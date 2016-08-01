@@ -164,7 +164,9 @@
 					out.println("<h5> Nome: " + request.getAttribute("nome")+"</h5>");
 					out.println("<h5> CPF: " + request.getAttribute("cpf")+"</h5>");
 				}
-				
+				if(request.getAttribute("msg") != null){
+					out.println("<h5>" + request.getAttribute("msg")+"</h5>");
+				}
 				
 				if(request.getAttribute("naoTemAtividade") != null && request.getAttribute("nome") != null){
 					out.println("<h5>" + request.getAttribute("naoTemAtividade")+"</h5>");
@@ -213,7 +215,8 @@
 					</div>
 				</div>
 <%out.println("<input name=\"nomeEmpregado\" id=\"nomeEmpregado\"type=\"hidden\" value=\""+request.getAttribute("nome")+"\"/>"); 
-out.println("<input name=\"cpfEmpregado\" id=\"cpfEmpregado\"type=\"hidden\" value=\""+request.getAttribute("cpf")+"\"/>");%>
+out.println("<input name=\"cpfEmpregado\" id=\"cpfEmpregado\"type=\"hidden\" value=\""+request.getAttribute("cpf")+"\"/>");
+out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.getAttribute("cpf")+"\"/>");%>
 
 			<!--  	RETIREI ESTE CAMPO POIS NAO FAZ SENTIDO SOLICITAR A DATA DE CRIACAO DA ATIVIDADE, PEGO A DATA DO INSERT.
 			<div class="form-group">
@@ -244,8 +247,9 @@ out.println("<input name=\"cpfEmpregado\" id=\"cpfEmpregado\"type=\"hidden\" val
 
 			</fieldset>
 	</form>
+	<form>
 			<table class="table ls-table" id="tabela1">
-
+<%out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.getAttribute("cpf")+"\"/>");%>
 					
 					
 				<%if(request.getAttribute("combo") != null){
@@ -303,7 +307,7 @@ out.println("<input name=\"cpfEmpregado\" id=\"cpfEmpregado\"type=\"hidden\" val
 			
 				</tbody>
 			</table>
-		
+		</form>
 
 		<c:import url="rodape.jsp" />
 </body>
