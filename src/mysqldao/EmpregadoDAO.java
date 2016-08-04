@@ -139,7 +139,7 @@ public class EmpregadoDAO extends MysqlConnect{
 		
 		try
 		{
-			String sql ="select b.nome, b.cd_empregado from usuario a inner join contrato c on a.cd_usuario = c.fk_usuario"		
+			String sql ="select b.nome, b.cd_empregado, b.foto from usuario a inner join contrato c on a.cd_usuario = c.fk_usuario"		
 			+" inner join empregado b on c.fk_empregado = b.cd_empregado WHERE b.ATIVO = 0";
 		
 			st= (PreparedStatement) conn.prepareStatement(sql);
@@ -149,6 +149,7 @@ public class EmpregadoDAO extends MysqlConnect{
 				empregadoTO = new EmpregadoTO();
 				empregadoTO.setCodigo(resultSet.getString("b.cd_empregado"));	
 				empregadoTO.setNome(resultSet.getString("b.nome"));
+				empregadoTO.setFoto(resultSet.getBytes("b.foto"));
 				lista.add(empregadoTO);
 			}	
 			st.close();
@@ -168,8 +169,8 @@ public class EmpregadoDAO extends MysqlConnect{
 		{
 			  String sql = " UPDATE EMPREGADO SET ativo = ?  where CD_EMPREGADO = ?";
 			  st = (PreparedStatement) conn.prepareStatement(sql);
-	           st.setString(1,codigo);
-	           st.setBoolean(2, true);
+			  st.setBoolean(1, true);
+	           st.setString(2,codigo);
 	           st.executeUpdate();
 	           st.close(); 
 		}

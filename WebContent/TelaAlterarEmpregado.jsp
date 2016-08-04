@@ -13,13 +13,14 @@
 integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
 <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/bootstrap.css">
 <script src="js/bootstrap-datetimepicker.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-<script type="text/javascript">
 <script src="js/jquery-1.2.6.pack 2.js"></script>
 <script src="js/jquery.maskedinput-1.1.4.pack 2.js"></script>
 <script type="text/javascript" src="js/scriptEmpregado.js"></script>
+<script src="jquery.min.js" type="text/javascript"></script>
 
 <title>Alterar Empregado</title>
 
@@ -688,8 +689,6 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		<button  type= "submit" name="acao" value="Cadastrar" class= "btn btn-primário " > Salvar </button> 
 		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " > Cancelar </button> 
 	</div>
-	
-     
   </form>
 
 </div>

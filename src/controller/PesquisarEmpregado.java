@@ -18,8 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.ContratoTO;
 import model.EmpregadoTO;
+import model.EspecialistaContrato;
 import model.EspecialistaEmpregado;
+import model.ManipulandoImagem;
 
 /**
  * Servlet implementation class PesquisarEmpregado
@@ -57,7 +60,7 @@ public class PesquisarEmpregado extends HttpServlet {
 		HttpSession session = request.getSession();
 		EmpregadoTO empregado = null;
 		EspecialistaEmpregado especilista = new EspecialistaEmpregado();
-
+		
 		switch (acao) 
 		{
 		case "Pesquisar":
@@ -78,16 +81,30 @@ public class PesquisarEmpregado extends HttpServlet {
 		
 		
 		case "PesquisarTodos":
-			
+	
 			try
 			{			
 				String codigoUsuario = (String) session.getAttribute("codigo");	
+				String tipo = request.getParameter("tipo");
+				
 				if(especilista.pesquisarTodos(codigoUsuario).size() > 0)
 				{
 					ArrayList<EmpregadoTO> funcionarios = especilista.pesquisarTodos(codigoUsuario);	
-			
+					
 					if(funcionarios.size() > 0)
 					{
+						if(tipo!= null && tipo.equals("excluir")){
+							request.setAttribute("mge", "Funcionário Excluido!");
+						}
+						else if (tipo!= null && tipo.equals("cadastrar")){
+							request.setAttribute("mge", "Funcionário Cadastrado!");
+						}	
+						else if (tipo!= null && tipo.equals("alterar")){
+							request.setAttribute("mge", "Funcionário Alterado!");
+						}
+						else if (tipo!= null && tipo.equals("erro")){
+							request.setAttribute("mge", "Operação não pode ser realizada!");
+						}
 						 request.setAttribute("combo", funcionarios);
 						 view = request.getRequestDispatcher("TelaEmpregado.jsp");
 						 view.forward(request, response);
@@ -96,7 +113,7 @@ public class PesquisarEmpregado extends HttpServlet {
 				else{
 					request.setAttribute("combo", null);
 					view = request.getRequestDispatcher("TelaEmpregado.jsp");
-					 view.forward(request, response);
+					view.forward(request, response);
 				}
 		}
 		catch(NumberFormatException e){

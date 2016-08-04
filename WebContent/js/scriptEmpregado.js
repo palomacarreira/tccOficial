@@ -1,14 +1,15 @@
 validacao = ""; //// VARIAVEL GLOBAL PARA VALIDAÇÃO DOS CAMPOS
-
 //Verifica se há erros na página
-function validar(){
-	
-	alert(validacao);
-		if(validacao == true){return true;}
-		else {return false;}
+function validar(){ 
+
+	if(validacao == false) 
+	{
+		alert("Verifique os campos com erros em vermelho na página.");
+		return false;
+	}
+	return true;
 }
-	
-	
+
 // Evento para ao selecionar a foto, ela seja mostrada 
 function onFileSelected(event) {
 	  var selectedFile = event.target.files[0];
@@ -31,7 +32,6 @@ $(document).ready(function(){
 	$(".imgPreenche").click(function() {
         preencheCampos(this.id);
     });
-	
 	
 	$("#cpf").mask("999.999.999-99");
 	$("#dataNasc").mask("99/99/9999");
@@ -171,7 +171,7 @@ function alertaDiaFolga(checkboxElem){
   	else
   	{
   		alert("A recomendação é que haja um descanso semanal combinado pelo menos uma vez por semana.");
-  		checkboxElem.checked = true; 
+   		checkboxElem.checked = true; 
   	}
   }
 }

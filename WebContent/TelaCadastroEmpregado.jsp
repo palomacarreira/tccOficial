@@ -19,21 +19,12 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <script src="js/jquery.maskedinput-1.1.4.pack 2.js"></script>
 <script type="text/javascript" src="js/scriptEmpregado.js"></script>
 <script src="jquery.min.js" type="text/javascript"></script>
-<script src="jquery.maskMoney.js" type="text/javascript"></script>
-<script type="text/javascript">
- 
-$(function(){
-$("#valeTransporte").maskMoney({symbol:'R$ ', showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
-});
-
-</script>
-
-
 
 <title>Cadastro Empregado</title>
 
 </head>
 <body>
+   
 
 <% String[] estados = {"AC", "AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PE","PI",
      			"PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"};
@@ -588,6 +579,12 @@ $("#valeTransporte").maskMoney({symbol:'R$ ', showSymbol:true, thousands:'.', de
  
 </div>
 <c:import url="rodape.jsp"/>
+<script type="text/javascript">
+window.onload = function()
+{
+	bootbox.alert("Hello world!");
+}
+</script>
 
 </body>
 </html>

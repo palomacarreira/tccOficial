@@ -14,77 +14,114 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
 <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 <script src="js/bootstrap-datetimepicker.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-<script>
-function chamaJSP(id){
-    	location.href = "AlterarEmpregado?acao=Alterar&codEmpregado=" + id;
-};
-</script>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/js/bootstrap-dialog.min.js"></script>
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<style type="text/css">
+    	#content {
+			margin: 30px;
+    	}
+</style>
 
 <title>Funcionários</title>
 </head>
 
 <body>
-
 <c:import url="cabecalhoLogado.jsp"/>
 	
-	<div class="container">
-	<label for="funcionarios" > Funcionários </label></br></br>
-	<form name="form1" class= "form-inline" method="post" action="CadastrarUsuario">
-		<div id="botoes">
-			<button  type= "submit" name="acao" value="Adicionar" class="btn btn-primário " > Adicionar </button> 
-		</div>
-    </form>
-	</div>
-
-	</br>
-	
-
-<form method="post" action="PesquisarEmpregado">
-	<fieldset id="f1">
-			<div>
- 				<table border="1px">
+<div id="content">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>Meus funcionários</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="adicionar">
+                    <a href="CadastrarUsuario?acao=Adicionar" class="link-avancar">
+                    <i class="fa fa-plus-square fa-2x" aria-hidden="true"></i>
+                   		<span class="func-link-txt" style="font-size:30px;">adicionar</span>
+                    </a>
+                </div>
+              </div>
+         </div>
+ 				<br><br>
+ 			<div id="meusFuncionarios">
  			<%
 				if(request.getAttribute("combo") != null){
 				
 				ArrayList<EmpregadoTO> lista = (ArrayList<EmpregadoTO>) request.getAttribute("combo");
-				out.println("<tr>");
-				out.println("<td width=\"25%\" height=\"20%\">Funcionários</td>");
-				out.println("<td width=\"25%\"><center>Férias</center></td>");
-				out.println("<td width=\"25%\"><center>13º</center></td>");
-				out.println("<td width=\"25%\"><center>Demitir</center></td>");
-				out.println("</tr>");
-			
-	
+				
 				for (EmpregadoTO item : lista) {
-				out.println("<tr>");
-				out.println("<td onclick=\"chamaJSP("+item.getCodigoEmpregado()+")\" style=\"cursor:pointer\" class=\"trClick\" height=\"20%\">"+item.getNome()+"</td>");
-				out.println("<td><center>");
-				out.println("<button type=\"submit\" name=\"acao\" value=\"Ferias\" class=\"btn btn-primário\" > F </button>"); 
-				out.println("</center></td>");
-				out.println("<td><center>");
-				out.println("<button type=\"submit\" name=\"acao\" value=\"DecimoTerceiro\" class=\"btn btn-primário\" > 13º </button>");
-				out.println("</center></td>");
-				out.println("<td><center>");
-				out.println("<button type=\"submit\" name=\"acao\" value=\"Demitir\" class=\"btn btn-primário\" > D </button>");
-				out.println("</center></td>");
-				out.println("</tr>");
-				}
-				}
-				else{
-					out.println("<tr>");
-					out.println("<td width=\"25%\" height=\"20%\">Funcionários</td>");
-					out.println("<td width=\"25%\"><center>Férias</center></td>");
-					out.println("<td width=\"25%\"><center>13º</center></td>");
-					out.println("<td width=\"25%\"><center>Demitir</center></td>");
-					out.println("</tr>");
-				}
-			%>
-		</table>
- 			</div>
-	</fieldset>
-	</form>
+					EspecialistaContrato espContrato = new EspecialistaContrato();
+					ContratoTO contratoTO = espContrato.pesquisarEmpregado(item.codigoEmpregado);
+					String fotoEmpregado = (String) ManipulandoImagem.exibiImagemLabel(item.getFoto());	
+				%>
+               <div class="col-md-12">
+               <div class="row" style="border-radius: 25px; border: 2px solid #DCDCDC;">
+                <div class="col-md-2">
+                	<img class="img-circle" height="50" src="data:image/png;base64,<%=fotoEmpregado%>" alt="">	
+                </div>
+                <div class="col-md-4">
+                	<div class="func-info">
+							<a href="AlterarEmpregado?acao=Alterar&codEmpregado=<%=item.getCodigoEmpregado()%>"><%=item.getNome()%></a>
+							<p class="text-orange">Salário <%=contratoTO.getSalarioBase()%></p>
+							<p>Contratado desde <%=contratoTO.getDataAdmissao()%></p>
+						</div>
+                </div>
+                <div class="col-md-2">
+                		<a href="AlterarEmpregado?acao=Excluir&codEmpregado=<%=item.getCodigoEmpregado()%>">
+							<span class="fa-stack fa-2x">
+								<i class="fa fa-square-o fa-stack-2x func-link-i1"></i>
+								<i class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+							</span>
+							<br>
+							<span class="func-link-txt">Demitir</span>
+						</a>
+                </div>
+                <div class="col-md-2">
+                   <a href="AlterarEmpregado?acao=Ferias&codEmpregado=<%=item.getCodigoEmpregado()%>">
+							<span class="fa-stack fa-2x">
+								<i class="fa fa-square-o fa-stack-2x func-link-i1"></i>
+								<i class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+							</span>
+							<br>
+							<span class="func-link-txt">Férias</span>
+						</a>
+                </div>
+                <div class="col-md-2">
+                   <a href="AlterarEmpregado?acao=DecimoTerceiro&codEmpregado=<%=item.getCodigoEmpregado()%>">
+							<span class="fa-stack fa-2x">
+								<i class="fa fa-square-o fa-stack-2x func-link-i1"></i>
+								<i class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+							</span>
+							<br>
+							<span class="func-link-txt">Décimo Terceiro</span>
+						</a>
+                </div>
+            </div>
+        </div>
+	<%}}%>
+</div>
+</div>
+
 <c:import url="rodape.jsp"/>
+<script type="text/javascript">
+window.onload = function(){
+	 <%
+	  String aqui= (String)request.getAttribute("mge");
+	  if(aqui != null){
+	  %>
+		  BootstrapDialog.alert("<%=aqui%>");
+
+	<%}%>
+}
+</script>	
 </body>
 </html>

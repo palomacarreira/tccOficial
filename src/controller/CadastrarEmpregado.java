@@ -174,26 +174,16 @@ public class CadastrarEmpregado extends HttpServlet {
 				 espJornada.adicionarJornada(horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, 
 							horaSaida, diaSemana, diaFolga, diaMeioPeriodo);
 			 } 
-			
-			
+
             String codigoEmpregado = espEmpregado.getUltimoCodigo();
             request.setAttribute("codigo", codigoEmpregado);
-            
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-            out.println("<b>Cadastro Realizado!</b><br>");
-        	view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos");
+        	view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
         	view.forward(request, response);
 			
-            out.close();
-			
 		} catch (NumberFormatException e) {
-			response.setContentType("text/html");
-			PrintWriter out = response.getWriter();
-			out.println("<b>Cadastro não pode ser realizado!</b><br>");
 			request.setAttribute("msg", "Error " + e.getMessage());
-			view = request.getRequestDispatcher("TelaEmpregado.jsp");
-			view.forward(request, response);
+			view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=erro");
+        	view.forward(request, response);
 		}
 		break;
 		

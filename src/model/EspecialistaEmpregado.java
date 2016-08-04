@@ -61,9 +61,9 @@ public class EspecialistaEmpregado
         
 	}
 	
-	public void excluir(String codigo){
+	public Boolean excluir(String codigo){
 		
-		empregadoDAO.excluirEmpregado(codigo);
+		return empregadoDAO.excluirEmpregado(codigo);
         
 	}
 	
