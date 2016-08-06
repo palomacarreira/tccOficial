@@ -1,6 +1,7 @@
 package model;
 
 
+import security.Digester;
 import mysqldao.ContatoDAO;
 import mysqldao.EnderecoDAO;
 import mysqldao.UsuarioDAO;
@@ -30,7 +31,10 @@ import mysqldao.UsuarioDAO;
 			usuarioTO.setRg(rg);
 			usuarioTO.setUfRg(ufRg);
 			usuarioTO.setEmail(email);
-			usuarioTO.setSenha(senha);
+			
+			String senhaEncr = Digester.encriptAES(senha);
+			
+			usuarioTO.setSenha(senhaEncr);
 			usuarioTO.setAtivo(ativo);
 		
 	    	usuarioDAO.cadastrarUsuario(usuarioTO);

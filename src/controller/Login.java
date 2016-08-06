@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import security.Digester;
 import model.EspecialistaLogin;
 import model.EspecialistaUsuario;
 import model.UsuarioTO;
@@ -55,7 +56,8 @@ public class Login extends HttpServlet {
 			String email = (String) request.getParameter("email");
 			String senha = (String) request.getParameter("senha");
 		
-			UsuarioTO usuario = (UsuarioTO) especialista.verificaLogin(email, senha);
+			String senhaDescri = Digester.encriptAES(senha);
+			UsuarioTO usuario = (UsuarioTO) especialista.verificaLogin(email, senhaDescri);
 			
 			if(usuario != null)
 			{
@@ -72,7 +74,7 @@ public class Login extends HttpServlet {
 				}
 			}
 			else{
-		    out.print("<h2>Login não encontrado</h2>");  
+		    out.print("<h2>Login nï¿½o encontrado</h2>");  
 	        RequestDispatcher rd=request.getRequestDispatcher("TelaLogin.jsp");  
 	        rd.include(request,response); 
 	    	out.close();  
@@ -88,7 +90,7 @@ public class Login extends HttpServlet {
 				}
 				else
 				{
-					out.print("<h2>Conta não pode ser ativada!</h2>");  
+					out.print("<h2>Conta nï¿½o pode ser ativada!</h2>");  
 			        RequestDispatcher rd=request.getRequestDispatcher("TelaLogin.jsp");  
 			        rd.include(request,response); 
 			    	out.close();  
