@@ -48,14 +48,14 @@ Equivale a um salário mensal e deve ser pago em duas parcelas até o dia 20 de 
 	<p>&nbsp;O empregador recolhe 8% sobre o salário bruto e o empregado tem 8% descontado do seu salário. O imposto incide também sobre o 13° salário, férias e adicional de férias.</p>
 	<h1 style="font-size:100%;">&nbsp;FGTS e seguros</h1>   
 	<p>&nbsp;Como era: O recolhimento do Fundo de Garantia do Tempo de Serviço (FGTS) era opcional para o empregador doméstico.
-	</br>&nbsp;Com a nova lei:A nova lei tornou obrigatório o recolhimento do FGTS por parte do empregador doméstico. A alíquota é de 8% sobre o salário bruto. Também é preciso recolher 0,8% por seguro contra acidente e 3,2% relativos à rescisão contratual. </p>
+	<br>&nbsp;Com a nova lei:A nova lei tornou obrigatório o recolhimento do FGTS por parte do empregador doméstico. A alíquota é de 8% sobre o salário bruto. Também é preciso recolher 0,8% por seguro contra acidente e 3,2% relativos à rescisão contratual. </p>
 	<h1 style="font-size:100%;">&nbsp;Horários</h1>   
 	<p>&nbsp;Antes da lei: O horário de trabalho era acordado diretamente entre empregador e empregado.
-</br>&nbsp;Com a nova lei: A jornada de trabalho deverá ser de 8 horas diárias e 44 horas semanais, com 4 horas de trabalho aos sábados. A lei permite a compensação das horas do sábado durante a semana.</p>
+<br>&nbsp;Com a nova lei: A jornada de trabalho deverá ser de 8 horas diárias e 44 horas semanais, com 4 horas de trabalho aos sábados. A lei permite a compensação das horas do sábado durante a semana.</p>
 	<h1 style="font-size:100%;">&nbsp;Intervalos</h1>   
 	<p>&nbsp;Antes da lei: Não havia definição sobre a obrigatoriedade do intervalo antes da nova lei, ficando a critério do empregador e do empregado.
-</br>&nbsp;Com a lei: Quem trabalha 8 horas por dia deve fazer um intervalo de no mínimo de 1 hora e no máximo 2. Para jornadas de até 6 horas a pausa deve ser de 15 minutos.
-</br>&nbsp;Pendências: Intervalos menores do que os estipulados pela nova lei devem ser aprovados por convenções ou acordos coletivos de trabalho. Atualmente, o Ministério do Trabalho aconselha que o empregador conceda o intervalo regulamentado, mesmo que o funcionário queira dispensá-lo.</p>
+<br>&nbsp;Com a lei: Quem trabalha 8 horas por dia deve fazer um intervalo de no mínimo de 1 hora e no máximo 2. Para jornadas de até 6 horas a pausa deve ser de 15 minutos.
+<br>&nbsp;Pendências: Intervalos menores do que os estipulados pela nova lei devem ser aprovados por convenções ou acordos coletivos de trabalho. Atualmente, o Ministério do Trabalho aconselha que o empregador conceda o intervalo regulamentado, mesmo que o funcionário queira dispensá-lo.</p>
 
 	
 	                    </form>

@@ -21,7 +21,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 				<br>
 				<br>
 				<nav>
-				    <ul class="nav nav-pills " align="center">
+				    <ul class="nav nav-pills">
 				      <li><a href="TelaLogin.jsp">Home</a></li>
 				      <li><a href="TelaDocumentacaoNecessaria.jsp">Documentacao Necessaria</a></li>
 	  				  <li><a href="TelaConhecaLei.jsp">Conheca a lei</a></li>

@@ -1,8 +1,6 @@
 package model;
 
 import java.sql.Date;
-import java.sql.Time;
-
 import mysqldao.ContratoDAO;
 
 public class EspecialistaContrato {
@@ -36,8 +34,7 @@ public class EspecialistaContrato {
 
 	public void alterarEmpregado(String codigoEmpregado, String cargo, String diaPagamento, 
 			Date dataAdmissao, Boolean descontoINSS, Double valeTransporte, 
-			Double salarioBase, String compensacaoDias,  String regimeDeTrabalho, 
-			String horaEntrada,String horaSaidaAlmoco, String horaVoltaAlmoco, String horaSaida, 
+			Double salarioBase, String compensacaoDias,  String regimeDeTrabalho,  
 		  String conta, String agencia, String banco, String tipoConta) 
 	{
 		

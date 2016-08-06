@@ -50,7 +50,6 @@ public class ManipulandoImagem {
 				BufferedImage imagem = ImageIO.read(input);
 				ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
 				ImageIO.write(imagem, "png", baos);
-				byte[] res=baos.toByteArray();
 				String encodedImage = Base64.encode(baos.toByteArray());
 				return encodedImage;
 			} catch (IOException ex) {

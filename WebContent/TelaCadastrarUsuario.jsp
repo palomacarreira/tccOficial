@@ -47,7 +47,7 @@ $(document).ready(function(){
 <nav class="navbar navbar-default" role="navigation">
 <div class="container">
 
-	<label  for= "meuPerfil" > Meu Perfil </label></br> </br>
+	<label  for= "meuPerfil" > Meu Perfil </label><br><br>
 		  <div  class= "form-group" > 
 		    <label  for= "nome" > Nome </label> 
 		    <div class="span3">
@@ -152,12 +152,12 @@ $(document).ready(function(){
       	</div>
     	</div> 
  </div>
- </br>
+ <br>
     	</nav>
     	<nav class="navbar navbar-default" role="navigation">
     	<div class="container">
 
-       <label  for= "email" > Login </label></br> </br>
+       <label  for= "email" > Login </label><br><br>
       
        <div  class= "form-group " > 
 		    <label  for= "email" > E-mail </label> 
@@ -174,13 +174,13 @@ $(document).ready(function(){
 		
 
     </div>
-     </br>
+     <br>
      
     </nav>
     
      	<nav class="navbar navbar-default" role="navigation">
     <div class="container">
-         <label  for= "TipoContato" > Contato </label></br> </br>
+         <label  for= "TipoContato" > Contato </label><br><br>
        <div  class= "form-group " > 
 		    <label  for= "tipoContato" > Tipo Contato </label> 
 		    <div class="span3">
@@ -193,11 +193,8 @@ $(document).ready(function(){
 		    <input  type= "text"  class= "form-control" name="numeroTelefone" id= "numeroTelefone" size="20"> 
 		    </div>
 		</div>
-
-
-      </br>
     </div>
-    </br>
+    <br>
       </nav>
     
      <div id="botoes">

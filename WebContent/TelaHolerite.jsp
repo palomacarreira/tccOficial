@@ -42,13 +42,11 @@ $(document).ready(function(){
      	
 <c:import url="cabecalhoLogado.jsp"/>
 <div class="container">
+
 <form name="form1" class= "form-inline" method="post" action="PesquisarHolerite">
-<legend>Relatorio de Holerite</legend>
-<nav class="navbar navbar-default" role="navigation">
-
-<div class="container">
-
-	 </br>
+	<label>Relatorio de Holerite</label>
+	<nav class="navbar navbar-default" role="navigation">
+	
 		  <div  class= "form-group" > 
 		    <label  for= "nome" > Nome </label> 
 		    <div class="span3">
@@ -96,31 +94,18 @@ $(document).ready(function(){
     	
       		</div>
     	</div> 
-    	</br>
+    	<br>
     	<div class="col-sm-8 pull-right">
-    	</br>
+    	<br>
     		<button  type= "submit" name="acao" value="GerarHolerite" class= "btn btn-primário " > Gerar Holerite </button> 
-		
 		 </div>
-		
-	   </div>   
-
-  </br>
- </div>
- </br>
-    	</nav>
-    	<div class="container">
-    	
-    		<nav class="navbar navbar-default" role="navigation">
-    	
-    	<!--Colocar aqui itens da pesquisa holerite  -->
-     </br>
-     
-    </nav>
-     </div>
-  </form>
-
+  		<br>
+ 		<br>
+     	<br> 
+  </nav>
+</form>
 </div>
+
 <c:import url="rodape.jsp"/>
 
 </body>

@@ -2,9 +2,7 @@ package mysqldao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import banco.MysqlConnect;
-import model.ContatoTO;
 import model.ContratoTO;
 
 public class ContratoDAO extends MysqlConnect {

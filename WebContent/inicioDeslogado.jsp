@@ -34,7 +34,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	                    <form role="form">
 	                        <fieldset>
 	                            <div class="form-group">
-	                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+	                                <input class="form-control" placeholder="E-mail" name="email" type="email" >
 	                            </div>
 	                            <div class="form-group">
 	                                <input class="form-control" placeholder="Password" name="password" type="password" value="">

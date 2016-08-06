@@ -19,6 +19,9 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <script src="js/jquery.maskedinput-1.1.4.pack 2.js"></script>
 <script type="text/javascript" src="js/scriptEmpregado.js"></script>
 <script src="jquery.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+<script src="js/sweetalert.min.js"></script> 
+<link rel="stylesheet" href="css/font-awesome.min.css">
 
 <title>Cadastro Empregado</title>
 
@@ -36,8 +39,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <form id="dadosEmpregado" role="form" class="form-inline" method="post" action="CadastrarEmpregado">
 <nav class="navbar navbar-default" role="navigation">
 <div class="container">
-
-	<label  for= "dadosEmpregado" > Dados Empregado </label></br> </br>
+	<label  for= "dadosEmpregado" > Dados Empregado </label><br><br>
 	
 		  <div  class= "form-group" > 
 		    <label  for= "nome" > Nome </label> 
@@ -45,27 +47,28 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    <input  type= "text"  class= "form-control"  name="nome" id="nome" size="80" required> 
 		    </div>
 		  </div> 
-		  
-		<div id="foto">
-		<img id="myimage" height="200">
-		<input type="file" id="fotoEmpregado" name="fotoEmpregado" size="24" onchange="onFileSelected(event)" alt=""/>
+		 
+		
+		<div class= "form-group" >  
+			<div id="foto">
+			<img id="myimage" src="imagens/sem-imagem.png" height="100">
+			<label class="btn btn-primary" for="my-file-selector">
+    		<input id="my-file-selector" name="fotoEmpregado" type="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val()); onFileSelected(event)">
+    			Pesquisar..
+			</label>
+			<span class='label label-info' id="upload-file-info"></span>
+			</div>
 		</div>
-	
+		
 		  <div  class= "form-group" > 
 		    <label  for= "sobrenome" > Sobrenome </label> 
 		    <div class="span3">
 		    <input  type= "text"  class= "form-control"  name="sobrenome" id= "sobrenome" size="80" required> 
 		    </div>
 		  </div> 
-		  
-		  <div  class= "form-group" > 
-		    <label  for= "dataNasc" > Data Nascimento </label> 
-		    <div class="span3">
-		    <input type="date" id="dataNasc" name="dataNasc" class="form-control" size="20" required> 
-		    </div>
-		 </div>
-		 
-	 <div  class= "radio form-group" > 
+		  	 
+	 	<div class="radio form-group" > 
+	 	<label for="sexo" > Sexo </label> 
   		<div class="span3">
    				 <input  type= "radio"  name= "sexo"  id= "radioFem"  value= "F" checked>
    			 Fem
@@ -74,6 +77,13 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
   			</div>
 		</div> 
 		
+		  <div  class= "form-group" > 
+		    <label  for= "dataNasc" > Data Nascimento </label> 
+		    <div class="span3">
+		    <input type="date" id="dataNasc" name="dataNasc" class="form-control" size="20" required> 
+		    </div>
+		 </div>
+		 
 		<div  class= "form-group" > 
 		    <label  for= "numDependentes" > Número de Dependentes </label> 
 		    <div class="span3">
@@ -81,9 +91,8 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    </div>
 		 </div> 
 		 
-		 
-		 
-		  <div>
+
+		  <div class= "form-group">
      		 <label  for = "select" >Estado Civil</label> 
      		 <div class="span3">
  			<select class="form-control" name="estadoCivil" id="estadoCivil">
@@ -110,7 +119,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    </div>
 		 </div>
 		 
-		 <div>
+		 <div class= "form-group" >
      		 <label  for = "select" >UF RG</label> 
      		 <div class="span3">
  
@@ -142,7 +151,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    </div>
 		 </div>
 		 
-		  <div>
+		  <div class= "form-group">
      		 <label  for = "select" >UF Carteira</label> 
      		 <div class="span3">
        		  
@@ -156,14 +165,13 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		out.println("</select>");
     	%>
       	</div>
-    	</div> 
-		 </br>
-		 </nav>
-		 
-		 
-		 <nav class="navbar navbar-default" role="navigation">
+    </div> 
+</div>
+<br>
+</nav>
+		<nav class="navbar navbar-default" role="navigation">
     	<div class="container">
-    	<label  for= "dadosEndereco" > Dados endereço </label></br> </br>
+    	<label  for= "dadosEndereco" > Dados endereço </label><br> <br>
     	<div  class= "form-group" > 
 		    <label  for= "cep" > CEP </label>
 		    <div class="span3"> 
@@ -202,7 +210,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		 
 	   </div>
 		 
-			 <div>
+			 <div class= "form-group">
      		 <label  for = "select" >Estado</label> 
      		 <div class="span3">
        		  
@@ -218,12 +226,12 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
       	</div>
     	</div> 
  </div>
- </br>
+ <br>
     	</nav>
       
      	<nav class="navbar navbar-default" role="navigation">
     <div class="container">
-         <label  for= "contratoTrabalho" > Contrato de Trabalho </label></br> </br>
+         <label  for= "contratoTrabalho" > Contrato de Trabalho </label><br> <br>
          
         <div  class= "form-group" > 
 		    <label  for= "dataAdmissao" > Data de Admissão </label> 
@@ -246,7 +254,6 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    <input  type= "text"  class= "form-control" name="salarioBase" id= "salarioBase" size="20"> 
 		    </div>
 		</div>
-		</br>
 		
 		<div  class= "form-group" > 
 		    <label  for= "cargo" > Valor vale transporte </label> 
@@ -255,7 +262,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    </div>
 		</div>
 		
-		 <div>
+		 <div class= "form-group">
      		 <label  for= "dataPagamento" > Dia de Pagamento</label> 
      		 <div class="span3">
  				<select class="form-control" name="diaPagamento" id="diaPagamento">
@@ -266,33 +273,36 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
      				<option value="5º dia util" style ="width: 100px; height: 100px">5º dia util</option>	
 				</select>
       		</div>
-    		</div> 
+    	</div> 
 	
-		 </br>
-		  <div>
-     	<div>
-     		 <label  for= "regimeContrato" > Regime de Trabalho</label> 
-     		 <div class="span3">
+		<br>
+		
+     	<div class= "form-group">
+     		<label  for= "regimeContrato" > Regime de Trabalho</label> 
+     		<div class="span3">
 		    <input  type="radio" name="regimeTrabalho" onchange="doalert(this)" id="regime44"  value="Tempo Integral" CHECKED>
 		    Tempo Integral(44hrs semanais) 
-		    </br>
+		    <br>
 			<input type="radio" name="regimeTrabalho" onchange="doalert(this)" id="regime25"  value="Tempo Parcial"> 
 			Tempo Parcial(25hrs semanais)		
-  			 </br>
+  			 <br>
       		</div>
     		</div> 
-    	</br>
-		
-		<div  class= "form-group" > 
-		<label  for= "compensacaoDias" > Compensação de Dias de Trabalho </label> 
-  		<div class="span3">
-  		<select class="form-control" name="compensacaoDias" id="compensacaoDias">
-		   <option value="salario" style ="width: 100px; height: 100px" selected> Acréscimo de salário </option>
-  		   <option value="horas" style ="width: 100px; height: 100px">Regime de compensação de horas</option>
-		</select>
-  		</div>
-		</div> 
-    
+    		
+    		
+    		<div class="form-group">
+     		<label  for="compensacaoDias" > Compensação de Dias de Trabalho</label> 
+     		<div class="span3">
+		    <input  type="radio" name="compensacaoDias" id="salario"  value="salario" CHECKED>
+		    Acréscimo de salário
+		    <br>
+			<input type="radio" name="compensacaoDias" id="horas"  value="horas"> 
+			Regime de compensação de horas		
+  			 <br>
+      		</div>
+    		</div> 
+    	<br>
+    	
 		 <div  class= "form-group" > 
 		    <label  for= "serieCarteira" > Banco </label> 
 		    <div class="span3">
@@ -323,20 +333,19 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 				</select>
       		</div>
     		</div> 
-    		</div>
-		  </br>
-     </br>
+    	
+		  <br>
+     <br>
      
      
   
  <div class="container">
- <label  for= "periodoDeTrabalho" > Confira os horários de trabalho </label></br> </br>
- <span> Ajuste o horário desde que não passe de 44 horas na semana ou 25 horas em regime de tempo parcial </span>
- </br> 
- <span> *HORÁRIO EM FORMATO 24Hrs </span>
- </br> 
- </br>
-  
+ <label  for= "periodoDeTrabalho" > Confira os horários de trabalho 
+ <a href="javascript:void(0)" onclick="informacaoCamposHora()"><i class="fa fa-info-circle" title="Informação"></i></a>
+ </label>
+ 
+ <br> 
+ <br>
   <table class="tableHorarios ">
   <tbody>
   <tr>
@@ -512,22 +521,20 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
   </table>
   </div>
   
- </br> 
- </br>
+ <br> 
+ <br>
  
  
  	<label for="totalHoras">Total de horas na semana: </label><span id="totalHoras">--</span>
- 	 </br>
-	<span style="color:red; font-weight:bold;" id="saldoHoras"></span> 
-
+ 	 <br>
+		<span style="color:red; font-weight:bold;" id="saldoHoras"></span> 
     </div>
-     </br>
-     
+     <br>
  </nav>
     
     	<nav class="navbar navbar-default" role="navigation">
     <div class="container">
-         <label  for= "TipoContato" > Contato </label></br> </br>
+         <label  for= "TipoContato" > Contato </label><br> <br>
        <div  class= "form-group " > 
 		    <label  for= "tipoContato" > Tipo Contato </label> 
 		    <div class="span3">
@@ -540,16 +547,16 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    <input  type= "text"  class= "form-control" name="numeroTelefone" id= "numeroTelefone" size="20"> 
 		    </div>
 		</div>
-      </br>
+      <br>
     </div>
-    </br>
+    <br>
     
       </nav>
     
     <nav class="navbar navbar-default" role="navigation">
     	<div class="container">
 
-       <label  for= "email" > Login </label></br> </br>
+       <label  for= "email" > Login </label><br> <br>
       
        <div  class= "form-group " > 
 		    <label  for= "email" > E-mail </label> 
@@ -566,25 +573,18 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		</div>
   
     </div>
-     </br>
+     <br>
      
     </nav>
-       
-     <div id="botoes">
+    
+    <div id="botoes">
 		<button  type= "submit" name="acao" value="Cadastrar" onclick="return validar()" class= "btn btn-primário " > Salvar </button> 
 		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " > Cancelar </button> 
 	</div>
-
  </form>
  
 </div>
 <c:import url="rodape.jsp"/>
-<script type="text/javascript">
-window.onload = function()
-{
-	bootbox.alert("Hello world!");
-}
-</script>
 
 </body>
 </html>

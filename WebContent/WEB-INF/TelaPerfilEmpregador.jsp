@@ -47,7 +47,7 @@ $(function() {
 <nav class="navbar navbar-default" role="navigation">
 <div class="container">
 
-	<label  for= "meuPerfil" > Meu Perfil </label></br> </br>
+	<label  for= "meuPerfil" > Meu Perfil </label><br> <br>
 		  <div  class= "form-group" > 
 		    <label  for= "nome" > Nome </label> 
 		    <input  type= "text"  class= "form-control"  id= "nome" size="100"> 
@@ -170,7 +170,7 @@ $(function() {
     	<nav class="navbar navbar-default" role="navigation">
     	<div class="container">
 
-       <label  for= "email" > Login </label></br> </br>
+       <label  for= "email" > Login </label><br> <br>
        <div  class= "form-group " > 
 		    <label  for= "email" > Email </label> 
 		    <input  type= "text"  class= "form-control"  id= "numero" size="10"> 
@@ -179,7 +179,7 @@ $(function() {
 		    <label  for= "senha" > Senha </label> 
 		    <input  type= "text"  class= "form-control"  id= "numero" size="10"> 
 		</div>
-		</br>
+		<br>
        <button  type= "submit"  class= "btn btn-primário " > Alterar</button> 
        <button  type= "submit"  class= "btn btn-primário " > Salvar </button> 
  

@@ -32,7 +32,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 				<nav>
 				    <ul class="nav nav-pills menu-principal" align="center">
 				      <li><a href="PesquisarEmpregado?acao=PesquisarTodos">Cadastro de Funcionarios</a></li>
-	 				  <li class="atividades"><a href="AtividadeController?acao=PaginaAtividades">Atividades</a></li>
+	 				  <li class="atividades"><a href="#">Atividades</a></li>
 				      <li><a href="#">Folha de Ponto</a></li>
 				      
 	  				  <li class="guias">
@@ -48,7 +48,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 					  </li>
 					  
 	                  
-	                  <li class="holerite"><a href="TelaHolerite.jsp">Holerite</a></li>
+	                  <li class="holerite"><a href="#">Holerite</a></li>
 	                  <li class="qrcode"><a href="#">QR Code</a></li>
 	                  
 	                  <li class="perfil navbar-right">

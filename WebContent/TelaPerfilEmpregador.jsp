@@ -42,17 +42,15 @@ $(document).ready(function(){
 <body>
 
 <c:import url="cabecalhoLogado.jsp"/>
-<div class="container">
 
 <% String[] estados = {"AC", "AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PE","PI",
      			"PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"};
      	%>
-     	
+<div class="container">   	
 <form  class= "form-inline" method="post" action="AlterarUsuario">
-<nav class="navbar navbar-default" role="navigation">
-<div class="container">
-
-	<label  for= "meuPerfil" > Meu Perfil </label></br> </br>
+	<nav class="navbar navbar-default" role="navigation">
+	<div class="container">  
+	<label  for= "meuPerfil" > Meu Perfil </label><br> <br>
 		  <div  class= "form-group" > 
 		    <label  for= "nome" > Nome </label> 
 		     <%
@@ -167,13 +165,13 @@ $(document).ready(function(){
 		     out.println("<input type=\"text\"  value="+endereco.getCidade()+" class=\"form-control\"  name=\"cidade\" id=\"cidade\" size=\"10\">");
 		 	%>
 	   </div>
-
-    	</nav>
+	  </div>
+    </nav>
     	
-    	<nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default" role="navigation">
     	<div class="container">
     	
-       <label  for= "email" > Login </label></br> </br>
+       <label  for= "email" > Login </label><br><br>
        
        <div  class= "form-group " > 
 		    <label  for= "email" > Email </label> 
@@ -194,7 +192,7 @@ $(document).ready(function(){
     
     <nav class="navbar navbar-default" role="navigation">
     <div class="container">
-       <label  for= "TipoContato" > Contato </label></br> </br>
+       <label  for= "TipoContato" > Contato </label><br> <br>
        <div  class= "form-group " > 
 		    <label  for= "tipoContato" > Tipo Contato </label> 
 		     <%
@@ -207,20 +205,16 @@ $(document).ready(function(){
 		     out.println("<input type=\"text\" value="+contato.getNumero()+" class=\"form-control\" name=\"numeroTelefone\" id=\"numeroTelefone\" size=\"20\">");
 		 	%>
 		</div>
-		</br>
-      
     </div>
      </nav>
      
- <nav class="navbar navbar-default" role="navigation">
-     <div id="botoes">
-		<button  type= "submit" name="acao" value="Salvar" class= "btn btn-primário " > Alterar </button> 
-		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " > Cancelar </button> 
-	</div>
+ 		<nav class="navbar navbar-default" role="navigation">
+     	<div id="botoes">
+			<button  type= "submit" name="acao" value="Salvar" class= "btn btn-primário " > Alterar </button> 
+			<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " > Cancelar </button> 
+		</div>
        </nav>
-       
   </form>
-
 </div>
 <c:import url="rodape.jsp"/>
 </body>

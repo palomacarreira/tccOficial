@@ -1,8 +1,6 @@
 package model;
 
 
-import mysqldao.ContatoDAO;
-import mysqldao.EnderecoDAO;
 import mysqldao.UsuarioDAO;
 
 
