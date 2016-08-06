@@ -282,8 +282,8 @@ out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.get
 					realizado = "Nao";
 				}
 				
-				out.println("<td>"+item.getCodigoAtividade()+"</td>");
-				out.println("<input name=\"codigo\" id=\"codigo\"type=\"hidden\" value=\""+item.getCodigoAtividade()+"\"/>");
+				/*out.println("<td>"+item.getCodigoAtividade()+"</td>");*/
+				/*out.println("<input name=\"codigo\" id=\"codigo\"type=\"hidden\" value=\""+item.getCodigoAtividade()+"\"/>");*/
 				out.println("<td>"+item.getTitulo()+"</td>");
 				out.println("<td>"+item.getData()+"</td>");
 				out.println("<td>"+realizado+"</td>");
@@ -295,13 +295,13 @@ out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.get
 				out.println("<form>");
 				}
 				
-				/*}else{
+				}else{
 					out.println("<tr>");
 					out.println("<td width=\"25%\" height=\"20%\">Funcionários</td>");
 					out.println("<td width=\"25%\"><center>Férias</center></td>");
 					out.println("<td width=\"25%\"><center>13º</center></td>");
 					out.println("<td width=\"25%\"><center>Demitir</center></td>");
-					out.println("</tr>");*/
+					out.println("</tr>");
 				}%>
 			
 			

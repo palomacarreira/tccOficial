@@ -1,11 +1,8 @@
 package controller;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageProducer;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -23,7 +20,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.ImageIcon;
 
 import model.ContatoTO;
 import model.ContratoTO;
@@ -34,9 +30,6 @@ import model.EspecialistaContrato;
 import model.EspecialistaEmpregado;
 import model.EspecialistaEndereco;
 import model.EspecialistaJornadaTrabalho;
-import model.JornadaTrabalhoTO;
-import model.ManipulandoImagem;
-import model.UsuarioTO;
 
 /**
  * Servlet implementation class AlterarEmpregado
@@ -187,36 +180,30 @@ public class AlterarEmpregado extends HttpServlet {
 				espContrato.alterarEmpregado(codEmpregado, cargo, diaPagamento, dataAdmissao, 
 				descontoINSS, valeTransporte, salarioBase, compensacaoDias, regimeDeTrabalho, horaEntrada,
 				horaSaidaAlmoco, horaVoltaAlmoco, horaSaidaAlmoco, tipoConta, agencia, banco, tipoContato);
-								
-				view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=alterar");
+				
+				
+				response.setContentType("text/html");
+	            PrintWriter out = response.getWriter();
+	            RequestDispatcher rd = null;
+	            
+	          
+	       
+	            out.println("<b>Cadastro Realizado!</b><br>");
+	        	view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos");
 	        	view.forward(request, response);
-
+				
+	            out.close();
+				
 			} catch (NumberFormatException e) {
 				
 				request.setAttribute("msg", "Error " + e.getMessage());
-				 view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=erro");
-				 view.forward(request, response);
+				view = request.getRequestDispatcher("TelaEmpregado.jsp");
+				view.forward(request, response);
 			}
 			break;
 			
 		case "Excluir":
-			String cod = (String) request.getParameter("codEmpregado");
-			try {
-				Boolean verifica = espEmpregado.excluir(cod);
-				 if(verifica == true){
-					 view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=excluir");
-					 view.forward(request, response);
-				 }
-				 else{
-					view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=erro");
-			        view.forward(request, response);
-			 
-				 }
-			} catch (Exception e) {
-				request.setAttribute("msg", "Error " + e.getMessage());
-				view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=erro");
-	        	view.forward(request, response);
-			}	
+		
 			break;
 			
 		case "Alterar":
@@ -228,31 +215,32 @@ public class AlterarEmpregado extends HttpServlet {
 					ContatoTO contatoTO = espContato.pesquisarEmpregado(codEmp);
 					EnderecoTO enderecoTO = espEndereco.pesquisarEmpregado(codEmp );
 					ContratoTO contratoTO = espContrato.pesquisarEmpregado(codEmp);
-					ArrayList<JornadaTrabalhoTO> listaJornada = espJornada.pesquisarJornada(contratoTO.getCodigo());
-					String fotoEmpregado = ManipulandoImagem.exibiImagemLabel(empregadoTO.getFoto());
+					//ArrayList<JornadaTrabalhoTO> listaJornada = espJornada.pesquisarJornada(contratoTO.getCodigo());
+		  		
+					//String fotoEmpregado = ManipulandoImagem.exibiImagemLabel(empregadoTO.getFoto());
 					
 					
 					try {
 						
-					request.setAttribute("Foto", fotoEmpregado);
+					//request.setAttribute("Foto", fotoEmpregado);
 					request.setAttribute("listaEmpregado", empregadoTO);
 					request.setAttribute("listaContato", contatoTO);
 					request.setAttribute("listaEndereco", enderecoTO);
 					request.setAttribute("listaContrato", contratoTO);
-					request.setAttribute("listaJornada", listaJornada);
+					//request.setAttribute("listaJornada", listaJornada);
 					
 					view = request.getRequestDispatcher("TelaAlterarEmpregado.jsp");
 					view.forward(request, response);
 					
 				} catch (NumberFormatException e) {
 					request.setAttribute("msg", "Error " + e.getMessage());
-					 view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=erro");
-					 view.forward(request, response);
+					view = request.getRequestDispatcher("TelaEmpregado.jsp");
+					view.forward(request, response);
 				}
 			}
 			else{
-				 view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos");
-				 view.forward(request, response);
+				view = request.getRequestDispatcher("TelaEmpregado.jsp");
+				view.forward(request, response);
 			}
 			break;
 			

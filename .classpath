@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_60">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.0">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
@@ -16,5 +11,15 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/javax.servlet.jsp.jstl-1.2.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/mysql-connector-java-5.1.28-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/palomacarreira/Desktop/JasperReport/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/Users/palomacarreira/Desktop/JasperReport/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="/Users/palomacarreira/Desktop/JasperReport/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="/Users/palomacarreira/Desktop/JasperReport/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/palomacarreira/Desktop/JasperReport/groovy-all-1.5.3.jar"/>
+	<classpathentry kind="lib" path="/Users/palomacarreira/Desktop/JasperReport/itext-2.1.7.jar"/>
+	<classpathentry kind="lib" path="/Users/palomacarreira/Desktop/JasperReport/jasperreports-5.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/palomacarreira/Desktop/JasperReport/poi-3.9.jar"/>
+	<classpathentry kind="lib" path="/Users/palomacarreira/Desktop/JasperReport/servlet-api-2.4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
