@@ -1,20 +1,10 @@
 package controller;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import java.sql.Date;
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
-
-import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -22,8 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JFileChooser;
-
 import model.EspecialistaContato;
 import model.EspecialistaContrato;
 import model.EspecialistaEmpregado;
@@ -75,21 +63,28 @@ public class CadastrarEmpregado extends HttpServlet {
 		        
 		case "Cadastrar":
 		
+			byte[] foto = null;
 			
-			byte[] foto = ManipulandoImagem.getImgBytes(request.getParameter("fotoEmpregado"));
-			
-		    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		    String data = request.getParameter("dataNasc");
-			Date dataNasc = null;
-			String dataA = request.getParameter("dataAdmissao");
-			Date dataAdmissao = null;
-			try {
-				dataNasc = new java.sql.Date( ((java.util.Date)formatter.parse(data)).getTime() );
-				dataAdmissao = new java.sql.Date( ((java.util.Date)formatter.parse(dataA)).getTime());
-			} catch (ParseException e1) {
-				e1.printStackTrace();
+			if(request.getParameter("fotoEmpregado") != ""){
+				foto = ManipulandoImagem.getImgBytes(request.getParameter("fotoEmpregado"));
 			}
-	        
+			else{
+				foto = ManipulandoImagem.getImgBytes("imagens/sem-imagem.png");
+			}
+			
+
+			 	DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+			 	Date dataAdmissao = null;
+				Date dataNasc = null;
+				String dataA = request.getParameter("dataNasc");
+				String dataB = request.getParameter("dataAdmissao");
+				try {
+					dataNasc = new java.sql.Date( ((java.util.Date)formatter.parse(dataA)).getTime() );
+					dataAdmissao = new java.sql.Date( ((java.util.Date)formatter.parse(dataB)).getTime());
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}				
+      
 			 String nome = (String) request.getParameter("nome");
 			 String sobrenome = (String) request.getParameter("sobrenome");
 			 String estadoCivil = (String) request.getParameter("estadoCivil");
@@ -106,7 +101,6 @@ public class CadastrarEmpregado extends HttpServlet {
 			 int qtdDependentes = Integer.parseInt(request.getParameter("qtdDependentes"));
 		
 			 String cargo = (String) request.getParameter("cargo");
-			 String regimeContrato = (String) request.getParameter("regimeContrato");
 			 String diaPagamento = request.getParameter("diaPagamento");
 			 Boolean descontoINSS = Boolean.parseBoolean(request.getParameter("descontoINSS"));
 			 Double valeTransporte = Double.parseDouble(request.getParameter("valeTransporte"));

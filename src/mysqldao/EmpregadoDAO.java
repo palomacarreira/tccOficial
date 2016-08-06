@@ -1,7 +1,5 @@
 package mysqldao;
 
-import java.awt.Image;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 

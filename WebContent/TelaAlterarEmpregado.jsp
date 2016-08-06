@@ -43,13 +43,14 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 %>
      	
 <c:import url="cabecalhoDeslogado.jsp"/>
-<div class="container">
 
+<div class="container">
 <form name="form1" class= "form-inline" method="post" action="CadastrarEmpregado">
-<nav class="navbar navbar-default" role="navigation">
-<div class="container">
+	
+	<nav class="navbar navbar-default" role="navigation">
+	<div class="container">
+		<label  for= "dadosEmpregado" > Dados Empregado </label><br><br>
 
-	<label  for= "dadosEmpregado" > Dados Empregado </label></br> </br>
 		  <div  class= "form-group" > 
 		    <label  for= "nome" > Nome </label> 
 		    <div class="span3">
@@ -57,17 +58,22 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		     out.println("<input type=\"text\" value="+empregado.getNome()+" class=\"form-control\"  name=\"nome\" id=\"nome\" size=\"80\">");
 		 	%>
 		    </div>
-		    
-		    <div id="foto">
-	<%
-	out.println("<img id=\"myimage\" height=\"200\" class='imagem_artigo'src=\"data:image/png;base64,"+foto+"\" alt=\"IMG DESC\">");	
-	out.println("<input type=\"file\" id=\"fotoEmpregado\" name=\"fotoEmpregado\" size=\"24\" onchange=\"onFileSelected(event)\" />");
-
-	%>
-	</div>
+		  </div>
+		  
       
-      
-		  </div> 
+      <div class= "form-group" >  
+			<div id="foto">
+			<%
+				out.println("<img id=\"myimage\" height=\"200\" class='imagem_artigo'src=\"data:image/png;base64,"+foto+"\" alt=\"IMG DESC\">");	
+			%>
+			<label class="btn btn-primary" for="my-file-selector">
+    		<input id="my-file-selector" name="fotoEmpregado" type="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val()); onFileSelected(event)">
+    			Pesquisar..
+			</label>
+			<span class='label label-info' id="upload-file-info"></span>
+			</div>
+		</div>
+		
 		  <div  class= "form-group" > 
 		    <label  for= "sobrenome" > Sobrenome </label> 
 		    <div class="span3">
@@ -76,6 +82,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		 	%>
 		    </div>
 		  </div> 
+		 
 		 <div  class= "form-group" > 
 		    <label  for= "dataNasc" > Data Nascimento </label> 
 		    <div class="span3">
@@ -86,6 +93,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		 </div>
 		 
 	 <div  class= "radio form-group" > 
+	  <label  for= "sexo" > Sexo </label> 
   		<div class="span3">
 		   <%
 		   if(empregado.getSexo().equals("F")){
@@ -112,7 +120,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		 </div> 
 
 		 
-		  <div>
+		  <div class= "form-group">
      		 <label  for = "select" >Estado Civil</label> 
      		 <div class="span3">
      		
@@ -150,7 +158,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    </div>
 		 </div>
 		 
-		 <div>
+		 <div class= "form-group">
      		 <label  for = "select" >UF RG</label> 
      		 <div class="span3">
 			<%
@@ -186,30 +194,31 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    </div>
 		 </div>
 		 
-		  <div>
-     		 <label  for = "select" >UF Carteira</label> 
-     		 <div class="span3">
-		<%
-		out.println("<select class=\"form-control\" name=\"ufRg\" id=\"ufRg\">");
-     	for (int i = 0; i < estados.length; i++) {
-     		if(estados[i].equals(empregado.getUfCarteira())){
+		<div class= "form-group">
+     	<label  for = "select" >UF Carteira</label> 
+     		<div class="span3">
+			<%
+			out.println("<select class=\"form-control\" name=\"ufRg\" id=\"ufRg\">");
+     		for (int i = 0; i < estados.length; i++) {
+     			if(estados[i].equals(empregado.getUfCarteira())){
      			out.println("<option value="+ estados[i]+" style =\"width: 100px; height: 100px\" selected>"+ estados[i] +"</option>");	
-     		}
-     		else{
+     			}
+     			else{
      			out.println("<option value="+ estados[i] +" style =\"width: 100px; height: 100px\">"+ estados[i] +"</option>");	
+     			}
      		}
-     	}
-		out.println("</select>");
-    	%>
-      	</div>
+			out.println("</select>");
+    		%>
+      		</div>
     	</div> 
-<br>
-</nav>
+	</div>
+	<br>
+	</nav>
 		 
 		 
-<nav class="navbar navbar-default" role="navigation">
+	<nav class="navbar navbar-default" role="navigation">
     <div class="container">
-    	<label  for= "dadosEndereco" > Dados endereço </label></br> </br>
+    	<label  for= "dadosEndereco" > Dados endereço </label><br><br>
     	<div  class= "form-group" > 
 			<label  for= "cep" > CEP </label>
 			<div class="span3"> 
@@ -250,6 +259,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		 		%>
 		    </div>
 		</div>
+		
 		<div  class= "form-group " > 
 			<label  for= "cidade" > Cidade </label> 
 			<div class="span3">
@@ -258,7 +268,8 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		 		%> 
 			</div>
 	   	</div>
-		<div>
+	   	
+		<div class= "form-group">
         	<label  for = "select" >Estado</label> 
      		<div class="span3">
 				<%
@@ -276,12 +287,12 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
       		</div>
     	</div> 
  	</div>
- <br>
- </nav>
+ 	<br>
+ 	</nav>
       
- <nav class="navbar navbar-default" role="navigation">
-    	<div class="container">
-        <label  for= "contratoTrabalho" > Contrato de Trabalho </label></br> </br>
+ 	<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <label  for= "contratoTrabalho" > Contrato de Trabalho </label><br><br>
         <div  class= "form-group" > 
 		    <label  for= "dataAdmissao" > Data de Admissão </label> 
 		    <div class="span3">
@@ -290,7 +301,6 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		   	%>
 		    </div>
 		 </div>
-		 
 		 
 	   <div  class= "form-group" > 
 		    <label  for= "cargo" > Cargo </label> 
@@ -320,7 +330,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    </div>
 		</div>
 		
-		 <div>
+		 <div class= "form-group">
      		 <label  for= "dataPagamento" > Dia de Pagamento</label> 
      		 <div class="span3">
 			<%
@@ -337,11 +347,9 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
     	%>
       		</div>
     		</div> 
-	
 		 <br>
-    	
-    	
-		  <div>
+
+		  <div class= "form-group"> 
      		 <label  for= "regimeContrato" > Regime de Trabalho</label> 
      		 <div class="span3">
 		    <%
@@ -360,29 +368,27 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		   %>	
       		</div>
     		</div> 
-    <br>
-    
-     <div  class= "form-group" > 
-		    <label  for= "compensacaoDias" > Compensação de Dias de Trabalho </label> 
-  		<div class="span3">
-  		<select class="form-control" name="compensacaoDias" id="compensacaoDias">
-  			  <%
+   
+   			<div class="form-group">
+     		<label  for="compensacaoDias" > Compensação de Dias de Trabalho</label> 
+     		<div class="span3">
+     		  <%
 		   if(contrato.getCompensacaoDias().equals("salario")){
-			   out.println("<option value=\"salario\" style =\"width: 100px; height: 100px\" selected> Acréscimo de salário </option>");
+			   out.println("<input  type=\"radio\" name=\"compensacaoDias\" id=\"salario\"  value=\"salario\" CHECKED>Acréscimo de salário<br>");
 		   }else{
-			   out.println("<option value=\"salario\" style =\"width: 100px; height: 100px\" > Acréscimo de salário </option>");
+			   out.println("<input type=\"radio\" name=\"compensacaoDias\" id=\"salario\"  value=\"salario\"> Acréscimo de salário<br>");
 		   }
   		   if(contrato.getCompensacaoDias().equals("horas")){
-  			   out.println("<option value=\"horas\" style =\"width: 100px; height: 100px\" selected>Regime de compensação de horas</option>");
+  			   out.println("<input type=\"radio\" name=\"compensacaoDias\" id=\"horas\"  value=\"horas\" CHECKED>Regime de compensação de horas<br>");
   		   }else{
-  			   out.println("<option value=\"horas\" style =\"width: 100px; height: 100px\">Regime de compensação de horas</option>");
+  			   out.println("<input type=\"radio\" name=\"compensacaoDias\" id=\"horas\"  value=\"horas\">Regime de compensação de horas<br>");
   		   }
 		   %>	
-		   </select>
-  			</div>
-		</div> 
-		
-		
+  			<br>
+      		</div>
+    		</div> 
+    	<br>
+
 		 <div  class= "form-group" > 
 		    <label  for= "serieCarteira" > Banco </label> 
 		    <div class="span3">
@@ -410,7 +416,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    </div>
 		 </div>
 		 
-		   <div >
+		   <div class= "form-group">
      		 <label  for = "tipoConta" >Tipo de Conta</label> 
      		 <div class="span3">
  				<select class="form-control" name="tipoConta" id="tipoConta">
@@ -431,210 +437,207 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 				</select>
       		</div>
     		</div> 
-    		</div>
-		  </br>
-     </br>
+		  <br>
+     	<br>
      
      
- <div class="container">
- <label  for= "periodoDeTrabalho" > Confira os horários de trabalho </label></br> </br>
- <span> Ajuste o horário desde que não passe de 44 horas na semana ou 25 horas em regime de tempo parcial </span>
- </br> 
- <span> *HORÁRIO EM FORMATO 24Hrs </span>
- </br> 
- </br>
-  
-  <table class="tableHorarios ">
-  <tbody>
-  <tr>
-  <td>Semana</td><td>Seg</td><td> </td><td>Ter</td><td>Qua</td><td>Qui</td><td>Sex</td><td>Sáb</td><td>Dom</td>
-  </tr> 
-  <tr>
-  <td>Entrada</td>
-  <td>
-  <input class="form-control" name="horaEntrada1" id="horaEntrada1" size="5">
-  </td>
-  <td>
-  <img src="imagens/botao_repete.ico" class="imgPreenche" id="1" style="cursor: pointer" height="20">
-  </td>
-  <td>
-  <input type="text" name="horaEntrada2" id="horaEntrada2" class="form-control" size="5" >
-  </td>
-  <td>
-  <input type="text" name="horaEntrada3" id="horaEntrada3" class="form-control" size="5" >
-  </td> 
-  <td>
- 	<input type="text" name="horaEntrada4" id="horaEntrada4" class="form-control" size="5" >
-  </td>
-    <td>
- 	<input type="text" name="horaEntrada5" id="horaEntrada5" class="form-control" size="5" >
-  </td>
-    <td>
- 	<input type="text"  name="horaEntrada6" id="horaEntrada6" class="form-control" size="5" >
-  </td>
-    <td>
- 	<input type="text" name="horaEntrada7" id="horaEntrada7" class="form-control" size="5" >
-  </td>
-  </tr>
-  
-  <tr>
-  <td>Saída Almoço</td>
-  <td>
-  <input  type="text"  name="horaSaidaAlmoco1" class="form-control" name="hora" id="horaSaidaAlmoco1" size="5">
-  </td>
-  <td>
-  <img src="imagens/botao_repete.ico" class="imgPreenche" id="2" style="cursor: pointer" height="20">
-  </td>
-  <td>
-  <input type="text" name="horaSaidaAlmoco2" id="horaSaidaAlmoco2" class="form-control" size="5" >
-  </td>
-  <td>
-  <input type="text" name="horaSaidaAlmoco3" id="horaSaidaAlmoco3" class="form-control" size="5" >
-  </td> 
-  <td>
- 	<input type="text"  name="horaSaidaAlmoco4" id="horaSaidaAlmoco4"  class="form-control" size="5" >
-  </td>
-    <td>
- 	<input type="text" name="horaSaidaAlmoco5"  id="horaSaidaAlmoco5" class="form-control" size="5" >
-  </td>
-    <td>
- 	<input type="text" name="horaSaidaAlmoco6" id="horaSaidaAlmoco6" class="form-control" size="5">
-  </td>
-    <td>
- 	<input type="text" name="horaSaidaAlmoco7" id="horaSaidaAlmoco7" class="form-control" size="5">
-  </td>
-  </tr>
-  
-  <tr>
-  <td>Volta Almoço</td>
-  <td>
-  <input type="text"  name="horaVoltaAlmoco1" class="form-control" id="horaVoltaAlmoco1" size="5">
-  </td>
-  <td>
-  <img src="imagens/botao_repete.ico" class="imgPreenche" id="3" style="cursor: pointer" height="20">
-  </td>
-  <td>
-  <input type="text"  name="horaVoltaAlmoco2" id="horaVoltaAlmoco2" class="form-control" size="5" >
-  </td>
-  <td>
-  <input type="text" name="horaVoltaAlmoco3" id="horaVoltaAlmoco3"  class="form-control" size="5" >
-  </td> 
-  <td>
- 	<input type="text" name="horaVoltaAlmoco4" id="horaVoltaAlmoco4" class="form-control" size="5" >
-  </td>
-    <td>
- 	<input type="text" name="horaVoltaAlmoco5" id="horaVoltaAlmoco5" class="form-control" size="5" >
-  </td>
-    <td>
- 	<input type="text" name="horaVoltaAlmoco6"  id="horaVoltaAlmoco6" class="form-control" size="5" >
-  </td>
-    <td>
- 	<input type="text"  name="horaVoltaAlmoco7" id="horaVoltaAlmoco7" class="form-control" size="5">
-  </td>
-  </tr>
-  
-  <tr>
-  <td>Saída</td>   
-  <td>
-  <input type="text" name="horaSaida1" class="form-control" name="hora" id="horaSaida1" size="5">
-  </td>
-  <td>
-  <img src="imagens/botao_repete.ico" class="imgPreenche" id="4" style="cursor: pointer" height="20">
-  </td>
-  <td>
-  <input type="text" name="horaSaida2" class="form-control" id="horaSaida2" class="form-control" size="5" >
-  </td>
-  <td>
-  <input type="text"  name="horaSaida3" class="form-control" id="horaSaida3" class="form-control" size="5" >
-  </td> 
-  <td>
- 	<input type="text" name="horaSaida4" class="form-control" id="horaSaida4" class="form-control" size="5" >
-  </td>
-    <td>
- 	<input type="text" name="horaSaida5" class="form-control" id="horaSaida5" class="form-control" size="5" >
-  </td>
-    <td>
- 	<input type="text" name="horaSaida6" class="form-control" id="horaSaida6" class="form-control" size="5" >
-  </td>
-    <td>
- 	<input type="text" name="horaSaida7" class="form-control" id="horaSaida7" class="form-control" size="5" >
-  </td>
-  </tr>
-  <tr>
-  <td> Dia de Folga </td>
-  <td>
-	<input name="diaFolga1" id="diaFolga1" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
-  </td>
-  <td> </td>
-  <td>
-	<input name="diaFolga2" id="diaFolga2" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
-  </td>
-  <td>
- 	<input name="diaFolga3" id="diaFolga3" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
-  </td>
-  <td>
- <input name="diaFolga4" id="diaFolga4" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
-  </td>
-  <td>
-  <input name="diaFolga5" id="diaFolga5" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
-  </td>
-  <td>
-  <input name="diaFolga6" id="diaFolga6" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
-  </td>
-  <td>
-	<input name="diaFolga7" id="diaFolga7" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
-  </td>
-  </tr>
-  <tr>
-  
-  
-  <tr>
-  <td> Meio período </td>
-  <td>
-	<input name="diaMeioPeriodo1" id="diaMeioPeriodo1" type="checkbox" onchange="alertaMeioPeriodo(this)" />
-  </td>
-  <td> </td>
-  <td>
-	<input name="diaMeioPeriodo2" id="diaMeioPeriodo2" type="checkbox" onchange="alertaMeioPeriodo(this)" />
-  </td>
-  <td>
- 	<input name="diaMeioPeriodo3" id="diaMeioPeriodo3" type="checkbox" onchange="alertaMeioPeriodo(this)" />
-  </td>
-  <td>
- <input name="diaMeioPeriodo4" id="diaMeioPeriodo4" type="checkbox" onchange="alertaMeioPeriodo(this)" />
-  </td>
-  <td>
-  <input name="diaMeioPeriodo5" id="diaMeioPeriodo5" type="checkbox" onchange="alertaMeioPeriodo(this)" />
-  </td>
-  <td>
-  <input name="diaMeioPeriodo6" id="diaMeioPeriodo6" type="checkbox" onchange="alertaMeioPeriodo(this)" />
-  </td>
-  <td>
-	<input name="diaMeioPeriodo7" id="diaMeioPeriodo7" type="checkbox" onchange="alertaMeioPeriodo(this)"/>
-  </td>
-
-  </tr>
-  
- </tbody>
-  </table>
-  </div>
-  
- <br/> 
- <br/>
-  
- <br/> 
- <br/>
- 	<label for="totalHoras">Total de horas na semana: </label><span id="totalHoras">--</span>
- 	 <br>
-	<span style="color:red; font-weight:bold;" id="saldoHoras"></span> 
-
-    </div>
-     <br/> 
- </nav>
+ 		<div class= "form-group">
+ 		<label  for= "periodoDeTrabalho" > Confira os horários de trabalho 
+ 		<a href="javascript:void(0)" onclick="informacaoCamposHora()"><i class="fa fa-info-circle" title="Informação"></i></a>
+ 		</label>
  
-    	<nav class="navbar navbar-default" role="navigation">
+ 		<br> 
+ 		<br>
+  
+  		<table class="tableHorarios ">
+  		<tbody>
+ 		 <tr>
+  		<td>Semana</td><td>Seg</td><td> </td><td>Ter</td><td>Qua</td><td>Qui</td><td>Sex</td><td>Sáb</td><td>Dom</td>
+  		</tr> 
+  		<tr>
+  		<td>Entrada</td>
+ 		 <td>
+  		<input class="form-control" name="horaEntrada1" id="horaEntrada1" size="5">
+  		</td>
+  		<td>
+  		<img src="imagens/botao_repete.ico" class="imgPreenche" id="1" style="cursor: pointer" height="20">
+  		</td>
+  		<td>
+  		<input type="text" name="horaEntrada2" id="horaEntrada2" class="form-control" size="5" >
+  		</td>
+  		<td>
+  		<input type="text" name="horaEntrada3" id="horaEntrada3" class="form-control" size="5" >
+  		</td> 
+  		<td>
+ 		<input type="text" name="horaEntrada4" id="horaEntrada4" class="form-control" size="5" >
+  		</td>
+   	 	<td>
+ 		<input type="text" name="horaEntrada5" id="horaEntrada5" class="form-control" size="5" >
+  		</td>
+    	<td>
+ 		<input type="text"  name="horaEntrada6" id="horaEntrada6" class="form-control" size="5" >
+  		</td>
+   		<td>
+ 		<input type="text" name="horaEntrada7" id="horaEntrada7" class="form-control" size="5" >
+  		</td>
+  		</tr>
+  
+  		<tr>
+  		<td>Saída Almoço</td>
+  		<td>
+  		<input  type="text"  name="horaSaidaAlmoco1" class="form-control" name="hora" id="horaSaidaAlmoco1" size="5">
+  		</td>
+  		<td>
+  		<img src="imagens/botao_repete.ico" class="imgPreenche" id="2" style="cursor: pointer" height="20">
+ 		</td>
+  		<td>
+  		<input type="text" name="horaSaidaAlmoco2" id="horaSaidaAlmoco2" class="form-control" size="5" >
+  		</td>
+  		<td>
+  		<input type="text" name="horaSaidaAlmoco3" id="horaSaidaAlmoco3" class="form-control" size="5" >
+  		</td> 
+  		<td>
+ 		<input type="text"  name="horaSaidaAlmoco4" id="horaSaidaAlmoco4"  class="form-control" size="5" >
+  		</td>
+    	<td>
+ 		<input type="text" name="horaSaidaAlmoco5"  id="horaSaidaAlmoco5" class="form-control" size="5" >
+  		</td>
+    	<td>
+ 		<input type="text" name="horaSaidaAlmoco6" id="horaSaidaAlmoco6" class="form-control" size="5">
+  		</td>
+    	<td>
+ 		<input type="text" name="horaSaidaAlmoco7" id="horaSaidaAlmoco7" class="form-control" size="5">
+  		</td>
+  		</tr>
+  
+  		<tr>
+  		<td>Volta Almoço</td>
+  		<td>
+  		<input type="text"  name="horaVoltaAlmoco1" class="form-control" id="horaVoltaAlmoco1" size="5">
+  		</td>
+  		<td>
+  		<img src="imagens/botao_repete.ico" class="imgPreenche" id="3" style="cursor: pointer" height="20">
+  		</td>
+  		<td>
+  		<input type="text"  name="horaVoltaAlmoco2" id="horaVoltaAlmoco2" class="form-control" size="5" >
+  		</td>
+  		<td>
+  		<input type="text" name="horaVoltaAlmoco3" id="horaVoltaAlmoco3"  class="form-control" size="5" >
+  		</td> 
+  		<td>
+ 		<input type="text" name="horaVoltaAlmoco4" id="horaVoltaAlmoco4" class="form-control" size="5" >
+  		</td>
+    	<td>
+ 		<input type="text" name="horaVoltaAlmoco5" id="horaVoltaAlmoco5" class="form-control" size="5" >
+  		</td>
+    	<td>
+ 		<input type="text" name="horaVoltaAlmoco6"  id="horaVoltaAlmoco6" class="form-control" size="5" >
+  		</td>
+    	<td>
+ 		<input type="text"  name="horaVoltaAlmoco7" id="horaVoltaAlmoco7" class="form-control" size="5">
+  		</td>
+  		</tr>
+  
+  		<tr>
+ 	 	<td>Saída</td>   
+  		<td>
+  		<input type="text" name="horaSaida1" class="form-control" name="hora" id="horaSaida1" size="5">
+  		</td>
+  		<td>
+  		<img src="imagens/botao_repete.ico" class="imgPreenche" id="4" style="cursor: pointer" height="20">
+  		</td>
+  		<td>
+  		<input type="text" name="horaSaida2" class="form-control" id="horaSaida2" class="form-control" size="5" >
+  		</td>
+  		<td>
+  		<input type="text"  name="horaSaida3" class="form-control" id="horaSaida3" class="form-control" size="5" >
+  		</td> 
+  		<td>
+ 		<input type="text" name="horaSaida4" class="form-control" id="horaSaida4" class="form-control" size="5" >
+  		</td>
+    	<td>
+ 		<input type="text" name="horaSaida5" class="form-control" id="horaSaida5" class="form-control" size="5" >
+		</td>
+		<td>
+		<input type="text" name="horaSaida6" class="form-control" id="horaSaida6" class="form-control" size="5" >
+		</td>
+	    <td>
+	 	<input type="text" name="horaSaida7" class="form-control" id="horaSaida7" class="form-control" size="5" >
+		 </td>
+		 </tr>
+		 <tr>
+		 <td> Dia de Folga </td>
+		 <td>
+			<input name="diaFolga1" id="diaFolga1" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
+		  </td>
+		  <td> </td>
+		  <td>
+			<input name="diaFolga2" id="diaFolga2" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
+		  </td>
+		  <td>
+		 	<input name="diaFolga3" id="diaFolga3" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
+		  </td>
+		  <td>
+		 <input name="diaFolga4" id="diaFolga4" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
+		  </td>
+		  <td>
+		  <input name="diaFolga5" id="diaFolga5" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
+		  </td>
+		  <td>
+		  <input name="diaFolga6" id="diaFolga6" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
+		  </td>
+		  <td>
+			<input name="diaFolga7" id="diaFolga7" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
+		  </td>
+		  </tr>
+		  <tr>
+				  
+		  
+		  <tr>
+		  <td> Meio período </td>
+		  <td>
+			<input name="diaMeioPeriodo1" id="diaMeioPeriodo1" type="checkbox" onchange="alertaMeioPeriodo(this)" />
+		  </td>
+		  <td> </td>
+		  <td>
+			<input name="diaMeioPeriodo2" id="diaMeioPeriodo2" type="checkbox" onchange="alertaMeioPeriodo(this)" />
+		  </td>
+		  <td>
+		 	<input name="diaMeioPeriodo3" id="diaMeioPeriodo3" type="checkbox" onchange="alertaMeioPeriodo(this)" />
+		  </td>
+		  <td>
+		 <input name="diaMeioPeriodo4" id="diaMeioPeriodo4" type="checkbox" onchange="alertaMeioPeriodo(this)" />
+		  </td>
+		  <td>
+		  <input name="diaMeioPeriodo5" id="diaMeioPeriodo5" type="checkbox" onchange="alertaMeioPeriodo(this)" />
+		  </td>
+		  <td>
+		  <input name="diaMeioPeriodo6" id="diaMeioPeriodo6" type="checkbox" onchange="alertaMeioPeriodo(this)" />
+		  </td>
+		  <td>
+			<input name="diaMeioPeriodo7" id="diaMeioPeriodo7" type="checkbox" onchange="alertaMeioPeriodo(this)"/>
+		  </td>
+		
+		  </tr>
+		  
+		 </tbody>
+		  </table>
+  		</div>
+  
+ 		<br> 
+ 		<br>
+ 		<br> 
+ 		<br>
+	 	<label for="totalHoras">Total de horas na semana: </label><span id="totalHoras">--</span>
+	 	 <br>
+		<span style="color:red; font-weight:bold;" id="saldoHoras"></span> 
+	<br> 
+	</div>
+ 	</nav>
+ 
+    <nav class="navbar navbar-default" role="navigation">
     <div class="container">
-         <label  for= "TipoContato" > Contato </label></br> </br>
+         <label  for= "TipoContato" > Contato </label><br><br>
        <div  class= "form-group " > 
 		    <label  for= "tipoContato" > Tipo Contato </label> 
 		    <div class="span3">
@@ -654,44 +657,39 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
       <br>
     </div>
     <br>
-    
-      </nav>
+    </nav>
     
     <nav class="navbar navbar-default" role="navigation">
     	<div class="container">
-
-       <label  for= "email" > Login </label></br> </br>
-      
-       <div  class= "form-group " > 
+       		<label  for= "email" > Login </label><br><br>
+       		<div  class= "form-group " > 
 		    <label  for= "email" > E-mail </label> 
 		    <div class="span3">
 		    <%
 		    out.println("<input value="+empregado.getEmail()+" class=\"form-control\" id=\"email\"  placeholder=\"E-mail\" name=\"email\" type=\"email\">");
 		   	%>
 		    </div>
-	   </div>
-	   <div  class= "form-group" > 
+	   		</div>
+	  	 	<div  class= "form-group" > 
 		    <label  for= "senha" > Senha </label> 
 		    <div class="span3">
 		    <%
 		    	out.println("<input type=\"password\" value="+empregado.getSenha()+" class=\"form-control\" name=\"senha\" id=\"senha\" size=\"10\">");
 		   	%>
 		    </div>
-		</div>
-		
-
-    </div>
+			</div>
+    	</div>
      <br>
-     
     </nav>
     
      <div id="botoes">
-		<button  type= "submit" name="acao" value="Cadastrar" class= "btn btn-primário " > Salvar </button> 
-		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " > Cancelar </button> 
-	</div>
-  </form>
-
+		<button  type= "submit" name="acao" value="Cadastrar" onclick="return validar()" class= "btn btn-default " > Salvar </button> 
+		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-default " > Cancelar </button> 
+	 </div>
+	
+ </form>
 </div>
+
 <c:import url="rodape.jsp"/>
 
 <script type="text/javascript">

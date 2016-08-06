@@ -1,20 +1,15 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import model.EspecialistaContato;
 import model.EspecialistaEndereco;
 import model.EspecialistaUsuario;
-import model.UsuarioTO;
-import mysqldao.UsuarioDAO;
 
 
 /**
@@ -90,19 +85,12 @@ public class CadastrarUsuario extends HttpServlet {
 			espEndereco.adicionarUsuario( endereco,  cidade,  estado, numeroEndereco,
 					complemento, cep, bairro);
 					
-			response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-            RequestDispatcher rd = null;
-            
-            
+			
             String codigo = espUsuario.getUltimoCodigo();
             request.setAttribute("codigo", codigo);
-        	  
-            out.println("<b>Login Realizado!</b><br>");
         	view = request.getRequestDispatcher("TelaPrincipal.jsp");
         	view.forward(request, response);
-			
-            out.close();
+	
 			
 		} catch (NumberFormatException e) {
 			

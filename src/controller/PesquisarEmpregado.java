@@ -1,23 +1,15 @@
 package controller;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import model.ContratoTO;
 import model.EmpregadoTO;
 import model.EspecialistaContrato;
@@ -86,6 +78,7 @@ public class PesquisarEmpregado extends HttpServlet {
 			{			
 				String codigoUsuario = (String) session.getAttribute("codigo");	
 				String tipo = request.getParameter("tipo");
+				EspecialistaContrato espContrato = new EspecialistaContrato();
 				
 				if(especilista.pesquisarTodos(codigoUsuario).size() > 0)
 				{
@@ -94,18 +87,26 @@ public class PesquisarEmpregado extends HttpServlet {
 					if(funcionarios.size() > 0)
 					{
 						if(tipo!= null && tipo.equals("excluir")){
-							request.setAttribute("mge", "Funcionário Excluido!");
+							request.setAttribute("mge", "Cadastro do empregado excluido com sucesso.");
 						}
 						else if (tipo!= null && tipo.equals("cadastrar")){
-							request.setAttribute("mge", "Funcionário Cadastrado!");
+							request.setAttribute("mge", "Cadastro do empregado realizado com sucesso.");
 						}	
 						else if (tipo!= null && tipo.equals("alterar")){
-							request.setAttribute("mge", "Funcionário Alterado!");
+							request.setAttribute("mge", "Cadastro do empregado atualizado com sucesso.");
 						}
 						else if (tipo!= null && tipo.equals("erro")){
 							request.setAttribute("mge", "Operação não pode ser realizada!");
 						}
-						 request.setAttribute("combo", funcionarios);
+						
+						ArrayList<ContratoTO> contratos = new ArrayList<>();
+						for(int i=0; i < funcionarios.size(); i++){
+							contratos.add(espContrato.pesquisarEmpregado(funcionarios.get(i).getCodigoEmpregado()));
+						}
+						
+						request.setAttribute("comboFuncionarios", funcionarios);
+						request.setAttribute("comboContratos", contratos);
+						
 						 view = request.getRequestDispatcher("TelaEmpregado.jsp");
 						 view.forward(request, response);
 					}

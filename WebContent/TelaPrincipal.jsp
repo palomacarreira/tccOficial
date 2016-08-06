@@ -14,7 +14,8 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <script src="js/bootstrap-datetimepicker.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-
+<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+<script src="js/sweetalert.min.js"></script> 
 
 
 <title>Gestão de Empregados</title>
@@ -24,12 +25,26 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 
 <c:import url="cabecalhoLogado.jsp"/>
 	
-</br>
+<br>
 <div align="center">
 			<img src="imagens/empregados.jpg" class="img-responsive">
 </div>
-</br>
+<br>
 
 	
 <c:import url="rodape.jsp"/>
+<script type="text/javascript">
+window.onload = function(){
+	 <%
+	  String aqui= (String)request.getAttribute("mge");
+	  if(aqui != null){
+	  %>
+	  swal({   title: "CADASTRO",   
+			text: "<span style=\"color:#F8BB86\"><%=aqui%><span>",   
+					html: true 
+			});
+
+	<%}%>
+}
+</script>
 </html>

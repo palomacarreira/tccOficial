@@ -1,9 +1,7 @@
 package model;
 
-import java.io.InputStream;
 import java.sql.Date;
 import java.util.ArrayList;
-
 import mysqldao.EmpregadoDAO;
 
 public class EspecialistaEmpregado 

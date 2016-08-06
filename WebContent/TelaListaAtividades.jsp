@@ -155,8 +155,6 @@
 	<c:import url="cabecalhoLogado.jsp" />
 		<form class="form-horizontal" >
 			<fieldset>
-
-
 				<legend>Lista de Atividades</legend>
 				
 				<%if(request.getAttribute("nome") != null && request.getAttribute("cpf") != null){
@@ -204,6 +202,7 @@
 							class="btn btn-primary">Buscar</button>
 					</div>
 				</div>
+	</fieldset>
 </form>
 <form>
 				<div class="form-group">
@@ -244,8 +243,6 @@ out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.get
 							class="btn btn-primary">Adicionar Atividade</button>
 					</div>
 				</div>
-
-			</fieldset>
 	</form>
 	<form>
 			<table class="table ls-table" id="tabela1">
@@ -307,7 +304,7 @@ out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.get
 			
 				</tbody>
 			</table>
-		</form>
+	</form>
 
 		<c:import url="rodape.jsp" />
 </body>

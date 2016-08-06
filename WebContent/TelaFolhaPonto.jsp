@@ -153,8 +153,6 @@
 	<c:import url="cabecalhoLogado.jsp" />
 		<form class="form-horizontal" >
 			<fieldset>
-
-
 				<legend>Folha de ponto</legend>
 				
 				<%if(request.getAttribute("nome") != null && request.getAttribute("cpf") != null){
@@ -202,6 +200,7 @@
 							class="btn btn-primary">Buscar</button>
 					</div>
 				</div>
+	</fieldset>
 </form>
 
 		<c:import url="rodape.jsp" />

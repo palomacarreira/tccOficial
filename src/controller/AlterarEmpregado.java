@@ -4,14 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +17,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+<<<<<<< HEAD
 
+=======
+>>>>>>> c534c22171fb3c898985525810b99f1f6d09eead
 import model.ContatoTO;
 import model.ContratoTO;
 import model.EmpregadoTO;
@@ -30,6 +30,11 @@ import model.EspecialistaContrato;
 import model.EspecialistaEmpregado;
 import model.EspecialistaEndereco;
 import model.EspecialistaJornadaTrabalho;
+<<<<<<< HEAD
+=======
+import model.JornadaTrabalhoTO;
+import model.ManipulandoImagem;
+>>>>>>> c534c22171fb3c898985525810b99f1f6d09eead
 
 /**
  * Servlet implementation class AlterarEmpregado
@@ -79,8 +84,6 @@ public class AlterarEmpregado extends HttpServlet {
 				//alterar dados empregado
 				
 				byte[] foto = null;
-				InputStream inputStream = null;
-				
 				String caminho = request.getParameter("fotoEmpregado");
 			    BufferedImage imagem;
 			    if(caminho != "")
@@ -115,12 +118,6 @@ public class AlterarEmpregado extends HttpServlet {
 					e1.printStackTrace();
 				}
 		        
-				 
-				 String horaEntrada = request.getParameter("horaEntrada");
-				 String horaSaida  = request.getParameter("horaSaida");
-				 String horaSaidaAlmoco = request.getParameter("horaSaidaAlmoco");
-				 String horaVoltaAlmoco = request.getParameter("horaVoltaAlmoco");
-				 
 				
 				 String nome = (String) request.getParameter("nome");
 				 String sobrenome = (String) request.getParameter("sobrenome");
@@ -138,7 +135,6 @@ public class AlterarEmpregado extends HttpServlet {
 				 int qtdDependentes = Integer.parseInt(request.getParameter("qtdDependentes"));
 			
 				 String cargo = (String) request.getParameter("cargo");
-				 String regimeContrato = (String) request.getParameter("regimeContrato");
 				 String diaPagamento = request.getParameter("diaPagamento");
 				 Boolean descontoINSS = Boolean.parseBoolean(request.getParameter("descontoINSS"));
 				 Double valeTransporte = Double.parseDouble(request.getParameter("valeTransporte"));
@@ -168,15 +164,16 @@ public class AlterarEmpregado extends HttpServlet {
 				view.forward(request, response);
 				
 		            
-				espEmpregado.alterar(codEmpregado, nome, sobrenome, dataNasc, estadoCivil, sexo, 
-				cpf, cargo, ufRg, numCarteira, serieCarteira, ufCarteira, email, senha, ativo, 
-				foto, qtdDependentes);
+				espEmpregado.alterar(codEmpregado, nome,  sobrenome, dataNasc, 
+				estadoCivil, sexo, cpf,  rg, ufRg, numCarteira, serieCarteira,  ufCarteira, 
+						 email,  senha,  ativo, foto, qtdDependentes);
 				
 				espContato.alterarEmpregado(codEmpregado, tipoContato, numeroTelefone);
 		
 				espEndereco.alterarEmpregado(codEmpregado, endereco, cidade, estado, 
 						numeroEndereco, complemento, cep, bairro);
 				
+<<<<<<< HEAD
 				espContrato.alterarEmpregado(codEmpregado, cargo, diaPagamento, dataAdmissao, 
 				descontoINSS, valeTransporte, salarioBase, compensacaoDias, regimeDeTrabalho, horaEntrada,
 				horaSaidaAlmoco, horaVoltaAlmoco, horaSaidaAlmoco, tipoConta, agencia, banco, tipoContato);
@@ -190,6 +187,14 @@ public class AlterarEmpregado extends HttpServlet {
 	       
 	            out.println("<b>Cadastro Realizado!</b><br>");
 	        	view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos");
+=======
+				espContrato.alterarEmpregado(codEmpregado,cargo,diaPagamento, 
+						 dataAdmissao, descontoINSS,  valeTransporte, 
+						 salarioBase, compensacaoDias,  regimeDeTrabalho,  
+					  conta,  agencia,  banco,  tipoConta);
+								
+				view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=alterar");
+>>>>>>> c534c22171fb3c898985525810b99f1f6d09eead
 	        	view.forward(request, response);
 				
 	            out.close();
@@ -202,6 +207,31 @@ public class AlterarEmpregado extends HttpServlet {
 			}
 			break;
 			
+		case "Demitir":
+			String codE = (String) request.getParameter("codEmpregado");
+			if(codE != null){
+				
+				EmpregadoTO empregadoTO = espEmpregado.pesquisar(codE);
+				ContratoTO contratoTO = espContrato.pesquisarEmpregado(codE);	
+				try 
+				{
+					request.setAttribute("listaEmpregado", empregadoTO);
+					request.setAttribute("listaContrato", contratoTO);
+					view = request.getRequestDispatcher("TelaRescisao.jsp");
+					view.forward(request, response);
+					
+				} catch (NumberFormatException e) {
+					request.setAttribute("msg", "Error " + e.getMessage());
+					 view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=erro");
+					 view.forward(request, response);
+				}
+			}
+			else{
+				 view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos");
+				 view.forward(request, response);
+			}
+		break;
+		
 		case "Excluir":
 		
 			break;

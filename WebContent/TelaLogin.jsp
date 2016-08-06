@@ -64,7 +64,7 @@ function valida_form (){
 	                     <form method="post" id="form1" action="Login" role="form" onsubmit="return valida_form(this)">
 	                        <fieldset>
 	                            <div class="form-group">
-	                                <input class="form-control" id="txtEmail"  placeholder="E-mail" name="email" type="email" autofocus>
+	                                <input class="form-control" id="txtEmail"  placeholder="E-mail" name="email" type="email">
 	                            </div>
 	                            <div class="form-group">
 	                                <input class="form-control" id="txtSenha"  placeholder="Password" name="senha" type="password" value="">

@@ -1,9 +1,12 @@
 package model;
 
 
+<<<<<<< HEAD
 import security.Digester;
 import mysqldao.ContatoDAO;
 import mysqldao.EnderecoDAO;
+=======
+>>>>>>> c534c22171fb3c898985525810b99f1f6d09eead
 import mysqldao.UsuarioDAO;
 
 

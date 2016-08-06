@@ -65,7 +65,6 @@ public class AlterarUsuario extends HttpServlet {
 			case "Salvar":
 				//alteração dado 
 				
-				UsuarioTO clienteTO = new UsuarioTO();
 				
 				String codigo = (String) session.getAttribute("codigo");
 				String nome = (String) request.getParameter("nome");
@@ -97,7 +96,7 @@ public class AlterarUsuario extends HttpServlet {
 					espEndereco.alterarUsuario( codigo, endereco,  cidade,  estado, numeroEndereco,
 							complemento, cep, bairro);
 					
-					request.setAttribute("msg", "Dados Alterados");
+					request.setAttribute("mge", "Seu cadastro foi atualizado com sucesso.");
 					view = request.getRequestDispatcher("TelaPrincipal.jsp");
 					view.forward(request, response);
 					

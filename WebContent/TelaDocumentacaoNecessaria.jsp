@@ -39,15 +39,15 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	                
 	                    <form role="form">
 	                        
-							<ul></br>
-								<li> Numero do CPF e RG</li></br>
-								<li> Data de nascimento</li></br>
-								<li> Numero da carteira de trabalho</li></br>
-								<li> Endereco residencial</li></br>
-								<li> Valor do salario contratado</li></br>
-								<li> Numero do telefone</li></br>
-								<li> E-mail para contato</li></br>
-								<li> Dados bancarios</li></br>
+							<ul>
+								<li> Numero do CPF e RG</li>
+								<li> Data de nascimento</li>
+								<li> Numero da carteira de trabalho</li>
+								<li> Endereco residencial</li>
+								<li> Valor do salario contratado</li>
+								<li> Numero do telefone</li>
+								<li> E-mail para contato</li>
+								<li> Dados bancarios</li>
 								<li> Data de admissao</li>
 							</ul>
 	                       

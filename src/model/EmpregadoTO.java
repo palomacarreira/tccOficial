@@ -1,8 +1,5 @@
 package model;
 
-import java.awt.Image;
-import java.io.File;
-import java.io.InputStream;
 import java.sql.Date;
 
 public class EmpregadoTO {
