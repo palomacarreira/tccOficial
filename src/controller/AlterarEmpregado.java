@@ -4,11 +4,12 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,10 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-<<<<<<< HEAD
 
-=======
->>>>>>> c534c22171fb3c898985525810b99f1f6d09eead
 import model.ContatoTO;
 import model.ContratoTO;
 import model.EmpregadoTO;
@@ -30,11 +28,7 @@ import model.EspecialistaContrato;
 import model.EspecialistaEmpregado;
 import model.EspecialistaEndereco;
 import model.EspecialistaJornadaTrabalho;
-<<<<<<< HEAD
-=======
-import model.JornadaTrabalhoTO;
-import model.ManipulandoImagem;
->>>>>>> c534c22171fb3c898985525810b99f1f6d09eead
+
 
 /**
  * Servlet implementation class AlterarEmpregado
@@ -173,10 +167,8 @@ public class AlterarEmpregado extends HttpServlet {
 				espEndereco.alterarEmpregado(codEmpregado, endereco, cidade, estado, 
 						numeroEndereco, complemento, cep, bairro);
 				
-<<<<<<< HEAD
 				espContrato.alterarEmpregado(codEmpregado, cargo, diaPagamento, dataAdmissao, 
-				descontoINSS, valeTransporte, salarioBase, compensacaoDias, regimeDeTrabalho, horaEntrada,
-				horaSaidaAlmoco, horaVoltaAlmoco, horaSaidaAlmoco, tipoConta, agencia, banco, tipoContato);
+				descontoINSS, valeTransporte, salarioBase, compensacaoDias, regimeDeTrabalho, tipoConta, agencia, banco, tipoContato);
 				
 				
 				response.setContentType("text/html");
@@ -187,14 +179,12 @@ public class AlterarEmpregado extends HttpServlet {
 	       
 	            out.println("<b>Cadastro Realizado!</b><br>");
 	        	view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos");
-=======
 				espContrato.alterarEmpregado(codEmpregado,cargo,diaPagamento, 
 						 dataAdmissao, descontoINSS,  valeTransporte, 
 						 salarioBase, compensacaoDias,  regimeDeTrabalho,  
 					  conta,  agencia,  banco,  tipoConta);
 								
 				view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=alterar");
->>>>>>> c534c22171fb3c898985525810b99f1f6d09eead
 	        	view.forward(request, response);
 				
 	            out.close();
