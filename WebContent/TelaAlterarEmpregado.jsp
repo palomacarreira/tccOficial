@@ -61,6 +61,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		 	%>
 		    </div>
 		  </div>
+		
 		  
 		<div class= "form-group" >  
 			<div id="foto">
