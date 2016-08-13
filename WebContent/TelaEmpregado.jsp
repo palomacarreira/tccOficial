@@ -26,7 +26,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <div class="container">
         <h1>Meus funcionários</h1>
 		<div class="adicionar">
-            <a href="CadastrarUsuario?acao=Adicionar" class="link-avancar">
+            <a href="CadastrarEmpregado?acao=Adicionar" class="link-avancar">
             	<i class="fa fa-plus-square fa-2x"></i>
             	<span class="func-link-txt" style="font-size:30px;">adicionar</span>
         	</a>
@@ -62,23 +62,23 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 						</a>
                 </div>
                 <div class="col-md-2">
-                   <a href="AlterarEmpregado?acao=Ferias&codEmpregado=<%=listaFunc.get(i).getCodigoEmpregado()%>">
-							<span class="fa-stack fa-2x">
-								<i class="fa fa-square-o fa-stack-2x func-link-i1"></i>
-								<i class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
-							</span>
-							<br>
-							<span class="func-link-txt">Férias</span>
+                   <a href="PesquisarFerias?acao=Pesquisar&codigoEmpregado=<%=listaFunc.get(i).getCodigoEmpregado()%>">
+						<span class="fa-stack fa-2x">
+							<i class="fa fa-square-o fa-stack-2x func-link-i1"></i>
+							<i class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+						</span>
+						<br>
+						<span class="func-link-txt">Férias</span>
 					</a>
                 </div>
                 <div class="col-md-2">
                    <a href="AlterarEmpregado?acao=DecimoTerceiro&codEmpregado=<%=listaFunc.get(i).getCodigoEmpregado()%>">
-							<span class="fa-stack fa-2x">
-								<i class="fa fa-square-o fa-stack-2x func-link-i1"></i>
-								<i class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
-							</span>
-							<br>
-							<span class="func-link-txt">Décimo Terceiro</span>
+						<span class="fa-stack fa-2x">
+							<i class="fa fa-square-o fa-stack-2x func-link-i1"></i>
+							<i class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+						</span>
+						<br>
+						<span class="func-link-txt">Décimo Terceiro</span>
 					</a>
                 </div>
                 <div class="col-md-2">

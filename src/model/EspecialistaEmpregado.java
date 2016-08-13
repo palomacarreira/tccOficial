@@ -11,7 +11,7 @@ public class EspecialistaEmpregado
 	
 	public void adicionar(String nome, String sobrenome, Date dataNasc, String estadoCivil, String sexo, 
 	String cpf, String rg, String ufRg, String numCarteira,String serieCarteira, String ufCarteira, 
-	String email, String senha, Boolean ativo, byte[] foto, int qtdDependentes){
+	String email, String senha, Boolean ativo, String foto, int qtdDependentes, String codigoUsuario){
 
 		empregadoTO.setNome(nome);
 		empregadoTO.setSobrenome(sobrenome);
@@ -29,15 +29,17 @@ public class EspecialistaEmpregado
 		empregadoTO.setAtivo(ativo);
 		empregadoTO.setFoto(foto);
 		empregadoTO.setQtdDependentes(qtdDependentes);
+		empregadoTO.setCodigoEmpregador(codigoUsuario);
 		
         empregadoDAO.cadastrarEmpregado(empregadoTO); 
+
 	}
 	
 	public void alterar(String codigo, String nome, String sobrenome, Date dataNasc, String estadoCivil, String sexo, 
 			String cpf, String rg, String ufRg, String numCarteira,String serieCarteira, String ufCarteira, 
-			String email, String senha, Boolean ativo, byte[] foto, int qtdDependentes){
+			String email, String senha, Boolean ativo, String foto, int qtdDependentes){
 		
-		empregadoTO.setCodigo(codigo);
+		empregadoTO.setCodigoEmpregado(codigo);
 		empregadoTO.setNome(nome);
 		empregadoTO.setSobrenome(sobrenome);
 		empregadoTO.setDataNasc(dataNasc);
@@ -54,7 +56,6 @@ public class EspecialistaEmpregado
 		empregadoTO.setAtivo(ativo);
 		empregadoTO.setFoto(foto);
 		empregadoTO.setQtdDependentes(qtdDependentes);
-		
 		empregadoDAO.alterarEmpregado(empregadoTO);
         
 	}
@@ -73,7 +74,7 @@ public class EspecialistaEmpregado
 	
 	public ArrayList<EmpregadoTO> pesquisarTodos(String codigoUsuario){
 		ArrayList<EmpregadoTO> empregadoTO = new ArrayList<EmpregadoTO>();
-		empregadoTO  = empregadoDAO.pesquisarTodos();
+		empregadoTO  = empregadoDAO.pesquisarTodos(codigoUsuario);
 		return empregadoTO;
 	}
 	
@@ -84,4 +85,8 @@ public class EspecialistaEmpregado
 		return codigo;
 	}
 
+	public void alterarFoto(String codigo,String foto)
+	{
+		empregadoDAO.alterarFoto(codigo,foto);
+	}
 }

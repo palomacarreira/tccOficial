@@ -55,6 +55,7 @@ public class UsuarioDAO extends MysqlConnect {
 				         st.setString(6,usuarioTO.getUfRg());
 				         st.setBoolean(7,usuarioTO.getAtivo());
 				         st.setString(8,usuarioTO.getCodigo());
+
 				         st.executeUpdate(); 
 				         st.close(); 
 		      }
@@ -125,8 +126,8 @@ public class UsuarioDAO extends MysqlConnect {
 	         {
 	            String sql = " UPDATE USUARIO SET ativo = ?  where CD_USUARIO = ?";
 	            st = conn.prepareStatement(sql);
-	            st.setString(1,cod);
-	            st.setBoolean(2, true);
+	            st.setBoolean(1, true);
+	            st.setString(2,cod);
 	            st.executeUpdate();
 	            st.close(); 
 	         }

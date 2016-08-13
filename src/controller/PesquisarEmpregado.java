@@ -3,6 +3,10 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import model.ContratoTO;
+import model.EmpregadoTO;
+import model.EspecialistaContrato;
+import model.EspecialistaEmpregado;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.ContratoTO;
-import model.EmpregadoTO;
-import model.EspecialistaContrato;
-import model.EspecialistaEmpregado;
-import model.ManipulandoImagem;
 
 /**
  * Servlet implementation class PesquisarEmpregado
@@ -45,13 +44,14 @@ public class PesquisarEmpregado extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		request.setCharacterEncoding("UTF-8");
-		String acao = request.getParameter("acao");
-
-		RequestDispatcher view= null;
-		HttpSession session = request.getSession();
 		EmpregadoTO empregado = null;
 		EspecialistaEmpregado especilista = new EspecialistaEmpregado();
+		
+		RequestDispatcher view;
+		request.setCharacterEncoding("UTF-8");
+		String acao = request.getParameter("acao");
+		HttpSession session = request.getSession();
+		String codigoUsuario = (String) session.getAttribute("codigoUsuario");
 		
 		switch (acao) 
 		{
@@ -76,7 +76,7 @@ public class PesquisarEmpregado extends HttpServlet {
 	
 			try
 			{			
-				String codigoUsuario = (String) session.getAttribute("codigo");	
+				
 				String tipo = request.getParameter("tipo");
 				EspecialistaContrato espContrato = new EspecialistaContrato();
 				
@@ -104,9 +104,8 @@ public class PesquisarEmpregado extends HttpServlet {
 							contratos.add(espContrato.pesquisarEmpregado(funcionarios.get(i).getCodigoEmpregado()));
 						}
 						
-						request.setAttribute("comboFuncionarios", funcionarios);
-						request.setAttribute("comboContratos", contratos);
-						
+						 request.setAttribute("comboFuncionarios", funcionarios);
+						 request.setAttribute("comboContratos", contratos);
 						 view = request.getRequestDispatcher("TelaEmpregado.jsp");
 						 view.forward(request, response);
 					}

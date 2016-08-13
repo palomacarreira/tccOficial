@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import model.EspecialistaContato;
 import model.EspecialistaEndereco;
 import model.EspecialistaUsuario;
@@ -41,19 +43,13 @@ public class CadastrarUsuario extends HttpServlet {
 		EspecialistaUsuario espUsuario = new EspecialistaUsuario();
 		EspecialistaContato espContato = new EspecialistaContato();
 		EspecialistaEndereco espEndereco = new EspecialistaEndereco();
-		
+		HttpSession session = request.getSession();
 		RequestDispatcher view;
 		request.setCharacterEncoding("UTF-8");
 		String acao = request.getParameter("acao");
 		switch (acao) 
 		{
-		
-		case "Adicionar":
-			view = request.getRequestDispatcher("TelaCadastroEmpregado.jsp");
-        	view.forward(request, response);
-			
-		break;
-			
+	
 		case "Cadastrar":
 			
 		String nome = (String) request.getParameter("nome");
@@ -87,7 +83,7 @@ public class CadastrarUsuario extends HttpServlet {
 					
 			
             String codigo = espUsuario.getUltimoCodigo();
-            request.setAttribute("codigo", codigo);
+            session.setAttribute("codigoUsuario", codigo);
         	view = request.getRequestDispatcher("TelaPrincipal.jsp");
         	view.forward(request, response);
 	
@@ -99,11 +95,6 @@ public class CadastrarUsuario extends HttpServlet {
 			view.forward(request, response);
 		}
 		break;
-		
-		case "Cancelar":
-			view = request.getRequestDispatcher("TelaLogin.jsp");
-			view.forward(request, response);
-			break;
 		}
 	
 	}

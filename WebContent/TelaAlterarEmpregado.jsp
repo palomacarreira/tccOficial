@@ -21,6 +21,9 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <script src="js/jquery.maskedinput-1.1.4.pack 2.js"></script>
 <script type="text/javascript" src="js/scriptEmpregado.js"></script>
 <script src="jquery.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+<script src="js/sweetalert.min.js"></script> 
+<link rel="stylesheet" href="css/font-awesome.min.css">
 
 <title>Alterar Empregado</title>
 
@@ -45,8 +48,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <c:import url="cabecalhoDeslogado.jsp"/>
 
 <div class="container">
-<form name="form1" class= "form-inline" method="post" action="CadastrarEmpregado">
-	
+<form id="dadosEmpregado" role="form" class="form-inline" method="post" action="AlterarEmpregado" enctype="multipart/form-data">
 	<nav class="navbar navbar-default" role="navigation">
 	<div class="container">
 		<label  for= "dadosEmpregado" > Dados Empregado </label><br><br>
@@ -60,17 +62,19 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    </div>
 		  </div>
 		  
-      
-      <div class= "form-group" >  
+		<div class= "form-group" >  
 			<div id="foto">
-			<%
-				out.println("<img id=\"myimage\" height=\"200\" class='imagem_artigo'src=\"data:image/png;base64,"+foto+"\" alt=\"IMG DESC\">");	
-			%>
-			<label class="btn btn-primary" for="my-file-selector">
-    		<input id="my-file-selector" name="fotoEmpregado" type="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val()); onFileSelected(event)">
-    			Pesquisar..
-			</label>
-			<span class='label label-info' id="upload-file-info"></span>
+				<% if(foto.equals("")){
+					%><img id="myimage" src="imagens/sem-imagem.png" height="100"><%
+				}
+				else{
+					%><img id="myimage" src="uploads/<%=foto%>" height="100"><%
+				}
+				%>
+				<label class="btn btn-primary" for="my-file-selector">
+	    		<input id="my-file-selector" name="fotoEmpregado" type="file" style="display:none;" onchange="onFileSelected(event)">
+	    			Pesquisar..
+				</label>
 			</div>
 		</div>
 		
@@ -83,16 +87,15 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    </div>
 		  </div> 
 		 
+		
 		 <div  class= "form-group" > 
 		    <label  for= "dataNasc" > Data Nascimento </label> 
 		    <div class="span3">
-		     <%
-		     out.println("<input type=\"date\" value="+empregado.getDataNasc()+" class=\"form-control\"  id=\"dataNasc\" name=\"dataNasc\" size=\"20\">");
-		 	%>
+		    <input type="date" value="<%=empregado.getDataNasc()%>" id="dataNasc" name="dataNasc" class="form-control" size="20" required> 
 		    </div>
 		 </div>
-		 
-	 <div  class= "radio form-group" > 
+		  
+	<div  class= "form-group" > 
 	  <label  for= "sexo" > Sexo </label> 
   		<div class="span3">
 		   <%
@@ -101,10 +104,10 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		   }else{
 			   out.println("<input type=\"radio\"  name=\"sexo\"  id=\"radioFem\"  value=\"F\" >Fem");
 		   }
-  		   if(empregado.getSexo().equals("F")){
+  		   if(empregado.getSexo().equals("M")){
   			   out.println("<input type=\"radio\"  name=\"sexo\"  id=\"radioMasc\"  value=\"M\" checked>Masc");
   		   }else{
-  			 out.println("<input type=\"radio\"  name=\"sexo\"  id=\"radioMasc\"  value=\"M\">Masc");
+  			   out.println("<input type=\"radio\"  name=\"sexo\"  id=\"radioMasc\"  value=\"M\">Masc");
   		   }
 		   %>
   		   </div>
@@ -114,11 +117,10 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    <label  for= "numDependentes" > Número de Dependentes </label> 
 		    <div class="span3">
 		    <%
-		     out.println("<input type=\"text\" value="+empregado.getDataNasc()+" id=\"qtdDependentes\" name=\"qtdDependentes\" class=\"form-control\" size=\"28\">");
+		     out.println("<input type=\"number\" min=\"0\" value="+empregado.getQtdDependentes()+" id=\"qtdDependentes\" name=\"qtdDependentes\" class=\"form-control\" size=\"28\">");
 		 	%>
 		    </div>
 		 </div> 
-
 		 
 		  <div class= "form-group">
      		 <label  for = "select" >Estado Civil</label> 
@@ -198,7 +200,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
      	<label  for = "select" >UF Carteira</label> 
      		<div class="span3">
 			<%
-			out.println("<select class=\"form-control\" name=\"ufRg\" id=\"ufRg\">");
+			out.println("<select class=\"form-control\" name=\"ufCarteira\" id=\"ufCarteira\">");
      		for (int i = 0; i < estados.length; i++) {
      			if(estados[i].equals(empregado.getUfCarteira())){
      			out.println("<option value="+ estados[i]+" style =\"width: 100px; height: 100px\" selected>"+ estados[i] +"</option>");	
@@ -238,9 +240,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		<div  class= "form-group" > 
 		<label  for= "numero" > Numero </label> 
 		    <div class="span3">
-		    	<%
-		      		out.println("<input type=\"text\" value="+endereco.getNumero()+" class=\"form-control\"  name=\"numeroEndereco\" id=\"numeroEndereco\" size=\"25\">");
-		 		%>
+		    	 <input type="number" value="<%=endereco.getNumero()%>" min="0" class= "form-control"  name="numeroEndereco" id= "numeroEndereco" size="25" required> 	
 		    </div>
 		</div>
 		<div  class= "form-group" > 
@@ -273,7 +273,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
         	<label  for = "select" >Estado</label> 
      		<div class="span3">
 				<%
-					out.println("<select class=\"form-control\" name=\"ufRg\" id=\"ufRg\">");
+					out.println("<select class=\"form-control\" name=\"estado\" id=\"estado\">");
      				for (int i = 0; i < estados.length; i++) {
      					if(estados[i].equals(endereco.getEstado())){
      					out.println("<option value="+ estados[i]+" style =\"width: 100px; height: 100px\" selected>"+ estados[i] +"</option>");	
@@ -293,14 +293,13 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
  	<nav class="navbar navbar-default" role="navigation">
     <div class="container">
         <label  for= "contratoTrabalho" > Contrato de Trabalho </label><br><br>
-        <div  class= "form-group" > 
+		 
+		 <div  class= "form-group" > 
 		    <label  for= "dataAdmissao" > Data de Admissão </label> 
 		    <div class="span3">
-		    <%
-		    	out.println("<input type=\"date\" value="+contrato.getDataAdmissao()+" id=\"dataAdmissao\" name=\"dataAdmissao\" class=\"form-control\" size=\"20\">");
-		   	%>
+		    <input type="date" value="<%=contrato.getDataAdmissao()%>" id="dataAdmissao" name="dataAdmissao" class= "form-control" size="20"> 
 		    </div>
-		 </div>
+		 </div> 
 		 
 	   <div  class= "form-group" > 
 		    <label  for= "cargo" > Cargo </label> 
@@ -628,10 +627,15 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
  		<br>
  		<br> 
  		<br>
-	 	<label for="totalHoras">Total de horas na semana: </label><span id="totalHoras">--</span>
-	 	 <br>
-		<span style="color:red; font-weight:bold;" id="saldoHoras"></span> 
-	<br> 
+ 		
+ 		<div  class= "form-group " > 
+		    <label for="totalHoras">Total de horas na semana: </label>
+		    <div class="span3">
+		    <input type="text" name="duracaoSemanal" value="<%=contrato.getDuracaoSemanal()%>" class= "form-control" id="duracaoSemanal" size="5" disabled>
+		    </div>
+	   		<span style="color:red; font-weight:bold;" id="saldoHoras"></span>
+	   </div>
+	   
 	</div>
  	</nav>
  
@@ -683,9 +687,9 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
     </nav>
     
      <div id="botoes">
-		<button  type= "submit" name="acao" value="Cadastrar" onclick="return validar()" class= "btn btn-default " > Salvar </button> 
-		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-default " > Cancelar </button> 
-	 </div>
+		<button  type= "submit" name="acao" value="Salvar" onclick="return validar()" class= "btn btn-primário " > Salvar </button> 
+		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)"> Cancelar </button> 
+	</div>
 	
  </form>
 </div>

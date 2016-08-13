@@ -24,10 +24,10 @@ public class EspecialistaJornadaTrabalho {
 		jornadaTrabalhoDAO.cadastrar(jornadaTrabalhoTO);
 	}
 	
-	public void alterarJornada(String codigoContrato, String horaEntrada,String horaSaidaAlmoco, String horaVoltaAlmoco, 
+	public void alterarJornada(String codigo, String horaEntrada,String horaSaidaAlmoco, String horaVoltaAlmoco, 
 			String horaSaida, int diaSemana, Boolean diaFolga, Boolean diaMeioPeriodo) 
 	{
-		jornadaTrabalhoTO.setCodigoContrato(codigoContrato);
+		jornadaTrabalhoTO.setCodigo(codigo);
 		jornadaTrabalhoTO.setHoraEntrada(horaEntrada);
 		jornadaTrabalhoTO.setHoraSaida(horaSaida);
 		jornadaTrabalhoTO.setHoraSaidaAlmoco(horaSaidaAlmoco);

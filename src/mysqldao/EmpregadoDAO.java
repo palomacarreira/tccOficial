@@ -21,7 +21,7 @@ public class EmpregadoDAO extends MysqlConnect{
 			String sql = "INSERT INTO EMPREGADO("
 					+ "nome, sobrenome, DATA_NASC, ESTADO_CIVIL, sexo, "
 					+ "cpf, rg,UF_RG, NUM_CARTEIRA, SERIE_CARTEIRA, UF_CARTEIRA,"
-					+ "E_MAIL, senha, ativo, foto, NUM_DEPENDENTES) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";       
+					+ "E_MAIL, senha, ativo, foto, NUM_DEPENDENTES, FK_EMPREGADOR) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";       
 			
 			st = (PreparedStatement) conn.prepareStatement(sql);
 			
@@ -39,11 +39,11 @@ public class EmpregadoDAO extends MysqlConnect{
 			st.setString(12,empregadoTO.getEmail());
 			st.setString(13,empregadoTO.getSenha());
 			st.setBoolean(14,empregadoTO.getAtivo());
-			st.setBytes(15,empregadoTO.getFoto());
+			st.setString(15,empregadoTO.getFoto());
 			st.setInt(16,empregadoTO.getQtdDependentes());
+			st.setString(17,empregadoTO.getCodigoEmpregador());
 			st.executeUpdate(); 
 			st.close();
-
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -55,11 +55,10 @@ public class EmpregadoDAO extends MysqlConnect{
 	public boolean alterarEmpregado(EmpregadoTO empregadoTO)
 	{ 
 		try{
-			String sql = "UPDATE EMPREGADO SET" 
-					+" nome = ?, sobrenome = ?, dataNasc=?, estadoCivil=?, sexo=?, "
-					+ "cpf=?, rg=?, fRg=?, numCarteira=?, serieCarteira=?, ufCarteira=?,"
-					+ "login=?, senha=?, ativo=?, foto=?, qtdDependentes=? WHERE CD_EMPREGADO = ?";
-					
+			String sql = "UPDATE EMPREGADO SET nome = ?, sobrenome = ?, DATA_NASC=?, ESTADO_CIVIL=?, sexo=?,"
+					+ "cpf=?, rg=?, UF_RG=?, NUM_CARTEIRA=?, SERIE_CARTEIRA=?, UF_CARTEIRA=?,"
+					+ "E_MAIL=?, senha=?, ativo=?, foto=?, NUM_DEPENDENTES=? WHERE CD_EMPREGADO = ?";
+			
 			st = (PreparedStatement) conn.prepareStatement(sql);
 			st.setString(1,empregadoTO.getNome());
 			st.setString(2,empregadoTO.getSobrenome());
@@ -75,7 +74,7 @@ public class EmpregadoDAO extends MysqlConnect{
 			st.setString(12,empregadoTO.getEmail());
 			st.setString(13,empregadoTO.getSenha());
 			st.setBoolean(14,empregadoTO.getAtivo());
-			st.setBytes(15,empregadoTO.getFoto());
+			st.setString(15,empregadoTO.getFoto());
 			st.setInt(16,empregadoTO.getQtdDependentes());
 			st.setString(17, empregadoTO.getCodigoEmpregado());
 			st.executeUpdate(); 
@@ -102,7 +101,8 @@ public class EmpregadoDAO extends MysqlConnect{
 			if(resultSet.next())
 			{
 				empregadoTO = new EmpregadoTO();
-				empregadoTO.setCodigo(codigo);
+				empregadoTO.setCodigoEmpregado(codigo);
+				empregadoTO.setCodigoEmpregador("fk_empregador");
 				empregadoTO.setNome(resultSet.getString("nome"));
 				empregadoTO.setSobrenome(resultSet.getString("sobrenome"));
 				empregadoTO.setDataNasc(resultSet.getDate("data_nasc"));
@@ -118,7 +118,7 @@ public class EmpregadoDAO extends MysqlConnect{
 				empregadoTO.setSenha(resultSet.getString("senha"));
 				empregadoTO.setQtdDependentes(resultSet.getInt("NUM_DEPENDENTES"));
 				empregadoTO.setAtivo(resultSet.getBoolean("ativo"));
-				empregadoTO.setFoto(resultSet.getBytes("foto"));
+				empregadoTO.setFoto(resultSet.getString("foto"));
 			}	
 			st.close();
 		}
@@ -131,23 +131,24 @@ public class EmpregadoDAO extends MysqlConnect{
 	}
 
 	
-	public ArrayList<EmpregadoTO> pesquisarTodos()
+	public ArrayList<EmpregadoTO> pesquisarTodos(String codigo)
 	{
 		ArrayList<EmpregadoTO> lista= new ArrayList<EmpregadoTO>();
 		
 		try
 		{
-			String sql ="select b.nome, b.cd_empregado, b.foto from usuario a inner join contrato c on a.cd_usuario = c.fk_usuario"		
-			+" inner join empregado b on c.fk_empregado = b.cd_empregado WHERE b.ATIVO = 0";
+			String sql ="select b.cd_empregado, b.nome, b.cd_empregado, b.foto from usuario a inner join contrato c on a.cd_usuario = c.fk_usuario"		
+			+" inner join empregado b on c.fk_empregado = b.cd_empregado WHERE b.ATIVO = 0 and b.fk_empregador = ?";
 		
 			st= (PreparedStatement) conn.prepareStatement(sql);
+			st.setString(1,codigo);
 			ResultSet resultSet = st.executeQuery();
 			while(resultSet.next())
 			{
 				empregadoTO = new EmpregadoTO();
-				empregadoTO.setCodigo(resultSet.getString("b.cd_empregado"));	
+				empregadoTO.setCodigoEmpregado(resultSet.getString("b.cd_empregado"));	
 				empregadoTO.setNome(resultSet.getString("b.nome"));
-				empregadoTO.setFoto(resultSet.getBytes("b.foto"));
+				empregadoTO.setFoto(resultSet.getString("b.foto"));
 				lista.add(empregadoTO);
 			}	
 			st.close();
@@ -165,9 +166,9 @@ public class EmpregadoDAO extends MysqlConnect{
 	{
 		try
 		{
-			  String sql = " UPDATE EMPREGADO SET ativo = ?  where CD_EMPREGADO = ?";
-			  st = (PreparedStatement) conn.prepareStatement(sql);
-			  st.setBoolean(1, true);
+			   String sql = " UPDATE EMPREGADO SET ativo = ?  where CD_EMPREGADO = ?";
+			   st = (PreparedStatement) conn.prepareStatement(sql);
+			   st.setBoolean(1, true);
 	           st.setString(2,codigo);
 	           st.executeUpdate();
 	           st.close(); 
@@ -202,4 +203,22 @@ public class EmpregadoDAO extends MysqlConnect{
 	            }
 			return codigo;
 	   }
+	  
+	  public boolean alterarFoto(String codigo, String foto)
+		{ 
+			try{
+				String sql = "UPDATE EMPREGADO SET foto=? WHERE CD_EMPREGADO = ?";
+				
+				st = (PreparedStatement) conn.prepareStatement(sql);
+				st.setString(1,foto);
+				st.setString(2,codigo);
+				st.executeUpdate(); 
+				st.close(); 
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				return false;
+			}   
+			return true;
+		}
 }

@@ -14,20 +14,36 @@ function informacaoCamposHora(){
 			});
 }
 
-function validar(){
-	if($("#saldoHoras").val().equals('Horários Inválidos') || 
-			$("#saldoHoras").val().equals("Total da semana deve ser menor do que 25 horas, por favor ajuste os horários") ||
-	$("#saldoHoras").html("Total da semana deve ser menor do que 44 horas, por favor ajuste os horários")
-	)
+function validar(){	
+	for (i = 1; i < 8; i++){
+		
+		if($("#horaEntrada"+i).parent().hasClass('has-error') || 
+			$("#horaSaidaAlmoco"+i).parent().hasClass('has-error') ||
+			$("#horaVoltaAlmoco"+i).parent().hasClass('has-error') ||
+			$("#horaSaida"+i).parent().hasClass('has-error'))
+		{
+			 swal({   title: "Cadastro Empregado",   
+		  			text: "<span style=\"color:#F8BB86\">Verifique os campos com erros em vermelho na página.<span>",   
+		  					html: true 
+		  			});
+			return false;
+		}
+	}
+	
+	var x = $("#saldoHoras").text();
+	if(x != "")
 	{
 		 swal({   title: "Cadastro Empregado",   
-	  			text: "<span style=\"color:#F8BB86\">Verifique os campos com erros em vermelho na página.<span>",   
+	  			text: "<span style=\"color:#F8BB86\">O total de horários da semana deve estar de acordo com o regime de trabalho escolhido. Verifique os horários!<span>",   
 	  					html: true 
 	  			});
-		return true;
+		return false;
 	}
-	return false;
+	
+	$("#duracaoSemanal").attr('disabled', false); // DESABILITA CAMPO PARA PEGAR VALOR PELO REQUEST.
+	return true;
 }
+	
 
 //ação para o evento onblur das horas: verificar se o horário digitado é válido e refazer os cálculos
 function verificaCamposHoras(horaEntrada, horaSaida){
@@ -69,28 +85,39 @@ function verificaCamposHoras(horaEntrada, horaSaida){
 	
 
 	// Evento para ao selecionar a foto, ela seja mostrada 
-	function onFileSelected(event) {
-		  var selectedFile = event.target.files[0];
-		  var reader = new FileReader();
-		  
-		  var imgtag = document.getElementById("myimage");
-		  imgtag.title = selectedFile.name;
-		  
-		  reader.onload = function(event) {
-		    imgtag.src = event.target.result;
-		  };
-		  
-		  reader.readAsDataURL(selectedFile);
-	}
+		function onFileSelected(event) {
+		  	var selectedFile = event.target.files[0];
+		  	var reader = new FileReader();
+		  	extensoes_permitidas = new Array(".png", ".jpg", ".jpeg"); 
+		  	parte = (selectedFile.name).lastIndexOf(".");
+	   		extensao = ((selectedFile.name).substring(parte)).toLowerCase();
+	   		permite = false;  
+	   		
+	   		for (var i = 0; i < extensoes_permitidas.length; i++) { 
+	   			if (extensoes_permitidas[i] == extensao) 
+	   			{ 
+	        	  permite = true;
+		          var imgtag = document.getElementById("myimage");
+	   			  imgtag.title = selectedFile.name;
+	   			  reader.onload = function(event) {
+	   				  imgtag.src = event.target.result;
+	   			  };
+	   		  
+	   			  reader.readAsDataURL(selectedFile);   			
+	   			  break; 
+	   			} 
+	   		}
+	   		if(!permite){
+				  swal({   title: "Cadastro Empregado",   
+	         		 text: "<span style=\"color:#F8BB86\">Extensões permitidas:.png,.jpeg,.jpg<span>",   
+		  					html: true 
+		  				});
 
-	
+			} 
+		}	
+		  
 $(document).ready(function(){
-	
-		// ação ao clicar nas imagens(botões) de preencher campos horários
-		$(".imgPreenche").click(function() {
-	        preencheCampos(this.id);
-	    });
-		
+
 		$("#cpf").mask("999.999.999-99");
 		$("#cnpj").mask("99.999.999/9999-99");
 		$("#rg").mask("99.999.999-*");
@@ -103,12 +130,16 @@ $(document).ready(function(){
 			$("#horaSaidaAlmoco" + i).mask("99:99");
 			$("#horaVoltaAlmoco" + i).mask("99:99");
 		}
-			
+		
+		// ação ao clicar nas imagens(botões) de preencher campos horários
+		$(".imgPreenche").click(function() {
+	        preencheCampos(this.id);
+	    });
 		
 		// Ao modificar um campo hora, recalcula o horário total(SEGUNDA COLUNA EM DIANTE)
 		// Em caso de dia de meio período
 		for ( i = 1; i < 8; i++ ) 
-		{
+		{ 
 			$("#horaEntrada"+ i).blur(function(e) { 
 				var id = e.target.id.substring(11, 12);
 				if(verificaCamposHoras($(this).val(), $("#horaSaida" + id).val()) == false){
@@ -118,7 +149,7 @@ $(document).ready(function(){
 				else{
 					if(verificaCamposHoras($(this).val(),$("#horaSaidaAlmoco" + id).val()) == false){
 						$("#saldoHoras").html('Horários Inválidos');
-				    	$(this).parent().addClass('has-error');
+						$(this).parent().addClass('has-error');
 					}
 					else{
 						$("#saldoHoras").html('');
@@ -182,10 +213,92 @@ $(document).ready(function(){
 					calculaHoras();
 				}
 			});
-		}
-		
-	});
+		}				
+			
+});
 
+
+//coloca o valor dos campos da primeira coluna , na coluna que foi desabilitada 
+function preencheCampos(id)
+{
+	if(id == 1)
+	{
+		for(i = 2; i < 8; i++)
+		{
+			if($("#diaMeioPeriodo" + i).attr("checked")== false)
+			{
+				if($("#diaFolga" + i).attr("checked") == false)
+				{
+					$("#horaEntrada"+i).val($("#horaEntrada1").val());
+					if($("#horaEntrada1").parent().hasClass('has-error')){
+						$("#horaEntrada"+i).parent().addClass('has-error');
+					}
+					else{
+						$("#horaEntrada"+i).parent().removeClass('has-error');
+					}
+				}
+			}
+		}
+	}
+	else if(id == 2)
+	{
+		for(i = 2; i < 8; i++)
+		{
+			if($("#diaMeioPeriodo" + i).attr("checked")== false)
+			{
+				if($("#diaFolga" + i).attr("checked") == false)
+				{
+					$("#horaSaidaAlmoco"+i).val($("#horaSaidaAlmoco1").val());
+					if($("#horaSaidaAlmoco1").parent().hasClass('has-error')){
+						$("#horaSaidaAlmoco"+i).parent().addClass('has-error');
+					}
+					else{
+						$("#horaSaidaAlmoco"+i).parent().removeClass('has-error');
+					}
+				}		
+			}
+		}
+	}
+	else if(id == 3)
+	{
+		for(i = 2; i < 8; i++)
+		{
+			if($("#diaMeioPeriodo" + i).attr("checked")== false)
+			{
+				if($("#diaFolga" + i).attr("checked") == false)
+				{
+					$("#horaVoltaAlmoco" + i).val($("#horaVoltaAlmoco1").val());
+					if($("#horaVoltaAlmoco1").parent().hasClass('has-error')){
+						$("#horaVoltaAlmoco" + i).parent().addClass('has-error');
+					}
+					else{
+						$("#horaVoltaAlmoco" + i).parent().removeClass('has-error');
+					}
+				}
+			}
+		}
+	}
+	else if(id == 4)
+	{
+		for(i = 2; i < 8; i++)
+		{
+			if($("#diaMeioPeriodo" + i).attr("checked")== false)
+			{
+				if($("#diaFolga" + i).attr("checked") == false)
+				{
+					$("#horaSaida"+i).val($("#horaSaida1").val());
+					if($("#horaSaida1").parent().hasClass('has-error')){
+						$("#horaSaida"+i).parent().addClass('has-error');
+					}
+					else{
+						$("#horaSaida"+i).parent().removeClass('has-error');
+					}
+				}
+			}
+		}
+	}
+	calculaHoras();
+}
 
 	//Função chamada quando uma opção regime de trabalho é selecionada
 	function doalert(checkboxElem) {
@@ -309,7 +422,6 @@ $(document).ready(function(){
 
 		var hora = 0;
 		var minuto = 0;
-		$("#saldoHoras").html('');
 		var tempoTotal = 0;
 		for( i = 1; i < 8; i++)
 		{
@@ -331,7 +443,7 @@ $(document).ready(function(){
 		hora = Math.floor(tempoTotal / 60);
 		minuto = tempoTotal % 60;
 		horaTotal = completaZeroEsquerda(hora) + ":" + completaZeroEsquerda(minuto);
-		$("#totalHoras").html(horaTotal); 
+		$("#duracaoSemanal").val(horaTotal); 
 		verificaLimite(horaTotal);// chama método
 	}
 
@@ -347,75 +459,22 @@ $(document).ready(function(){
 		if($("#regime44").attr("checked") == true)
 		{
 	   		if(x >= 45){
-			$("#saldoHoras").html("Total da semana deve ser menor do que 44 horas, por favor ajuste os horários");
+	   			$("#saldoHoras").html("Total da semana deve ser menor do que 44 horas, por favor ajuste os horários");
+			}
+	   		else{
+				$("#saldoHoras").html('');
 			}
 
 		}
 		else if($("#regime25").attr("checked")== true)
 		{
 			if(x >= 26){
-			$("#saldoHoras").html("Total da semana deve ser menor do que 25 horas, por favor ajuste os horários");
+				$("#saldoHoras").html("Total da semana deve ser menor do que 25 horas, por favor ajuste os horários");
 			}
-			
+			else{
+				$("#saldoHoras").html('');
+			}	
 		}
-	}
-
-	//coloca o valor dos campos da primeira coluna , na coluna que foi desabilitada 
-	function preencheCampos(id)
-	{
-		if(id == 1)
-		{
-			for(i = 2; i < 8; i++)
-			{
-				if($("#diaMeioPeriodo" + i).attr("checked")== false)
-				{
-					if($("#diaFolga" + i).attr("checked") == false)
-					{
-						$("#horaEntrada"+i).val($("#horaEntrada1").val());
-					}
-				}
-			}
-		}
-		else if(id == 2)
-		{
-			for(i = 2; i < 8; i++)
-			{
-				if($("#diaMeioPeriodo" + i).attr("checked")== false)
-				{
-					if($("#diaFolga" + i).attr("checked") == false)
-					{
-						$("#horaSaidaAlmoco"+i).val($("#horaSaidaAlmoco1").val());
-					}		
-				}
-			}
-		}
-		else if(id == 3)
-		{
-			for(i = 2; i < 8; i++)
-			{
-				if($("#diaMeioPeriodo" + i).attr("checked")== false)
-				{
-					if($("#diaFolga" + i).attr("checked") == false)
-					{
-						$("#horaVoltaAlmoco" + i).val($("#horaVoltaAlmoco1").val());
-					}
-				}
-			}
-		}
-		else if(id == 4)
-		{
-			for(i = 2; i < 8; i++)
-			{
-				if($("#diaMeioPeriodo" + i).attr("checked")== false)
-				{
-					if($("#diaFolga" + i).attr("checked") == false)
-					{
-						$("#horaSaida"+i).val($("#horaSaida1").val());
-					}
-				}
-			}
-		}
-		calculaHoras();
 	}
 	
 	// Completa um número menor que dez com um zero à esquerda.

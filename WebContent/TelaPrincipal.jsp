@@ -17,11 +17,11 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
 <script src="js/sweetalert.min.js"></script> 
 
-
 <title>Gestão de Empregados</title>
 
 </head>
 <body>
+<h1><% String usr = (String) session.getAttribute("codigoUsuario"); %></h1>
 
 <c:import url="cabecalhoLogado.jsp"/>
 	
@@ -33,18 +33,4 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 
 	
 <c:import url="rodape.jsp"/>
-<script type="text/javascript">
-window.onload = function(){
-	 <%
-	  String aqui= (String)request.getAttribute("mge");
-	  if(aqui != null){
-	  %>
-	  swal({   title: "CADASTRO",   
-			text: "<span style=\"color:#F8BB86\"><%=aqui%><span>",   
-					html: true 
-			});
-
-	<%}%>
-}
-</script>
 </html>

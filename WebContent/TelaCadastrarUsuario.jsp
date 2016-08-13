@@ -199,7 +199,7 @@ $(document).ready(function(){
     
      <div id="botoes">
 		<button  type= "submit" name="acao" value="Cadastrar" class= "btn btn-primário " > Salvar </button> 
-		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " > Cancelar </button> 
+		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Cancelar </button> 
 	</div>
 	
      

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import security.Digester;
 import model.EspecialistaLogin;
 import model.EspecialistaUsuario;
 import model.UsuarioTO;
@@ -43,46 +42,44 @@ public class Login extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String acao = request.getParameter("acao");
 		PrintWriter out = response.getWriter();  
-	    HttpSession session = request.getSession();
 	    RequestDispatcher view = null;
 		EspecialistaLogin especialista = new EspecialistaLogin();
 		EspecialistaUsuario espUsuario = new EspecialistaUsuario();
+		HttpSession session = request.getSession();
 		
 		switch (acao) 
 		{
-			
 			case "Entrar":
-				
+					
 			String email = (String) request.getParameter("email");
 			String senha = (String) request.getParameter("senha");
 		
-			String senhaDescri = Digester.encriptAES(senha);
-			UsuarioTO usuario = (UsuarioTO) especialista.verificaLogin(email, senhaDescri);
-			
+			UsuarioTO usuario = (UsuarioTO) especialista.verificaLogin(email, senha);
+		
+		    
 			if(usuario != null)
 			{
 				if(usuario.getAtivo() == true)
 				{
-					session.setAttribute("codigo", usuario.getCodigo());
+					session.setAttribute("codigoUsuario", usuario.getCodigo());
 					view = request.getRequestDispatcher("TelaAtivandoConta.jsp");
 					view.forward(request, response);
 				}
 				else{
-					session.setAttribute("codigo", usuario.getCodigo());
+					session.setAttribute("codigoUsuario", usuario.getCodigo());
 					view = request.getRequestDispatcher("TelaPrincipal.jsp");
 					view.forward(request, response);
 				}
 			}
 			else{
-		    out.print("<h2>Login nï¿½o encontrado</h2>");  
-	        RequestDispatcher rd=request.getRequestDispatcher("TelaLogin.jsp");  
-	        rd.include(request,response); 
-	    	out.close();  
+				request.setAttribute("mge", "O email inserido não corresponde a nenhuma conta. Cadastre-se para abrir uma conta"); 
+				view = request.getRequestDispatcher("TelaLogin.jsp");
+				view.forward(request, response);  
 			}
 	    	break;
 	    	
-			case "Ativa":
-				String cod = (String) session.getAttribute("codigo");
+			case "Ativa":	
+				String cod = (String) session.getAttribute("codigoUsuario");
 				Boolean ok = espUsuario.ativarUsuario(cod);
 				if(ok== true){
 				view = request.getRequestDispatcher("TelaPrincipal.jsp");
@@ -90,7 +87,7 @@ public class Login extends HttpServlet {
 				}
 				else
 				{
-					out.print("<h2>Conta nï¿½o pode ser ativada!</h2>");  
+					out.print("<h2>Conta não pode ser ativada!</h2>");  
 			        RequestDispatcher rd=request.getRequestDispatcher("TelaLogin.jsp");  
 			        rd.include(request,response); 
 			    	out.close();  

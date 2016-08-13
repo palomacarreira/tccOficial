@@ -211,7 +211,7 @@ $(document).ready(function(){
  		<nav class="navbar navbar-default" role="navigation">
      	<div id="botoes">
 			<button  type= "submit" name="acao" value="Salvar" class= "btn btn-primário " > Alterar </button> 
-			<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " > Cancelar </button> 
+			<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)"> Cancelar </button> 
 		</div>
        </nav>
   </form>

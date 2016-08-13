@@ -64,9 +64,8 @@ public class AlterarUsuario extends HttpServlet {
 			
 			case "Salvar":
 				//alteração dado 
-				
-				
-				String codigo = (String) session.getAttribute("codigo");
+					
+				String codigo = (String) session.getAttribute("codigoUsuario");
 				String nome = (String) request.getParameter("nome");
 				String sobrenome = (String) request.getParameter("sobrenome");
 				String cpf = (String) request.getParameter("cpf");
@@ -96,7 +95,7 @@ public class AlterarUsuario extends HttpServlet {
 					espEndereco.alterarUsuario( codigo, endereco,  cidade,  estado, numeroEndereco,
 							complemento, cep, bairro);
 					
-					request.setAttribute("mge", "Seu cadastro foi atualizado com sucesso.");
+					request.setAttribute("msg", "Dados Alterados");
 					view = request.getRequestDispatcher("TelaPrincipal.jsp");
 					view.forward(request, response);
 					
@@ -106,11 +105,38 @@ public class AlterarUsuario extends HttpServlet {
 					view = request.getRequestDispatcher("TelaPrincipal.jsp");
 					view.forward(request, response);
 				}
-				
-			
 			break;
 			
-		case "Excluir":
+			case "alterar":
+				String codg = (String) session.getAttribute("codigoUsuario");
+				
+				if(codg != null){
+					try {
+						
+						UsuarioTO usuarioTO = espUsuario.pesquisarUsuario(codg);
+						ContatoTO contatoTO = espContato.pesquisarUsuario(codg);
+						EnderecoTO enderecoTO = espEndereco.pesquisarUsuario(codg);
+						
+						request.setAttribute("listaUsuario", usuarioTO);
+						request.setAttribute("listaContato", contatoTO);
+						request.setAttribute("listaEndereco", enderecoTO);
+						
+						view = request.getRequestDispatcher("TelaPerfilEmpregador.jsp");
+						view.forward(request, response);
+						
+					} catch (NumberFormatException e) {
+						request.setAttribute("msg", "Error " + e.getMessage());
+						view = request.getRequestDispatcher("TelaPrincipal.jsp");
+						view.forward(request, response);
+					}
+				}
+				else{
+					view = request.getRequestDispatcher("TelaPrincipal.jsp");
+					view.forward(request, response);
+				}
+				break;
+				
+		case "excluir":
 			String cod = (String) session.getAttribute("codigo");
 			try {
 				espUsuario.excluir(cod);
@@ -123,40 +149,6 @@ public class AlterarUsuario extends HttpServlet {
 				view = request.getRequestDispatcher("TelaPerfilEmpregador.jsp");
 				view.forward(request, response);
 			}	
-			break;
-			
-		case "Alterar":
-			String codg = (String) session.getAttribute("codigo");
-			
-			if(codg != null){
-				try {
-					
-					UsuarioTO usuarioTO = espUsuario.pesquisarUsuario(codg);
-					ContatoTO contatoTO = espContato.pesquisarUsuario(codg);
-					EnderecoTO enderecoTO = espEndereco.pesquisarUsuario(codg);
-					
-					request.setAttribute("listaUsuario", usuarioTO);
-					request.setAttribute("listaContato", contatoTO);
-					request.setAttribute("listaEndereco", enderecoTO);
-					
-					view = request.getRequestDispatcher("TelaPerfilEmpregador.jsp");
-					view.forward(request, response);
-					
-				} catch (NumberFormatException e) {
-					request.setAttribute("msg", "Error " + e.getMessage());
-					view = request.getRequestDispatcher("TelaPrincipal.jsp");
-					view.forward(request, response);
-				}
-			}
-			else{
-				view = request.getRequestDispatcher("TelaPrincipal.jsp");
-				view.forward(request, response);
-			}
-			break;
-			
-		case "Cancelar":
-			view = request.getRequestDispatcher("TelaPrincipal.jsp");
-			view.forward(request, response);
 			break;
 		}
 	}

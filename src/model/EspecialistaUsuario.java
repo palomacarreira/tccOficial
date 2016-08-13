@@ -2,7 +2,6 @@ package model;
 
 
 import mysqldao.UsuarioDAO;
-import security.Digester;
 
 
 	public class EspecialistaUsuario {
@@ -29,10 +28,7 @@ import security.Digester;
 			usuarioTO.setRg(rg);
 			usuarioTO.setUfRg(ufRg);
 			usuarioTO.setEmail(email);
-			
-			String senhaEncr = Digester.encriptAES(senha);
-			
-			usuarioTO.setSenha(senhaEncr);
+			usuarioTO.setSenha(senha);
 			usuarioTO.setAtivo(ativo);
 		
 	    	usuarioDAO.cadastrarUsuario(usuarioTO);

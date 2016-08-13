@@ -69,8 +69,8 @@ public class ContratoDAO extends MysqlConnect {
 	    	
 	    	  String sql = "INSERT INTO CONTRATO(DATA_ADMISSAO, CARGO,SALARIO_BASE,DIA_PAGAMENTO,"
 	    		         + "VALE_TRANSPORTE_VALOR,COMPENSACAO_DIAS,REGIME_TRABALHO,"
-	    		         + "CONTA,AGENCIA,BANCO, TIPO_CONTA,"
-	    		         + "FK_EMPREGADO,FK_USUARIO)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
+	    		         + "CONTA,AGENCIA,BANCO, TIPO_CONTA, DURACAO_SEMANAL, "
+	    		         + "FK_EMPREGADO, FK_USUARIO)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
 	    		         
 	         st = conn.prepareStatement(sql);
 	         st.setDate(1,contratoTO.getDataAdmissao());
@@ -84,9 +84,9 @@ public class ContratoDAO extends MysqlConnect {
 	         st.setString(9,contratoTO.getAgencia());
 	         st.setString(10,contratoTO.getBanco());
 	         st.setString(11,contratoTO.getTipoConta());
-	         st.setString(12,codigoEmpregado);
-	         st.setString(13,codigoUsuario); 
-	         
+	         st.setString(12,contratoTO.getDuracaoSemanal());
+	         st.setString(13,codigoEmpregado);
+	         st.setString(14,codigoUsuario); 
 	         st.executeUpdate(); 
 	         st.close();
 	      }
@@ -104,8 +104,7 @@ public class ContratoDAO extends MysqlConnect {
 	    	  String sql ="UPDATE CONTRATO SET" 
 				+" DATA_ADMISSAO = ?, CARGO=?,SALARIO_BASE = ? ,DIA_PAGAMENTO=?,"
 	    		+ "VALE_TRANSPORTE_VALOR = ?,COMPENSACAO_DIAS=?,REGIME_TRABALHO=?,"
-	    		+ "CONTA = ?,AGENCIA = ?,BANCO=?, TIPO_CONTA =?,"
-	    		+ "WHERE FK_EMPREGADO = ?";
+	    		+ "CONTA = ?,AGENCIA = ?,BANCO=?, TIPO_CONTA =?, DURACAO_SEMANAL = ? WHERE FK_EMPREGADO = ?";
 				
 	    	 st = conn.prepareStatement(sql);
 	         st.setDate(1,contratoTO.getDataAdmissao());
@@ -119,8 +118,8 @@ public class ContratoDAO extends MysqlConnect {
 	         st.setString(9,contratoTO.getAgencia());
 	         st.setString(10,contratoTO.getBanco());
 	         st.setString(11,contratoTO.getTipoConta());
-	         st.setString(12,contratoTO.getCodigoEmpregado());
-	         
+	         st.setString(12,contratoTO.getDuracaoSemanal());
+	         st.setString(13,contratoTO.getCodigoEmpregado());
 	         st.executeUpdate(); 
 				st.close(); 
 			}
@@ -156,6 +155,7 @@ public class ContratoDAO extends MysqlConnect {
 	           	contratoTO.setAgencia(resultSet.getString("AGENCIA"));
 	        	contratoTO.setBanco(resultSet.getString("BANCO"));
 	        	contratoTO.setTipoConta(resultSet.getString("TIPO_CONTA"));
+	        	contratoTO.setDuracaoSemanal(resultSet.getString("DURACAO_SEMANAL"));
 	        	contratoTO.setCodigoEmpregado(resultSet.getString("FK_EMPREGADO"));
 	        	contratoTO.setCodigoUsuario(resultSet.getString("FK_USUARIO"));
 		    

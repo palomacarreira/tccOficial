@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class ContratoTO {
 
-	public String cargo, codigo;
+	public String cargo, codigo, duracaoSemanal;
 	String diaPagamento;
 	public Date dataDemissao, dataAdmissao;
 	public Boolean descontoINSS;
@@ -131,5 +131,11 @@ public class ContratoTO {
 		this.tipoConta = tipoConta;
 	}
 	
+	public String getDuracaoSemanal() {
+		return duracaoSemanal;
+	}
+	public void setDuracaoSemanal(String duracaoSemanal) {
+		this.duracaoSemanal = duracaoSemanal;
+	}
 	
 }

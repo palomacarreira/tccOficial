@@ -47,7 +47,7 @@ public class JornadaTrabalhoDAO extends MysqlConnect{
 	    	  String sql = "INSERT INTO JORNADA_TRABALHO("
 	    		         + "HORA_ENTRADA, HORA_SAIDA, "
 	    		         + "HORA_INICIO_INTERVALO, HORA_FIM_INTERVALO,"
-	    		         + "DIA_SEMANA,DIA_FOLGA, DIA_MEIO_PERIODO,"
+	    		         + "DIA_SEMANA,DIA_FOLGA, DIA_MEIO_PERIODO, "
 	    		         + "FK_CONTRATO)VALUES (?,?,?,?,?,?,?,?)"; 
 	    		         
 	         st = conn.prepareStatement(sql);
@@ -73,12 +73,13 @@ public class JornadaTrabalhoDAO extends MysqlConnect{
 	   
 	   public boolean alterar(JornadaTrabalhoTO jornadaTrabalhoTO)
 	   {
+
 	      try{
 	    	
-	    		String sql =  "UPDATE JORNADA_TRABALHO SET" 
+	    		String sql =  "UPDATE JORNADA_TRABALHO SET " 
 				+ "HORA_ENTRADA=?, HORA_SAIDA=?, HORA_INICIO_INTERVALO=?, HORA_FIM_INTERVALO=?, "
-				+ "DIA_SEMANA=?, DIA_FOLGA=?, DIA_MEIO_PERIODO=?, "		
-				+ "WHERE FK_CONTRATO = ?";
+				+ "DIA_SEMANA=?, DIA_FOLGA=?, DIA_MEIO_PERIODO=? "		
+				+ "WHERE CD_JORNADA_TRABALHO = ?";
 	    	  
 	    	  	 st = conn.prepareStatement(sql);
 	    	  	 st.setString(1,jornadaTrabalhoTO.getHoraEntrada());
@@ -88,7 +89,7 @@ public class JornadaTrabalhoDAO extends MysqlConnect{
 		         st.setInt(5,jornadaTrabalhoTO.getDiaSemana());
 		         st.setBoolean(6,jornadaTrabalhoTO.getDiaFolga());
 		         st.setBoolean(7,jornadaTrabalhoTO.getDiaMeioPeriodo());
-		         st.setString(8,jornadaTrabalhoTO.getCodigoContrato());
+		         st.setString(8,jornadaTrabalhoTO.getCodigo());
 		         st.executeUpdate(); 
 					st.close(); 
 				}
@@ -115,6 +116,7 @@ public class JornadaTrabalhoDAO extends MysqlConnect{
 	           while(resultSet.next())
 	           {
 	        	   jornadaTrabalhoTO = new JornadaTrabalhoTO();
+	        	   jornadaTrabalhoTO.setCodigo(resultSet.getString("CD_JORNADA_TRABALHO"));
 	        	   jornadaTrabalhoTO.setHoraEntrada(resultSet.getString("HORA_ENTRADA"));
 	        	   jornadaTrabalhoTO.setHoraSaida(resultSet.getString("HORA_SAIDA"));
 	        	   jornadaTrabalhoTO.setHoraSaidaAlmoco(resultSet.getString("HORA_INICIO_INTERVALO"));

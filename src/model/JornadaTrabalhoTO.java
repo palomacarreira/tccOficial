@@ -5,9 +5,15 @@ public class JornadaTrabalhoTO {
 	public String horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, horaSaida;
 	public int diaSemana;
 	public Boolean diaFolga, diaMeioPeriodo;
-	public String codigoContrato;
+	public String codigoContrato,codigo;
 	
 	
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 	public String getCodigoContrato() {
 		return codigoContrato;
 	}

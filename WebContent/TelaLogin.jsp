@@ -21,6 +21,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 
 
 <script type="text/javascript">
+
 $(function(){
 	$.superbox.settings = {
 		closeTxt: "Fechar",
@@ -48,6 +49,7 @@ function valida_form (){
 </head>
 <body>
 <c:import url="cabecalhoDeslogado.jsp"/>
+
 <div class="container">
 	<div  class="row">
 		<div  class="col-md-8">

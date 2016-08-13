@@ -7,17 +7,25 @@ public class EmpregadoTO {
 	Date dataNasc;
 	public String rg, ufRg, numCarteira, serieCarteira, ufCarteira, senha;
 	public Boolean ativo;
-	public byte[] foto;
+	public String foto;
 	public int qtdDependentes;
-	public String codigoEmpregado;
+	public String codigoEmpregado, codigoEmpregador;
 	private String email;
 
+	
+	public String getCodigoEmpregador() {
+		return codigoEmpregador;
+	}
+	public void setCodigoEmpregador(String codigoEmpregador) {
+		this.codigoEmpregador = codigoEmpregador;
+	}
+	public void setCodigoEmpregado(String codigoEmpregado) {
+		this.codigoEmpregado = codigoEmpregado;
+	}
 	public String getCodigoEmpregado() {
 		return codigoEmpregado;
 	}
-	public void setCodigo(String codigo) {
-		this.codigoEmpregado = codigo;
-	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -97,11 +105,11 @@ public class EmpregadoTO {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	public byte[] getFoto() {
+	public String getFoto() {
 		return foto;
 	}
-	public void setFoto(byte[] bs) {
-		this.foto = bs;
+	public void setFoto(String foto2) {
+		this.foto = foto2;
 	}
 	public int getQtdDependentes() {
 		return qtdDependentes;

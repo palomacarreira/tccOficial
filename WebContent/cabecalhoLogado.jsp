@@ -34,7 +34,6 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 				      <li><a href="PesquisarEmpregado?acao=PesquisarTodos">Cadastro de Funcionarios</a></li>
 	 				  <li class="atividades"><a href="#">Atividades</a></li>
 				      <li><a href="#">Folha de Ponto</a></li>
-				      
 	  				  <li class="guias">
 	  				  <a tabindex="0" data-toggle="dropdown" data-submenu>Guias<span class="caret"></span></a>   
 	  				  
@@ -56,8 +55,8 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		  				  
 			  				  <ul class="dropdown-menu">
 				  				  <li class="perfil dropdown-submenu">
-									       <a href="AlterarUsuario?acao=Alterar" tabindex="0">Meu Perfil</a>
-									      <a href="AlterarUsuario?acao=Excluir" tabindex="0">Excluir Conta</a>
+									      <a href="AlterarUsuario?acao=alterar" tabindex="0">Meu Perfil</a>
+									      <a href="AlterarUsuario?acao=excluir" tabindex="0">Excluir Conta</a>
 									      <a href="TelaLogin.jsp" tabindex="0">Sair</a>
 								  </li>
 							  </ul>

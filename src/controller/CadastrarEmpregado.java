@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -12,12 +13,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+
 import model.EspecialistaContato;
 import model.EspecialistaContrato;
 import model.EspecialistaEmpregado;
 import model.EspecialistaEndereco;
 import model.EspecialistaJornadaTrabalho;
-import model.ManipulandoImagem;
+
 
 
 /**
@@ -47,6 +51,7 @@ public class CadastrarEmpregado extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		EspecialistaEmpregado espEmpregado = new EspecialistaEmpregado();
 		EspecialistaContato espContato = new EspecialistaContato();
 		EspecialistaEndereco espEndereco = new EspecialistaEndereco();
@@ -56,34 +61,32 @@ public class CadastrarEmpregado extends HttpServlet {
 		RequestDispatcher view;
 		request.setCharacterEncoding("UTF-8");
 		String acao = request.getParameter("acao");
-	
+		
+		HttpSession session = request.getSession();
+		String codigoUsuario = (String) session.getAttribute("codigoUsuario");
 		
 		switch (acao) 
 		{
-		        
-		case "Cadastrar":
+		 
+		case "Adicionar":
+			view = request.getRequestDispatcher("TelaCadastroEmpregado.jsp");
+        	view.forward(request, response);
+			
+		break;
 		
-			byte[] foto = null;
-			
-			if(request.getParameter("fotoEmpregado") != ""){
-				foto = ManipulandoImagem.getImgBytes(request.getParameter("fotoEmpregado"));
-			}
-			else{
-				foto = ManipulandoImagem.getImgBytes("imagens/sem-imagem.png");
-			}
-			
+		case "Cadastrar":
 
-			 	DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-			 	Date dataAdmissao = null;
-				Date dataNasc = null;
-				String dataA = request.getParameter("dataNasc");
-				String dataB = request.getParameter("dataAdmissao");
-				try {
-					dataNasc = new java.sql.Date( ((java.util.Date)formatter.parse(dataA)).getTime() );
-					dataAdmissao = new java.sql.Date( ((java.util.Date)formatter.parse(dataB)).getTime());
-				} catch (ParseException e1) {
-					e1.printStackTrace();
-				}				
+			 DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			 Date dataAdmissao = null;
+			 Date dataNasc = null;
+			 String dataA = request.getParameter("dataNasc");
+			 String dataB = request.getParameter("dataAdmissao");
+			 try {
+				dataNasc = new java.sql.Date(((java.util.Date)formatter.parse(dataA)).getTime());
+				dataAdmissao = new java.sql.Date(((java.util.Date)formatter.parse(dataB)).getTime());
+			 } catch (ParseException e1) {
+				e1.printStackTrace();
+			 }				
       
 			 String nome = (String) request.getParameter("nome");
 			 String sobrenome = (String) request.getParameter("sobrenome");
@@ -99,7 +102,7 @@ public class CadastrarEmpregado extends HttpServlet {
 			 String senha = (String) request.getParameter("senha");
 			 Boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
 			 int qtdDependentes = Integer.parseInt(request.getParameter("qtdDependentes"));
-		
+			
 			 String cargo = (String) request.getParameter("cargo");
 			 String diaPagamento = request.getParameter("diaPagamento");
 			 Boolean descontoINSS = Boolean.parseBoolean(request.getParameter("descontoINSS"));
@@ -111,7 +114,8 @@ public class CadastrarEmpregado extends HttpServlet {
 			 String agencia = (String) request.getParameter("agencia");
 			 String banco =(String) request.getParameter("banco");
 			 String tipoConta =(String) request.getParameter("tipoConta");
-		
+			 String duracaoSemanal = (String) request.getParameter("duracaoSemanal");
+ 
 			 String endereco = (String) request.getParameter("endereco");
 			 String cidade = (String) request.getParameter("cidade");
 			 String estado = (String) request.getParameter("estado");
@@ -119,15 +123,25 @@ public class CadastrarEmpregado extends HttpServlet {
 			 String complemento = (String) request.getParameter("complemento");
 			 String cep =(String) request.getParameter("cep");
 			 String bairro = (String) request.getParameter("bairro");
-		
+			 
 			 String numeroTelefone = (String) request.getParameter("numeroTelefone");
 			 String tipoContato = (String) request.getParameter("tipoContato");
-			 
+			
+				
+			 String foto = "";
+		      for(Part part: request.getParts()){
+		        if(part.getName().equals("fotoEmpregado")) {
+		        	foto = this.getFileName(part);  
+		        	break;
+		        }
+		     }
+
 		try {
 			
 			espEmpregado.adicionar(nome, sobrenome, dataNasc, estadoCivil, sexo, 
 					cpf, rg,  ufRg,  numCarteira, serieCarteira, ufCarteira, 
-				 login,  senha, ativo,  foto, qtdDependentes);
+				 login,  senha, ativo,  foto, qtdDependentes, codigoUsuario);
+
 			
 			espContato.adicionarEmpregado(tipoContato, numeroTelefone);
 			espEndereco.adicionarEmpregado( endereco,  cidade,  estado, numeroEndereco,
@@ -136,8 +150,8 @@ public class CadastrarEmpregado extends HttpServlet {
 			espContrato.adicionarEmpregado(cargo, diaPagamento, 
 			dataAdmissao, descontoINSS, valeTransporte, 
 			salarioBase, compensacaoDias,regimeDeTrabalho,
-			conta,  agencia,  banco,  tipoConta);
-			
+			conta,  agencia,  banco,  tipoConta, duracaoSemanal);
+					
 			
 			for(int i = 1; i < 8; i++){
 				
@@ -163,31 +177,67 @@ public class CadastrarEmpregado extends HttpServlet {
 				 if(diaM == null){
 					 diaMeioPeriodo = false;
 				 }else{diaMeioPeriodo = true;}
-				 
 					
 				 espJornada.adicionarJornada(horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, 
 							horaSaida, diaSemana, diaFolga, diaMeioPeriodo);
 			 } 
 
+			
+			 // CRIA NO DIRETORIO DO PROJETO (PASTA UPLOADS) E UMA PASTA DENTRO COM O ID DO USUARIO
+			 //PARA EVITAR CONFLITO DE NOMES DE ARQUIVO ATUALIZADA O CAMPO NA TABELA 
+			 // A FOTO CADASTRADA TERÁ O NOME: idEmpregado_nomeFoto
+			 //PEGA O ÚLTIMO CODIGO CADASTRADO
+			 String codEmpr = espEmpregado.getUltimoCodigo();
+			 File dirX = new File( getServletContext().getRealPath("uploads"));
+			 if( !dirX.isDirectory() ){
+		            dirX.mkdir();
+		     }	
+			 File dir = new File( getServletContext().getRealPath("uploads")+ "/" + codigoUsuario );// diretório de upload
+			 //se o diretório não existe ele cria
+		        if( !dir.isDirectory() ){
+		            dir.mkdir();
+		        }	
+		    
+		      //grava o arquivo no disco com o id do empregado
+		      for(Part part: request.getParts()){
+		        if(part.getName().equals("fotoEmpregado")) {
+		        	foto = this.getFileName(part);  
+					if(!foto.equals("")) // SE SELECIONOU ALGUMA FOTO
+					{
+						 foto = codEmpr + "_" + getFileName(part);
+						 espEmpregado.alterarFoto(codEmpr ,foto); // FAZ UPDATE NA TABELA
+						 File arquivo = new File(dir.getAbsolutePath() + "/" + foto); 
+						 part.write( arquivo.getAbsolutePath() );
+						 break;
+					}
+		        }
+		     }
+		        
+		      
             String codigoEmpregado = espEmpregado.getUltimoCodigo();
             request.setAttribute("codigo", codigoEmpregado);
         	view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
         	view.forward(request, response);
 			
 		} catch (NumberFormatException e) {
-			request.setAttribute("msg", "Error " + e.getMessage());
 			view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=erro");
         	view.forward(request, response);
 		}
 		break;
-		
-		case "Cancelar":
-			view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos");
-        	view.forward(request, response);
-			break;
 		}
 	
 	}
+
+	public String getFileName(Part part){
+	    String header = part.getHeader( "content-disposition" );
+	    for( String tmp : header.split(";") ){
+	        if( tmp.trim().startsWith("filename") ){
+	            return tmp.substring( tmp.indexOf("=")+2 , tmp.length()-1 );
+	        }
+    	}
+    	return null;
 	}
+
+}
 
 
