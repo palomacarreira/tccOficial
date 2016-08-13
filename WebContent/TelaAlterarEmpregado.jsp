@@ -45,7 +45,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	String[] diaPagamento = {"1º dia util","2º dia util","3º dia util","4º dia util","5º dia util"};
 %>
      	
-<c:import url="cabecalhoDeslogado.jsp"/>
+<c:import url="cabecalhoLogado.jsp"/>
 
 <div class="container">
 <form id="dadosEmpregado" role="form" class="form-inline" method="post" action="AlterarEmpregado" enctype="multipart/form-data">
