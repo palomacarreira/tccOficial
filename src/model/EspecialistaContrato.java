@@ -9,12 +9,10 @@ public class EspecialistaContrato {
 	ContratoTO contratoTO = new ContratoTO();
 	
 	public void adicionarEmpregado(String cargo, String diaPagamento, 
-			Date dataAdmissao, Boolean descontoINSS, Double valeTransporte, 
-			Double salarioBase, String compensacaoDias,  String regimeDeTrabalho, 
-		  String conta, String agencia, String banco, String tipoConta, String duracaoSemanal) 
+	Date dataAdmissao, Boolean descontoINSS, Double valeTransporte, Double salarioBase, 
+	String compensacaoDias,  String regimeDeTrabalho,String conta,String agencia, String banco, 
+	String tipoConta, String duracaoSemanal, Double descontoBeneficios) 
 	{
-		
-		
 		contratoTO.setCargo(cargo); 
 		contratoTO.setDiaPagamento(diaPagamento); 
 		contratoTO.setDataAdmissao(dataAdmissao);
@@ -28,14 +26,15 @@ public class EspecialistaContrato {
 		contratoTO.setBanco(banco);
 		contratoTO.setTipoConta(tipoConta);
 		contratoTO.setDuracaoSemanal(duracaoSemanal);
+		contratoTO.setDescontoBeneficios(descontoBeneficios);
     	contratoDAO.cadastrar(contratoTO);
 		
 	}
 
 	public void alterarEmpregado(String codigoEmpregado, String cargo, String diaPagamento, 
-			Date dataAdmissao, Boolean descontoINSS, Double valeTransporte, 
-			Double salarioBase, String compensacaoDias,  String regimeDeTrabalho,  
-		  String conta, String agencia, String banco, String tipoConta, String duracaoSemanal) 
+	Date dataAdmissao, Boolean descontoINSS, Double valeTransporte, Double salarioBase, 
+	String compensacaoDias,  String regimeDeTrabalho, String conta, String agencia, String banco, 
+	String tipoConta, String duracaoSemanal,Double descontoBeneficios) 
 	{
 		
 		contratoTO.setCodigoEmpregado(codigoEmpregado);
@@ -52,6 +51,7 @@ public class EspecialistaContrato {
 		contratoTO.setBanco(banco);
 		contratoTO.setTipoConta(tipoConta);
 		contratoTO.setDuracaoSemanal(duracaoSemanal);
+		contratoTO.setDescontoBeneficios(descontoBeneficios);
     	contratoDAO.alterar(contratoTO);
 		
 	}

@@ -115,7 +115,8 @@ public class CadastrarEmpregado extends HttpServlet {
 			 String banco =(String) request.getParameter("banco");
 			 String tipoConta =(String) request.getParameter("tipoConta");
 			 String duracaoSemanal = (String) request.getParameter("duracaoSemanal");
- 
+             Double descontoBeneficios = Double.parseDouble(request.getParameter("descontoBeneficios"));
+             
 			 String endereco = (String) request.getParameter("endereco");
 			 String cidade = (String) request.getParameter("cidade");
 			 String estado = (String) request.getParameter("estado");
@@ -150,7 +151,7 @@ public class CadastrarEmpregado extends HttpServlet {
 			espContrato.adicionarEmpregado(cargo, diaPagamento, 
 			dataAdmissao, descontoINSS, valeTransporte, 
 			salarioBase, compensacaoDias,regimeDeTrabalho,
-			conta,  agencia,  banco,  tipoConta, duracaoSemanal);
+			conta,  agencia,  banco,  tipoConta, duracaoSemanal, descontoBeneficios);
 					
 			
 			for(int i = 1; i < 8; i++){
@@ -188,11 +189,11 @@ public class CadastrarEmpregado extends HttpServlet {
 			 // A FOTO CADASTRADA TERÁ O NOME: idEmpregado_nomeFoto
 			 //PEGA O ÚLTIMO CODIGO CADASTRADO
 			 String codEmpr = espEmpregado.getUltimoCodigo();
-			 File dirX = new File( getServletContext().getRealPath("uploads"));
+			 File dirX = new File((getServletContext().getRealPath("")+ "/"+ "uploads"));
 			 if( !dirX.isDirectory() ){
 		            dirX.mkdir();
 		     }	
-			 File dir = new File( getServletContext().getRealPath("uploads")+ "/" + codigoUsuario );// diretório de upload
+			 File dir = new File((getServletContext().getRealPath("")+ "/"+ "uploads")+ "/" + codigoUsuario );// diretório de upload
 			 //se o diretório não existe ele cria
 		        if( !dir.isDirectory() ){
 		            dir.mkdir();
@@ -206,7 +207,7 @@ public class CadastrarEmpregado extends HttpServlet {
 					{
 						 foto = codEmpr + "_" + getFileName(part);
 						 espEmpregado.alterarFoto(codEmpr ,foto); // FAZ UPDATE NA TABELA
-						 File arquivo = new File(dir.getAbsolutePath() + "/" + foto); 
+						 File arquivo = new File(dir + "/" + foto); 
 						 part.write( arquivo.getAbsolutePath() );
 						 break;
 					}

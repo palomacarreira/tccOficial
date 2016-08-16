@@ -113,7 +113,8 @@ public class AlterarEmpregado extends HttpServlet {
 				 String agencia = (String) request.getParameter("agencia");
 				 String banco =(String) request.getParameter("banco");
 				 String tipoConta =(String) request.getParameter("tipoConta");
-			
+				 Double descontoBeneficios = Double.parseDouble(request.getParameter("descontoBeneficios"));
+				 
 				 String endereco = (String) request.getParameter("endereco");
 				 String cidade = (String) request.getParameter("cidade");
 				 String estado = (String) request.getParameter("estado");
@@ -154,7 +155,7 @@ public class AlterarEmpregado extends HttpServlet {
 				espContrato.alterarEmpregado(codEmpregado,cargo,diaPagamento, 
 						 dataAdmissao, descontoINSS,  valeTransporte, 
 						 salarioBase, compensacaoDias,  regimeDeTrabalho,  
-					  conta,  agencia,  banco,  tipoConta, duracaoSemanal);
+					  conta,  agencia,  banco,  tipoConta, duracaoSemanal, descontoBeneficios);
 				
 				String codigoContrato = espContrato.pesquisarEmpregado(codEmpregado).getCodigo(); 
 				ArrayList<JornadaTrabalhoTO> listaDeJornadas = espJornada.pesquisarJornada(codigoContrato);
@@ -196,11 +197,11 @@ public class AlterarEmpregado extends HttpServlet {
 						 foto = this.getFileName(part);
 						 if(!foto.equals("")) // SE SELECIONOU ALGUMA FOTO
 						 {
-							 File dirX = new File( getServletContext().getRealPath("uploads"));
+							 File dirX = new File((getServletContext().getRealPath("")+ "/"+ "uploads"));
 							 if( !dirX.isDirectory() ){
 						            dirX.mkdir();
 						     }	
-							 File dir = new File( getServletContext().getRealPath("uploads")+ "/" + codigoUsuario );// diretório de upload
+							 File dir = new File((getServletContext().getRealPath("")+ "/"+ "uploads") + "/" + codigoUsuario );// diretório de upload
 							 //se o diretório não existe ele cria
 						     if( !dir.isDirectory() ){
 						         dir.mkdir();
@@ -209,16 +210,16 @@ public class AlterarEmpregado extends HttpServlet {
 						     foto = codEmpregado + "_" + getFileName(part);
 						     espEmpregado.alterarFoto(codEmpregado ,foto); // FAZ UPDATE NA TABELA
 							 if(fotoAntiga.equals("")){
-								 File arquivo = new File( dir.getAbsolutePath() + "/" + foto); 
+								 File arquivo = new File( dir + "/" + foto); 
 								 part.write( arquivo.getAbsolutePath() );  
 							 }
 							 else
 							 {
 								foto = codEmpregado + "_" + getFileName(part);
 								// DELETA ANTIGA E COLOCA A NOVA
-								File arquivo = new File(dir.getAbsolutePath() + "/" + fotoAntiga);
+								File arquivo = new File(dir + "/" + fotoAntiga);
 								if(arquivo.delete()){
-									arquivo = new File( dir.getAbsolutePath() + "/" + foto); 
+									arquivo = new File(dir + "/" + foto); 
 									part.write( arquivo.getAbsolutePath() );
 								}
 								else{

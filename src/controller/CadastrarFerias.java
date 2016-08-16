@@ -17,7 +17,9 @@ import javax.servlet.http.HttpSession;
 import model.ContratoTO;
 import model.EspecialistaContrato;
 import model.EspecialistaEmpregado;
+import model.EspecialistaFolhaPagamento;
 import model.EspecialistaFerias;
+import model.FolhaPagamentoTO;
 
 /**
  * Servlet implementation class CadastrarFerias
@@ -50,6 +52,8 @@ public class CadastrarFerias extends HttpServlet {
 
 		EspecialistaFerias espFerias = new EspecialistaFerias();
 		EspecialistaContrato contrato = new EspecialistaContrato();
+		EspecialistaFolhaPagamento folha = new EspecialistaFolhaPagamento();
+		
 		RequestDispatcher view;
 		String codigoEmpregado = (String) request.getAttribute("codigoEmpregado");
 		request.setCharacterEncoding("UTF-8");
@@ -60,8 +64,79 @@ public class CadastrarFerias extends HttpServlet {
 		case "Adicionar":
 			
 			ContratoTO cont = contrato.pesquisarEmpregado(codigoEmpregado);
-			Double salário = cont.getSalarioBase();
+			FolhaPagamentoTO folhaTO = folha.pesquisar(cont.getCodigo());
+			
+			Double salario = cont.getSalarioBase();
 			String regimeTrabalho = cont.getRegimeDeTrabalho();		
+			String duracaoSemanal = cont.getDuracaoSemanal();
+			Date dataAdmissao = cont.getDataAdmissao();
+			int qtdFolgas = folha.getQtdDiasDeFolga();
+			
+			int diasDeFerias = 0;
+			if(regimeTrabalho.equals("Tempo Parcial")){ // CÁLCULO REGIME DE TEMPO PARCIAL
+				int totalSemana = Integer.parseInt((duracaoSemanal.substring(0,2)));
+				if(totalSemana > 22)
+				{
+					if(qtdFolgas > 7){
+						diasDeFerias = 9;
+					}else{ 
+						diasDeFerias = 18;
+					}
+				}else if(totalSemana > 20 && totalSemana <=22){
+					if(qtdFolgas > 7){
+						diasDeFerias = 8;
+					}else{ 
+						diasDeFerias = 16;
+					}
+				}else if(totalSemana > 15 && totalSemana <=20){
+					if(qtdFolgas > 7){
+						diasDeFerias = 7;
+					}else{ 
+						diasDeFerias = 14;
+					}
+				}else if(totalSemana > 10 && totalSemana <=15){
+					if(qtdFolgas > 7){
+						diasDeFerias = 6;
+					}else{ 
+						diasDeFerias = 12;
+					}
+				}else if(totalSemana > 5 && totalSemana <=10){
+					if(qtdFolgas > 7){
+						diasDeFerias = 5;
+					}else{ 
+						diasDeFerias = 10;
+					}
+				}else if(totalSemana <= 5){
+					if(qtdFolgas > 7){
+						diasDeFerias = 4;
+					}else{ 
+						diasDeFerias = 8;
+					}
+				}
+						
+			}else{ // CÁLCULO REGIME DE TEMPO INTEGRAL
+				diasDeFerias = 30;
+				if(qtdFolgas > 5){
+					if(qtdFolgas >= 6 && qtdFolgas <=14){
+						diasDeFerias = 24;
+					}else if(qtdFolgas >= 15 && qtdFolgas <=23){
+						diasDeFerias = 18;
+					}else if(qtdFolgas >= 24 && qtdFolgas <=32){
+						diasDeFerias = 12;
+					}else{
+						diasDeFerias = 0;
+					}
+				}	
+			}
+			
+			// FÉRIAS DISPONÍVEIS A DO ANO QUE ELE ENTROU NO EMPREGO PARA FRENTE ATÉ O ANO ATUAL
+			// contando do mês que ele entrou 12 meses a frente
+			// da ultima ferias mais 12 meses
+			
+			request.setAttribute("qtdFolgas", diasDeferias);
+			request.setAttribute("Salário", salario);
+			view = request.getRequestDispatcher("TelaFerias.jsp");
+			view.forward(request, response);
 			
 		break;
 		
@@ -104,5 +179,6 @@ public class CadastrarFerias extends HttpServlet {
 		}
 	
 	}
+
 }
 

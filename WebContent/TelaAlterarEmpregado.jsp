@@ -25,6 +25,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <script src="js/sweetalert.min.js"></script> 
 <link rel="stylesheet" href="css/font-awesome.min.css">
 
+
 <title>Alterar Empregado</title>
 
 </head>
@@ -45,7 +46,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	String[] diaPagamento = {"1º dia util","2º dia util","3º dia util","4º dia util","5º dia util"};
 %>
      	
-<c:import url="cabecalhoLogado.jsp"/>
+<c:import url="cabecalhoDeslogado.jsp"/>
 
 <div class="container">
 <form id="dadosEmpregado" role="form" class="form-inline" method="post" action="AlterarEmpregado" enctype="multipart/form-data">
@@ -96,7 +97,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    </div>
 		 </div>
 		  
-	<div  class= "form-group" > 
+	<div  class="form-group" > 
 	  <label  for= "sexo" > Sexo </label> 
   		<div class="span3">
 		   <%
@@ -241,7 +242,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		<div  class= "form-group" > 
 		<label  for= "numero" > Numero </label> 
 		    <div class="span3">
-		    	 <input type="number" value="<%=endereco.getNumero()%>" min="0" class= "form-control"  name="numeroEndereco" id= "numeroEndereco" size="25" required> 	
+		    	<input type="number" min="0" value="<%=endereco.getNumero()%>" class= "form-control"  name="numeroEndereco" id= "numeroEndereco" size="25" required>
 		    </div>
 		</div>
 		<div  class= "form-group" > 
@@ -310,24 +311,43 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		   	%>
 		    </div>
 		</div>
-
+		
 		<div  class= "form-group" > 
 		    <label  for= "salarioBase" > Salário Base </label> 
 		    <div class="span3">
-		    <%
-		    	out.println("<input type=\"text\" value="+contrato.getSalarioBase()+" class=\"form-control\" name=\"salarioBase\" id=\"salarioBase\" size=\"20\">");
-		   	%>
-		    </div>
+	 			<div class="input-group"> 
+	       		<span class="input-group-addon">$</span>
+	       		<%
+			    	out.println("<input name=\"salarioBase\" value="+contrato.getSalarioBase()+" id=\"salarioBase\" size=\"20\" type=\"number\" min=\"0\" step=\"0.01\" data-number-to-fixed=\"2\" data-number-stepfactor=\"100\" class=\"form-control currency\"/>");
+			   	%>
+	   			 </div>	  
+	   		</div>  
 		</div>
-		<br>
+		
+		<div  class= "form-group" > 
+		    <label  for= "valeTransporte" > Valor vale transporte(MENSAL) </label> 
+		    <div class="span3">
+				<div class="input-group"> 
+	       		<span class="input-group-addon">$</span>
+	       		<%
+			    	out.println("<input name=\"valeTransporte\" value="+contrato.getValeTransporte()+" id=\"valeTransporte\" size=\"20\" type=\"number\" min=\"0\" step=\"0.01\" data-number-to-fixed=\"2\" data-number-stepfactor=\100\" class=\"form-control currency\"/>");
+			   	%>
+	   			</div>	 
+	   		</div>   		   
+		</div>
 	
 		<div  class= "form-group" > 
-		    <label  for= "cargo" > Valor vale transporte </label> 
-		    <div class="span3">
-		    <%
-		    	out.println("<input type=\"text\" value="+contrato.getValeTransporte()+" class=\"form-control\" name=\"valeTransporte\" id=\"valeTransporte\" size=\"20\">");
-		   	%>
-		    </div>
+		    <label  for= "descontoBeneficios" > Desconto de Benefícios
+	 		<a href="javascript:void(0)" onclick="informacaoDescontoBeneficios()"><i class="fa fa-info-circle" title="Informação"></i></a>
+	 		</label>
+	 		<div class="span3">
+				<div class="input-group"> 
+	       		 	<span class="input-group-addon">$</span>
+	       		 	<%
+	       		 		out.println("<input value="+contrato.getDescontoBeneficios()+" name=\"descontoBeneficios\" id=\"descontoBeneficios\" size=\"20\" type=\"number\" min=\"0\" step=\"0.01\" data-number-to-fixed=\"2\" data-number-stepfactor=\"100\" class=\"form-control currency\"/>");
+			   		%>
+	   			 </div>	  	 
+	   		</div>  		   
 		</div>
 		
 		 <div class= "form-group">

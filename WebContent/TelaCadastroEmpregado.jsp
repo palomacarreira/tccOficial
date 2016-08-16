@@ -33,7 +33,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
      			"PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"};	
 %>
 	
-<c:import url="cabecalhoLogado.jsp"/>
+<c:import url="cabecalhoDeslogado.jsp"/>
 <div class="container">
 
 <form id="dadosEmpregado" role="form" class="form-inline" method="post" action="CadastrarEmpregado" enctype="multipart/form-data">
@@ -47,6 +47,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    <input  type= "text"  class= "form-control"  name="nome" id="nome" size="80" required> 
 		    </div>
 		  </div> 
+		 
 		
 		<div class= "form-group" >  
 			<div id="foto">
@@ -65,7 +66,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		    </div>
 		  </div> 
 
-	 	<div class="radio form-group" > 
+	 	<div class="form-group" > 
 	 	<label for="sexo" > Sexo </label> 
   		<div class="span3">
    				 <input  type= "radio"  name= "sexo"  id= "radioFem"  value= "F" checked>
@@ -246,20 +247,36 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 
 		<div  class= "form-group" > 
 		    <label  for= "salarioBase" > Salário Base </label> 
- 			<div class="input-group"> 
-       		 	<span class="input-group-addon">$</span>
-        		<input name="salarioBase" id= "salarioBase" size="20" type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"/>
-   			 </div>	    
+		    <div class="span3">
+	 			<div class="input-group"> 
+	       		 	<span class="input-group-addon">$</span>
+	        		<input name="salarioBase" id= "salarioBase" size="20" type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"/>
+	   			 </div>	   
+   			 </div> 
 		</div>
 		
 		<div  class= "form-group" > 
-		    <label  for= "cargo" > Valor vale transporte </label> 
-			<div class="input-group"> 
-       		 	<span class="input-group-addon">$</span>
-        		<input name="valeTransporte" id="valeTransporte" size="20" type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"/>
-   			 </div>	    		   
+		    <label  for= "valeTransporte" > Valor vale transporte(MENSAL) </label> 
+		    <div class="span3">
+				<div class="input-group"> 
+	       		 	<span class="input-group-addon">$</span>
+	        		<input name="valeTransporte" id="valeTransporte" size="20" type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"/>
+	   			 </div>	 
+   			 </div>   		   
 		</div>
 		
+		<div  class= "form-group" > 
+		    <label  for= "descontoBeneficios" > Desconto de Benefícios
+	 		<a href="javascript:void(0)" onclick="informacaoDescontoBeneficios()"><i class="fa fa-info-circle" title="Informação"></i></a>
+	 		</label>
+	 		<div class="span3">
+				<div class="input-group"> 
+	       		 	<span class="input-group-addon">$</span>
+	        		<input name="descontoBeneficios" id="descontoBeneficios" size="20" type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"/>
+	   			 </div>	    
+	   		</div>		   
+		</div>
+	
 		 <div class= "form-group">
      		 <label  for= "dataPagamento" > Dia de Pagamento</label> 
      		 <div class="span3">
@@ -352,28 +369,28 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		  <tr>
 		  <td>Entrada</td>
 		  <td>
-		  <input class="form-control" name="horaEntrada1" id="horaEntrada1" size="5">
+		  <input type="text" class="form-control" name="horaEntrada1" id="horaEntrada1" size="5">
 		  </td>
 		  <td>
 		  <img src="imagens/botao_repete.ico" class="imgPreenche" id="1" style="cursor: pointer" height="20">
 		  </td>
 		  <td>
-		   <input type="text" name="horaEntrada2" id="horaEntrada2" class="form-control" size="5" >
+		  <input type="text" class="form-control" name="horaEntrada2" id="horaEntrada2" size="5" >
 		  </td>
 		  <td>
-		  <input type="text" name="horaEntrada3" id="horaEntrada3" class="form-control" size="5" >
+		  <input type="text" class="form-control"  name="horaEntrada3" id="horaEntrada3" size="5" >
 		  </td> 
 		  <td>
-		 	<input type="text" name="horaEntrada4" id="horaEntrada4" class="form-control" size="5" >
+		 	<input type="text" class="form-control" name="horaEntrada4" id="horaEntrada4" size="5" >
 		  </td>
 		    <td>
-		 	<input type="text" name="horaEntrada5" id="horaEntrada5" class="form-control" size="5" >
+		 	<input type="text" class="form-control" name="horaEntrada5" id="horaEntrada5" size="5" >
 		  </td>
 		    <td>
-		 	<input type="text"  name="horaEntrada6" id="horaEntrada6" class="form-control" size="5" >
+		 	<input type="text" class="form-control" name="horaEntrada6" id="horaEntrada6" size="5" >
 		 </td>
 		    <td>
-		 	<input type="text" name="horaEntrada7" id="horaEntrada7" class="form-control" size="5" disabled>
+		 	<input type="text" class="form-control" name="horaEntrada7" id="horaEntrada7" size="5" disabled>
 		  </td>
 		  </tr>
 		  

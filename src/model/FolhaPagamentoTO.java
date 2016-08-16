@@ -2,13 +2,54 @@ package model;
 
 public class FolhaPagamentoTO {
 
-	public Double decimoTerceiro, decTercPrimeiro, decTercSegunda, IR_retido;
+	public Double decTercPrimeiro, decTercSegunda, irRetido;
 	public Double salarioLiquido, fgts, inss, totalPagarHoraExtra;
-	public Double getDecimoTerceiro() {
-		return decimoTerceiro;
+	public Double valeTransporte, beneficios,horaExtra;
+	public String mesReferencia, anoReferencia;
+	public String codigoContrato, codigo;
+	
+	
+	public String getCodigoContrato() {
+		return codigoContrato;
 	}
-	public void setDecimoTerceiro(Double decimoTerceiro) {
-		this.decimoTerceiro = decimoTerceiro;
+	public void setCodigoContrato(String codigoContrato) {
+		this.codigoContrato = codigoContrato;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	public Double getValeTransporte() {
+		return valeTransporte;
+	}
+	public void setValeTransporte(Double valeTransporte) {
+		this.valeTransporte = valeTransporte;
+	}
+	public Double getBeneficios() {
+		return beneficios;
+	}
+	public void setBeneficios(Double beneficios) {
+		this.beneficios = beneficios;
+	}
+	public Double getHoraExtra() {
+		return horaExtra;
+	}
+	public void setHoraExtra(Double horaExtra) {
+		this.horaExtra = horaExtra;
+	}
+	public String getMesReferencia() {
+		return mesReferencia;
+	}
+	public void setMesReferencia(String mesReferencia) {
+		this.mesReferencia = mesReferencia;
+	}
+	public String getAnoReferencia() {
+		return anoReferencia;
+	}
+	public void setAnoReferencia(String anoReferencia) {
+		this.anoReferencia = anoReferencia;
 	}
 	public Double getDecTercPrimeiro() {
 		return decTercPrimeiro;
@@ -22,11 +63,11 @@ public class FolhaPagamentoTO {
 	public void setDecTercSegunda(Double decTercSegunda) {
 		this.decTercSegunda = decTercSegunda;
 	}
-	public Double getIR_retido() {
-		return IR_retido;
+	public Double getIrRetido() {
+		return irRetido;
 	}
-	public void setIR_retido(Double iR_retido) {
-		IR_retido = iR_retido;
+	public void setIrRetido(Double iR_retido) {
+		irRetido = iR_retido;
 	}
 	public Double getSalarioLiquido() {
 		return salarioLiquido;

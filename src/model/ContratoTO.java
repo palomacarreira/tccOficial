@@ -8,12 +8,19 @@ public class ContratoTO {
 	String diaPagamento;
 	public Date dataDemissao, dataAdmissao;
 	public Boolean descontoINSS;
-	public Double valeTransporte, valorPagarDemissao, salarioBase;
+	public Double valeTransporte, valorPagarDemissao, salarioBase, descontoBeneficios;
 	public String compensacaoDias;
 	public String regimeDeTrabalho, descricao, tipoDemissao;
 	public String conta, agencia, banco, tipoConta;
 	public String codigoUsuario, codigoEmpregado;
 	
+	
+	public Double getDescontoBeneficios() {
+		return descontoBeneficios;
+	}
+	public void setDescontoBeneficios(Double descontoBeneficios) {
+		this.descontoBeneficios = descontoBeneficios;
+	}
 	public String getCodigo() {
 		return codigo;
 	}

@@ -8,13 +8,38 @@ function informacaoCamposHora(){
 "<p>25 horas semanais não excedendo 6 (seis) horas diárias. </p><br/>"+
 "<p>A duração normal do trabalho do empregado em regime de tempo parcial poderá ser acrescida de horas suplementares, em número não excedente a 1 (uma) hora diária, "+ 
 "mediante acordo escrito entre empregador e empregado, aplicando-se lhe, ainda, o limite máximo de 6 (seis) horas diárias.</p><br/>"+
+"<p>Para a jornada de 8 (oito) horas diárias, o intervalo para repouso ou alimentação será de, no mínimo 1 (uma) e, no máximo, 2 (duas) horas. "+
+"Mediante acordo escrito entre empregado(a) e empregador(a), o limite mínimo de 1 hora pode ser reduzido para 30 minutos.</p>"+
+"<p>Quando a jornada de trabalho não exceder de 6 (seis) horas, o intervalo concedido será de 15 (quinze) minutos. </p>"+
+"<p>No caso de empregado(a) que reside no local de trabalho, o período de intervalo poderá ser desmembrado em 2 (dois) períodos, "+
+"desde que cada um deles tenha, no mínimo, uma 1 (hora), até o limite de 4 (quatro) horas ao dia. </p>"+
 "<span style=\"color:#F8BB86\">Preencha uma coluna ou todas, para ver o total de horas</span><br/>"+  
 "<span style=\"color:#F8BB86\">HORÁRIO EM FORMATO 24HRS</span>",
 				html: true 
 			});
 }
 
+function informacaoDescontoBeneficios(){
+	
+	swal({   title: "Cadastro Empregado",   
+			text:
+				"<p>É facultado ao empregador efetuar descontos no salário do empregado, mediante acordo escrito entre as partes,"+
+				"para a inclusão do empregado em planos de assistência médico-hospitalar e odontológica, de seguro e de "+
+				"previdência privada, não podendo a dedução ultrapassar 20%(vinte por cento) do salário base. </p>",
+				html: true 
+			});
+}
+
 function validar(){	
+	
+	if(verificaBeneficio() == false){
+		swal({   title: "Cadastro Empregado",   
+  			text: "<span style=\"color:#F8BB86\">O valor do benefício não pode ultrapassar 20% do salário base.<span>",   
+  					html: true 
+  			});
+		return false;
+	}
+	
 	for (i = 1; i < 8; i++){
 		
 		if($("#horaEntrada"+i).parent().hasClass('has-error') || 
@@ -136,6 +161,7 @@ $(document).ready(function(){
 	        preencheCampos(this.id);
 	    });
 		
+
 		// Ao modificar um campo hora, recalcula o horário total(SEGUNDA COLUNA EM DIANTE)
 		// Em caso de dia de meio período
 		for ( i = 1; i < 8; i++ ) 
@@ -216,6 +242,23 @@ $(document).ready(function(){
 		}				
 			
 });
+
+
+//calcula valor do beneficio
+function verificaBeneficio(valor)
+{
+	//VERIFICA SE O VALOR INSERIDO ESTÁ DENTRO DO PERMITIDO ATÉ 20% DO SALÁRIO BASE
+	var valor = $("#descontoBeneficios").val();
+	var salario = $("#salarioBase").val();
+	var total = salario * 0.2;
+		if(valor > total){
+			$("#descontoBeneficios").parent().addClass('has-error');
+			return false;
+		}else{
+			$("#descontoBeneficios").parent().removeClass('has-error');
+		}
+		return true;
+}
 
 
 //coloca o valor dos campos da primeira coluna , na coluna que foi desabilitada 
