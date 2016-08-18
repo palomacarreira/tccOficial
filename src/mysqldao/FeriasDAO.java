@@ -20,7 +20,7 @@ public class FeriasDAO extends MysqlConnect {
 	   {
 	      try{
 	         String sql = "insert into FERIAS(PERIODO_AQUISITIVO,SITUACAO, DATA_INICIO, DATA_FIM, "
-	         		+ "QTD_DIAS_FERIAS, VALOR, VENDA_FERIAS, FK_CONTRATO "
+	         		+ "QTD_DIAS_FERIAS, VALOR, VENDA_FERIAS, FK_CONTRATO) "
 	         		+ "values (?,?,?,?,?,?,?,?)";     
 	         st = conn.prepareStatement(sql);
 	         st.setString(1,feriasTO.getPeriodoAquisitivo());
