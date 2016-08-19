@@ -3,9 +3,9 @@ package model;
 import java.sql.Date;
 
 public class PontoTO {
-	public Date data, horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, horaSaida;
+	public Date data;
 	Boolean falta, faltaJustificada;
-	String codigoEmpregado, codigo;
+	String codigoEmpregado, codigo, horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, horaSaida;
 	
 	
 	public String getCodigo() {
@@ -24,19 +24,19 @@ public class PontoTO {
 		this.codigoEmpregado = codigoEmpregado;
 	}
 
-	public Date getHoraSaidaAlmoco() {
+	public String getHoraSaidaAlmoco() {
 		return horaSaidaAlmoco;
 	}
 
-	public void setHoraSaidaAlmoco(Date horaSaidaAlmoco) {
+	public void setHoraSaidaAlmoco(String horaSaidaAlmoco) {
 		this.horaSaidaAlmoco = horaSaidaAlmoco;
 	}
 
-	public Date getHoraVoltaAlmoco() {
+	public String getHoraVoltaAlmoco() {
 		return horaVoltaAlmoco;
 	}
 
-	public void setHoraVoltaAlmoco(Date horaVoltaAlmoco) {
+	public void setHoraVoltaAlmoco(String horaVoltaAlmoco) {
 		this.horaVoltaAlmoco = horaVoltaAlmoco;
 	}
 
@@ -64,19 +64,19 @@ public class PontoTO {
 		this.data = data;
 	}
 
-	public Date getHoraEntrada() {
+	public String getHoraEntrada() {
 		return horaEntrada;
 	}
 
-	public void setHoraEntrada(Date horaEntrada) {
-		this.horaEntrada = horaEntrada;
+	public void setHoraEntrada(String horaEntrada2) {
+		this.horaEntrada = horaEntrada2;
 	}
 
-	public Date getHoraSaida() {
+	public String getHoraSaida() {
 		return horaSaida;
 	}
 
-	public void setHoraSaida(Date horaSaida) {
+	public void setHoraSaida(String horaSaida) {
 		this.horaSaida = horaSaida;
 	}
 	

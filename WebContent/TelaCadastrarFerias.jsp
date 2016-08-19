@@ -102,7 +102,6 @@ function informacaoValor(){
 		    	<input type="text" id="valor" name="valor" class="form-control" size="20" disabled> 
 		    </div>
 		 </div>
-		 
     </div>
     
     <div id="botoes">
