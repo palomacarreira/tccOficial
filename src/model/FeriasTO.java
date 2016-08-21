@@ -1,11 +1,12 @@
 package model;
 
-import java.sql.Date;
+
+
 
 public class FeriasTO {
 	public Double valor;
-	public Date dataInicio, dataFinal, diaPagamento;
-	public String PeriodoAquisitivo;
+	public String dataInicio, dataFinal, diaPagamento;
+	public String PeriodoAquisitivoInicio, PeriodoAquisitivoFim;
 	public String situacao;
 	public Boolean vendaFerias;
 	public int qtdDiasFerias;
@@ -18,12 +19,7 @@ public class FeriasTO {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	public Date getDiaPagamento() {
-		return diaPagamento;
-	}
-	public void setDiaPagamento(Date diaPagamento) {
-		this.diaPagamento = diaPagamento;
-	}
+
 	public String getCodigoContrato() {
 		return codigoContrato;
 	}
@@ -36,12 +32,7 @@ public class FeriasTO {
 	public void setQtdDiasFerias(int qtdDiasFerias) {
 		this.qtdDiasFerias = qtdDiasFerias;
 	}
-	public String getPeriodoAquisitivo() {
-		return PeriodoAquisitivo;
-	}
-	public void setPeriodoAquisitivo(String periodoAquisitivo) {
-		PeriodoAquisitivo = periodoAquisitivo;
-	}
+	
 	public String getSituacao() {
 		return situacao;
 	}
@@ -60,18 +51,34 @@ public class FeriasTO {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	public Date getDataInicio() {
+	public String getDataInicio() {
 		return dataInicio;
 	}
-	public void setDataInicio(Date dataInicio) {
+	public void setDataInicio(String dataInicio) {
 		this.dataInicio = dataInicio;
 	}
-	public Date getDataFinal() {
+	public String getDataFinal() {
 		return dataFinal;
 	}
-	public void setDataFinal(Date dataFinal) {
+	public void setDataFinal(String dataFinal) {
 		this.dataFinal = dataFinal;
 	}
-	
-	
+	public String getDiaPagamento() {
+		return diaPagamento;
+	}
+	public void setDiaPagamento(String diaPagamento) {
+		this.diaPagamento = diaPagamento;
+	}
+	public String getPeriodoAquisitivoInicio() {
+		return PeriodoAquisitivoInicio;
+	}
+	public void setPeriodoAquisitivoInicio(String periodoAquisitivoInicio) {
+		PeriodoAquisitivoInicio = periodoAquisitivoInicio;
+	}
+	public String getPeriodoAquisitivoFim() {
+		return PeriodoAquisitivoFim;
+	}
+	public void setPeriodoAquisitivoFim(String periodoAquisitivoFim) {
+		PeriodoAquisitivoFim = periodoAquisitivoFim;
+	}
 }
