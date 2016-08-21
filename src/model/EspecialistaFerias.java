@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 import mysqldao.FeriasDAO;
@@ -10,10 +9,11 @@ public class EspecialistaFerias {
 	FeriasDAO feriasDAO = new FeriasDAO();	
 	
 
-	public void adicionar(String codigoContrato, String periodo, String situacao, Date dataInicio, Date dataFinal,
+	public void adicionar(String codigoContrato, String periodoAqInicio, String periodoAqFim, String situacao, String dataInicio, String dataFinal,
 			int qtdDias, Double valor, Boolean vendaFerias){		
 		
-		feriasTO.setPeriodoAquisitivo(periodo);
+		feriasTO.setPeriodoAquisitivoInicio(periodoAqInicio);
+		feriasTO.setPeriodoAquisitivoFim(periodoAqFim);
         feriasTO.setSituacao(situacao);
         feriasTO.setDataInicio(dataInicio);
         feriasTO.setDataFinal(dataFinal);
@@ -26,10 +26,11 @@ public class EspecialistaFerias {
 	}
 	
 	
-	public void alterar(String codigo, String periodo, String situacao, Date dataInicio, Date dataFinal,
+	public void alterar(String codigo, String periodoAqInicio, String periodoAqFim, String situacao, String dataInicio, String dataFinal,
 			int qtdDias, Double valor, Boolean vendaFerias){	
 		
-		feriasTO.setPeriodoAquisitivo(periodo);
+		feriasTO.setPeriodoAquisitivoInicio(periodoAqInicio);
+		feriasTO.setPeriodoAquisitivoFim(periodoAqFim);
         feriasTO.setSituacao(situacao);
         feriasTO.setDataInicio(dataInicio);
         feriasTO.setDataFinal(dataFinal);
@@ -48,7 +49,7 @@ public class EspecialistaFerias {
 
 	}
 	
-	public void alterarPagamento(String codigo, Date diaPagamento)
+	public void alterarPagamento(String codigo, String diaPagamento)
 	{
 		 feriasTO.setDiaPagamento(diaPagamento);
          feriasTO.setCodigo(codigo);

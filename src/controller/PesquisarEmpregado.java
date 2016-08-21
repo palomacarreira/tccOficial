@@ -96,7 +96,7 @@ public class PesquisarEmpregado extends HttpServlet {
 							request.setAttribute("mge", "Cadastro do empregado atualizado com sucesso.");
 						}
 						else if (tipo!= null && tipo.equals("erro")){
-							request.setAttribute("mge", "Operação não pode ser realizada!");
+							request.setAttribute("mge", "Operaï¿½ï¿½o nï¿½o pode ser realizada!");
 						}
 						
 						ArrayList<ContratoTO> contratos = new ArrayList<>();
@@ -119,7 +119,7 @@ public class PesquisarEmpregado extends HttpServlet {
 		catch(NumberFormatException e){
 			
 			request.setAttribute("msg", "Error " + e.getMessage());
-			view = request.getRequestDispatcher("TelaPrincipal.jsp");
+			view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
 			view.forward(request, response);
 		}
 		break;

@@ -22,6 +22,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
 <script src="js/sweetalert.min.js"></script> 
 <link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"  href="css/estilo.css" />
 
 <title>Cadastro Empregado</title>
 
@@ -33,7 +34,51 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
      			"PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"};	
 %>
 	
-<c:import url="cabecalhoDeslogado.jsp"/>
+	<div class="header clearfix">
+		<div class="row">
+			<div class="col-md-4">
+				<img src="imagens/logo.jpg" align="left">
+			</div>
+			<div class="col-md-8">
+				<br>
+				<br>
+				<nav>
+				<ul class="nav nav-pills">
+
+                <div class="col-md-2">
+
+						
+							<p style="font-size: 25px;">Cadastro</p>
+
+					
+
+					</div>
+				      
+	                  
+	                    <nav >
+  <ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
+      
+            <li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
+            
+                <ul>
+                      <li><a href="AlterarUsuario?acao=alterar">Meu Perfil</a></li>
+                      <li><a href="AlterarUsuario?acao=excluir">Excluir</a></li>
+                      <li><a href="TelaLogin.jsp">Sair</a></li>                   
+                </ul>
+            </li>
+                   
+</ul>
+</nav>
+						 
+						
+				    </ul>
+				</nav>
+
+			</div>
+	  	</div>
+	</div>
+	<br>
+		<hr />
 <div class="container">
 
 <form id="dadosEmpregado" role="form" class="form-inline" method="post" action="CadastrarEmpregado" enctype="multipart/form-data">

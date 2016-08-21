@@ -57,8 +57,7 @@ public class Login extends HttpServlet {
 			UsuarioTO usuario = (UsuarioTO) especialista.verificaLogin(email, senha);
 		
 		    
-			if(usuario != null)
-			{
+			if(usuario != null){
 				if(usuario.getAtivo() == true)
 				{
 					session.setAttribute("codigoUsuario", usuario.getCodigo());
@@ -67,12 +66,12 @@ public class Login extends HttpServlet {
 				}
 				else{
 					session.setAttribute("codigoUsuario", usuario.getCodigo());
-					view = request.getRequestDispatcher("TelaPrincipal.jsp");
+					view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
 					view.forward(request, response);
 				}
 			}
 			else{
-				request.setAttribute("mge", "O email inserido não corresponde a nenhuma conta. Cadastre-se para abrir uma conta"); 
+				request.setAttribute("mge", "O email inserido nï¿½o corresponde a nenhuma conta. Cadastre-se para abrir uma conta"); 
 				view = request.getRequestDispatcher("TelaLogin.jsp");
 				view.forward(request, response);  
 			}
@@ -82,12 +81,12 @@ public class Login extends HttpServlet {
 				String cod = (String) session.getAttribute("codigoUsuario");
 				Boolean ok = espUsuario.ativarUsuario(cod);
 				if(ok== true){
-				view = request.getRequestDispatcher("TelaPrincipal.jsp");
+					view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
 				view.forward(request, response);
 				}
 				else
 				{
-					out.print("<h2>Conta não pode ser ativada!</h2>");  
+					out.print("<h2>Conta nï¿½o pode ser ativada!</h2>");  
 			        RequestDispatcher rd=request.getRequestDispatcher("TelaLogin.jsp");  
 			        rd.include(request,response); 
 			    	out.close();  

@@ -22,6 +22,7 @@
 <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
 <script src="js/jquery-1.2.6.pack 2.js"></script>
 <script src="js/jquery.maskedinput-1.1.4.pack 2.js"></script>
+<link rel="stylesheet" type="text/css"  href="css/estilo.css" />
 
 <script type="text/javascript">
 	$(document).ready(
@@ -152,10 +153,98 @@
 </script>
 
 <body>
-	<c:import url="cabecalhoLogado.jsp" />
-		<form class="form-horizontal" >
+	<div class="header clearfix">
+		<div class="row">
+			<div class="col-md-4">
+				<img src="imagens/logo.jpg" align="left">
+			</div>
+			<div class="col-md-8">
+				<br>
+				<br>
+				<nav>
+				<ul class="nav nav-pills">
+
+                <div class="col-md-2">
+
+						
+							<p style="font-size: 25px;">Atividades</p>
+
+					
+
+					</div>
+				      
+	                  
+	                    <nav >
+  <ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
+      
+            <li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
+            
+                <ul>
+                      <li><a href="AlterarUsuario?acao=alterar">Meu Perfil</a></li>
+                      <li><a href="AlterarUsuario?acao=excluir">Excluir</a></li>
+                      <li><a href="TelaLogin.jsp">Sair</a></li>                   
+                </ul>
+            </li>
+                   
+</ul>
+</nav>
+						 
+						
+				    </ul>
+				</nav>
+
+			</div>
+	  	</div>
+	</div>
+	<hr />
+	
+	<div class="container">
+	<form name="form1" class= "form-inline" method="post" action="AtividadeController"> 
+	<nav class="navbar navbar-default" role="navigation">
+	
+	<div class="container">
+
+		 <div  class= "form-group" > 
+		    <label  for= "titulo" > Titulo
+ 				<a href="javascript:void(0)" onclick="informacaoValor()"><i class="fa fa-info-circle" title="Informação"></i></a>
+			</label>
+		    <div class="span3">
+
+		    	<input name="titulo" required="required" id="titulo" type="text"
+							class="form-control input-md">
+		    </div>
+		 </div>
+    </div>
+    </br></br>
+    
+		<div class="container">
+
+		  <div  class= "form-group" > 
+		    <label  for= "descricao" > Descricao
+ 				<a href="javascript:void(0)" onclick="informacaoValor()"><i class="fa fa-info-circle" title="Informação"></i></a>
+			</label>
+		    <div class="span3">
+
+		    	<textarea class="form-control" id="descricao" required="required" name="descricao"></textarea>
+		    </div>
+		 </div>
+    </div>
+    </br></br>
+    <div id="botoes">
+   	    <button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Cancelar </button> 
+   	    <button  type= "submit" name="acao" value="Cadastrar&codigoEmpregado=<%=request.getAttribute("codigoEmpregado")%>" class="btn btn-primary">Adicionar Atividade</button>
+   	   
+		
+	</div>
+	
+  </nav>
+  </form>
+
+
+</div>
+		<%-- <form class="form-horizontal" >
 			<fieldset>
-				<legend>Lista de Atividades</legend>
+				<!-- <legend>Lista de Atividades</legend> -->
 				
 				<%if(request.getAttribute("nome") != null && request.getAttribute("cpf") != null){
 					out.println("<input name=\"nomeEmpregado\" id=\"nomeEmpregado\"type=\"hidden\" value=\""+request.getAttribute("nome")+"\"/>");
@@ -188,7 +277,7 @@
 					<label class="col-md-6 control-label" for="textinput">OU</label>
 				</div>-->
 
-				<div class="form-group">
+				<!--  <div class="form-group">
 					<label class="col-md-4 control-label" for="textinput">CPF</label>
 					<div class="col-md-4">
 						<input class="form-control input-md" type="text" name="cpf" id="cpf" onblur="javascript: validarCPF(this.value);" onkeypress="javascript: mascara(this, cpf_mask);"  maxlength="14" />
@@ -201,18 +290,23 @@
 					<button type="submit" name="acao" value="PesquisarTodos"
 							class="btn btn-primary">Buscar</button>
 					</div>
-				</div>
-	</fieldset>
-</form>
-<form>
+				</div>-->
+	</fieldset> 
+</form>--%>
+<%-- 
+<div class="container">
+	<form name="form1" class= "form-inline" method="post" action="CadastrarFerias"> 
+	<nav class="navbar navbar-default" role="navigation">
+	
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="textinput">Titulo</label>
+					<label class="col-md-6 control-label" for="textinput">Titulo</label>
 					<div class="col-md-4">
 						<input name="titulo" required="required" id="titulo" type="text"
 							class="form-control input-md">
 
 					</div>
 				</div>
+				<br><br><br>
 <%out.println("<input name=\"nomeEmpregado\" id=\"nomeEmpregado\"type=\"hidden\" value=\""+request.getAttribute("nome")+"\"/>"); 
 out.println("<input name=\"cpfEmpregado\" id=\"cpfEmpregado\"type=\"hidden\" value=\""+request.getAttribute("cpf")+"\"/>");
 out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.getAttribute("cpf")+"\"/>");%>
@@ -228,22 +322,30 @@ out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.get
 				</div>-->
 
 
-				<div class="form-group">
-					<label class="col-md-4 control-label" for="textarea">Descricao</label>
-					<div class="col-md-4">
-						<textarea class="form-control" id="descricao" required="required" name="descricao"></textarea>
-					</div>
-				</div>
+			
+		</br></br>
 
-
-				<div class="form-group">
-					<label class="col-md-4 control-label" for="singlebutton"></label>
-					<div class="col-md-4">
-						<button type="submit" name="acao" value="Cadastrar"
-							class="btn btn-primary">Adicionar Atividade</button>
-					</div>
+		  <div  class= "form-group" > 
+		  <label for="textarea">Descricao</label>
+		    
+		    <div class="span3">
+		    	<textarea class="form-control" id="descricao" required="required" name="descricao"></textarea>
+		    </div>
+		 </div>
+    </div>
+    </br></br>
+    
+					
+	<div id="botoes">
+   	    <button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Cancelar </button> 
+		<button  type= "submit" name="acao" value="Cadastrar" class="btn btn-primary">Adicionar Atividade</button>
+	</div>
 				</div>
-	</form>
+	  </nav>
+  </form>
+--%>
+
+</div>
 	<form>
 			<table class="table ls-table" id="tabela1">
 <%out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.getAttribute("cpf")+"\"/>");%>
@@ -279,8 +381,8 @@ out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.get
 					realizado = "Nao";
 				}
 				
-				out.println("<td>"+item.getCodigoAtividade()+"</td>");
-				out.println("<input name=\"codigo\" id=\"codigo\"type=\"hidden\" value=\""+item.getCodigoAtividade()+"\"/>");
+				/*out.println("<td>"+item.getCodigoAtividade()+"</td>");
+				out.println("<input name=\"codigo\" id=\"codigo\"type=\"hidden\" value=\""+item.getCodigoAtividade()+"\"/>");*/
 				out.println("<td>"+item.getTitulo()+"</td>");
 				out.println("<td>"+item.getData()+"</td>");
 				out.println("<td>"+realizado+"</td>");

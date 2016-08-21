@@ -17,7 +17,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
 <script src="js/jquery-1.2.6.pack 2.js"></script>
 <script src="js/jquery.maskedinput-1.1.4.pack 2.js"></script>
-
+<link rel="stylesheet" type="text/css"  href="css/estilo.css" />
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -40,7 +40,50 @@ $(document).ready(function(){
 <% String[] meses = {"Janeiro", "Fevereiro","Marco","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"};%>
 <% String[] ano = {"2000", "2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016"};%>
      	
-<c:import url="cabecalhoLogado.jsp"/>
+<div class="header clearfix">
+		<div class="row">
+			<div class="col-md-4">
+				<img src="imagens/logo.jpg" align="left">
+			</div>
+			<div class="col-md-8">
+				<br>
+				<br>
+				<nav>
+				<ul class="nav nav-pills">
+
+                <div class="col-md-2">
+
+						
+							<p style="font-size: 25px;">Holetite</p>
+
+					
+
+					</div>
+				      
+	                  
+	                    <nav >
+  <ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
+      
+            <li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
+            
+                <ul>
+                      <li><a href="AlterarUsuario?acao=alterar">Meu Perfil</a></li>
+                      <li><a href="AlterarUsuario?acao=excluir">Excluir</a></li>
+                      <li><a href="TelaLogin.jsp">Sair</a></li>                   
+                </ul>
+            </li>
+                   
+</ul>
+</nav>
+						 
+						
+				    </ul>
+				</nav>
+
+			</div>
+	  	</div>
+	</div>
+	<hr />
 <div class="container">
 
 <form name="form1" class= "form-inline" method="post" action="PesquisarHolerite">

@@ -50,8 +50,9 @@ public class PesquisarFerias extends HttpServlet {
 		RequestDispatcher view= null;
 		
 		String codigoEmpregado = request.getParameter("codigoEmpregado");
-		switch (acao) 
-		{
+
+		
+		switch (acao){
 			case "Pesquisar":
 				try{
 					ContratoTO contratoTO = espContrato.pesquisarEmpregado(codigoEmpregado);
@@ -69,11 +70,14 @@ public class PesquisarFerias extends HttpServlet {
 				}catch(NumberFormatException e){
 					
 					request.setAttribute("msg", "Error " + e.getMessage());
-					view = request.getRequestDispatcher("TelaPrincipal.jsp");
+					view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
 					view.forward(request, response);
 				}
 			break;
+
+			
 		}
+			
 	}
 }
 

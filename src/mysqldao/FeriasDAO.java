@@ -1,11 +1,13 @@
 package mysqldao;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import banco.MysqlConnect;
+import util.DataUtil;
 import model.FeriasTO;
+import banco.MysqlConnect;
 
 public class FeriasDAO extends MysqlConnect {
 	   
@@ -19,18 +21,19 @@ public class FeriasDAO extends MysqlConnect {
 	   public boolean cadastrarFerias(FeriasTO feriasTO)
 	   {
 	      try{
-	         String sql = "insert into FERIAS(PERIODO_AQUISITIVO,SITUACAO, DATA_INICIO, DATA_FIM, "
-	         		+ "QTD_DIAS_FERIAS, VALOR, VENDA_FERIAS, FK_CONTRATO) "
-	         		+ "values (?,?,?,?,?,?,?,?)";     
+	         String sql = "insert into FERIAS(PERIODO_AQUISITIVO_INICIO,SITUACAO, DATA_INICIO, DATA_FIM, "
+	         		+ "QTD_DIAS_FERIAS, VALOR, VENDA_FERIAS, FK_CONTRATO, PERIODO_AQUISITIVO_FIM) "
+	         		+ "values (?,?,?,?,?,?,?,?,?)";     
 	         st = conn.prepareStatement(sql);
-	         st.setString(1,feriasTO.getPeriodoAquisitivo());
+	         st.setString(1, feriasTO.getPeriodoAquisitivoInicio());
 	         st.setString(2,feriasTO.getSituacao());
-	         st.setDate(3,feriasTO.getDataInicio());
-	         st.setDate(4,feriasTO.getDataFinal());
+	         st.setString(3,feriasTO.getDataInicio());
+	         st.setString(4,feriasTO.getDataFinal());
 	         st.setInt(5,feriasTO.getQtdDiasFerias());
 	         st.setDouble(6,feriasTO.getValor());
 	         st.setBoolean(7,feriasTO.getVendaFerias());
 	         st.setString(8,feriasTO.getCodigoContrato());
+	         st.setString(9,feriasTO.getPeriodoAquisitivoFim());
 	         st.executeUpdate(); 
 	         st.close();
 	      }
@@ -44,18 +47,19 @@ public class FeriasDAO extends MysqlConnect {
 	   public boolean alterarFerias(FeriasTO feriasTO)
 	   { 
 		      try{
-		         String sql = "UPDATE FERIAS SET PERIODO_AQUISITIVO=?, SITUACAO = ?, DATA_INICIO = ?, "
-		         		+ "DATA_FIM = ?, QTD_DIAS_FERIAS = ?, VALOR = ?, VENDA_FERIAS =? WHERE CD_FERIAS = ?";
+		         String sql = "UPDATE FERIAS SET PERIODO_AQUISITIVO_INICIO=?, SITUACAO = ?, DATA_INICIO = ?, "
+		         		+ "DATA_FIM = ?, QTD_DIAS_FERIAS = ?, VALOR = ?, VENDA_FERIAS =? PERIODO_AQUISITIVO_INICIO=? WHERE CD_FERIAS = ?";
 				         
 				         st = conn.prepareStatement(sql); 
-				         st.setString(1,feriasTO.getPeriodoAquisitivo());
+				         st.setString(1,feriasTO.getPeriodoAquisitivoInicio());
 				         st.setString(2,feriasTO.getSituacao());
-				         st.setDate(3,feriasTO.getDataInicio());
-				         st.setDate(4,feriasTO.getDataFinal());
+				         st.setString(3,feriasTO.getDataInicio());
+				         st.setString(4, feriasTO.getDataFinal());
 				         st.setInt(5,feriasTO.getQtdDiasFerias());
 				         st.setDouble(6,feriasTO.getValor());
 				         st.setBoolean(7,feriasTO.getVendaFerias());
-				         st.setString(8,feriasTO.getCodigo());
+				         st.setString(8, feriasTO.getPeriodoAquisitivoFim());
+				         st.setString(9,feriasTO.getCodigo());
 				         st.executeUpdate(); 
 				         st.close(); 
 		      }
@@ -72,7 +76,7 @@ public class FeriasDAO extends MysqlConnect {
 		         String sql = "UPDATE FERIAS SET DATA_PAGAMENTO WHERE CD_FERIAS = ?";
 				         
 				         st = conn.prepareStatement(sql); 
-				         st.setDate(1,feriasTO.getDiaPagamento());
+				         st.setString(1,feriasTO.getDiaPagamento());
 				         st.setString(2,feriasTO.getCodigo());
 				         st.executeUpdate(); 
 				         st.close(); 
@@ -87,7 +91,7 @@ public class FeriasDAO extends MysqlConnect {
 	   	
 	   public ArrayList<FeriasTO> pesquisarFerias(String codigo)
 	   {
-		   ArrayList<FeriasTO> lista= new ArrayList<FeriasTO>();
+		   ArrayList<FeriasTO> lista = new ArrayList<FeriasTO>();
 		   FeriasTO feriasTO = null;
 	         try
 	         {
@@ -98,15 +102,20 @@ public class FeriasDAO extends MysqlConnect {
 				while(resultSet.next())
 				{
 	            	feriasTO = new FeriasTO();
-	            	feriasTO.setPeriodoAquisitivo(resultSet.getString("PERIODO_AQUISITIVO"));
+	            	
+	            	DataUtil dtUtil = new DataUtil();
+	            	
+	            	feriasTO.setPeriodoAquisitivoInicio(dtUtil.retornaDataFormatadaCompletaMySQL(resultSet.getDate("PERIODO_AQUISITIVO_INICIO")));
+	            	feriasTO.setPeriodoAquisitivoFim(dtUtil.retornaDataFormatadaCompletaMySQL(resultSet.getDate("PERIODO_AQUISITIVO_FIM")));
 	            	feriasTO.setSituacao(resultSet.getString("SITUACAO"));
-	            	feriasTO.setDataInicio(resultSet.getDate("DATA_INICIO"));
-	            	feriasTO.setDataFinal(resultSet.getDate("DATA_FIM"));
+	            	feriasTO.setDataInicio(dtUtil.retornaDataFormatadaCompletaMySQL(resultSet.getDate("DATA_INICIO")));
+	            	feriasTO.setDataFinal(dtUtil.retornaDataFormatadaCompletaMySQL(resultSet.getDate("DATA_FIM")));
 	            	feriasTO.setQtdDiasFerias(resultSet.getInt("QTD_DIAS_FERIAS"));
 	            	feriasTO.setValor(resultSet.getDouble("VALOR"));	
 	            	feriasTO.setVendaFerias(resultSet.getBoolean("VENDA_FERIAS"));
-	            	feriasTO.setDiaPagamento(resultSet.getDate("DATA_PAGAMENTO"));
+	            	feriasTO.setDiaPagamento(resultSet.getString("DATA_PAGAMENTO"));
 	            	feriasTO.setCodigo(resultSet.getString("CD_FERIAS"));
+	            	
 	            	lista.add(feriasTO);
 				}	
 				st.close();

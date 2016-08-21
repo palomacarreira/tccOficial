@@ -70,7 +70,7 @@ public class PesquisarUsuario extends HttpServlet {
 				}catch(NumberFormatException e){
 					
 					request.setAttribute("msg", "Error " + e.getMessage());
-					view = request.getRequestDispatcher("TelaPrincipal.jsp");
+					view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
 					view.forward(request, response);
 				}
 			break;

@@ -63,7 +63,7 @@ public class AlterarUsuario extends HttpServlet {
 				
 			
 			case "Salvar":
-				//alteração dado 
+				//alteraï¿½ï¿½o dado 
 					
 				String codigo = (String) session.getAttribute("codigoUsuario");
 				String nome = (String) request.getParameter("nome");
@@ -96,13 +96,13 @@ public class AlterarUsuario extends HttpServlet {
 							complemento, cep, bairro);
 					
 					request.setAttribute("msg", "Dados Alterados");
-					view = request.getRequestDispatcher("TelaPrincipal.jsp");
+					view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
 					view.forward(request, response);
 					
 				} catch (NumberFormatException e) {
 					
 					request.setAttribute("msg", "Error " + e.getMessage());
-					view = request.getRequestDispatcher("TelaPrincipal.jsp");
+					view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
 					view.forward(request, response);
 				}
 			break;
@@ -126,12 +126,12 @@ public class AlterarUsuario extends HttpServlet {
 						
 					} catch (NumberFormatException e) {
 						request.setAttribute("msg", "Error " + e.getMessage());
-						view = request.getRequestDispatcher("TelaPrincipal.jsp");
+						view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
 						view.forward(request, response);
 					}
 				}
 				else{
-					view = request.getRequestDispatcher("TelaPrincipal.jsp");
+					view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
 					view.forward(request, response);
 				}
 				break;
@@ -140,7 +140,7 @@ public class AlterarUsuario extends HttpServlet {
 			String cod = (String) session.getAttribute("codigo");
 			try {
 				espUsuario.excluir(cod);
-				request.setAttribute("msg", "Cadastro Excluído");
+				request.setAttribute("msg", "Cadastro Excluï¿½do");
 				view = request.getRequestDispatcher("TelaLogin.jsp");
 				view.forward(request, response);
 			} catch (Exception e) {

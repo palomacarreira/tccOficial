@@ -84,14 +84,14 @@ public class CadastrarUsuario extends HttpServlet {
 			
             String codigo = espUsuario.getUltimoCodigo();
             session.setAttribute("codigoUsuario", codigo);
-        	view = request.getRequestDispatcher("TelaPrincipal.jsp");
+            view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos"); 
         	view.forward(request, response);
 	
 			
 		} catch (NumberFormatException e) {
 			
 			request.setAttribute("msg", "Error " + e.getMessage());
-			view = request.getRequestDispatcher("TelaLogin.jsp");
+			view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos"); 
 			view.forward(request, response);
 		}
 		break;

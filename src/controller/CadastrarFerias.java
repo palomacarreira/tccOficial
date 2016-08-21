@@ -6,6 +6,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import util.DataUtil;
 import model.ContratoTO;
 import model.EspecialistaContrato;
 import model.EspecialistaEmpregado;
@@ -44,7 +47,7 @@ public class CadastrarFerias extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		this.doPost(request, response);
+		doPost(request, response);
 	}
 
 	/**
@@ -52,22 +55,25 @@ public class CadastrarFerias extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		request.setCharacterEncoding("UTF-8");
+		String acao = request.getParameter("acao");
+		
 		EspecialistaFerias espFerias = new EspecialistaFerias();
 		EspecialistaContrato contrato = new EspecialistaContrato();
 		EspecialistaPonto ponto = new EspecialistaPonto();
 		
-		RequestDispatcher view;
-		String codigoEmpregado = (String) request.getAttribute("codigoEmpregado");
-		request.setCharacterEncoding("UTF-8");
-		String acao = request.getParameter("acao");
-		switch (acao) 
-		{
+		RequestDispatcher view= null;
+		String codigoEmpregado = "1";//request.getParameter("codigoEmpregado");
+		//String codigoEmpregado = (String) request.getAttribute("codigoEmpregado");
+		//String codigoEmpregado = (String) session.getAttribute("codigoEmpregado");
+
+		switch (acao){
 		
 		case "Adicionar":
 			
 			ContratoTO cont = contrato.pesquisarEmpregado(codigoEmpregado);
 			ArrayList<PontoTO> listaDePonto = ponto.pesquisar(cont.getCodigo());
+			//ArrayList<PontoTO> listaDePonto = ponto.pesquisar(cont.getCodigo());
 			
 			int qtdFolgas = 0;
 			if(listaDePonto != null){
@@ -83,10 +89,10 @@ public class CadastrarFerias extends HttpServlet {
 				Double salario = cont.getSalarioBase();
 				String regimeTrabalho = cont.getRegimeDeTrabalho();		
 				String duracaoSemanal = cont.getDuracaoSemanal();
-				Date dataAdmissao = cont.getDataAdmissao();
+				String dataAdmissao = cont.getDataAdmissao();
 				
 				int diasDeFerias = 0;
-				if(regimeTrabalho.equals("Tempo Parcial")){ // CÁLCULO REGIME DE TEMPO PARCIAL
+				if(regimeTrabalho.equals("Tempo Parcial")){ // Cï¿½LCULO REGIME DE TEMPO PARCIAL
 					int totalSemana = Integer.parseInt((duracaoSemanal.substring(0,2)));
 					if(totalSemana > 22)
 					{
@@ -127,7 +133,7 @@ public class CadastrarFerias extends HttpServlet {
 						}
 					}
 							
-				}else{ // CÁLCULO REGIME DE TEMPO INTEGRAL
+				}else{ // Cï¿½LCULO REGIME DE TEMPO INTEGRAL
 					diasDeFerias = 30;
 					if(qtdFolgas > 5){
 						if(qtdFolgas >= 6 && qtdFolgas <=14){
@@ -142,52 +148,91 @@ public class CadastrarFerias extends HttpServlet {
 					}	
 				}
 				
-				// FÉRIAS DISPONÍVEIS A DO ANO QUE ELE ENTROU NO EMPREGO PARA FRENTE ATÉ O ANO ATUAL
-				// contando do mês que ele entrou 12 meses a frente
+				// Fï¿½RIAS DISPONï¿½VEIS A DO ANO QUE ELE ENTROU NO EMPREGO PARA FRENTE ATï¿½ O ANO ATUAL
+				// contando do mï¿½s que ele entrou 12 meses a frente
 				// da ultima ferias mais 12 meses
 				
 				request.setAttribute("diasDeFerias", diasDeFerias);
-				request.setAttribute("Salário", salario);
-				view = request.getRequestDispatcher("TelaFerias.jsp");
+				request.setAttribute("Salario", salario);
+				//view = request.getRequestDispatcher("TelaFerias.jsp");
+				view = request.getRequestDispatcher("TelaCadastrarFerias.jsp");
 				view.forward(request, response);
 		}
 		else{
 		
-			// SE NÃO TIVER DADOS NO BANCO REFERENTE AO ANO DE FÉRIAS
-			//MOSTRAR MENSAGEM FALANDO QUE ESTAS FÉRIAS SÃO ANTIGAS E QUE NÃO HÁ DADOS NO BANCO
-			//REFERENTES AO ANO , POR FAVOR CLIQUE NO BOTÃO FÉRIAS ANTIGAS PARA DESBLOQUEAR
-			// AS PRÓXIMAS FÉRIAS
+			// SE Nï¿½O TIVER DADOS NO BANCO REFERENTE AO ANO DE Fï¿½RIAS
+			//MOSTRAR MENSAGEM FALANDO QUE ESTAS Fï¿½RIAS Sï¿½O ANTIGAS E QUE Nï¿½O Hï¿½ DADOS NO BANCO
+			//REFERENTES AO ANO , POR FAVOR CLIQUE NO BOTï¿½O Fï¿½RIAS ANTIGAS PARA DESBLOQUEAR
+			// AS PRï¿½XIMAS Fï¿½RIAS
 			
 		}
 			
 		break;
 		
 		case "Cadastrar":
-		String periodo = (String) request.getParameter("periodoAquisitivo");
-		String situacao = (String) request.getParameter("situacao");
-		int qtdDias = Integer.parseInt(request.getParameter("qtdDiasFerias"));
-		Double valor= Double.parseDouble(request.getParameter("valor"));
+			
+		String periodoAquisitivoInicio = request.getParameter("periodoAquisitivoInicio");
+		String periodoAquisitivoFim = request.getParameter("periodoAquisitivoFim");
+		String dataFeriasInicio = request.getParameter("dataInicio");
+		String dataFeriasFim = request.getParameter("dataTermino");
 		Boolean vendaFerias = Boolean.parseBoolean(request.getParameter("vendaFerias"));
-		
+		Double valor= Double.parseDouble(request.getParameter("valor"));
+		String situacao = (String) request.getParameter("situacao");
+		//int qtdDias = Integer.parseInt(request.getParameter("qtdDiasFerias"));
+
+		 
 		 DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		 Date dataInicio = null;
-		 Date dataFinal = null;
-		 String dataA = request.getParameter("dataInicio");
-		 String dataB = request.getParameter("dataTermino");
+		 //SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
+
+		 GregorianCalendar gcIncioFerias =new GregorianCalendar();
+		 GregorianCalendar gcFimFerias =new GregorianCalendar();
+		 
+//PEGANDO PERIODO AQUISITIVO
+		 Date periodoAquisitivoI = null;
+		 Date periodoAquisitivoF = null;
+		 
 		 try {
-			dataInicio = new java.sql.Date(((java.util.Date)formatter.parse(dataA)).getTime());
-			dataFinal = new java.sql.Date(((java.util.Date)formatter.parse(dataB)).getTime());
+			 periodoAquisitivoI = new java.sql.Date(((java.util.Date)formatter.parse(periodoAquisitivoInicio)).getTime());
+			 periodoAquisitivoF = new java.sql.Date(((java.util.Date)formatter.parse(periodoAquisitivoFim)).getTime());
+			 
 		 } catch (ParseException e1) {
 			e1.printStackTrace();
-		 }		
+		 }	
 		 
-		try {
+		   
+//PEGANDO PERIODO DE FERIAS
+		 Date dataInicioFerias = null;
+		 Date dataFinalFerias = null;
+		
+		 try {
+			 dataInicioFerias = new java.sql.Date(((java.util.Date)formatter.parse(dataFeriasInicio)).getTime());
+			 dataFinalFerias = new java.sql.Date(((java.util.Date)formatter.parse(dataFeriasFim)).getTime());
+		
+		 } catch (ParseException e1) {
+			e1.printStackTrace();
+		 }		  
+		    
+		  DataUtil dtUtil = new DataUtil();
+
+		  Calendar cal1 = Calendar.getInstance();
+		  cal1.setTime(dataInicioFerias);
+		  Calendar cal2 = Calendar.getInstance();
+		  cal2.setTime(dataFinalFerias);
+		  
+		 
+		  int qtdDias = dtUtil.retornaDiferencaEmDias2(dataInicioFerias, dataFinalFerias);
+		 
+		
+		 try {
 			
 			ContratoTO contratoTO = contrato.pesquisarEmpregado(codigoEmpregado);
-			espFerias.adicionar(contratoTO.getCodigo(), periodo, situacao, 
-					dataInicio, dataFinal, qtdDias, valor, vendaFerias);
+			
+			espFerias.adicionar(contratoTO.getCodigo(), periodoAquisitivoI.toString(), periodoAquisitivoF.toString(), situacao, 
+					dataInicioFerias.toString(), dataFinalFerias.toString(), qtdDias, valor, vendaFerias);
 				
-        	view = request.getRequestDispatcher("TelaFerias.jsp");
+			view = request.getRequestDispatcher("PesquisarFerias?acao=Pesquisar&codigoEmpregado=" + codigoEmpregado);
+			
+        	//view = request.getRequestDispatcher("TelaFerias.jsp");
         	view.forward(request, response);
 	
 			

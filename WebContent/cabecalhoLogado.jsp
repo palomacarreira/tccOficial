@@ -30,7 +30,16 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 				<br>
 				<br>
 				<nav>
-				    <ul class="nav nav-pills menu-principal" align="center">
+				<ul class="nav nav-pills">
+
+                
+				      <!--  <li><a href="TelaLogin.jsp">Home</a></li>
+				      <li><a href="TelaDocumentacaoNecessaria.jsp">Documentacao Necessaria</a></li>
+	  				  <li><a href="TelaConhecaLei.jsp">Conheca a lei</a></li>
+	                  <li><a href="TelaComoFunciona.jsp">Como Funciona</a></li>
+	                  <li><a href="TelaFormularioContato.jsp">Contatos</a></li>-->
+				    
+				    <!--  <ul class="nav nav-pills menu-principal" align="center">
 				      <li><a href="PesquisarEmpregado?acao=PesquisarTodos">Cadastro de Funcionarios</a></li>
 	 				  <li class="atividades"><a href="#">Atividades</a></li>
 				      <li><a href="#">Folha de Ponto</a></li>
@@ -48,15 +57,15 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 					  
 	                  
 	                  <li class="holerite"><a href="#">Holerite</a></li>
-	                  <li class="qrcode"><a href="#">QR Code</a></li>
+	                  <li class="qrcode"><a href="#">QR Code</a></li>-->
 	                  
 	                  <li class="perfil navbar-right">
 		  				  <a tabindex="0" data-toggle="dropdown" data-submenu><img src="imagens/ferramenta.png" width="20" height="20" align="right"><span class="caret"></span></a>   
 		  				  
 			  				  <ul class="dropdown-menu">
 				  				  <li class="perfil dropdown-submenu">
-									      <a href="AlterarUsuario?acao=Alterar" tabindex="0">Meu Perfil</a>
-									      <a href="AlterarUsuario?acao=Excluir" tabindex="0">Excluir Conta</a>
+									      <a href="AlterarUsuario?acao=alterar" tabindex="0">Meu Perfil</a>
+									      <a href="AlterarUsuario?acao=excluir" tabindex="0">Excluir Conta</a>
 									      <a href="TelaLogin.jsp" tabindex="0">Sair</a>
 								  </li>
 							  </ul>

@@ -42,44 +42,26 @@ function informacaoValor(){
 <c:import url="cabecalhoLogado.jsp"/>
 
 	<div class="container">
-	<form name="form1" class= "form-inline" method="post" action="CadastrarFerias">
+	<form name="form1" class= "form-inline" method="post" action="CadastrarFerias"> 
 	<nav class="navbar navbar-default" role="navigation">
 	
 	<div class="container">
-	<label  for= "meuPerfil" > Registro de Férias </label><br><br>
+	<label  for= "meuPerfil" > Cadastro de Férias </label><br><br>
 		  
 		  <div  class= "form-group" > 
-		    <label  for= "nome" > Período Aquisitivo(Ano) </label> 
+		    <label  for= "nome" > Período Aquisitivo(Inicio) </label> 
 		    <div class="span3">
-		    <input type= "text"  class= "form-control"  name="periodoAquisitivo" id="periodoAquisitivo" size="4"> 
+		    <input type="date" id="periodoAquisitivoInicio" name="periodoAquisitivoInicio" class="form-control" size="20" required> 
 		    </div>
 		  </div> 
-		  
+		  <div  class= "form-group" > 
+		    <label  for= "nome" > Período Aquisitivo(Fim) </label> 
+		    <div class="span3">
+		    <input type="date" id="periodoAquisitivoFim" name="periodoAquisitivoFim" class="form-control" size="20" required> 
+		    </div>
+		  </div> 
+		  </br></br>
 		   <div  class= "form-group" > 
-		    <label  for= "qtdDiasFerias" > Quantidade de dias de férias disponíveis </label> 
-		    <div class="span3">
-		    	<input  type= "text" id="qtdDiasFerias" name="qtdDiasFerias" class="form-control" size="2" disabled> 
-		    </div>
-		 </div> 
-
-		<div class="radio form-group" > 
-	 	<label for="vendaFerias" > Abono Pecuniário (Venda de 1/3 das Férias)</label> 
-  		<div class="span3">
-   				 <input  type= "radio"  name="vendaFerias"  id="sim"  value="true" checked>
-   			 Sim
-  				<input  type= "radio"  name="vendaFerias"  id="não"  value="false" >
-  			 Não
-  			</div>
-		</div> 
-		
-		<div  class= "form-group" > 
-		    <label  for= "qtdDiasVendidos" > Quantidade de dias Vendidos </label> 
-		    <div class="span3">
-		   		<input type="text" id="qtdDiasVendidos" name="qtdDiasVendidos" class= "form-control" size="2" disabled> 
-		    </div>
-		 </div> 
-		 
-		 <div  class= "form-group" > 
 		    <label  for= "dataInicio" > Data Início </label> 
 		    <div class="span3">
 		    <input type="date" id="dataInicio" name="dataInicio" class="form-control" size="20" required> 
@@ -89,24 +71,52 @@ function informacaoValor(){
 		 <div  class= "form-group" > 
 		    <label  for= "dataTermino" > Data Término </label> 
 		    <div class="span3">
-		    <input type="date" id="dataTermino" name="dataTermino" class="form-control" size="20" disabled> 
+		    <input type="date" id="dataTermino" name="dataTermino" class="form-control" size="20" > 
 		    </div>
 		 </div>
+		 </br></br>
+		   <%-- A GENTE JA TEM A QUANTIDADE DE DIAS DE FERIAS PEGANDO A DATA DE INICIO E DATA DE FIM. 
+		   <div  class= "form-group" > 
+		    <label  for= "qtdDiasFerias" > Quantidade de dias de férias</label> 
+		    <div class="span3">
+		    	<input  type= "text" id="qtdDiasFerias" name="qtdDiasFerias" class="form-control" size="2" > 
+		    </div>
+		 </div> --%>
+
+		<div class="form-group radio" > 
+	 	<label for="vendaFerias" > Abono Pecuniário (Venda de 1/3 das Férias)</label> 
+  		<div class="span3">
+   				 <input  type= "radio"  name="vendaFerias"  id="sim"  value="true" >
+   			 Sim
+  				<input  type= "radio"  name="vendaFerias"  id="não"  value="false" checked>
+  			 Não
+  			</div>
+		</div> 
+		
+		<%-- Abono Pecuniário EH A VENDA DE 1/3 DAS FERIAS - OU VENDE 1/3 CONFORME A LEI OU NAO VENDE NADA
+		<div  class= "form-group" > 
+		    <label  for= "qtdDiasVendidos" > Quantidade de dias Vendidos </label> 
+		    <div class="span3">
+		   		<input type="text" id="qtdDiasVendidos" name="qtdDiasVendidos" class= "form-control" size="2" > 
+		    </div>
+		 </div> --%>
 		 
+		
+		 </br></br>
 
 		  <div  class= "form-group" > 
 		    <label  for= "valor" > Valor a pagar pelas Férias 
  				<a href="javascript:void(0)" onclick="informacaoValor()"><i class="fa fa-info-circle" title="Informação"></i></a>
 			</label>
 		    <div class="span3">
-		    	<input type="text" id="valor" name="valor" class="form-control" size="20" disabled> 
+		    	<input type="text" id="valor" name="valor" class="form-control" size="20" > 
 		    </div>
 		 </div>
     </div>
-    
+    </br></br>
     <div id="botoes">
+   	    <button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Cancelar </button> 
 		<button  type= "submit" name="acao" value="Cadastrar" class= "btn btn-primário " > Registrar </button> 
-		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Cancelar </button> 
 	</div>
 	
   </nav>

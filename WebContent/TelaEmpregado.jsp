@@ -15,16 +15,65 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="dist/css/bootstrap-submenu.min.css">
+
+<link rel="stylesheet" type="text/css"  href="css/estilo.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" defer></script>
+  <script src="dist/js/bootstrap-submenu.min.js" defer></script>
 <script src="js/sweetalert.min.js"></script> 
 
 <title>Funcionários</title>
 </head>
 
 <body>
-<c:import url="cabecalhoLogado.jsp"/>
-	
+	<div class="header clearfix">
+		<div class="row">
+			<div class="col-md-4">
+				<img src="imagens/logo.jpg" align="left">
+			</div>
+			<div class="col-md-8">
+				<br>
+				<br>
+				<nav>
+				<ul class="nav nav-pills">
+
+                <div class="col-md-2">
+
+						
+							<p style="font-size: 25px;">Funcionários</p>
+
+					
+
+					</div>
+				      
+	                  
+	                    <nav >
+  <ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
+      
+            <li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
+            
+                <ul>
+                      <li><a href="AlterarUsuario?acao=alterar">Meu Perfil</a></li>
+                      <li><a href="AlterarUsuario?acao=excluir">Excluir</a></li>
+                      <li><a href="TelaLogin.jsp">Sair</a></li>                   
+                </ul>
+            </li>
+                   
+</ul>
+</nav>
+						 
+						
+				    </ul>
+				</nav>
+
+			</div>
+	  	</div>
+	</div>
+	<hr />
 <div class="container">
-        <h1>Meus funcionários</h1>
+       
 		<div class="adicionar">
             <a href="CadastrarEmpregado?acao=Adicionar" class="link-avancar">
             	<i class="fa fa-plus-square fa-2x"></i>
@@ -43,15 +92,17 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 				{	
 				%>
                
-               <div class="row" style="border-radius: 25px; border: 2px solid #DCDCDC;">
-                <div class="col-md-4">
+               <div class="row1" ><!--  style="border-radius: 25px; border: 2px solid #DCDCDC;"-->
+                <div class="col-md-4" style="border-radius: 25px; border: 2px solid #DCDCDC;">
                 	<div class="funcDados">
-							<a href="AlterarEmpregado?acao=Alterar&codEmpregado=<%=listaFunc.get(i).getCodigoEmpregado()%>"><%=listaFunc.get(i).getNome()%></a>
-							<p class="text-orange">Salário <%=listaCont.get(i).getSalarioBase()%></p>
-							<p>Contratado desde <%=listaCont.get(i).getDataAdmissao()%></p>
+                			<img href="AlterarEmpregado?acao=Alterar&codEmpregado=<%=listaFunc.get(i).getCodigoEmpregado()%>" id="myimage" src="uploads/1/<%=listaFunc.get(i).getFoto() %>" height="100">
+							<a href="AlterarEmpregado?acao=Alterar&codEmpregado=<%=listaFunc.get(i).getCodigoEmpregado()%>"><%=listaFunc.get(i).getNome()%> <%=listaFunc.get(i).getSobrenome()%></a>
+							<p class="text-orange" style="font-family: Arial; font-style: oblique; font-size: 15px;text-align: center">Salário <%=listaCont.get(i).getSalarioBase()%></p>
+							<p style="font-family: Arial; font-style: oblique; font-size: 15px;text-align: center">Contratado desde: <%=listaCont.get(i).getDataAdmissao()%></p>
 					</div>
                 </div>
-                <div class="col-md-2">
+          
+                <%--<div class="col-md-2">
                 		<a href="AlterarEmpregado?acao=Demitir&codEmpregado=<%=listaFunc.get(i).getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x">
 								<i class="fa fa-square-o fa-stack-2x func-link-i1"></i>
@@ -80,9 +131,9 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 						<br>
 						<span class="func-link-txt">Décimo Terceiro</span>
 					</a>
-                </div>
-                <div class="col-md-2">
-               		<div class="dropdown">
+                </div>--%>
+               <%--	   <div class="col-md-2">
+              	<div class="dropdown">
     <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
     <span class="caret"></span></button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
@@ -93,7 +144,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
       <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
     </ul>
   				</div>
-                </div>
+                </div>--%>
             </div>
      	 <% }
 

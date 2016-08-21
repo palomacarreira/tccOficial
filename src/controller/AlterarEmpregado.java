@@ -153,7 +153,7 @@ public class AlterarEmpregado extends HttpServlet {
 						numeroEndereco, complemento, cep, bairro);
 				
 				espContrato.alterarEmpregado(codEmpregado,cargo,diaPagamento, 
-						 dataAdmissao, descontoINSS,  valeTransporte, 
+						 dataAdmissao.toString(), descontoINSS,  valeTransporte, 
 						 salarioBase, compensacaoDias,  regimeDeTrabalho,  
 					  conta,  agencia,  banco,  tipoConta, duracaoSemanal, descontoBeneficios);
 				
@@ -201,8 +201,8 @@ public class AlterarEmpregado extends HttpServlet {
 							 if( !dirX.isDirectory() ){
 						            dirX.mkdir();
 						     }	
-							 File dir = new File((getServletContext().getRealPath("")+ "/"+ "uploads") + "/" + codigoUsuario );// diretório de upload
-							 //se o diretório não existe ele cria
+							 File dir = new File((getServletContext().getRealPath("")+ "/"+ "uploads") + "/" + codigoUsuario );// diretï¿½rio de upload
+							 //se o diretï¿½rio nï¿½o existe ele cria
 						     if( !dir.isDirectory() ){
 						         dir.mkdir();
 						     }	
@@ -230,7 +230,8 @@ public class AlterarEmpregado extends HttpServlet {
 					 }
 				 }
 				 
-		       view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=alterar");
+		       //view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=alterar");
+		       view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
 		       view.forward(request, response);
 
 			} catch (NumberFormatException e) {

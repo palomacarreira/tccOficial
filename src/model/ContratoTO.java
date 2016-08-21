@@ -6,7 +6,7 @@ public class ContratoTO {
 
 	public String cargo, codigo, duracaoSemanal;
 	String diaPagamento;
-	public Date dataDemissao, dataAdmissao;
+	public String dataDemissao, dataAdmissao;
 	public Boolean descontoINSS;
 	public Double valeTransporte, valorPagarDemissao, salarioBase, descontoBeneficios;
 	public String compensacaoDias;
@@ -51,18 +51,7 @@ public class ContratoTO {
 	public void setDiaPagamento(String diaPagamento) {
 		this.diaPagamento = diaPagamento;
 	}
-	public Date getDataDemissao() {
-		return dataDemissao;
-	}
-	public void setDataDemissao(Date dataDemissao) {
-		this.dataDemissao = dataDemissao;
-	}
-	public Date getDataAdmissao() {
-		return dataAdmissao;
-	}
-	public void setDataAdmissao(Date dataAdmissao) {
-		this.dataAdmissao = dataAdmissao;
-	}
+	
 	public Boolean getDescontoINSS() {
 		return descontoINSS;
 	}
@@ -144,5 +133,18 @@ public class ContratoTO {
 	public void setDuracaoSemanal(String duracaoSemanal) {
 		this.duracaoSemanal = duracaoSemanal;
 	}
+	public String getDataDemissao() {
+		return dataDemissao;
+	}
+	public void setDataDemissao(String dataDemissao) {
+		this.dataDemissao = dataDemissao;
+	}
+	public String getDataAdmissao() {
+		return dataAdmissao;
+	}
+	public void setDataAdmissao(String dataAdmissao) {
+		this.dataAdmissao = dataAdmissao;
+	}
+	
 	
 }

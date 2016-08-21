@@ -14,10 +14,10 @@ public class RelatorioTeste{
 			System.out.println("Inicio extraindo PDF");
 			
 			FolhaPagamentoTO folhaPagamentoTO1 = new FolhaPagamentoTO();
-			folhaPagamentoTO1.setDecimoTerceiro(2.0);
+			//folhaPagamentoTO1.setDecimoTerceiro(2.0);
 			folhaPagamentoTO1.setDecTercPrimeiro(2.0);
 			folhaPagamentoTO1.setDecTercSegunda(2.0);
-			folhaPagamentoTO1.setIR_retido(2.0);
+			//folhaPagamentoTO1.setIR_retido(2.0);
 			folhaPagamentoTO1.setSalarioLiquido(2.0);
 			folhaPagamentoTO1.setFgts(2.0);
 			folhaPagamentoTO1.setInss(2.0);

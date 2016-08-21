@@ -12,14 +12,14 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/mysql-connector-java-5.1.28-bin.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Bianca/git/tccOficial/WebContent/WEB-INF/servlet-api-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bianca/git/tccOficial/WebContent/WEB-INF/commons-beanutils-1.7.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bianca/git/tccOficial/WebContent/WEB-INF/commons-collections-3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bianca/git/tccOficial/WebContent/WEB-INF/commons-digester-1.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bianca/git/tccOficial/WebContent/WEB-INF/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bianca/git/tccOficial/WebContent/WEB-INF/groovy-all-1.5.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bianca/git/tccOficial/WebContent/WEB-INF/itext-2.1.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bianca/git/tccOficial/WebContent/WEB-INF/jasperreports-5.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bianca/git/tccOficial/WebContent/WEB-INF/poi-3.9.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/groovy-all-1.5.3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/itext-2.1.7.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/jasperreports-5.5.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/poi-3.9.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/servlet-api-3.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
