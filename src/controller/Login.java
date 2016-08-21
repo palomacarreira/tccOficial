@@ -66,7 +66,7 @@ public class Login extends HttpServlet {
 				}
 				else{
 					session.setAttribute("codigoUsuario", usuario.getCodigo());
-					view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
+					view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos");
 					view.forward(request, response);
 				}
 			}
@@ -81,7 +81,7 @@ public class Login extends HttpServlet {
 				String cod = (String) session.getAttribute("codigoUsuario");
 				Boolean ok = espUsuario.ativarUsuario(cod);
 				if(ok== true){
-					view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
+					view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos");
 				view.forward(request, response);
 				}
 				else

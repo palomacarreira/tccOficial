@@ -167,7 +167,7 @@
 					<div class="col-md-2">
 
 						<a
-							href="AtividadeController?acao=PesquisarTodos&codEmpregado=<%=empregado.getCodigoEmpregado()%>">
+							href="#">
 
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
@@ -697,17 +697,15 @@
 
 					<label for="dataAdmissao"> Data de Admissão </label>
 
-					<div class="span3">
+	
+				
+				<div class="span3">
 
-						<input type="date" value="<%=contrato.getDataAdmissao()%>"
-							id="dataAdmissao" name="dataAdmissao" class="form-control"
-							size="20">
+						<input value="<%=contrato.getDataAdmissao()%>"id="dataAdmissao" name="dataAdmissao" class="form-control" size="20"required>
 
 					</div>
 
-				</div>
-
-
+</div>
 
 				<div class="form-group">
 

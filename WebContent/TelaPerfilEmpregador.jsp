@@ -17,6 +17,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
 <script type="text/javascript">
+<link rel="stylesheet" type="text/css"  href="css/estilo.css" />
 
 $(document).ready(function(){
 	
@@ -41,16 +42,60 @@ $(document).ready(function(){
 
 <body>
 
-<c:import url="cabecalhoLogado.jsp"/>
+<div class="header clearfix">
+		<div class="row">
+			<div class="col-md-4">
+				<img src="imagens/logo.jpg" align="left">
+			</div>
+			<div class="col-md-8">
+				<br>
+				<br>
+				<nav>
+				<ul class="nav nav-pills">
+
+                <div class="col-md-2">
+
+						
+							<p style="font-size: 25px;">Meu Perfil</p>
+
+					
+
+					</div>
+				      
+	                  
+	                    <nav >
+  <ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
+      
+            <li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
+            
+                <ul>
+                      <li><a href="AlterarUsuario?acao=alterar">Meu Perfil</a></li>
+                      <li><a href="AlterarUsuario?acao=excluir">Excluir</a></li>
+                      <li><a href="TelaLogin.jsp">Sair</a></li>                   
+                </ul>
+            </li>
+                   
+</ul>
+</nav>
+						 
+						
+				    </ul>
+				</nav>
+
+			</div>
+	  	</div>
+	</div>
+	<hr />
 
 <% String[] estados = {"AC", "AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PE","PI",
      			"PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"};
      	%>
+     	
 <div class="container">   	
 <form  class= "form-inline" method="post" action="AlterarUsuario">
 	<nav class="navbar navbar-default" role="navigation">
 	<div class="container">  
-	<label  for= "meuPerfil" > Meu Perfil </label><br> <br>
+	<!-- <label  for= "meuPerfil" > Meu Perfil </label><br> <br> -->
 		  <div  class= "form-group" > 
 		    <label  for= "nome" > Nome </label> 
 		     <%

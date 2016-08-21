@@ -21,7 +21,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <script src="js/jquery.maskedinput-1.1.4.pack 2.js"></script>
 <script type="text/javascript" src="js/scriptEmpregado.js"></script>
 <script src="jquery.min.js" type="text/javascript"></script>
-
+<link rel="stylesheet" type="text/css"  href="css/estilo.css" />
 <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
 <script src="js/sweetalert.min.js"></script> 
 
@@ -49,7 +49,51 @@ function confirma(){
 		request.setAttribute("codEmpregado", empregado.getCodigoEmpregado());
 %>
 
-<c:import url="cabecalhoDeslogado.jsp"/>
+<div class="header clearfix">
+		<div class="row">
+			<div class="col-md-4">
+				<img src="imagens/logo.jpg" align="left">
+			</div>
+			<div class="col-md-8">
+				<br>
+				<br>
+				<nav>
+				<ul class="nav nav-pills">
+
+                <div class="col-md-2">
+
+						
+							<p style="font-size: 25px;">Rescisão</p>
+
+					
+
+					</div>
+				      
+	                  
+	                    <nav >
+  <ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
+      
+            <li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
+            
+                <ul>
+                      <li><a href="AlterarUsuario?acao=alterar">Meu Perfil</a></li>
+                      <li><a href="AlterarUsuario?acao=excluir">Excluir</a></li>
+                      <li><a href="TelaLogin.jsp">Sair</a></li>                   
+                </ul>
+            </li>
+                   
+</ul>
+</nav>
+						 
+						
+				    </ul>
+				</nav>
+
+			</div>
+	  	</div>
+	</div>
+	<br>
+	<hr />
 
 <div class="container">
 <form id="dadosEmpregado" role="form" class="form-inline" method="post" action="AlterarEmpregado">

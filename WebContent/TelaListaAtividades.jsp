@@ -197,7 +197,7 @@
 	  	</div>
 	</div>
 	<hr />
-	
+	<br>
 	<div class="container">
 	<form name="form1" class= "form-inline" method="post" action="AtividadeController"> 
 	<nav class="navbar navbar-default" role="navigation">

@@ -231,7 +231,7 @@ public class AlterarEmpregado extends HttpServlet {
 				 }
 				 
 		       //view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=alterar");
-		       view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos&tipo=cadastrar");
+		       view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos");
 		       view.forward(request, response);
 
 			} catch (NumberFormatException e) {
