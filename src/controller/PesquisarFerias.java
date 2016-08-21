@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -56,7 +57,8 @@ public class PesquisarFerias extends HttpServlet {
 			case "Pesquisar":
 				try{
 					ContratoTO contratoTO = espContrato.pesquisarEmpregado(codigoEmpregado);
-					ArrayList<FeriasTO> listaFerias = espFerias.pesquisarTodos(contratoTO.getCodigo());
+					Date dataAdmissao = contratoTO.dataAdmissao;
+					ArrayList<FeriasTO> listaFerias = espFerias.ferias(contratoTO.getCodigo(), dataAdmissao);
 					if(listaFerias.size() > 0)
 					{
 						request.setAttribute("comboFerias", listaFerias);
@@ -64,6 +66,7 @@ public class PesquisarFerias extends HttpServlet {
 						request.setAttribute("comboFerias", null);
 					}
 					request.setAttribute("codigoEmpregado",codigoEmpregado);
+					request.setAttribute("dataAdmissao",dataAdmissao);
 					view = request.getRequestDispatcher("TelaFerias.jsp");
 					view.forward(request, response);
 						

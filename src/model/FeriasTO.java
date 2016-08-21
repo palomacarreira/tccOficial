@@ -1,12 +1,11 @@
 package model;
 
-
-
+import java.sql.Date;
 
 public class FeriasTO {
 	public Double valor;
-	public String dataInicio, dataFinal, diaPagamento;
-	public String PeriodoAquisitivoInicio, PeriodoAquisitivoFim;
+	public Date dataInicio, dataFinal, diaPagamento;
+	public Date PeriodoAquisitivoInicio, PeriodoAquisitivoFim;
 	public String situacao;
 	public Boolean vendaFerias;
 	public int qtdDiasFerias;
@@ -51,34 +50,35 @@ public class FeriasTO {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	public String getDataInicio() {
+	public Date getDataInicio() {
 		return dataInicio;
 	}
-	public void setDataInicio(String dataInicio) {
+	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
-	public String getDataFinal() {
+	public Date getDataFinal() {
 		return dataFinal;
 	}
-	public void setDataFinal(String dataFinal) {
+	public void setDataFinal(Date dataFinal) {
 		this.dataFinal = dataFinal;
 	}
-	public String getDiaPagamento() {
+	public Date getDiaPagamento() {
 		return diaPagamento;
 	}
-	public void setDiaPagamento(String diaPagamento) {
+	public void setDiaPagamento(Date diaPagamento) {
 		this.diaPagamento = diaPagamento;
 	}
-	public String getPeriodoAquisitivoInicio() {
+	public Date getPeriodoAquisitivoInicio() {
 		return PeriodoAquisitivoInicio;
 	}
-	public void setPeriodoAquisitivoInicio(String periodoAquisitivoInicio) {
+	public void setPeriodoAquisitivoInicio(Date periodoAquisitivoInicio) {
 		PeriodoAquisitivoInicio = periodoAquisitivoInicio;
 	}
-	public String getPeriodoAquisitivoFim() {
+	public Date getPeriodoAquisitivoFim() {
 		return PeriodoAquisitivoFim;
 	}
-	public void setPeriodoAquisitivoFim(String periodoAquisitivoFim) {
+	public void setPeriodoAquisitivoFim(Date periodoAquisitivoFim) {
 		PeriodoAquisitivoFim = periodoAquisitivoFim;
 	}
+
 }

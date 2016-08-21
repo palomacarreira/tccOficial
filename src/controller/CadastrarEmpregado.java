@@ -149,7 +149,7 @@ public class CadastrarEmpregado extends HttpServlet {
 					complemento, cep, bairro);
 			
 			espContrato.adicionarEmpregado(cargo, diaPagamento, 
-			dataAdmissao.toString(), descontoINSS, valeTransporte, 
+			dataAdmissao, descontoINSS, valeTransporte, 
 			salarioBase, compensacaoDias,regimeDeTrabalho,
 			conta,  agencia,  banco,  tipoConta, duracaoSemanal, descontoBeneficios);
 					

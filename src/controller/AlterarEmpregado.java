@@ -153,7 +153,7 @@ public class AlterarEmpregado extends HttpServlet {
 						numeroEndereco, complemento, cep, bairro);
 				
 				espContrato.alterarEmpregado(codEmpregado,cargo,diaPagamento, 
-						 dataAdmissao.toString(), descontoINSS,  valeTransporte, 
+						 dataAdmissao, descontoINSS,  valeTransporte, 
 						 salarioBase, compensacaoDias,  regimeDeTrabalho,  
 					  conta,  agencia,  banco,  tipoConta, duracaoSemanal, descontoBeneficios);
 				

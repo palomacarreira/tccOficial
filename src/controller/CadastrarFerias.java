@@ -89,7 +89,7 @@ public class CadastrarFerias extends HttpServlet {
 				Double salario = cont.getSalarioBase();
 				String regimeTrabalho = cont.getRegimeDeTrabalho();		
 				String duracaoSemanal = cont.getDuracaoSemanal();
-				String dataAdmissao = cont.getDataAdmissao();
+				Date dataAdmissao = cont.getDataAdmissao();
 				
 				int diasDeFerias = 0;
 				if(regimeTrabalho.equals("Tempo Parcial")){ // C�LCULO REGIME DE TEMPO PARCIAL
@@ -227,8 +227,8 @@ public class CadastrarFerias extends HttpServlet {
 			
 			ContratoTO contratoTO = contrato.pesquisarEmpregado(codigoEmpregado);
 			
-			espFerias.adicionar(contratoTO.getCodigo(), periodoAquisitivoI.toString(), periodoAquisitivoF.toString(), situacao, 
-					dataInicioFerias.toString(), dataFinalFerias.toString(), qtdDias, valor, vendaFerias);
+			espFerias.adicionar(contratoTO.getCodigo(), periodoAquisitivoI, periodoAquisitivoF, situacao, 
+					dataInicioFerias, dataFinalFerias, qtdDias, valor, vendaFerias);
 				
 			view = request.getRequestDispatcher("PesquisarFerias?acao=Pesquisar&codigoEmpregado=" + codigoEmpregado);
 			

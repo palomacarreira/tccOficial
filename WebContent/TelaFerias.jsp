@@ -65,16 +65,17 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	  	</div>
 	</div>
 	<hr />
-<div class="container">
+
   <div id="meusFuncionarios">	
   <h2>Histórico de Férias</h2>
   <table class="table table-hover">
     <thead>
       <tr>
         <th>Período Aquisitivo</th>
-        <th>Período de ferias</th>
-        <th>Dias de Férias</th> 
+        <!-- <th>Período de ferias</th> -->
+        <!-- <th>Dias de Férias</th>  -->
         <th>Situação</th>
+        <th>Adicionar Férias</th>
       </tr>
     </thead>
     <tbody>
@@ -87,9 +88,10 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 			%>
 		      <tr>
 		        <td><%=listaFerias.get(i).getPeriodoAquisitivoInicio()%> - <%=listaFerias.get(i).getPeriodoAquisitivoFim()%></td>
-		        <td><%=listaFerias.get(i).getDataInicio()%> - <%=listaFerias.get(i).getDataFinal()%></td>
-		        <td><%=listaFerias.get(i).getQtdDiasFerias()%></td>
+		        <%--<td><%=listaFerias.get(i).getDataInicio()%> - <%=listaFerias.get(i).getDataFinal()%></td> --%>
+		        <%--<td><%=listaFerias.get(i).getQtdDiasFerias()%></td> --%>
 		      	<td><%=listaFerias.get(i).getSituacao()%></td>
+		      	<td><button type=submit name=acao value=Adicionar&codigoEmpregado=<%=request.getAttribute("codigoEmpregado")%>" class=btn btn-danger > Adicionar Férias </button></td>
 		      </tr>
 		 	<% 
 		 	}
@@ -106,13 +108,13 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	</tbody>
   </table>
 
-	    <div class="adicionar">
+	    <!-- <div class="adicionar">
 			
            	 <a href="CadastrarFerias?acao=Adicionar&codigoEmpregado=<%=request.getAttribute("codigoEmpregado")%>" class="link-avancar"> 
             	<i class="fa fa-plus-square fa-2x"></i>
             	<span class="func-link-txt" style="font-size:30px;">Adicionar Férias</span>
         	</a>
-        </div>
+        </div> -->
  		<br>
  		<br>
 </div>

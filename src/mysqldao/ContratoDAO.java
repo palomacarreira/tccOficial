@@ -75,7 +75,7 @@ public class ContratoDAO extends MysqlConnect {
 	    		         + "FK_EMPREGADO, FK_USUARIO)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
 	    		         
 	         st = conn.prepareStatement(sql);
-	         st.setString(1,contratoTO.getDataAdmissao());
+	         st.setDate(1,contratoTO.getDataAdmissao());
 	         st.setString(2,contratoTO.getCargo());
 	         st.setDouble(3,contratoTO.getSalarioBase());
 	         st.setString(4,contratoTO.getDiaPagamento());
@@ -111,7 +111,7 @@ public class ContratoDAO extends MysqlConnect {
 	    		+ "DESCONTO_BENEFICIOS = ? WHERE FK_EMPREGADO = ?";
 				
 	    	 st = conn.prepareStatement(sql);
-	         st.setString(1,contratoTO.getDataAdmissao());
+	         st.setDate(1,contratoTO.getDataAdmissao());
 	         st.setString(2,contratoTO.getCargo());
 	         st.setDouble(3,contratoTO.getSalarioBase());
 	         st.setString(4,contratoTO.getDiaPagamento());
@@ -151,7 +151,7 @@ public class ContratoDAO extends MysqlConnect {
 	        	   
 	           	contratoTO = new ContratoTO();
 	           	contratoTO.setCodigo(resultSet.getString("CD_CONTRATO"));
-	           	contratoTO.setDataAdmissao(dtUtil.retornaDataFormatadaCompletaMySQL(resultSet.getDate("DATA_ADMISSAO")));
+	           	contratoTO.setDataAdmissao(resultSet.getDate("DATA_ADMISSAO"));
 	           	contratoTO.setCargo(resultSet.getString("CARGO"));
 	           	contratoTO.setSalarioBase(resultSet.getDouble("SALARIO_BASE"));
 	           	contratoTO.setDiaPagamento(resultSet.getString("DIA_PAGAMENTO"));

@@ -25,15 +25,15 @@ public class FeriasDAO extends MysqlConnect {
 	         		+ "QTD_DIAS_FERIAS, VALOR, VENDA_FERIAS, FK_CONTRATO, PERIODO_AQUISITIVO_FIM) "
 	         		+ "values (?,?,?,?,?,?,?,?,?)";     
 	         st = conn.prepareStatement(sql);
-	         st.setString(1, feriasTO.getPeriodoAquisitivoInicio());
+	         st.setDate(1, feriasTO.getPeriodoAquisitivoInicio());
 	         st.setString(2,feriasTO.getSituacao());
-	         st.setString(3,feriasTO.getDataInicio());
-	         st.setString(4,feriasTO.getDataFinal());
+	         st.setDate(3,feriasTO.getDataInicio());
+	         st.setDate(4,feriasTO.getDataFinal());
 	         st.setInt(5,feriasTO.getQtdDiasFerias());
 	         st.setDouble(6,feriasTO.getValor());
 	         st.setBoolean(7,feriasTO.getVendaFerias());
 	         st.setString(8,feriasTO.getCodigoContrato());
-	         st.setString(9,feriasTO.getPeriodoAquisitivoFim());
+	         st.setDate(9,feriasTO.getPeriodoAquisitivoFim());
 	         st.executeUpdate(); 
 	         st.close();
 	      }
@@ -51,14 +51,14 @@ public class FeriasDAO extends MysqlConnect {
 		         		+ "DATA_FIM = ?, QTD_DIAS_FERIAS = ?, VALOR = ?, VENDA_FERIAS =? PERIODO_AQUISITIVO_INICIO=? WHERE CD_FERIAS = ?";
 				         
 				         st = conn.prepareStatement(sql); 
-				         st.setString(1,feriasTO.getPeriodoAquisitivoInicio());
+				         st.setDate(1,feriasTO.getPeriodoAquisitivoInicio());
 				         st.setString(2,feriasTO.getSituacao());
-				         st.setString(3,feriasTO.getDataInicio());
-				         st.setString(4, feriasTO.getDataFinal());
+				         st.setDate(3,feriasTO.getDataInicio());
+				         st.setDate(4, feriasTO.getDataFinal());
 				         st.setInt(5,feriasTO.getQtdDiasFerias());
 				         st.setDouble(6,feriasTO.getValor());
 				         st.setBoolean(7,feriasTO.getVendaFerias());
-				         st.setString(8, feriasTO.getPeriodoAquisitivoFim());
+				         st.setDate(8, feriasTO.getPeriodoAquisitivoFim());
 				         st.setString(9,feriasTO.getCodigo());
 				         st.executeUpdate(); 
 				         st.close(); 
@@ -76,7 +76,7 @@ public class FeriasDAO extends MysqlConnect {
 		         String sql = "UPDATE FERIAS SET DATA_PAGAMENTO WHERE CD_FERIAS = ?";
 				         
 				         st = conn.prepareStatement(sql); 
-				         st.setString(1,feriasTO.getDiaPagamento());
+				         st.setDate(1,feriasTO.getDiaPagamento());
 				         st.setString(2,feriasTO.getCodigo());
 				         st.executeUpdate(); 
 				         st.close(); 
@@ -105,15 +105,15 @@ public class FeriasDAO extends MysqlConnect {
 	            	
 	            	DataUtil dtUtil = new DataUtil();
 	            	
-	            	feriasTO.setPeriodoAquisitivoInicio(dtUtil.retornaDataFormatadaCompletaMySQL(resultSet.getDate("PERIODO_AQUISITIVO_INICIO")));
-	            	feriasTO.setPeriodoAquisitivoFim(dtUtil.retornaDataFormatadaCompletaMySQL(resultSet.getDate("PERIODO_AQUISITIVO_FIM")));
+	            	feriasTO.setPeriodoAquisitivoInicio(resultSet.getDate("PERIODO_AQUISITIVO_INICIO"));
+	            	feriasTO.setPeriodoAquisitivoFim(resultSet.getDate("PERIODO_AQUISITIVO_FIM"));
 	            	feriasTO.setSituacao(resultSet.getString("SITUACAO"));
-	            	feriasTO.setDataInicio(dtUtil.retornaDataFormatadaCompletaMySQL(resultSet.getDate("DATA_INICIO")));
-	            	feriasTO.setDataFinal(dtUtil.retornaDataFormatadaCompletaMySQL(resultSet.getDate("DATA_FIM")));
+	            	feriasTO.setDataInicio(resultSet.getDate("DATA_INICIO"));
+	            	feriasTO.setDataFinal(resultSet.getDate("DATA_FIM"));
 	            	feriasTO.setQtdDiasFerias(resultSet.getInt("QTD_DIAS_FERIAS"));
 	            	feriasTO.setValor(resultSet.getDouble("VALOR"));	
 	            	feriasTO.setVendaFerias(resultSet.getBoolean("VENDA_FERIAS"));
-	            	feriasTO.setDiaPagamento(resultSet.getString("DATA_PAGAMENTO"));
+	            	feriasTO.setDiaPagamento(resultSet.getDate("DATA_PAGAMENTO"));
 	            	feriasTO.setCodigo(resultSet.getString("CD_FERIAS"));
 	            	
 	            	lista.add(feriasTO);

@@ -9,7 +9,7 @@ public class EspecialistaContrato {
 	ContratoTO contratoTO = new ContratoTO();
 	
 	public void adicionarEmpregado(String cargo, String diaPagamento, 
-	String dataAdmissao, Boolean descontoINSS, Double valeTransporte, Double salarioBase, 
+	Date dataAdmissao, Boolean descontoINSS, Double valeTransporte, Double salarioBase, 
 	String compensacaoDias,  String regimeDeTrabalho,String conta,String agencia, String banco, 
 	String tipoConta, String duracaoSemanal, Double descontoBeneficios) 
 	{
@@ -32,7 +32,7 @@ public class EspecialistaContrato {
 	}
 
 	public void alterarEmpregado(String codigoEmpregado, String cargo, String diaPagamento, 
-	String dataAdmissao, Boolean descontoINSS, Double valeTransporte, Double salarioBase, 
+	Date dataAdmissao, Boolean descontoINSS, Double valeTransporte, Double salarioBase, 
 	String compensacaoDias,  String regimeDeTrabalho, String conta, String agencia, String banco, 
 	String tipoConta, String duracaoSemanal,Double descontoBeneficios) 
 	{
