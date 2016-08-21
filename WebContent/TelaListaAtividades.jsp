@@ -236,7 +236,8 @@
     
   </nav>
   <div id="botoes">
-   	    <button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Cancelar </button> 
+  		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Voltar </button> 
+   	    <!-- button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Cancelar </button>  -->
    	    <button  type= "submit" name="acao" value="Cadastrar" class="btn btn-primary">Adicionar Atividade</button>
    	
 	</div>

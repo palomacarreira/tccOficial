@@ -140,6 +140,7 @@ $(document).ready(function(){
     	<br>
     	<div class="col-sm-8 pull-right">
     	<br>
+    		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Voltar </button> 
     		<button  type= "submit" name="acao" value="GerarHolerite" class= "btn btn-primário " > Gerar Holerite </button> 
 		 </div>
   		<br>

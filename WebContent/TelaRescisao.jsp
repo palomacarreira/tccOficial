@@ -153,8 +153,10 @@ function confirma(){
 	<br>
 </nav>
      <div id="botoes">
+     	<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Voltar </button> 
 		<button  type= "submit" name="acao" value="Excluir" onclick="return confirma()" class= "btn btn-primário " > Demitir </button> 
-		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " > Cancelar </button> 
+		
+	
 	</div>
 	 </form>
 </div>
