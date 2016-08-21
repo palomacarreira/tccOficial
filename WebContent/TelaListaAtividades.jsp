@@ -199,7 +199,10 @@
 	<hr />
 	<br>
 	<div class="container">
-	<form name="form1" class= "form-inline" method="post" action="AtividadeController"> 
+	<form name="form1" class="form-inline" method="post" action="AtividadeController" enctype="multipart/form-data">
+			
+			
+	<%out.println("<input name=\"codigoEmpregado\" id=\"codigoEmpregado\"type=\"hidden\" value=\""+request.getAttribute("codigoEmpregado")+"\"/>");%>
 	<nav class="navbar navbar-default" role="navigation">
 	
 	<div class="container">
@@ -214,10 +217,10 @@
 							class="form-control input-md">
 		    </div>
 		 </div>
-    </div>
+    
     </br></br>
     
-		<div class="container">
+		
 
 		  <div  class= "form-group" > 
 		    <label  for= "descricao" > Descricao
@@ -230,125 +233,23 @@
 		 </div>
     </div>
     </br></br>
-    <div id="botoes">
-   	    <button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Cancelar </button> 
-   	    <button  type= "submit" name="acao" value="Cadastrar&codigoEmpregado=<%=request.getAttribute("codigoEmpregado")%>" class="btn btn-primary">Adicionar Atividade</button>
-   	   
-		
-	</div>
-	
-  </nav>
-  </form>
-
-
-</div>
-		<%-- <form class="form-horizontal" >
-			<fieldset>
-				<!-- <legend>Lista de Atividades</legend> -->
-				
-				<%if(request.getAttribute("nome") != null && request.getAttribute("cpf") != null){
-					out.println("<input name=\"nomeEmpregado\" id=\"nomeEmpregado\"type=\"hidden\" value=\""+request.getAttribute("nome")+"\"/>");
-					out.println("<h5> Nome: " + request.getAttribute("nome")+"</h5>");
-					out.println("<h5> CPF: " + request.getAttribute("cpf")+"</h5>");
-				}
-				if(request.getAttribute("msg") != null){
-					out.println("<h5>" + request.getAttribute("msg")+"</h5>");
-				}
-				
-				if(request.getAttribute("naoTemAtividade") != null && request.getAttribute("nome") != null){
-					out.println("<h5>" + request.getAttribute("naoTemAtividade")+"</h5>");
-				}
-				
-				if(request.getAttribute("naoEstaCadastrado") != null){
-					out.println("<h5>" + request.getAttribute("naoEstaCadastrado")+"</h5>");
-				}%>
-				
-				<!-- RETIREI A OPCAO DE BUSCA PELO NOME POIS NAO CONSEGUI VERIFICAR SE 1 DOS 2 CAMPOS ESTA PREENCHIDO(VALIDACAO) PARA FAZER A BUSCA, 
-				
-				<div class="form-group">
-					<label class="col-md-4 control-label" for="textinput">Nome</label>
-					<div class="col-md-4">
-						<input name="nome" id="nome" type="text" 
-							class="form-control input-md">
-
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-6 control-label" for="textinput">OU</label>
-				</div>-->
-
-				<!--  <div class="form-group">
-					<label class="col-md-4 control-label" for="textinput">CPF</label>
-					<div class="col-md-4">
-						<input class="form-control input-md" type="text" name="cpf" id="cpf" onblur="javascript: validarCPF(this.value);" onkeypress="javascript: mascara(this, cpf_mask);"  maxlength="14" />
-
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-4 control-label" for="singlebutton"></label>
-					<div class="col-md-4">
-					<button type="submit" name="acao" value="PesquisarTodos"
-							class="btn btn-primary">Buscar</button>
-					</div>
-				</div>-->
-	</fieldset> 
-</form>--%>
-<%-- 
-<div class="container">
-	<form name="form1" class= "form-inline" method="post" action="CadastrarFerias"> 
-	<nav class="navbar navbar-default" role="navigation">
-	
-				<div class="form-group">
-					<label class="col-md-6 control-label" for="textinput">Titulo</label>
-					<div class="col-md-4">
-						<input name="titulo" required="required" id="titulo" type="text"
-							class="form-control input-md">
-
-					</div>
-				</div>
-				<br><br><br>
-<%out.println("<input name=\"nomeEmpregado\" id=\"nomeEmpregado\"type=\"hidden\" value=\""+request.getAttribute("nome")+"\"/>"); 
-out.println("<input name=\"cpfEmpregado\" id=\"cpfEmpregado\"type=\"hidden\" value=\""+request.getAttribute("cpf")+"\"/>");
-out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.getAttribute("cpf")+"\"/>");%>
-
-			<!--  	RETIREI ESTE CAMPO POIS NAO FAZ SENTIDO SOLICITAR A DATA DE CRIACAO DA ATIVIDADE, PEGO A DATA DO INSERT.
-			<div class="form-group">
-					<label class="col-md-4 control-label" for="data">Data</label>
-					<div class="col-md-4">
-						<input id="data" type="date" required="required" maxlength="10" name="date" pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$" min="2012-01-01" max="2020-02-18" 
-							class="form-control input-md">
-
-					</div>
-				</div>-->
-
-
-			
-		</br></br>
-
-		  <div  class= "form-group" > 
-		  <label for="textarea">Descricao</label>
-		    
-		    <div class="span3">
-		    	<textarea class="form-control" id="descricao" required="required" name="descricao"></textarea>
-		    </div>
-		 </div>
-    </div>
-    </br></br>
     
-					
-	<div id="botoes">
+  </nav>
+  <div id="botoes">
    	    <button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Cancelar </button> 
-		<button  type= "submit" name="acao" value="Cadastrar" class="btn btn-primary">Adicionar Atividade</button>
+   	    <button  type= "submit" name="acao" value="Cadastrar" class="btn btn-primary">Adicionar Atividade</button>
+   	
 	</div>
-				</div>
-	  </nav>
+	
   </form>
---%>
 
-</div>
-	<form>
+
+
+
+<form>
 			<table class="table ls-table" id="tabela1">
 <%out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.getAttribute("cpf")+"\"/>");%>
+<%out.println("<input name=\"codigoEmpregado\" id=\"codigoEmpregado\"type=\"hidden\" value=\""+request.getAttribute("codigoEmpregado")+"\"/>");%>
 					
 					
 				<%if(request.getAttribute("combo") != null){
@@ -357,9 +258,9 @@ out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.get
 				out.println("<thead>");
 				out.println("<tr>");
 				
-				out.println("<th>Codigo da Atividade</th>");
+				/*out.println("<th>Codigo da Atividade</th>");*/
 				out.println("<th>Título</th>");
-				out.println("<th>Data</th>");
+				/*out.println("<th>Data</th>");*/
 				out.println("<th>Enviado</th>");
 				out.println("<th>Enviar</th>");
 				out.println("<th>Excluir</th>");
@@ -381,10 +282,10 @@ out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.get
 					realizado = "Nao";
 				}
 				
-				/*out.println("<td>"+item.getCodigoAtividade()+"</td>");
-				out.println("<input name=\"codigo\" id=\"codigo\"type=\"hidden\" value=\""+item.getCodigoAtividade()+"\"/>");*/
+				/*out.println("<td>"+item.getId()+"</td>");*/
+				out.println("<input name=\"codigo\" id=\"codigo\"type=\"hidden\" value=\""+item.getId()+"\"/>");
 				out.println("<td>"+item.getTitulo()+"</td>");
-				out.println("<td>"+item.getData()+"</td>");
+				/*out.println("<td>"+item.getData()+"</td>");*/
 				out.println("<td>"+realizado+"</td>");
 				out.println("<td><button type=\"submit\" name=\"acao\" value=\"Enviar\" class=\"btn btn-danger\" > Enviar </button></td>");
 		        out.println("<td><button type=\"submit\" name=\"acao\" value=\"Excluir\" class=\"btn btn-danger\" onclick=\"Excluir("+item.getTitulo()+")\"> Excluir </button></td>");
@@ -407,7 +308,7 @@ out.println("<input name=\"cpf\" id=\"cpf\"type=\"hidden\" value=\""+request.get
 				</tbody>
 			</table>
 	</form>
-
+</div>
 		<c:import url="rodape.jsp" />
 </body>
 </html>

@@ -152,7 +152,7 @@
 					<div class="col-md-2">
 
 						<a
-							href="AtividadeController?acao=PesquisarTodos&codEmpregado=<%=empregado.getCodigoEmpregado()%>">
+							href="AtividadeController?acao=PesquisarTodos&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
 
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i

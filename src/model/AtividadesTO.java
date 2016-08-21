@@ -3,9 +3,17 @@ package model;
 import java.sql.Date;
 
 public class AtividadesTO {
-	public Date data;
-	public String titulo, descricao;
-	public Boolean realizado;
+	private int id;
+	private Date data;
+	private String titulo, descricao;
+	private Boolean realizado;
+	private int FkEmpregado;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Date getData() {
 		return data;
 	}
@@ -30,6 +38,11 @@ public class AtividadesTO {
 	public void setRealizado(Boolean realizado) {
 		this.realizado = realizado;
 	}
-	
+	public int getFkEmpregado() {
+		return FkEmpregado;
+	}
+	public void setFkEmpregado(int fkEmpregado) {
+		FkEmpregado = fkEmpregado;
+	}
 	
 }
