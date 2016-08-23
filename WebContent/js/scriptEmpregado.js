@@ -233,6 +233,9 @@ $(document).ready(function(){
 					$("#saldoHoras").html('Horários Inválidos');
 			    	$(this).parent().addClass('has-error');
 				}
+				else if(verificaCamposHoras($("#horaSaida" + id).val(), $(this).val()) == false){
+			    	$(this).parent().addClass('has-error');
+				}
 				else{
 					$("#saldoHoras").html('');
 					$(this).parent().removeClass('has-error');

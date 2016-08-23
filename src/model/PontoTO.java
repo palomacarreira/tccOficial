@@ -3,11 +3,19 @@ package model;
 import java.sql.Date;
 
 public class PontoTO {
-	public Date data;
-	Boolean falta, faltaJustificada;
+	public Date dataPonto;
 	String codigoEmpregado, codigo, horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, horaSaida;
+	String acao;
 	
 	
+	public String getAcao() {
+		return acao;
+	}
+
+	public void setAcao(String acao) {
+		this.acao = acao;
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}
@@ -40,28 +48,13 @@ public class PontoTO {
 		this.horaVoltaAlmoco = horaVoltaAlmoco;
 	}
 
-	public Boolean getFalta() {
-		return falta;
+
+	public Date getDataPonto() {
+		return dataPonto;
 	}
 
-	public void setFalta(Boolean falta) {
-		this.falta = falta;
-	}
-
-	public Boolean getFaltaJustificada() {
-		return faltaJustificada;
-	}
-
-	public void setFaltaJustificada(Boolean faltaJustificada) {
-		this.faltaJustificada = faltaJustificada;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
+	public void setDataPonto(Date data) {
+		this.dataPonto = data;
 	}
 
 	public String getHoraEntrada() {

@@ -78,12 +78,11 @@ public class CadastrarFerias extends HttpServlet {
 			int qtdFolgas = 0;
 			if(listaDePonto != null){
 				
-				for(PontoTO pontoTO: listaDePonto){
-					if(pontoTO.getFalta() == true)
+				for(PontoTO pontoTO: listaDePonto)
+				{
+					if(pontoTO.getAcao().equals("Falta"))
 					{
-						if(pontoTO.getFaltaJustificada() == false){
 							qtdFolgas += 1;
-						}
 					}
 				}
 				Double salario = cont.getSalarioBase();

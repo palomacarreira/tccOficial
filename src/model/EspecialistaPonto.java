@@ -11,30 +11,28 @@ public class EspecialistaPonto {
 	
 	
 	public void adicionar(Date data, String horaEntrada, String horaSaidaAlmoco, String horaVoltaAlmoco, 
-         		String horaSaida, Boolean falta, Boolean faltaJustificada, String codigoEmpregado){
+         		String horaSaida, String acao, String codigoEmpregado){
 				
-		pontoTO.setData(data);
+		pontoTO.setDataPonto(data);
         pontoTO.setHoraEntrada(horaEntrada);
         pontoTO.setHoraSaidaAlmoco(horaSaidaAlmoco);
         pontoTO.setHoraVoltaAlmoco(horaVoltaAlmoco);
         pontoTO.setHoraSaida(horaSaida);
-        pontoTO.setFalta(falta);
-        pontoTO.setFaltaJustificada(faltaJustificada);
+        pontoTO.setAcao(acao);
         pontoTO.setCodigoEmpregado(codigoEmpregado);
     	pontoDAO.cadastrarPonto(pontoTO);
 	}
 	
 	
 	public void alterar(Date data, String horaEntrada, String horaSaidaAlmoco, String horaVoltaAlmoco, 
-     		String horaSaida, Boolean falta, Boolean faltaJustificada, String codigoEmpregado){	
+     		String horaSaida, String acao, String codigoEmpregado){	
 		
-		pontoTO.setData(data);
+		pontoTO.setDataPonto(data);
         pontoTO.setHoraEntrada(horaEntrada);
         pontoTO.setHoraSaidaAlmoco(horaSaidaAlmoco);
         pontoTO.setHoraVoltaAlmoco(horaVoltaAlmoco);
         pontoTO.setHoraSaida(horaSaida);
-        pontoTO.setFalta(falta);
-        pontoTO.setFaltaJustificada(faltaJustificada);
+        pontoTO.setAcao(acao);
         pontoTO.setCodigoEmpregado(codigoEmpregado);
     	pontoDAO.alterarPonto(pontoTO);
 	}

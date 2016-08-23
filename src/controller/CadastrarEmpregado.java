@@ -186,15 +186,15 @@ public class CadastrarEmpregado extends HttpServlet {
 			
 			 // CRIA NO DIRETORIO DO PROJETO (PASTA UPLOADS) E UMA PASTA DENTRO COM O ID DO USUARIO
 			 //PARA EVITAR CONFLITO DE NOMES DE ARQUIVO ATUALIZADA O CAMPO NA TABELA 
-			 // A FOTO CADASTRADA TERï¿½ O NOME: idEmpregado_nomeFoto
-			 //PEGA O ï¿½LTIMO CODIGO CADASTRADO
+			 // A FOTO CADASTRADA TERÁ O NOME: idEmpregado_nomeFoto
+			 //PEGA O ÚLTIMO CODIGO CADASTRADO
 			 String codEmpr = espEmpregado.getUltimoCodigo();
 			 File dirX = new File((getServletContext().getRealPath("")+ "/"+ "uploads"));
 			 if( !dirX.isDirectory() ){
 		            dirX.mkdir();
 		     }	
-			 File dir = new File((getServletContext().getRealPath("")+ "/"+ "uploads")+ "/" + codigoUsuario );// diretï¿½rio de upload
-			 //se o diretï¿½rio nï¿½o existe ele cria
+			 File dir = new File((getServletContext().getRealPath("")+ "/"+ "uploads")+ "/" + codigoUsuario );// diretório de upload
+			 //se o diretório não existe ele cria
 		        if( !dir.isDirectory() ){
 		            dir.mkdir();
 		        }	
