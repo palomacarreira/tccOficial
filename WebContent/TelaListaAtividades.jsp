@@ -202,7 +202,8 @@
 	<form name="form1" class="form-inline" method="post" action="AtividadeController" enctype="multipart/form-data">
 			
 			
-	<%out.println("<input name=\"codigoEmpregado\" id=\"codigoEmpregado\"type=\"hidden\" value=\""+request.getAttribute("codigoEmpregado")+"\"/>");%>
+	<%out.println("<input name=\"codigoEmpregado\" id=\"codigoEmpregado\"type=\"hidden\" value=\""+request.getAttribute("codigoEmpregado")+"\"/>");
+	System.out.println(request.getAttribute("codigoEmpregado"));%>
 	<nav class="navbar navbar-default" role="navigation">
 	
 	<div class="container">
@@ -241,11 +242,7 @@
    	    <button  type= "submit" name="acao" value="Cadastrar" class="btn btn-primary">Adicionar Atividade</button>
    	
 	</div>
-	
-  </form>
-
-
-
+ </form>
 
 <form>
 			<table class="table ls-table" id="tabela1">

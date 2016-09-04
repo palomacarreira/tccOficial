@@ -37,6 +37,7 @@ $(document).ready(function(){
 </head>
 <body>
 
+<%out.println("<input name=\"codigoEmpregado\" id=\"codigoEmpregado\"type=\"hidden\" value=\""+request.getAttribute("codigoEmpregado")+"\"/>");%>
 <% String[] meses = {"Janeiro", "Fevereiro","Marco","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"};%>
 <% String[] ano = {"2000", "2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016"};%>
      	
@@ -86,7 +87,8 @@ $(document).ready(function(){
 	<hr />
 <div class="container">
 
-<form name="form1" class= "form-inline" method="post" action="PesquisarHolerite">
+<form name="form1" class= "form-inline" method="post" action="PesquisarHolerite" enctype="multipart/form-data">
+<%out.println("<input name=\"codEmpregado\" id=\"codEmpregado\"type=\"hidden\" value=\""+request.getParameter("codEmpregado")+"\"/>");%>
 	<label>Relatorio de Holerite</label>
 	<nav class="navbar navbar-default" role="navigation">
 	
@@ -140,8 +142,11 @@ $(document).ready(function(){
     	<br>
     	<div class="col-sm-8 pull-right">
     	<br>
-    		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Voltar </button> 
-    		<button  type= "submit" name="acao" value="GerarHolerite" class= "btn btn-primário " > Gerar Holerite </button> 
+    		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Voltar </button> <br><br>
+    		<%--<button  type= "submit" name="acao" value="GerarHolerite" class= "btn btn-primário " > Gerar Holerite </button>  --%>
+    		<a href="PesquisarHolerite?acao=GerarHolerite&codEmpregado=<%=request.getParameter("codEmpregado")%>">Exportar Holerite</a>
+  			<%-- <input type=image src="<%=request.getContextPath()%>/imagens/icone-pdf.png" value="PesquisarHolerite?acao=GerarHolerite&codEmpregado=<%=request.getParameter("codEmpregado")%>"> --%>
+    		<%--<input type="image" src="<%=request.getContextPath()%>/imagens/icone-pdf.png" href="PesquisarHolerite?acao=GerarHolerite&codEmpregado=<%=request.getParameter("codEmpregado")%>" class="botao">--%>
 		 </div>
   		<br>
  		<br>

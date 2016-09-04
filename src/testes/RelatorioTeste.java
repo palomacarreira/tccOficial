@@ -3,7 +3,7 @@ package testes;
 import java.util.ArrayList;
 import java.util.List;
 
-import relatorio.HoleriteRelatorio;
+import relatorio.HoleriteRel;
 import model.FolhaPagamentoTO;
 
  
@@ -48,8 +48,8 @@ public class RelatorioTeste{
 		
 			
 			
-			HoleriteRelatorio relatorio = new HoleriteRelatorio();
-			relatorio.imprimir(holerites);
+			HoleriteRel relatorio = new HoleriteRel();
+			//relatorio.imprimir(holerites);
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());
