@@ -14,8 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.ContratoTO;
+import model.EmpregadoTO;
 import model.EspecialistaContrato;
+import model.EspecialistaEmpregado;
+import model.EspecialistaHorasExtras;
+import model.EspecialistaJornadaTrabalho;
 import model.EspecialistaPonto;
+import model.HoraExtraTO;
+import model.JornadaTrabalhoTO;
 import model.PontoTO;
 
 /**
@@ -47,8 +53,9 @@ public class PesquisarPonto extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EspecialistaContrato contrato = new EspecialistaContrato();
 		EspecialistaPonto ponto = new EspecialistaPonto();
-		
-		RequestDispatcher view;
+		EspecialistaEmpregado empregado = new EspecialistaEmpregado();
+		EspecialistaJornadaTrabalho jornadaTrabalho = new EspecialistaJornadaTrabalho();
+		RequestDispatcher view = null;
 		String codigoEmpregado = (String) request.getParameter("codigoEmpregado");
 		request.setCharacterEncoding("UTF-8");
 		String acao = request.getParameter("acao");
@@ -56,15 +63,17 @@ public class PesquisarPonto extends HttpServlet {
 		{
 			case "Pesquisar":
 				
+				EmpregadoTO empregadoTO = empregado.pesquisar(codigoEmpregado);
 				ContratoTO contratoTO = contrato.pesquisarEmpregado(codigoEmpregado);
 				SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
 				String dataAdmissao = formatador.format(contratoTO.getDataAdmissao());
 				ArrayList<PontoTO> listaDePonto = ponto.pesquisar(codigoEmpregado);
-				
+				ArrayList<JornadaTrabalhoTO> listaJornadaTrabalho = jornadaTrabalho.pesquisarJornada(contratoTO.getCodigo());
+		
 				if(request.getParameter("mes") == null)
 				{
 					int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
-					int mesAtual = Calendar.getInstance().get(Calendar.MONTH);
+					int mesAtual = Calendar.getInstance().get(Calendar.MONTH) + 1;
 					int totalDias = diasNoMes(mesAtual, anoAtual);
 
 					request.setAttribute("anoEscolhido", anoAtual);
@@ -81,7 +90,21 @@ public class PesquisarPonto extends HttpServlet {
 				 	request.setAttribute("totalDias", totalDias);
 				}
 				
+				
+				 HoraExtraTO horaExtraTO = new HoraExtraTO();
+				 EspecialistaHorasExtras horasExtras = new EspecialistaHorasExtras();
+				 ArrayList<HoraExtraTO> arrayHoras = new ArrayList<HoraExtraTO>();
+				 ArrayList<PontoTO> listaPontos = ponto.pesquisar(codigoEmpregado);
+				 for(PontoTO pontoTO : listaPontos)
+				 {	 
+					 horaExtraTO = horasExtras.pesquisar(pontoTO.getCodigo());
+					 arrayHoras.add(horaExtraTO);
+				 }
+				 
+				request.setAttribute("arrayHoras", arrayHoras);
+				request.setAttribute("listaJornadaTrabalho", listaJornadaTrabalho);
 				request.setAttribute("codigoEmpregado", codigoEmpregado);
+				request.setAttribute("listaEmpregado", empregadoTO);
 				request.setAttribute("listaPonto", listaDePonto);
 				request.setAttribute("dataAdmissao", dataAdmissao);
 				view = request.getRequestDispatcher("TelaPonto.jsp");
@@ -94,11 +117,13 @@ public class PesquisarPonto extends HttpServlet {
 				formatador = new SimpleDateFormat("yyyy-MM-dd");
 				dataAdmissao = formatador.format(contratoTO.getDataAdmissao());
 				listaDePonto = ponto.pesquisar(codigoEmpregado);
+				listaJornadaTrabalho = jornadaTrabalho.pesquisarJornada(contratoTO.getCodigo());
+				ArrayList<PontoTO> listaPonto = ponto.pesquisar(codigoEmpregado);
 	
-				if(request.getParameter("mes") == null)
+				if(request.getParameter("mes") == null) // CASO NÃO TENHA ESCOLHIDO O MÊS AINDA, MOSTRA PONTO DO MÊS ATUAL
 				{
 					int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
-					int mesAtual = Calendar.getInstance().get(Calendar.MONTH);
+					int mesAtual = Calendar.getInstance().get(Calendar.MONTH) + 1;
 					int totalDias = diasNoMes(mesAtual, anoAtual);
 
 					request.setAttribute("anoEscolhido", anoAtual);
@@ -107,19 +132,25 @@ public class PesquisarPonto extends HttpServlet {
 				 	request.setAttribute("codigoEmpregado", codigoEmpregado);
 					request.setAttribute("listaPonto", listaDePonto);
 					request.setAttribute("dataAdmissao", dataAdmissao);
-					
+					request.setAttribute("listaPonto", listaPonto);
+					request.setAttribute("listaJornadaTrabalho", listaJornadaTrabalho);
 					view = request.getRequestDispatcher("TelaCadastrarPonto.jsp");
-					for(PontoTO lista : listaDePonto)
+					
+					if(listaDePonto != null)
 					{
-						String dataPonto = formatador.format(lista.getDataPonto());
-						int diaPonto = Integer.parseInt(dataPonto.substring(8,10));
-						int mesPonto = Integer.parseInt(dataPonto.substring(5,7));
-						int anoPonto = Integer.parseInt(dataPonto.substring(0,4));
-						if((mesPonto == mesAtual) && (anoPonto == anoAtual))
-						{ 
-							view = request.getRequestDispatcher("TelaAlterarPonto.jsp");
+						for(PontoTO lista : listaDePonto)
+						{
+							String dataPonto = formatador.format(lista.getDataPonto());
+							int diaPonto = Integer.parseInt(dataPonto.substring(8,10));
+							int mesPonto = Integer.parseInt(dataPonto.substring(5,7));
+							int anoPonto = Integer.parseInt(dataPonto.substring(0,4));
+							if((mesPonto == mesAtual) && (anoPonto == anoAtual))
+							{ 
+								view = request.getRequestDispatcher("TelaAlterarPonto.jsp");
+							}
 						}
 					}
+
 					view.forward(request, response);
 				}
 				else
@@ -134,17 +165,22 @@ public class PesquisarPonto extends HttpServlet {
 				 	request.setAttribute("codigoEmpregado", codigoEmpregado);
 					request.setAttribute("listaPonto", listaDePonto);
 					request.setAttribute("dataAdmissao", dataAdmissao);
-					
+					request.setAttribute("listaPonto", listaPonto);
+					request.setAttribute("listaJornadaTrabalho", listaJornadaTrabalho);
 					view = request.getRequestDispatcher("TelaCadastrarPonto.jsp");
-					for(PontoTO lista : listaDePonto)
+					
+					if(listaDePonto != null)
 					{
-						String dataPonto = formatador.format(lista.getDataPonto());
-						int diaPonto = Integer.parseInt(dataPonto.substring(8,10));
-						int mesPonto = Integer.parseInt(dataPonto.substring(5,7));
-						int anoPonto = Integer.parseInt(dataPonto.substring(0,4));
-						if((mesPonto == mesEscolhido) && (anoPonto == anoEscolhido))
-						{ 
-							view = request.getRequestDispatcher("TelaAlterarPonto.jsp");
+						for(PontoTO lista : listaDePonto)
+						{
+							String dataPonto = formatador.format(lista.getDataPonto());
+							int diaPonto = Integer.parseInt(dataPonto.substring(8,10));
+							int mesPonto = Integer.parseInt(dataPonto.substring(5,7));
+							int anoPonto = Integer.parseInt(dataPonto.substring(0,4));
+							if((mesPonto == mesEscolhido) && (anoPonto == anoEscolhido))
+							{ 
+								view = request.getRequestDispatcher("TelaAlterarPonto.jsp");
+							}
 						}
 					}
 					view.forward(request, response);
@@ -154,6 +190,20 @@ public class PesquisarPonto extends HttpServlet {
 	}
 	
 	public int diasNoMes(int mes, int ano){
-	 	return 32 - new Date(ano, mes, 32).getDate();
+		java.util.Date date = null;
+        String data = 1 +"/"+mes+"/"+ano;
+        String formato = "dd/MM/yyyy";
+        SimpleDateFormat df = new SimpleDateFormat(formato);
+		try {
+			date = df.parse(data);
+		} catch (java.text.ParseException e) {
+			e.printStackTrace();
+		}
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+	 	int ultimoDia = c.getActualMaximum (Calendar.DAY_OF_MONTH);
+	 	
+	 	return ultimoDia;
 	}
+	
 }

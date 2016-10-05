@@ -2,6 +2,9 @@ package controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -12,25 +15,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.ContratoTO;
-import model.EmpregadoTO;
 import model.EspecialistaContrato;
-import model.EspecialistaEmpregado;
 import model.EspecialistaFerias;
+import model.EspecialistaPonto;
 import model.FeriasTO;
+import model.PontoTO;
 
 /**
- * Servlet implementation class PesquisarFerias
+ * Servlet implementation class AlterarFerias
  */
-@WebServlet("/PesquisarFerias")
-public class PesquisarFerias extends HttpServlet {
+@WebServlet("/AlterarFerias")
+public class AlterarFerias extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PesquisarFerias() {
+    public AlterarFerias() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,7 +44,7 @@ public class PesquisarFerias extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		 doPost(request, response);
+		this.doPost(request, response);
 	}
 
 	/**
@@ -49,42 +53,70 @@ public class PesquisarFerias extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		String acao = request.getParameter("acao");
-		EspecialistaFerias espFerias = new EspecialistaFerias();
-		EspecialistaEmpregado empregado = new EspecialistaEmpregado();
+		HttpSession session = request.getSession();
 		EspecialistaContrato espContrato = new EspecialistaContrato();
-		RequestDispatcher view= null;
-		
+		EspecialistaFerias espFerias = new EspecialistaFerias();
+		String codigoFerias = (String) request.getParameter("codigoFerias");
 		String codigoEmpregado = request.getParameter("codigoEmpregado");
+		RequestDispatcher view;
+		String acao = request.getParameter("acao");
 		switch (acao) 
 		{
-			case "Pesquisar":
-				try{
-					EmpregadoTO empregadoTO = empregado.pesquisar(codigoEmpregado);
-					ContratoTO contratoTO = espContrato.pesquisarEmpregado(codigoEmpregado);
-					ArrayList<FeriasTO> listaFerias = espFerias.pesquisarTodos(contratoTO.getCodigo());
-					if(listaFerias.size() > 0)
+			case "TelaPagamento":
+				
+					try 
 					{
-						request.setAttribute("comboFerias", listaFerias);
-					}else{
-						request.setAttribute("comboFerias", null);
-					}
-					
-					
-					Date dataAdmissao = contratoTO.getDataAdmissao();
-					ArrayList<FeriasTO> listaPeriodos = listaPeriodos(dataAdmissao);
-					request.setAttribute("listaPeriodos", listaPeriodos);
-					request.setAttribute("codigoEmpregado",codigoEmpregado);
-					request.setAttribute("listaEmpregado", empregadoTO);
-					view = request.getRequestDispatcher("TelaFerias.jsp");
-					view.forward(request, response);
+						FeriasTO feriasTO = espFerias.pesquisarFerias(codigoFerias);
+						request.setAttribute("codigoEmpregado", codigoEmpregado);
+						request.setAttribute("codigoFerias",codigoFerias);
+						request.setAttribute("valor",feriasTO.getValor());
+						view = request.getRequestDispatcher("TelaPagamentoFerias.jsp");
+						view.forward(request, response);
 						
-				}catch(NumberFormatException e){
+					} catch (NumberFormatException e) {
+						request.setAttribute("msg", "Error " + e.getMessage());
+					}
+
+				break;
+				
+			case "Pagamento":
+				
+					String situacao = "CONCLUIDA";
+					String dataPagamento = (String)request.getParameter("dataPagamento");
+					DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+					Date data = null;
 					
-					request.setAttribute("msg", "Error " + e.getMessage());
-					view = request.getRequestDispatcher("TelaPrincipal.jsp");
-					view.forward(request, response);
-				}
+					try 
+					{
+						 data = new java.sql.Date(((java.util.Date)formatter.parse(dataPagamento)).getTime());
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					}		
+					
+					try 
+					{
+						espFerias.alterarPagamento(codigoFerias, data, situacao);
+						view = request.getRequestDispatcher("PesquisarFerias?acao=Pesquisar");
+						view.forward(request, response);
+						
+					} catch (NumberFormatException e) {
+						request.setAttribute("msg", "Error " + e.getMessage());
+					}
+
+			break;
+				
+				
+		case "Excluir":
+			
+			
+			try {
+				espFerias.excluir(codigoFerias);
+				view = request.getRequestDispatcher("PesquisarFerias?acao=Pesquisar");
+				view.forward(request, response);
+			} catch (Exception e) {
+				
+				request.setAttribute("msg", "Error " + e.getMessage());
+			}	
 			break;
 		}
 	}
@@ -131,5 +163,3 @@ public class PesquisarFerias extends HttpServlet {
 	}
 
 }
-
-

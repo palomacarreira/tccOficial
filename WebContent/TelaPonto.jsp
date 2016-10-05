@@ -25,6 +25,8 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <script src="js/sweetalert.min.js"></script> 
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <script src="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css"></script>
+<link rel="stylesheet" type="text/css"  href="css/estilo.css" />
+
 
 <style type="text/css">
 #imagemCadastroPonto:hover {
@@ -37,13 +39,13 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 
 </head>
 <body>
-<c:import url="cabecalhoDeslogado.jsp"/>
-
 <%
-
+	EmpregadoTO empregado = (EmpregadoTO) request.getAttribute("listaEmpregado");
 	String[] meses = {"","Janeiro", "Fevereiro","Março","Abril","Maio","Junho",
 			"Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"};	
 	ArrayList<PontoTO> listaDePonto = (ArrayList<PontoTO>) request.getAttribute("listaPonto");
+	ArrayList<JornadaTrabalhoTO> listaJornada = (ArrayList<JornadaTrabalhoTO>) request.getAttribute("listaJornadaTrabalho");
+	ArrayList<HoraExtraTO> listaHoraExtra = (ArrayList<HoraExtraTO>) request.getAttribute("arrayHoras");
 	String codigoEmpregado = (String) request.getAttribute("codigoEmpregado");
 	String dataAdmissao = (String) request.getAttribute("dataAdmissao");
 	int anoAdmissao = Integer.parseInt(dataAdmissao.substring(0,4));
@@ -55,6 +57,106 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	int diasDoMes = (int)request.getAttribute("totalDias");
 	
 %>  
+
+<div class="header clearfix">
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+			defer></script>
+
+		<script src="dist/js/bootstrap-submenu.min.js" defer></script>
+		<script src="js/sweetalert.min.js"></script>
+		<div class="row">
+			<div class="col-md-2">
+				<img src="imagens/logo.jpg" align="left">
+			</div>
+
+			<div class="col-md-10">
+				<br> <br>
+				<nav>
+				<ul class="nav nav-pills">
+				
+					<div class="col-md-1">
+						<a href="PesquisarEmpregado?acao=PesquisarTodos">
+							<span class="fa-stack fa-2x"> <i
+								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
+								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+						</span> <br> <span class="func-link-txt">Funcionários</span>
+						</a>
+					</div>
+					
+					<div class="col-md-1">
+						<a href="AlterarEmpregado?acao=Demitir&codEmpregado=<%=empregado.getCodigoEmpregado()%>">
+							<span class="fa-stack fa-2x"> <i
+								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
+								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+						</span> <br> <span class="func-link-txt">Demitir</span>
+						</a>
+					</div>
+					
+					<div class="col-md-1">
+						<a href="PesquisarFolhaPagamento?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
+							<span class="fa-stack fa-2x"> <i
+								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
+								class="fa fa-bars fa-stack-1x func-link-i2"></i>
+						</span> <br> <span class="func-link-txt">Holerite</span>
+						</a>
+					</div>
+					
+					<div class="col-md-1">
+						<a href="PesquisarFerias?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
+							<span class="fa-stack fa-2x"> <i
+								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
+								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+						</span> <br> <span class="func-link-txt">Férias</span>
+						</a>
+					</div>
+
+					<div class="col-md-1">
+						<a href="AtividadeController?acao=PesquisarTodos&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
+							<span class="fa-stack fa-2x"> <i
+								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
+								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+						</span> <br> <span class="func-link-txt">Atividades</span>
+						</a>
+					</div>
+
+					<div class="col-md-1">
+						<a href="#">
+							<span class="fa-stack fa-2x"> <i
+								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
+								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+						</span> <br> <span class="func-link-txt">Décimo Terceiro</span>
+						</a>
+					</div>
+					
+					<div class="col-md-1">
+						<a href="PesquisarPonto?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
+							<span class="fa-stack fa-2x"> <i
+								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
+								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+						</span> <br> <span class="func-link-txt">Folha de Ponto</span>
+						</a>
+					</div>
+
+					<div class="col-md-4">
+	         		<nav >
+					<ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
+						<li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
+					    	<ul>
+						        <li><a href="AlterarUsuario?acao=alterar">Meu Perfil</a></li>
+						        <li><a href="AlterarUsuario?acao=excluir">Excluir</a></li>
+						        <li><a href="TelaLogin.jsp">Sair</a></li>                   
+					       	</ul>
+					    </li>            
+					</ul>
+					</nav>
+					</div>
+				</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+	
     <div class="container">
     
     <h1>Folha de Ponto</h1>
@@ -137,8 +239,8 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	                <th>Saida Almoço</th>
 	                <th>Retorno Almoço</th>
 	                <th>Saída</th>
-	                <th>Horas</th>
 	                <th>Horas Extras</th>
+	                <th>Horas Noturnas</th>
 	                <th>Ação</th>
 	            </tr>
 	        </thead>
@@ -149,7 +251,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	                <th>&nbsp;</th>
 	                <th>&nbsp;</th>
 	                <th>Totais:</th>
-	                <th>&nbsp;</th>
+	                <th><span id="totalDeHoras"></span></th>
 	                <th>&nbsp;</th>
 	                <th>&nbsp;</th>
 	            </tr>
@@ -167,9 +269,12 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <script type="text/javascript">
 window.onload = function(){
   <% 
+  		String totalHoraExtra = "00:00";
+  		String totalHoraExtraNoturna= "00:00";
   		Boolean obtemPontoMesAtual = false;
-		 if(listaDePonto.size() != 0)
-		 {
+		if(listaDePonto.size() != 0)
+		{
+			
 				for(PontoTO pontoTO : listaDePonto)
 				{
 					SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
@@ -179,34 +284,48 @@ window.onload = function(){
 					int anoPonto = Integer.parseInt(dataPonto.substring(0,4));
 					int ano = anoEscolhido;
 					int mes = mesEscolhido;
-
+					
+					for(HoraExtraTO horaExtra : listaHoraExtra)
+					{
+						if(horaExtra.getCodigoPonto().equals(pontoTO.getCodigo()))
+						{
+							totalHoraExtra = horaExtra.getTotalDeHorasExtras();	
+							totalHoraExtraNoturna = horaExtra.getTotalDeHorasExtrasNoturno();	
+						}
+					}
+					
 					if((mesPonto == mes) && (anoPonto == ano))
 					{ 
 						obtemPontoMesAtual = true;
+						
 						%>
+						
+							var diaSem ;
+							var diaSemana ;
+							diaSem = diaDaSemana(<%=diaPonto%>,<%=mesEscolhido%>, <%=anoEscolhido%>);
+							if(diaSem == 0){diaSemana="DOM";}
+							else if(diaSem == 1){diaSemana="SEG";}
+							else if(diaSem == 2){diaSemana="TER";}
+							else if(diaSem == 3){diaSemana="QUA";}
+							else if(diaSem == 4){diaSemana="QUI";}
+							else if(diaSem == 5){diaSemana="SEX";}
+							else if(diaSem == 6){diaSemana = "SAB";}	
+					    
 							var newRow = $("<tr>");
 						    var cols = "";
-						
-						    cols += '<td>'+ <%=diaPonto%> +'</td>';
-						    cols += '<td><span id=\"horaEntrada'+<%=diaPonto%>+'\"><%=pontoTO.getHoraEntrada()%></span></td>';
-						    cols += '<td><span id=\"horaSaidaAlmoco'+<%=diaPonto%>+'\"><%=pontoTO.getHoraSaidaAlmoco()%></span></td>';
-						    cols += '<td><span id=\"horaVoltaAlmoco'+<%=diaPonto%>+'\"><%=pontoTO.getHoraVoltaAlmoco()%></span></td>';
-						    cols += '<td><span id=\"horaSaida'+<%=diaPonto%>+'\"><%=pontoTO.getHoraSaida()%></span></td>';
-						    cols += '<td><span id=\"horasColuna'+<%=diaPonto%>+'\"></span></td>';
-						    cols += '<td>&nbsp;</td>';
-						    cols += '<td>';
-						    cols += '<select id=\"combo_acao\" name=\"ano\">';
-							cols += '<option value=\"Dia Comum\">Dia Comum</option>';
-							cols += '<option value=\"Falta\">Falta</option>';
-							cols += '<option value=\"Falta Justificada\">Falta Justificada</option>';
-							cols += '<option value=\"Feriado\">Feriado</option>';
-							cols += '<option value=\"Feriado Trabalhado\">Feriado Trabalhado</option>';
-							cols += '</select>';
-						    cols += '</td>';
+						   
+						    cols += '<td><p id=\"dia'+ <%=diaPonto%> +'\" name=\"'+diaSemana+'\">'+ <%=diaPonto%> + '<br>' +diaSemana+'</p></td>';
+						    cols += '<td id=\"horaEntrada'+<%=diaPonto%>+'\"><%=pontoTO.getHoraEntrada()%></td>';
+						    cols += '<td id=\"horaSaidaAlmoco'+<%=diaPonto%>+'\"><%=pontoTO.getHoraSaidaAlmoco()%></td>';
+						    cols += '<td id=\"horaVoltaAlmoco'+<%=diaPonto%>+'\"><%=pontoTO.getHoraVoltaAlmoco()%></td>';
+						    cols += '<td id=\"horaSaida'+<%=diaPonto%>+'\"><%=pontoTO.getHoraSaida()%></td>';
+						    cols += '<td><span id=\"horasExtrasColuna'+<%=diaPonto%>+'\"><%=totalHoraExtra%></span></td>';
+						    cols += '<td><span id=\"horasExtrasNoturnaColuna'+<%=diaPonto%>+'\"><%=totalHoraExtraNoturna%></span></td>';
+						    cols += '<td><span><%=pontoTO.getAcao()%></span></td>';
 						
 						    newRow.append(cols);
 						    $("#tableFolhaPonto").append(newRow);
-			
+						 
 						    <%
 							if(pontoTO.getAcao().equals("Falta")){
 							%>
@@ -216,21 +335,7 @@ window.onload = function(){
 							%>
 							    $('#combo_acao option[value="Dia Comum"]').attr({ selected : "selected" });
 							<%
-							} 
-						    //%>
-						    //if(<%=pontoTO.getHoraEntrada()%> != ""){
-						   // 	calculaTotal();
-						   // }
-						   // if(<%=pontoTO.getHoraSaidaAlmoco()%> != ""){
-						   // 	calculaTotal();
-						   // }
-							//if(<%=pontoTO.getHoraVoltaAlmoco()%> != ""){
-							//	calculaTotal();				    	
-							//}
-							//if(<%=pontoTO.getHoraSaida()%> != ""){
-							//	calculaTotal();
-							//}
-						   // <%
+							}
 					}
 				}
 				
@@ -239,26 +344,28 @@ window.onload = function(){
 					for( int x = 1; x <= diasDoMes ; x++)
 					{
 					%>
+						var diaSem ;
+						var diaSemana ;
+						diaSem = diaDaSemana(<%=x%>,<%=mesEscolhido%>, <%=anoEscolhido%>);
+						if(diaSem == 0){diaSemana="DOM";}
+						else if(diaSem == 1){diaSemana="SEG";}
+						else if(diaSem == 2){diaSemana="TER";}
+						else if(diaSem == 3){diaSemana="QUA";}
+						else if(diaSem == 4){diaSemana="QUI";}
+						else if(diaSem == 5){diaSemana="SEX";}
+						else if(diaSem == 6){diaSemana = "SAB";}	
+						
 						var newRow = $("<tr>");
 					    var cols = "";
-			
-					    cols += '<td>'+ <%=x%> +'</td>';
+
+				    	cols += '<td><p id=\"dia'+ <%=x%> +'\" name=\"'+diaSemana+'\">'+ <%=x%> + '<br>' +diaSemana+'</p></td>';
 					    cols += '<td>&nbsp;</td>';
 					    cols += '<td>&nbsp;</td>';
 					    cols += '<td>&nbsp;</td>';
 					    cols += '<td>&nbsp;</td>';
 					    cols += '<td>&nbsp;</td>';
 					    cols += '<td>&nbsp;</td>';
-					    cols += '<td>';
-					    cols += '<div class=\"form-group\">';
-					    cols += '<select class=\"form-control\" id=\"combo_acao\" name=\"ano\">';
-					    cols += '<option value=\"Dia Comum\">Dia Comum</option>';
-					    cols += '<option value=\"Falta\">Falta</option>';
-					    cols += '<option value=\"Falta Justificada\">Falta Justificada</option>';
-					    cols += '<option value=\"Feriado\">Feriado</option>';
-					    cols += '<option value=\"Feriado Trabalhado\">Feriado Trabalhado</option>';
-					    cols += '</select>';  
-					    cols +='</div>';
+					    cols += '<td>&nbsp;</td>';
 					    newRow.append(cols);
 					    $("#tableFolhaPonto").append(newRow);
 					    
@@ -271,26 +378,28 @@ window.onload = function(){
 				for( int x = 1; x <= diasDoMes ; x++)
 				{
 				%>
+					var diaSem ;
+					var diaSemana ;
+					diaSem = diaDaSemana(<%=x%>,<%=mesEscolhido%>, <%=anoEscolhido%>);
+					if(diaSem == 0){diaSemana="DOM";}
+					else if(diaSem == 1){diaSemana="SEG";}
+					else if(diaSem == 2){diaSemana="TER";}
+					else if(diaSem == 3){diaSemana="QUA";}
+					else if(diaSem == 4){diaSemana="QUI";}
+					else if(diaSem == 5){diaSemana="SEX";}
+					else if(diaSem == 6){diaSemana = "SAB";}	
+					
 					var newRow = $("<tr>");
 				    var cols = "";
-		
-				    cols += '<td>'+ <%=x%> +'</td>';
+	
+			    	cols += '<td><p id=\"dia'+ <%=x%> +'\" name=\"'+diaSemana+'\">'+ <%=x%> + '<br>' +diaSemana+'</p></td>';
 				    cols += '<td>&nbsp;</td>';
 				    cols += '<td>&nbsp;</td>';
 				    cols += '<td>&nbsp;</td>';
 				    cols += '<td>&nbsp;</td>';
 				    cols += '<td>&nbsp;</td>';
 				    cols += '<td>&nbsp;</td>';
-				    cols += '<td>';
-				    cols += '<div class=\"form-group\">';
-				    cols += '<select class=\"form-control\" id=\"combo_acao\" name=\"ano\">';
-				    cols += '<option value=\"Dia Comum\">Dia Comum</option>';
-				    cols += '<option value=\"Falta\">Falta</option>';
-				    cols += '<option value=\"Falta Justificada\">Falta Justificada</option>';
-				    cols += '<option value=\"Feriado\">Feriado</option>';
-				    cols += '<option value=\"Feriado Trabalhado\">Feriado Trabalhado</option>';
-				    cols += '</select>';  
-				    cols +='</div>';
+				    cols += '<td>&nbsp;</td>';
 				    newRow.append(cols);
 				    $("#tableFolhaPonto").append(newRow);
 				    
@@ -299,6 +408,7 @@ window.onload = function(){
 			} 
 		%>
 	}(jQuery);
+	
 </script>	
 
 <c:import url="rodape.jsp"/>

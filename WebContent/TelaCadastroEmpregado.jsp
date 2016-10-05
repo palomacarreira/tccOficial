@@ -300,7 +300,9 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		</div>
 		
 		<div  class= "form-group" > 
-		    <label  for= "valeTransporte" > Valor vale transporte(MENSAL) </label> 
+		    <label  for= "valeTransporte" > Valor vale transporte(MENSAL) 
+		    <a href="javascript:void(0)" onclick="informacaoDescontoValeTransporte()"><i class="fa fa-info-circle" title="Informação"></i></a>
+		    </label> 
 		    <div class="span3">
 				<div class="input-group"> 
 	       		 	<span class="input-group-addon">$</span>
@@ -350,14 +352,16 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
     		
     		
     		<div class="form-group">
-     		<label  for="compensacaoDias" > Compensação de Dias de Trabalho</label> 
+     		<label  for="compensacaoDias" > Compensação de Dias de Trabalho
+     		<a href="javascript:void(0)" onclick="informacaoBancoDeHoras()"><i class="fa fa-info-circle" title="Informação"></i></a>
+	 		</label>
      		<div class="span3">
 		    <input  type="radio" name="compensacaoDias" id="salario"  value="salario" CHECKED>
 		    Acréscimo de salário
 		    <br>
 			<input type="radio" name="compensacaoDias" id="horas"  value="horas"> 
-			Regime de compensação de horas		
-  			 <br>
+			Regime de compensação de horas	
+		    <br>
       		</div>
     		</div> 
     	<br>
@@ -586,7 +590,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	    <div  class= "form-group " > 
 		    <label for="totalHoras">Total de horas na semana: </label>
 		    <div class="span3">
-		    <input type="text" name="duracaoSemanal" class="form-control" id="duracaoSemanal" size="5" value="00:00" disabled>
+		    <input type="text" name="duracaoSemanal" class="form-control" id="duracaoSemanal" size="5" value="00:00" Readonly>
 		    </div>
 	   		<span style="color:red; font-weight:bold;" id="saldoHoras"></span>
 	   </div>

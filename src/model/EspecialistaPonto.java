@@ -25,7 +25,7 @@ public class EspecialistaPonto {
 	
 	
 	public void alterar(Date data, String horaEntrada, String horaSaidaAlmoco, String horaVoltaAlmoco, 
-     		String horaSaida, String acao, String codigoEmpregado){	
+     		String horaSaida, String acao, String codigo){	
 		
 		pontoTO.setDataPonto(data);
         pontoTO.setHoraEntrada(horaEntrada);
@@ -33,7 +33,7 @@ public class EspecialistaPonto {
         pontoTO.setHoraVoltaAlmoco(horaVoltaAlmoco);
         pontoTO.setHoraSaida(horaSaida);
         pontoTO.setAcao(acao);
-        pontoTO.setCodigoEmpregado(codigoEmpregado);
+        pontoTO.setCodigo(codigo);
     	pontoDAO.alterarPonto(pontoTO);
 	}
 	
@@ -43,4 +43,13 @@ public class EspecialistaPonto {
 		pontoTO  = pontoDAO.pesquisarPonto(codigo);
 		return pontoTO;
 	}
+	
+	 public String ultimoCodigoPonto(){
+		 return pontoDAO.ultimoCodigoPonto();
+	 }
+	 
+	 public PontoTO pesquisaPorData(Date data){
+		 
+		 return pontoDAO.pesquisaPorData(data);
+	 }
 }

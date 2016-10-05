@@ -1,24 +1,13 @@
 <%@page import="java.util.*, java.text.*"%>
-
 <%@page import="model.*, mysqldao.*"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <html>
-
 <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<!-- Latest compiled and minified CSS -->
-
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -36,7 +25,6 @@
 <script src="js/sweetalert.min.js"></script>
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css"  href="css/estilo.css" />
-<!--<script src="https://code.jquery.com/jquery-2.2.4.min.js" ></script>  -->
 
 <title>Alterar Empregado</title>
 
@@ -83,7 +71,7 @@
 					</div>
 					
 					<div class="col-md-2">
-						<a href="PesquisarHolerite?acao=Pesquisar&codEmpregado=<%=empregado.getCodigoEmpregado()%>">
+						<a href="PesquisarFolhaPagamento?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
 								class="fa fa-bars fa-stack-1x func-link-i2"></i>
@@ -215,7 +203,7 @@
 		    <label  for= "numDependentes" > Número de Dependentes </label> 
 		    <div class="span3">
 		    <%
-		     out.println("<input type=\"number\" min=\"0\" value="+empregado.getQtdDependentes()+" id=\"qtdDependentes\" name=\"qtdDependentes\" class=\"form-control\" size=\"28\">");
+		     out.println("<input type=\"number\" min=\"0\" value=\""+empregado.getQtdDependentes()+"\" id=\"qtdDependentes\" name=\"qtdDependentes\" class=\"form-control\" size=\"28\">");
 		 	%>
 		    </div>
 		 </div> 
@@ -289,7 +277,7 @@
 		    <label  for= "serieCarteira" > Série </label> 
 		    <div class="span3">
 		    <%
-		      out.println("<input type=\"text\" value="+empregado.getSerieCarteira()+" name=\"serieCarteira\" id=\"serieCarteira\" class=\"form-control\" size=\"30\">");
+		      out.println("<input type=\"text\" value=\""+empregado.getSerieCarteira()+"\" name=\"serieCarteira\" id=\"serieCarteira\" class=\"form-control\" size=\"30\">");
 		 	%>
 		    </div>
 		 </div>
@@ -421,7 +409,9 @@
 		</div>
 		
 		<div  class= "form-group" > 
-		    <label  for= "valeTransporte" > Valor vale transporte(MENSAL) </label> 
+		    <label  for= "valeTransporte" > Valor vale transporte(MENSAL) 
+		    <a href="javascript:void(0)" onclick="informacaoDescontoValeTransporte()"><i class="fa fa-info-circle" title="Informação"></i></a>
+		    </label> 
 		    <div class="span3">
 				<div class="input-group"> 
 	       		<span class="input-group-addon">$</span>
@@ -486,7 +476,9 @@
     		</div> 
    
    			<div class="form-group">
-     		<label  for="compensacaoDias" > Compensação de Dias de Trabalho</label> 
+     		<label  for="compensacaoDias" > Compensação de Dias de Trabalho
+     		<a href="javascript:void(0)" onclick="informacaoBancoDeHoras()"><i class="fa fa-info-circle" title="Informação"></i></a>
+	 		</label>
      		<div class="span3">
      		  <%
 		   if(contrato.getCompensacaoDias().equals("salario")){
@@ -500,7 +492,7 @@
   			   out.println("<input type=\"radio\" name=\"compensacaoDias\" id=\"horas\"  value=\"horas\">Regime de compensação de horas<br>");
   		   }
 		   %>	
-  			<br>
+		    <br>
       		</div>
     		</div> 
     	<br>
@@ -748,7 +740,7 @@
  		<div  class= "form-group " > 
 		    <label for="totalHoras">Total de horas na semana: </label>
 		    <div class="span3">
-		    <input type="text" name="duracaoSemanal" value="<%=contrato.getDuracaoSemanal()%>" class= "form-control" id="duracaoSemanal" size="5" disabled>
+		    <input type="text" name="duracaoSemanal" value="<%=contrato.getDuracaoSemanal()%>" class= "form-control" id="duracaoSemanal" size="5" Readonly>
 		    </div>
 	   		<span style="color:red; font-weight:bold;" id="saldoHoras"></span>
 	   </div>

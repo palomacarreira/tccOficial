@@ -68,6 +68,7 @@ public class FeriasTO {
 	public void setDiaPagamento(Date diaPagamento) {
 		this.diaPagamento = diaPagamento;
 	}
+
 	public Date getPeriodoAquisitivoInicio() {
 		return PeriodoAquisitivoInicio;
 	}
@@ -80,5 +81,6 @@ public class FeriasTO {
 	public void setPeriodoAquisitivoFim(Date periodoAquisitivoFim) {
 		PeriodoAquisitivoFim = periodoAquisitivoFim;
 	}
+
 
 }

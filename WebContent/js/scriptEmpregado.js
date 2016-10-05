@@ -1,6 +1,22 @@
+function informacaoBancoDeHoras(){
+	swal({   title: "Compensação de Dias de Trabalho",   
+		text:	
+"<p>A opção Regime de compensação de horas é a possibilidade de reduzir as horas de trabalho em um dia para " +
+"compensar as Horas Extras realizadas em outro, evitando-se assim o pagamento das horas extras. " +
+"Ao contrário da opção Acréscimo de salário onde será devido o pagamento das horas extras.</p><br/>"+
+"As horas de trabalho realizadas em um Domingo, DSR ou Feriado não podem ser compensadas com outro dia normal "+
+"de trabalho. Se o empregado trabalhar neste dia deve-se pagar estas horas com o dobro do valor de uma hora "+
+"normal ou o empregador pode determinar outro dia inteiro de folga para compensar estas horas trabalhadas "+
+"(Art. 9o. Lei 605/1949).</p><br/>"+
+"<p>Mesmo que o empregado trabalhe somente 1 hora neste dia para compensar com outro deve-se conceder um dia inteiro "+
+"de folga porque o seu descanso de pelo menos 24 horas seguido foi interrompido.</p><br/>",
+			html: true 
+		});
+}
+
 function informacaoCamposHora(){
 	
-	swal({   title: "Cadastro Empregado",   
+	swal({   title: "Jornada de Trabalho",   
 			text:
 "<p>Ajuste o horário desde que não últrapasse o regime de trabalho escolhido! </p><br/>"+
 "<p>Jornada de trabalho: </p>"+
@@ -19,9 +35,22 @@ function informacaoCamposHora(){
 			});
 }
 
+function informacaoDescontoValeTransporte(){
+	
+	swal({   title: "Vale Transporte",   
+			text:
+				"<p>O empregado tem obrigação de contribuir com o valor da sua passagem na proporção equivalente "+
+				"a 6% do valor do seu salário, quantia que será descontada em folha. Se o saldo de passagens mensais "+
+				"tiver um valor menor do que 6% do salário, então o empregador deverá descontar no máximo o valor "+
+				"referente a passagem. Quando as passagens tiverem o valor maior do que o desconto permitido, "+
+				"então o empregador deverá complementar o custo. </p>",
+				html: true 
+			});
+}
+
 function informacaoDescontoBeneficios(){
 	
-	swal({   title: "Cadastro Empregado",   
+	swal({   title: "Desconto Beneficios",   
 			text:
 				"<p>É facultado ao empregador efetuar descontos no salário do empregado, mediante acordo escrito entre as partes,"+
 				"para a inclusão do empregado em planos de assistência médico-hospitalar e odontológica, de seguro e de "+
@@ -65,8 +94,6 @@ function validar(){
 		return false;
 	}
 	
-	$("#duracaoSemanal").attr('disabled', false); // DESABILITA CAMPO PARA PEGAR VALOR PELO REQUEST.
-	return true;
 }
 	
 
@@ -438,29 +465,48 @@ function preencheCampos(id)
 
 
 	//RETORNA O CALCULO DE UMA COLUNA DE HORARIOS
-	function horarios(id, horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, horaSaida){
+	function horarios(horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, horaSaida){
 
-		horainicio = parseInt(horaEntrada.substring(0, 2));
-		horapausa = parseInt(horaSaidaAlmoco.substring(0, 2));
-		horacontinuacao = parseInt(horaVoltaAlmoco.substring(0, 2));
-		horafinal = parseInt(horaSaida.substring(0, 2));
-		
-		minutoinicio = parseInt(horaEntrada.substring(3, 10));
-		minutopausa = parseInt(horaSaidaAlmoco.substring(3, 10));
-		minutocontinuacao = parseInt(horaVoltaAlmoco.substring(3, 10));
-		minutofinal = parseInt(horaSaida.substring(3, 10));
-		
-		horainicio = horainicio * 60 + minutoinicio; 
-		horapausa = horapausa * 60 + minutopausa; 
-		horacontinuacao = horacontinuacao * 60 + minutocontinuacao; 
-		horafinal = horafinal * 60 + minutofinal; 
 
-		var vlhora = (horapausa - horainicio) + (horafinal - horacontinuacao);
-		var hora = Math.floor(vlhora / 60);
-		var minuto = vlhora % 60;
-		horaFinal = completaZeroEsquerda(hora) + ":" + completaZeroEsquerda(minuto)
+		if(possuiValor(horaSaidaAlmoco) && possuiValor(horaVoltaAlmoco))
+		{
+			horainicio = parseInt(horaEntrada.substring(0, 2));
+			horapausa = parseInt(horaSaidaAlmoco.substring(0, 2));
+			horacontinuacao = parseInt(horaVoltaAlmoco.substring(0, 2));
+			horafinal = parseInt(horaSaida.substring(0, 2));
+			
+			minutoinicio = parseInt(horaEntrada.substring(3, 10));
+			minutopausa = parseInt(horaSaidaAlmoco.substring(3, 10));
+			minutocontinuacao = parseInt(horaVoltaAlmoco.substring(3, 10));
+			minutofinal = parseInt(horaSaida.substring(3, 10));
+			
+			horainicio = horainicio * 60 + minutoinicio; 
+			horapausa = horapausa * 60 + minutopausa; 
+			horacontinuacao = horacontinuacao * 60 + minutocontinuacao; 
+			horafinal = horafinal * 60 + minutofinal; 
+
+			var vlhora = (horapausa - horainicio) + (horafinal - horacontinuacao);
+			var hora = Math.floor(vlhora / 60);
+			var minuto = vlhora % 60;
+			horaFinal = completaZeroEsquerda(hora) + ":" + completaZeroEsquerda(minuto)
+		}
+		else{
+			horainicio = parseInt(horaEntrada.substring(0, 2));
+			horafinal = parseInt(horaSaida.substring(0, 2));
+			
+			minutoinicio = parseInt(horaEntrada.substring(3, 10));
+			minutofinal = parseInt(horaSaida.substring(3, 10));
+			
+			horainicio = horainicio * 60 + minutoinicio; 
+			horafinal = horafinal * 60 + minutofinal; 
+
+			var vlhora = (horafinal - horainicio);
+			var hora = Math.floor(vlhora / 60);
+			var minuto = vlhora % 60;
+			horaFinal = completaZeroEsquerda(hora) + ":" + completaZeroEsquerda(minuto)
+		}
+		
 		return horaFinal;
-		
 	}
 
 	// Realiza o cálculo das horas
@@ -479,7 +525,14 @@ function preencheCampos(id)
 			if(possuiValor(horaEntrada) && possuiValor(horaSaidaAlmoco) && 
 					possuiValor(horaVoltaAlmoco) && possuiValor(horaSaida))
 			{
-				horaFinal = horarios(i, horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, horaSaida); // chama método
+				horaFinal = horarios(horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, horaSaida); // chama método
+				hora = parseInt(horaFinal.substring(0, 2));
+				minuto = parseInt(horaFinal.substring(3, 10));
+				tempoTotal += hora * 60 + minuto; 
+			}
+			else if(possuiValor(horaEntrada) && possuiValor(horaSaida))
+			{
+				horaFinal = horarios(horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, horaSaida); // chama método
 				hora = parseInt(horaFinal.substring(0, 2));
 				minuto = parseInt(horaFinal.substring(3, 10));
 				tempoTotal += hora * 60 + minuto; 

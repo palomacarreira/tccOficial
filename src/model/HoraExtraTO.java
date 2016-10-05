@@ -1,19 +1,43 @@
 package model;
 
 public class HoraExtraTO {
-	public int qtdHoraExtra;
-	public Double valorHoraExtra;
-	public int getQtdHoraExtra() {
-		return qtdHoraExtra;
+	public String totalDeHorasExtras;
+	public String totalDeHorasExtrasNoturno;
+	public String folgaCompensatoria;
+	public String codigoPonto;
+	
+	
+	
+	public String getFolgaCompensatoria() {
+		return folgaCompensatoria;
 	}
-	public void setQtdHoraExtra(int qtdHoraExtra) {
-		this.qtdHoraExtra = qtdHoraExtra;
+
+	public void setFolgaCompensatoria(String folgaCompensatoria) {
+		this.folgaCompensatoria = folgaCompensatoria;
 	}
-	public Double getValorHoraExtra() {
-		return valorHoraExtra;
+
+	public String getCodigoPonto() {
+		return codigoPonto;
 	}
-	public void setValorHoraExtra(Double valorHoraExtra) {
-		this.valorHoraExtra = valorHoraExtra;
+	
+	public void setCodigoPonto(String codigoPonto) {
+		this.codigoPonto = codigoPonto;
+	}
+	
+	public String getTotalDeHorasExtrasNoturno() {
+		return totalDeHorasExtrasNoturno;
+	}
+
+	public String getTotalDeHorasExtras() {
+		return totalDeHorasExtras;
+	}
+
+	public void setTotalDeHorasExtras(String totalDeHorasExtras) {
+		this.totalDeHorasExtras = totalDeHorasExtras;
+		
+	}
+	public void setTotalDeHorasExtrasNoturno(String totalDeHorasExtrasNoturno) {
+		this.totalDeHorasExtrasNoturno = totalDeHorasExtrasNoturno;
 	}
 	
 	
