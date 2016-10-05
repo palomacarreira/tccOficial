@@ -250,8 +250,8 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	                <th>&nbsp;</th>
 	                <th>&nbsp;</th>
 	                <th>&nbsp;</th>
-	                <th>Totais:</th>
-	                <th><span id="totalDeHoras"></span></th>
+	                <th>&nbsp;</th>
+	                <th>&nbsp;</th>
 	                <th>&nbsp;</th>
 	                <th>&nbsp;</th>
 	            </tr>
@@ -262,9 +262,35 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	    </table>
 	</div>
 	</form>
+	
+	
+	<div id="itensCalculos">
+	   <table id="tableCalculos" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	        <thead>
+	            <tr>
+	                <th>Totais</th>
+	                <th>Dias de Faltas</th>
+	                <th>Horas Dom/Fer.</th>
+	                <th>Horas Trabalhadas</th>
+	                <th>Horas Extras</th>
+	                <th>Horas Extras Noturnas</th>
+	            </tr>
+	        </thead>
+	        <tfoot>
+	            <tr>
+	                <th>&nbsp;</th>
+	                <th>&nbsp;</th>
+	                <th>&nbsp;</th>
+	                <th>&nbsp;</th>
+	                <th><span id="totalDeHoras"></span></th>
+	                <th>&nbsp;</th>
+	            </tr>
+	        </tfoot>
+	        <tbody>
+	        </tbody>
+	    </table>
+	</div>
 </div>
-
-
 
 <script type="text/javascript">
 window.onload = function(){

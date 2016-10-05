@@ -165,8 +165,11 @@ function informacaoDescontoValeTransporte(){
 	</div>
 	</div>
 	
-	<div class="container">
-	<form id="dadosEmpregado" role="form" class="form-inline" method="post" action="AlterarEmpregado" enctype="multipart/form-data">
+  <div class="container">
+	
+	<h1>Holerite</h1>
+	
+	<form id="dadosFolha" role="form" class="form-inline" >
 		<div class="container" style="width: 100%;">    
 			<div class= "form-group" style="float: right;">
 		     	<label  for = "select" >ANO</label> 
@@ -216,8 +219,15 @@ function informacaoDescontoValeTransporte(){
 		        	</select>
 		      	</div>
 		    </div>  	
+			
+		  	<div class= "form-group">
+		  		<a href="PesquisarPonto?acao=CadastrarAlterar&codigoEmpregado=<%=codigoEmpregado%>">
+		  		<img id="imagemCadastroPonto" src="imagens/cadastroPonto.png">
+ 				</a>
+		    </div>
 		</div> 
-	<script>
+	</form>
+ 	<script>
 		function funcaoData() 
 		{
 			var valor_mes = document.getElementById("combo_mes").value;
@@ -225,7 +235,9 @@ function informacaoDescontoValeTransporte(){
 			location.href="PesquisarFolhaPagamento?acao=Pesquisar&codigoEmpregado=<%=codigoEmpregado%>&mes="+valor_mes+"&ano="+valor_ano+""; 
 		}
 	</script>
-
+	<br/>
+	
+	<form id="dadosEmpregado" role="form" class="form-inline" method="post" action="AlterarEmpregado" enctype="multipart/form-data">
 	<nav class="navbar navbar-default" role="navigation">
 	<div class="container">
 		<label  for= "dadosEmpregado" > Dados da Folha </label><br><br>
@@ -352,7 +364,6 @@ function informacaoDescontoValeTransporte(){
     <div id="botoes">
 		<button  type= "submit" name="acao" value="Pagar" onclick="return validar()" class= "btn btn-primário " > Pagar </button> 
 		<button  type= "submit" name="acao" value="Imprimir" onclick="return validar()" class= "btn btn-primário " > Imprimir </button> 
-		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick=""> Cancelar </button> 
 	</div>
 	
  </form>
