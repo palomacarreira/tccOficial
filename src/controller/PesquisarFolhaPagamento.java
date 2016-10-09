@@ -111,31 +111,68 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 			case "GerarHolerite":
 				try{
 					
-						EspecialistaEmpregado emp = new EspecialistaEmpregado();
+					String codEmpregado = request.getParameter("codEmpregado");
+					
+					EmpregadoTO empregadoTO2 = empregado.pesquisar(codEmpregado);
+					ContratoTO contratoTO2 = contrato.pesquisarEmpregado(codEmpregado);
+					SimpleDateFormat formatador2 = new SimpleDateFormat("yyyy-MM-dd");
+					//String dataAdmissao2 = formatador2.format(contratoTO2.getDataAdmissao());
+					CalculosFolhaDePagamento calculos2 = new CalculosFolhaDePagamento();
+				 	
+					int totalDias2 = 0;
+					int anoEscolhido2 = 0;
+					int mesEscolhido2 = 0;
+					if(request.getParameter("mes") == null)
+					{
+						anoEscolhido  = Calendar.getInstance().get(Calendar.YEAR);
+						mesEscolhido = Calendar.getInstance().get(Calendar.MONTH) + 1;
+						totalDias = calculos2.diasNoMes(mesEscolhido, anoEscolhido);
+					}
+					else{
+						anoEscolhido = Integer.parseInt(request.getParameter("ano"));
+						mesEscolhido = Integer.parseInt(request.getParameter("mes"));
+						totalDias = calculos2.diasNoMes(mesEscolhido, anoEscolhido);
+					}
+					
+				 	double valorHoraExtra2 = calculos2.totalHoraExtra(codEmpregado,mesEscolhido, anoEscolhido,totalDias);
+					double salario2 = contratoTO2.getSalarioBase();
+					double inss2 = calculos2.totalINSS(salario2);
+					double fgts2 = calculos2.totalFGTS(salario2);
+					double irrf2 = calculos2.totalIRRF(salario2,codEmpregado,inss2);
+					double valeTransporte2 = calculos2.totalValeTransporte(salario2, codEmpregado);
+					double salarioLiquido2 = calculos2.totalSalario(codEmpregado, salario2, valeTransporte2, 
+					inss2, irrf2, valorHoraExtra2);
+					List<HoleriteRelatorio> holerites = new ArrayList<HoleriteRelatorio>();
+					
+					
+						/*EspecialistaEmpregado emp = new EspecialistaEmpregado();
 						EspecialistaUsuario usuario = new EspecialistaUsuario();
 						List<HoleriteRelatorio> holerites = new ArrayList<HoleriteRelatorio>();
 						String codEmpregado = request.getParameter("codEmpregado");
 						ContratoTO contTO = contrato.pesquisarEmpregado(codEmpregado);
 						UsuarioTO usuarioTO = usuario.pesquisarUsuario(codEmpregado);
-						EmpregadoTO emprTO = emp.pesquisar(codEmpregado);	
+						EmpregadoTO emprTO = emp.pesquisar(codEmpregado);	*/
 						Date data = new java.sql.Date(new java.util.Date().getTime());
 						
 						System.out.println("Gerando PDF do holerite");
 						
 						HoleriteRelatorio holerite = new HoleriteRelatorio();
 						
-						holerite.setNomeEmpregador(usuarioTO.getNome() +" "+ usuarioTO.getSobrenome());
-						holerite.setIdEmpregado(emprTO.getCodigoEmpregado());
-						holerite.setNomeEmpregado(emprTO.getNome()+" "+ emprTO.getSobrenome());
-						holerite.setCargoEmpregado(contTO.getCargo());
-						holerite.setSalarioBase(contTO.getSalarioBase());
-						holerite.setPorcentagemDescontoInss(0.6);//ISSO TEM QUE PEGAR SA TABELA PARAMETRO DO BANCO
-						holerite.setValorDescontoInss(9.0);//ISSO E A PORCENTAGEM SOBRE O SALARIO
-						holerite.setSalarioLiquido(9.0); //ISSO E O SALARIO BASE MENOS TODOS OS DESCONTOS
-						holerite.setDataDoHolerite(data);//MES E ANO DO HOLERITE
-						holerite.setHoraExtra(9.0);//ISSO E O VALOR ADICIONAL REFERENTE HORA EXTRA DO MES EM QUESTAO
-						holerite.setAdicionalNoturno(9.0);//ISSO E O VALOR ADICIONAL REFERENTE TRABALHO NOTURNO
-						holerite.setValorDescontoIr(9.0);//VALOR A SER DESCONTADO DE IR --ISSO VAI DEPENDER DO VALOR DO SALARIO DO EMPREGADO, SE O VALOR FOR BAIXO NAO ENTRA AQUI.
+						holerite.setNomeEmpregador(empregadoTO2.getNome() +" "+ empregadoTO2.getSobrenome());
+						holerite.setIdEmpregado(empregadoTO2.getCodigoEmpregado());
+						holerite.setNomeEmpregado(empregadoTO2.getNome()+" "+ empregadoTO2.getSobrenome());
+						holerite.setCargoEmpregado(contratoTO2.getCargo());
+						holerite.setSalarioBase(salario2);//feito
+						holerite.setValeTransporte(valeTransporte2);
+						holerite.setHoraExtra(valorHoraExtra2);
+						holerite.setDescontoBeneficios(3.0);
+						holerite.setValorDescontoInss(inss2);//feito
+						holerite.setFgts(fgts2);
+						holerite.setSalarioLiquido(salarioLiquido2); 
+						holerite.setDataDoHolerite(data);
+						//holerite.setPorcentagemDescontoInss(0.6);//ISSO TEM QUE PEGAR SA TABELA PARAMETRO DO BANCO
+						//holerite.setAdicionalNoturno(9.0);//ISSO E O VALOR ADICIONAL REFERENTE TRABALHO NOTURNO
+						//holerite.setValorDescontoIr(9.0);//VALOR A SER DESCONTADO DE IR --ISSO VAI DEPENDER DO VALOR DO SALARIO DO EMPREGADO, SE O VALOR FOR BAIXO NAO ENTRA AQUI.
 						
 
 						holerites.add(holerite);

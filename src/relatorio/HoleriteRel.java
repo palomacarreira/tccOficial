@@ -41,6 +41,7 @@ public class HoleriteRel{
 		try {
 			//report = JasperCompileManager.compileReport("reports/jasper/reportHolerite.jrxml");
 			report = JasperCompileManager.compileReport(this.getPathToReportPackage()+ "jasper/reportHolerite.jrxml");
+			System.out.println("LOCAL ONDE TEM QUE TA O RELATORIO: " + this.getPathToReportPackage()+ "jasper/reportHolerite.jrxml");
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			System.out.println("compileReport");
