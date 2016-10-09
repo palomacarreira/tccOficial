@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,17 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.CalculosFolhaDePagamento;
-import model.CalculosHoraExtra;
 import model.ContratoTO;
 import model.EmpregadoTO;
 import model.EspecialistaContrato;
 import model.EspecialistaEmpregado;
-import model.EspecialistaHorasExtras;
-import model.EspecialistaJornadaTrabalho;
-import model.EspecialistaPonto;
-import model.HoraExtraTO;
-import model.JornadaTrabalhoTO;
-import model.PontoTO;
+import model.EspecialistaUsuario;
+import model.HoleriteRelatorio;
+import model.UsuarioTO;
+import relatorio.HoleriteRel;
 
 /**
  * Servlet implementation class PesquisarFolhaPagamento
@@ -108,6 +106,50 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 				request.setAttribute("dataAdmissao", dataAdmissao);
 				view = request.getRequestDispatcher("TelaFolhaPagamento.jsp");
 				view.forward(request, response);
+			break;
+			
+			case "GerarHolerite":
+				try{
+					
+						EspecialistaEmpregado emp = new EspecialistaEmpregado();
+						EspecialistaUsuario usuario = new EspecialistaUsuario();
+						List<HoleriteRelatorio> holerites = new ArrayList<HoleriteRelatorio>();
+						String codEmpregado = request.getParameter("codEmpregado");
+						ContratoTO contTO = contrato.pesquisarEmpregado(codEmpregado);
+						UsuarioTO usuarioTO = usuario.pesquisarUsuario(codEmpregado);
+						EmpregadoTO emprTO = emp.pesquisar(codEmpregado);	
+						Date data = new java.sql.Date(new java.util.Date().getTime());
+						
+						System.out.println("Gerando PDF do holerite");
+						
+						HoleriteRelatorio holerite = new HoleriteRelatorio();
+						
+						holerite.setNomeEmpregador(usuarioTO.getNome() +" "+ usuarioTO.getSobrenome());
+						holerite.setIdEmpregado(emprTO.getCodigoEmpregado());
+						holerite.setNomeEmpregado(emprTO.getNome()+" "+ emprTO.getSobrenome());
+						holerite.setCargoEmpregado(contTO.getCargo());
+						holerite.setSalarioBase(contTO.getSalarioBase());
+						holerite.setPorcentagemDescontoInss(0.6);//ISSO TEM QUE PEGAR SA TABELA PARAMETRO DO BANCO
+						holerite.setValorDescontoInss(9.0);//ISSO E A PORCENTAGEM SOBRE O SALARIO
+						holerite.setSalarioLiquido(9.0); //ISSO E O SALARIO BASE MENOS TODOS OS DESCONTOS
+						holerite.setDataDoHolerite(data);//MES E ANO DO HOLERITE
+						holerite.setHoraExtra(9.0);//ISSO E O VALOR ADICIONAL REFERENTE HORA EXTRA DO MES EM QUESTAO
+						holerite.setAdicionalNoturno(9.0);//ISSO E O VALOR ADICIONAL REFERENTE TRABALHO NOTURNO
+						holerite.setValorDescontoIr(9.0);//VALOR A SER DESCONTADO DE IR --ISSO VAI DEPENDER DO VALOR DO SALARIO DO EMPREGADO, SE O VALOR FOR BAIXO NAO ENTRA AQUI.
+						
+
+						holerites.add(holerite);
+
+						HoleriteRel relatorio = new HoleriteRel();
+						
+						relatorio.imprimir(holerites);
+						
+						relatorio.download(response,holerites);
+						
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			break;
 		}
 	}

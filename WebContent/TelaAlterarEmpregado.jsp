@@ -98,7 +98,7 @@
 					</div>
 
 					<div class="col-md-2">
-						<a href="#">
+						<a href="DecimoTerceiroController?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
 								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>

@@ -363,7 +363,8 @@ function informacaoDescontoValeTransporte(){
     
     <div id="botoes">
 		<button  type= "submit" name="acao" value="Pagar" onclick="return validar()" class= "btn btn-primário " > Pagar </button> 
-		<button  type= "submit" name="acao" value="Imprimir" onclick="return validar()" class= "btn btn-primário " > Imprimir </button> 
+		<!--<button  type= "submit" name="acao" value="Imprimir" onclick="return validar()" class= "btn btn-primário " > Imprimir </button>   -->
+		<a href="PesquisarFolhaPagamento?acao=GerarHolerite&codEmpregado=<%=empregado.getCodigoEmpregado()%>">Exportar Holerite</a>
 	</div>
 	
  </form>

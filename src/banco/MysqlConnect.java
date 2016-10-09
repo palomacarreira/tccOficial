@@ -12,7 +12,7 @@ package banco;
 	        String dbName   = "projetoTCC";                      
 	        String driver   = "com.mysql.jdbc.Driver";       
 	        String userName = "root";                         
-	        String password = "administrador";                  
+	        String password = "";                  
 	        try {
 	            Class.forName(driver); 
 	            conn = DriverManager.getConnection(url+dbName, userName, password); 
