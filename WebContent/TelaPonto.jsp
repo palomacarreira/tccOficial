@@ -55,7 +55,11 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	int anoEscolhido = (int) request.getAttribute("anoEscolhido");
 	int mesEscolhido = (int) request.getAttribute("mesEscolhido");
 	int diasDoMes = (int)request.getAttribute("totalDias");
-	
+	String totalHorasTrabalhadas =(String) request.getAttribute("totalHorasTrabalhadas");
+	String totalHorasExtras = (String) request.getAttribute("totalHorasExtras");
+	String totalHorasNoturnas = (String) request.getAttribute("totalHoraExtraNoturna");
+	int totalFaltas = (int) request.getAttribute("totalFaltas");
+	int totalFolgas = (int) request.getAttribute("totalFolgas");
 %>  
 
 <div class="header clearfix">
@@ -270,7 +274,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	            <tr>
 	                <th>Totais</th>
 	                <th>Dias de Faltas</th>
-	                <th>Horas Dom/Fer.</th>
+	                <th>Dias de Dom/DSR/Fer.</th>
 	                <th>Horas Trabalhadas</th>
 	                <th>Horas Extras</th>
 	                <th>Horas Extras Noturnas</th>
@@ -279,11 +283,11 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	        <tfoot>
 	            <tr>
 	                <th>&nbsp;</th>
-	                <th>&nbsp;</th>
-	                <th>&nbsp;</th>
-	                <th>&nbsp;</th>
-	                <th><span id="totalDeHoras"></span></th>
-	                <th>&nbsp;</th>
+	                <th><%=totalFaltas%></th>
+	                <th><%=totalFolgas%></th>
+	                <th><%=totalHorasTrabalhadas%></th>
+	                <th><%=totalHorasExtras%></th>
+	                <th><%=totalHorasNoturnas%></th>
 	            </tr>
 	        </tfoot>
 	        <tbody>
@@ -294,13 +298,13 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 
 <script type="text/javascript">
 window.onload = function(){
+
   <% 
   		String totalHoraExtra = "00:00";
   		String totalHoraExtraNoturna= "00:00";
   		Boolean obtemPontoMesAtual = false;
 		if(listaDePonto.size() != 0)
 		{
-			
 				for(PontoTO pontoTO : listaDePonto)
 				{
 					SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
@@ -350,18 +354,8 @@ window.onload = function(){
 						    cols += '<td><span><%=pontoTO.getAcao()%></span></td>';
 						
 						    newRow.append(cols);
-						    $("#tableFolhaPonto").append(newRow);
-						 
-						    <%
-							if(pontoTO.getAcao().equals("Falta")){
-							%>
-							    $('#combo_acao option[value="Falta"]').attr({ selected : "selected" });
-							<%
-							}else{
-							%>
-							    $('#combo_acao option[value="Dia Comum"]').attr({ selected : "selected" });
-							<%
-							}
+						    $("#tableFolhaPonto").append(newRow);	
+						<%
 					}
 				}
 				

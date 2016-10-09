@@ -1,10 +1,10 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.CalculosFolhaDePagamento;
+import model.CalculosPagamento;
 import model.ContratoTO;
 import model.EmpregadoTO;
 import model.EspecialistaContrato;
@@ -59,13 +59,53 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 		
 		switch (acao) 
 		{
+			case "GerarHolerite":
+			try{
+			 					
+			 	EspecialistaEmpregado emp = new EspecialistaEmpregado();
+			 	EspecialistaUsuario usuario = new EspecialistaUsuario();
+			 	List<HoleriteRelatorio> holerites = new ArrayList<HoleriteRelatorio>();
+			 	String codEmpregado = request.getParameter("codEmpregado");
+			 	ContratoTO contTO = contrato.pesquisarEmpregado(codEmpregado);
+			 	UsuarioTO usuarioTO = usuario.pesquisarUsuario(codEmpregado);
+			 	EmpregadoTO emprTO = emp.pesquisar(codEmpregado);	
+			 	Date data = new java.sql.Date(new java.util.Date().getTime());
+			 						
+			 	System.out.println("Gerando PDF do holerite");
+			 					
+			 	HoleriteRelatorio holerite = new HoleriteRelatorio();
+			 						
+			 	holerite.setNomeEmpregador(usuarioTO.getNome() +" "+ usuarioTO.getSobrenome());
+			 	holerite.setIdEmpregado(emprTO.getCodigoEmpregado());
+			 	holerite.setNomeEmpregado(emprTO.getNome()+" "+ emprTO.getSobrenome());
+			 	holerite.setCargoEmpregado(contTO.getCargo());
+			 	holerite.setSalarioBase(contTO.getSalarioBase());
+			 	holerite.setPorcentagemDescontoInss(0.6);//ISSO TEM QUE PEGAR SA TABELA PARAMETRO DO BANCO
+			 	holerite.setValorDescontoInss(9.0);//ISSO E A PORCENTAGEM SOBRE O SALARIO
+			 	holerite.setSalarioLiquido(9.0); //ISSO E O SALARIO BASE MENOS TODOS OS DESCONTOS
+			 	holerite.setDataDoHolerite(data);//MES E ANO DO HOLERITE
+			 	holerite.setHoraExtra(9.0);//ISSO E O VALOR ADICIONAL REFERENTE HORA EXTRA DO MES EM QUESTAO
+			 	holerite.setAdicionalNoturno(9.0);//ISSO E O VALOR ADICIONAL REFERENTE TRABALHO NOTURNO
+			 	holerite.setValorDescontoIr(9.0);//VALOR A SER DESCONTADO DE IR --ISSO VAI DEPENDER DO VALOR DO SALARIO DO EMPREGADO, SE O VALOR FOR BAIXO NAO ENTRA AQUI.
+			 	holerites.add(holerite);
+			 
+			 	HoleriteRel relatorio = new HoleriteRel();
+			 	relatorio.imprimir(holerites);
+			 	relatorio.download(response,holerites);
+			 						
+			 	} catch (Exception e) {
+			 	// TODO Auto-generated catch block
+			 		e.printStackTrace();
+			 	}
+			 	break;
+			 			
 			case "Pesquisar":
 				
 				EmpregadoTO empregadoTO = empregado.pesquisar(codigoEmpregado);
 				ContratoTO contratoTO = contrato.pesquisarEmpregado(codigoEmpregado);
 				SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
 				String dataAdmissao = formatador.format(contratoTO.getDataAdmissao());
-				CalculosFolhaDePagamento calculos = new CalculosFolhaDePagamento();
+				CalculosPagamento calculos = new CalculosPagamento();
 			 	
 				int totalDias = 0;
 				int anoEscolhido = 0;
@@ -88,8 +128,9 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 				double fgts = calculos.totalFGTS(salario);
 				double irrf = calculos.totalIRRF(salario,codigoEmpregado,inss);
 				double valeTransporte = calculos.totalValeTransporte(salario, codigoEmpregado);
+				double folgas = calculos.totalFolgas(codigoEmpregado);
 				double salarioLiquido = calculos.totalSalario(codigoEmpregado, salario, valeTransporte, 
-				inss, irrf, valorHoraExtra);
+				inss, irrf, valorHoraExtra, folgas);
 				
 				request.setAttribute("anoEscolhido", anoEscolhido);
 				request.setAttribute("mesEscolhido", mesEscolhido);
@@ -106,50 +147,6 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 				request.setAttribute("dataAdmissao", dataAdmissao);
 				view = request.getRequestDispatcher("TelaFolhaPagamento.jsp");
 				view.forward(request, response);
-			break;
-			
-			case "GerarHolerite":
-				try{
-					
-						EspecialistaEmpregado emp = new EspecialistaEmpregado();
-						EspecialistaUsuario usuario = new EspecialistaUsuario();
-						List<HoleriteRelatorio> holerites = new ArrayList<HoleriteRelatorio>();
-						String codEmpregado = request.getParameter("codEmpregado");
-						ContratoTO contTO = contrato.pesquisarEmpregado(codEmpregado);
-						UsuarioTO usuarioTO = usuario.pesquisarUsuario(codEmpregado);
-						EmpregadoTO emprTO = emp.pesquisar(codEmpregado);	
-						Date data = new java.sql.Date(new java.util.Date().getTime());
-						
-						System.out.println("Gerando PDF do holerite");
-						
-						HoleriteRelatorio holerite = new HoleriteRelatorio();
-						
-						holerite.setNomeEmpregador(usuarioTO.getNome() +" "+ usuarioTO.getSobrenome());
-						holerite.setIdEmpregado(emprTO.getCodigoEmpregado());
-						holerite.setNomeEmpregado(emprTO.getNome()+" "+ emprTO.getSobrenome());
-						holerite.setCargoEmpregado(contTO.getCargo());
-						holerite.setSalarioBase(contTO.getSalarioBase());
-						holerite.setPorcentagemDescontoInss(0.6);//ISSO TEM QUE PEGAR SA TABELA PARAMETRO DO BANCO
-						holerite.setValorDescontoInss(9.0);//ISSO E A PORCENTAGEM SOBRE O SALARIO
-						holerite.setSalarioLiquido(9.0); //ISSO E O SALARIO BASE MENOS TODOS OS DESCONTOS
-						holerite.setDataDoHolerite(data);//MES E ANO DO HOLERITE
-						holerite.setHoraExtra(9.0);//ISSO E O VALOR ADICIONAL REFERENTE HORA EXTRA DO MES EM QUESTAO
-						holerite.setAdicionalNoturno(9.0);//ISSO E O VALOR ADICIONAL REFERENTE TRABALHO NOTURNO
-						holerite.setValorDescontoIr(9.0);//VALOR A SER DESCONTADO DE IR --ISSO VAI DEPENDER DO VALOR DO SALARIO DO EMPREGADO, SE O VALOR FOR BAIXO NAO ENTRA AQUI.
-						
-
-						holerites.add(holerite);
-
-						HoleriteRel relatorio = new HoleriteRel();
-						
-						relatorio.imprimir(holerites);
-						
-						relatorio.download(response,holerites);
-						
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			break;
 		}
 	}

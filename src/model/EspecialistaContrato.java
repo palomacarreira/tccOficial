@@ -53,9 +53,19 @@ public class EspecialistaContrato {
 		contratoTO.setDuracaoSemanal(duracaoSemanal);
 		contratoTO.setDescontoBeneficios(descontoBeneficios);
     	contratoDAO.alterar(contratoTO);
-		
+    	
 	}
 	
+	public void alterarRescisao(boolean demitido, Date dataDemissao, double valor, String descricao,String tipo, String codigo)
+	{
+		 contratoTO.setDemitido(demitido);
+         contratoTO.setDataDemissao(dataDemissao);
+         contratoTO.setValorPagarDemissao(valor);
+         contratoTO.setDescricao(descricao);
+         contratoTO.setTipoDemissao(tipo);
+         contratoTO.setCodigoEmpregado(codigo);
+         contratoDAO.alterarRescisao(contratoTO);
+	}
 
 	public ContratoTO pesquisarEmpregado(String codg){
 		

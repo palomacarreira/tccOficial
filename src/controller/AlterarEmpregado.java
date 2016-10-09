@@ -7,6 +7,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -16,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+import model.CalculosPagamento;
 import model.ContatoTO;
 import model.ContratoTO;
 import model.EmpregadoTO;
@@ -174,6 +178,7 @@ public class AlterarEmpregado extends HttpServlet {
 					 
 					 Boolean diaFolga = null;
 					 Boolean diaMeioPeriodo = null;
+					 Boolean diaNaoTrabalhado = false;
 					 String diaF = request.getParameter("diaFolga"+ i);
 					 String diaM = request.getParameter("diaMeioPeriodo"+ i);
 					 
@@ -185,8 +190,14 @@ public class AlterarEmpregado extends HttpServlet {
 						 diaMeioPeriodo = false;
 					 }else{diaMeioPeriodo = true;}
 
+					 if(horaEntrada.equals("") && horaSaida.equals("") && horaSaidaAlmoco.equals("") && horaVoltaAlmoco.equals(""))
+					 {
+						 if(diaFolga == false){
+							 diaNaoTrabalhado = true;
+						 }
+					 }
 					 espJornada.alterarJornada(jornada.getCodigo(),horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, 
-								horaSaida, diaSemana, diaFolga, diaMeioPeriodo);
+								horaSaida, diaSemana, diaFolga, diaMeioPeriodo, diaNaoTrabalhado);
 					 
 					 i = i+1; // CONTADOR
 				 } 
@@ -290,6 +301,128 @@ public class AlterarEmpregado extends HttpServlet {
 			}	
 			break;
 			
+		case "Rescisao":
+			
+			String codgEmp = (String) request.getParameter("codEmpregado");
+			String tipoDemissao = (String) request.getParameter("motivoDemissao");
+			String descricao = request.getParameter("descricao");
+			String tipoAviso = request.getParameter("tipoAviso");
+			String feriasVencidas = request.getParameter("feriasVencidas");
+			formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date dataDemissao = null;
+			dataA = request.getParameter("dataDemissao");;
+			 
+			try {
+				dataDemissao = new java.sql.Date( ((java.util.Date)formatter.parse(dataA)).getTime());
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}	
+			
+			CalculosPagamento calculos = new CalculosPagamento();
+			ContratoTO contratoTO = espContrato.pesquisarEmpregado(codgEmp);
+			// data demissao
+			int ano = Integer.parseInt(dataA.substring(0,4)); 
+			int mes = Integer.parseInt(dataA.substring(5,7));
+			int dia = Integer.parseInt(dataA.substring(8,10));
+			
+			int totalDiasProporcionais = dia;
+			int totalDias = calculos.diasNoMes(mes, ano);
+			
+		 	double valorHoraExtra = calculos.totalHoraExtra(codgEmp,mes, ano,totalDias);
+		 	double valorHoraExtraProporcional = calculos.totalHoraExtra(codgEmp, mes, ano,totalDiasProporcionais);
+		 	
+			double salario = contratoTO.getSalarioBase();
+			double inss = calculos.totalINSS(salario);
+			double fgts = calculos.totalFGTS(salario);
+			double irrf = calculos.totalIRRF(salario,codgEmp,inss);
+			double vale = calculos.totalValeTransporte(salario, codgEmp);
+			double folgas = calculos.totalFolgas(codgEmp);
+			double beneficios = contratoTO.getDescontoBeneficios();
+			
+			double salarioLiquidoProporcional = calculos.totalSalario(codgEmp, salario, vale, 
+			inss, irrf, valorHoraExtraProporcional, folgas);
+			double salarioLiquido = calculos.totalSalario(codgEmp, salario, vale, 
+			inss, irrf, valorHoraExtra, folgas);
+			
+			double decimoTerceiro =  calculos.calculaDecimoTerceiro(codgEmp, mes, ano,salario,
+					valorHoraExtra, inss, irrf);
+			double multaAviso = 0.0;
+			double ferias = 0.0;
+			if(feriasVencidas.equals("Sim"))
+			{
+				ferias = calculos.calculaValorFerias(salario);
+			}
+			double feriasProporcionais = calculos.calculaFeriasProporcionais(codgEmp, 
+					salario, mes, ano);
+				
+			double total = 0.0;
+			if(tipoDemissao.equals("Sem Justa Causa") && tipoAviso.equals("Indenizado"))
+			{
+				double avisoPrevioIndenizado = salarioLiquido;
+				total = salarioLiquido + avisoPrevioIndenizado + ferias + feriasProporcionais + decimoTerceiro;
+				
+			}
+			else if(tipoDemissao.equals("Sem Justa Causa")&& tipoAviso.equals("Trabalhado"))
+			{
+				double avisoPrevioIndenizado = salarioLiquido;
+				total = salarioLiquido + avisoPrevioIndenizado + ferias + feriasProporcionais
+								+ decimoTerceiro ;
+			}
+			else if(tipoDemissao.equals("Com Justa Causa"))
+			{	
+				total = salarioLiquidoProporcional + ferias + feriasProporcionais ;
+			}
+			else if(tipoDemissao.equals("Pedido de Demissão") && tipoAviso.equals("Trabalhado"))
+			{
+				total = salarioLiquidoProporcional + ferias + feriasProporcionais + decimoTerceiro ;
+			}
+			else if(tipoDemissao.equals("Pedido de Demissão")&& tipoAviso.equals("Indenizado"))
+			{
+				total = salarioLiquidoProporcional + ferias + feriasProporcionais + decimoTerceiro ;
+			}
+			else if(tipoDemissao.equals("Sem Justa Causa")&& tipoAviso.equals("Não trabalhou"))
+			{
+				double avisoPrevioIndenizado = salario;
+				multaAviso = salario;	
+				total = salario + avisoPrevioIndenizado + ferias + feriasProporcionais + decimoTerceiro
+						 - multaAviso;
+				
+				//multa no valor de um mês de salário descontado do pagamento da rescisão. 
+				//A empresa só poderia descontar até o limite, ou seja, até zerar a rescisão”, 
+				if(total < 0){
+					total = 0.0;
+				}
+			}
+			else if(tipoDemissao.equals("Término de Contrato")){
+				total = salarioLiquido + ferias + feriasProporcionais + decimoTerceiro;
+			}
+			
+			try {
+				espContrato.alterarRescisao(true, dataDemissao, total, descricao, tipoDemissao, codgEmp);
+				request.setAttribute("codigoEmpregado", codgEmp);
+				request.setAttribute("salarioLiquido", salarioLiquido);
+				request.setAttribute("salarioLiquidoProporcional", salarioLiquidoProporcional);
+				request.setAttribute("inss", inss);
+				request.setAttribute("fgts", fgts);
+				request.setAttribute("irrf", irrf);
+				request.setAttribute("valeTransporte",vale);
+				request.setAttribute("ferias", ferias);
+				request.setAttribute("feriasProporcionais", feriasProporcionais);
+				request.setAttribute("decimoTerceiro", decimoTerceiro);
+				request.setAttribute("multaAvisoPrevio", multaAviso);
+				request.setAttribute("folgas", folgas);
+				request.setAttribute("beneficios", beneficios);
+				request.setAttribute("total", total);
+				view = request.getRequestDispatcher("TelaCalculosRescisao.jsp"); 
+		        view.forward(request, response);
+			} 
+			catch (NumberFormatException e) 
+			{
+				view = request.getRequestDispatcher("PesquisarEmpregado?acao=PesquisarTodos");
+				view.forward(request, response);
+			}
+			break;
+			
 		case "Alterar":
 
 			String codEmp = (String) request.getParameter("codEmpregado");
@@ -299,7 +432,7 @@ public class AlterarEmpregado extends HttpServlet {
 					EmpregadoTO empregadoTO = espEmpregado.pesquisar(codEmp);
 					ContatoTO contatoTO = espContato.pesquisarEmpregado(codEmp);
 					EnderecoTO enderecoTO = espEndereco.pesquisarEmpregado(codEmp );
-					ContratoTO contratoTO = espContrato.pesquisarEmpregado(codEmp);
+					contratoTO = espContrato.pesquisarEmpregado(codEmp);
 					ArrayList<JornadaTrabalhoTO> listaJornada = espJornada.pesquisarJornada(contratoTO.getCodigo());
 
 					try {
@@ -333,13 +466,16 @@ public class AlterarEmpregado extends HttpServlet {
 		}
 	}
 
-public String getFileName(Part part){
-    String header = part.getHeader( "content-disposition" );
-    for( String tmp : header.split(";") ){
-        if( tmp.trim().startsWith("filename") ){
-            return tmp.substring( tmp.indexOf("=")+2 , tmp.length()-1 );
-        }
-    }
-    return null;
+	public String getFileName(Part part){
+	    String header = part.getHeader( "content-disposition" );
+	    for( String tmp : header.split(";") ){
+	        if( tmp.trim().startsWith("filename") ){
+	            return tmp.substring( tmp.indexOf("=")+2 , tmp.length()-1 );
+	        }
+	    }
+	    return null;
+	}
+	
 }
-}
+
+

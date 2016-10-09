@@ -118,8 +118,8 @@ public class FolhaPagamentoDAO extends MysqlConnect {
 	            if(resultSet.next())
 	            {
 	            	folhaPagamentoTO = new FolhaPagamentoTO();
-	            	//folhaPagamentoTO.setDecTercPrimeiro(resultSet.getDouble("DECIMO_TERCEIRO_1PARCELA"));
-					//folhaPagamentoTO.setDecTercSegunda(resultSet.getDouble("DECIMO_TERCEIRO_2PARCELA"));
+	            	folhaPagamentoTO.setDecTercPrimeiro(resultSet.getDouble("DECIMO_TERCEIRO_1PARCELA"));
+					folhaPagamentoTO.setDecTercSegunda(resultSet.getDouble("DECIMO_TERCEIRO_2PARCELA"));
 					folhaPagamentoTO.setSalarioLiquido(resultSet.getDouble("SALARIO_LIQUIDO"));
 					folhaPagamentoTO.setFgts(resultSet.getDouble("FGTS"));
 					folhaPagamentoTO.setInss(resultSet.getDouble("INSS"));
@@ -128,7 +128,7 @@ public class FolhaPagamentoDAO extends MysqlConnect {
 					folhaPagamentoTO.setBeneficios(resultSet.getDouble("BENEFICIOS"));
 					folhaPagamentoTO.setMesReferencia(resultSet.getString("MES_REFERENCIA"));
 					folhaPagamentoTO.setAnoReferencia(resultSet.getString("ANO_REFERENCIA"));
-					//folhaPagamentoTO.setHoraExtra(resultSet.getDouble("VALOR_HORA_EXTRA"));
+					folhaPagamentoTO.setHoraExtra(resultSet.getDouble("VALOR_HORA_EXTRA"));
 					folhaPagamentoTO.setCodigo(resultSet.getString("CD_FOLHA_PAGAMENTO"));
 	            }	
 	            st.close();

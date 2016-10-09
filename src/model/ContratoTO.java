@@ -7,7 +7,7 @@ public class ContratoTO {
 	public String cargo, codigo, duracaoSemanal;
 	String diaPagamento;
 	public Date dataDemissao, dataAdmissao;
-	public Boolean descontoINSS;
+	public Boolean descontoINSS, demitido;
 	public Double valeTransporte, valorPagarDemissao, salarioBase, descontoBeneficios;
 	public String compensacaoDias;
 	public String regimeDeTrabalho, descricao, tipoDemissao;
@@ -145,6 +145,12 @@ public class ContratoTO {
 	public void setDataAdmissao(Date dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
-
+	public Boolean getDemitido() {
+		return demitido;
+	}
+	public void setDemitido(Boolean demitido) {
+		this.demitido = demitido;
+	}
+	
 	
 }

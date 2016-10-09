@@ -95,10 +95,15 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
                <div class="row1" ><!--  style="border-radius: 25px; border: 2px solid #DCDCDC;"-->
                 <div class="col-md-4" style="border-radius: 25px; border: 2px solid #DCDCDC;">
                 	<div class="funcDados">
-                			<img href="AlterarEmpregado?acao=Alterar&codEmpregado=<%=listaFunc.get(i).getCodigoEmpregado()%>" id="myimage" src="uploads/1/<%=listaFunc.get(i).getFoto() %>" height="100">
-							<a href="AlterarEmpregado?acao=Alterar&codEmpregado=<%=listaFunc.get(i).getCodigoEmpregado()%>"><%=listaFunc.get(i).getNome()%> <%=listaFunc.get(i).getSobrenome()%></a>
-							<p class="text-orange" style="font-family: Arial; font-style: oblique; font-size: 15px;text-align: center">Salário <%=listaCont.get(i).getSalarioBase()%></p>
-							<p style="font-family: Arial; font-style: oblique; font-size: 15px;text-align: center">Contratado desde: <%=listaCont.get(i).getDataAdmissao()%></p>
+                		<img href="AlterarEmpregado?acao=Alterar&codEmpregado=<%=listaFunc.get(i).getCodigoEmpregado()%>" id="myimage" src="uploads/1/<%=listaFunc.get(i).getFoto() %>" height="100">
+						<a href="AlterarEmpregado?acao=Alterar&codEmpregado=<%=listaFunc.get(i).getCodigoEmpregado()%>"><%=listaFunc.get(i).getNome()%> <%=listaFunc.get(i).getSobrenome()%></a>
+						<p class="text-orange" style="font-family: Arial; font-style: oblique; font-size: 15px;text-align: center">Salário <%=listaCont.get(i).getSalarioBase()%></p>
+						<p style="font-family: Arial; font-style: oblique; font-size: 15px;text-align: center">Contratado desde: <%=listaCont.get(i).getDataAdmissao()%></p>
+						<%
+						if(listaCont.get(i).getDemitido() == true){
+							out.println("<p style=\'font-family: Arial; font-style: oblique; color:red; font-size: 15px;text-align: center\'>DEMITIDO</p>");
+						}
+						%>
 					</div>
                 </div>
           

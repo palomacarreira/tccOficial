@@ -53,15 +53,24 @@
 		<script src="dist/js/bootstrap-submenu.min.js" defer></script>
 		<script src="js/sweetalert.min.js"></script>
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<img src="imagens/logo.jpg" align="left">
 			</div>
 
-			<div class="col-md-8">
+			<div class="col-md-7">
 				<br> <br>
 				<nav>
 				<ul class="nav nav-pills">
-					<div class="col-md-2">
+					<div class="col-md-1">
+						<a href="AlterarEmpregado?acao=Excluir&codEmpregado=<%=empregado.getCodigoEmpregado()%>">
+							<span class="fa-stack fa-2x"> <i
+								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
+								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+						</span> <br> <span class="func-link-txt">Excluir</span>
+						</a>
+					</div>
+					
+					<div class="col-md-1">
 						<a href="AlterarEmpregado?acao=Demitir&codEmpregado=<%=empregado.getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
@@ -70,7 +79,7 @@
 						</a>
 					</div>
 					
-					<div class="col-md-2">
+					<div class="col-md-1">
 						<a href="PesquisarFolhaPagamento?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
@@ -79,7 +88,7 @@
 						</a>
 					</div>
 					
-					<div class="col-md-2">
+					<div class="col-md-1">
 						<a href="PesquisarFerias?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
@@ -88,7 +97,7 @@
 						</a>
 					</div>
 
-					<div class="col-md-2">
+					<div class="col-md-1">
 						<a href="AtividadeController?acao=PesquisarTodos&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
@@ -97,7 +106,7 @@
 						</a>
 					</div>
 
-					<div class="col-md-2">
+					<div class="col-md-1">
 						<a href="DecimoTerceiroController?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
@@ -106,7 +115,7 @@
 						</a>
 					</div>
 					
-					<div class="col-md-2">
+					<div class="col-md-1">
 						<a href="PesquisarPonto?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
@@ -673,8 +682,9 @@
 	 	<input type="text" name="horaSaida7" class="form-control" id="horaSaida7" class="form-control" size="5" >
 		 </td>
 		 </tr>
+		 
 		 <tr>
-		 <td> Dia de Folga </td>
+		 <td> DSR </td>
 		 <td>
 			<input name="diaFolga1" id="diaFolga1" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
 		  </td>

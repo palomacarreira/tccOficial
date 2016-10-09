@@ -11,7 +11,7 @@ public class EspecialistaJornadaTrabalho {
 	JornadaTrabalhoDAO jornadaTrabalhoDAO = new JornadaTrabalhoDAO();
 	
 	public void adicionarJornada(String horaEntrada,String horaSaidaAlmoco, String horaVoltaAlmoco, 
-	String horaSaida, int diaSemana, Boolean diaFolga, Boolean diaMeioPeriodo) 
+	String horaSaida, int diaSemana, Boolean diaFolga, Boolean diaMeioPeriodo, Boolean diaSemTrabalho) 
 	{
 	
 		jornadaTrabalhoTO.setHoraEntrada(horaEntrada);
@@ -21,11 +21,12 @@ public class EspecialistaJornadaTrabalho {
 		jornadaTrabalhoTO.setDiaSemana(diaSemana);
 		jornadaTrabalhoTO.setDiaMeioPeriodo(diaMeioPeriodo);
 		jornadaTrabalhoTO.setDiaFolga(diaFolga);
+		jornadaTrabalhoTO.setDiaSemTrabalho(diaSemTrabalho);
 		jornadaTrabalhoDAO.cadastrar(jornadaTrabalhoTO);
 	}
 	
 	public void alterarJornada(String codigo, String horaEntrada,String horaSaidaAlmoco, String horaVoltaAlmoco, 
-			String horaSaida, int diaSemana, Boolean diaFolga, Boolean diaMeioPeriodo) 
+			String horaSaida, int diaSemana, Boolean diaFolga, Boolean diaMeioPeriodo, Boolean diaSemTrabalho) 
 	{
 		jornadaTrabalhoTO.setCodigo(codigo);
 		jornadaTrabalhoTO.setHoraEntrada(horaEntrada);
@@ -35,6 +36,7 @@ public class EspecialistaJornadaTrabalho {
 		jornadaTrabalhoTO.setDiaSemana(diaSemana);
 		jornadaTrabalhoTO.setDiaMeioPeriodo(diaMeioPeriodo);
 		jornadaTrabalhoTO.setDiaFolga(diaFolga);
+		jornadaTrabalhoTO.setDiaSemTrabalho(diaSemTrabalho);
 		jornadaTrabalhoDAO.alterar(jornadaTrabalhoTO);
 	}
 	

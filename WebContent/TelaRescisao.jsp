@@ -54,63 +54,50 @@ function confirma(){
 			<div class="col-md-4">
 				<img src="imagens/logo.jpg" align="left">
 			</div>
-			<div class="col-md-8">
-				<br>
-				<br>
-				<nav>
+		<div class="col-md-8">
+			<br>
+			<br>
+			<nav>
 				<ul class="nav nav-pills">
-
-                <div class="col-md-2">
-
-						
-							<p style="font-size: 25px;">Rescisão</p>
-
-					
-
+		            <div class="col-md-2">
+						<p style="font-size: 25px;">Rescisão</p>
 					</div>
-				      
-	                  
-	                    <nav >
-  <ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
-      
-            <li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
-            
-                <ul>
-                      <li><a href="AlterarUsuario?acao=alterar">Meu Perfil</a></li>
-                      <li><a href="AlterarUsuario?acao=excluir">Excluir</a></li>
-                      <li><a href="TelaLogin.jsp">Sair</a></li>                   
-                </ul>
-            </li>
-                   
-</ul>
-</nav>
-						 
-						
-				    </ul>
-				</nav>
-
-			</div>
+			     	<nav >
+		  			<ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
+		           		<li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
+		                <ul>
+		                      <li><a href="AlterarUsuario?acao=alterar">Meu Perfil</a></li>
+		                      <li><a href="AlterarUsuario?acao=excluir">Excluir</a></li>
+		                      <li><a href="TelaLogin.jsp">Sair</a></li>                   
+		                </ul>
+		            	</li> 
+					</ul>
+					</nav>		
+				</ul>
+			</nav>
+		</div>
 	  	</div>
 	</div>
 	<br>
 	<hr />
 
-<div class="container">
-<form id="dadosEmpregado" role="form" class="form-inline" method="post" action="AlterarEmpregado">
-<nav class="navbar navbar-default" role="navigation">
+	<div class="container">
+	<form id="dadosEmpregado" role="form" class="form-inline" method="post" action="AlterarEmpregado?&codEmpregado=<%=empregado.getCodigoEmpregado()%>">
+	<nav class="navbar navbar-default" role="navigation">
 	<label  for= "dadosEmpregado" > Dados Rescisão</label><br> <br>
-    <div class="form-group"> 
-    <label  for= "regimeContrato" >Motivo demissão:</label> 
-    	<div class="span3">
-		<input  type="radio" name="motivoDemissao" id="justaCausa"  value="Justa Causa" CHECKED>
-		Justa Causa
-		<input type="radio" name="motivoDemissao" id="solicitadoEmpregador"  value="Solicitado pelo empregador"> 
-		Solicitado pelo empregador	
-		<input type="radio" name="motivoDemissao" id="solicitadoEmpregado"  value="Solicitado pelo empregado"> 
-		Solicitado pelo empregado	
-		</div>	
-    </div>
  
+ 		 <div class="form-group">
+     		<label  for = "motivoDemissao" >Motivo demissão:</label>
+     		 <div class="span3">
+ 				<select class="form-control" name="motivoDemissao" id="motivoDemissao">
+					<option value="Pedido de Demissão" style ="width: 100px; height: 100px">Pedido de Demissão</option>	
+     				<option value="Sem Justa Causa" style ="width: 100px; height: 100px">Dispensa Sem Justa Causa</option>	
+     				<option value="Com Justa Causa" style ="width: 100px; height: 100px">Dispensa Com Justa Causa</option>
+     				<option value="Término de Contrato" style ="width: 100px; height: 100px">Término de Contrato</option>
+				</select>
+      		</div>
+    	</div> 
+    		
 	<br>
 	<br>
 	<div  class= "form-group" > 
@@ -126,10 +113,33 @@ function confirma(){
 	    	<input type="date" id="dataDemissao" name="dataDemissao" class= "form-control" size="20"> 
 	    </div>
 	</div>
-   <br>
+	
+	 <div class="form-group">
+     	<label  for= "tipoAviso" > Tipo de Aviso Prévio: </label> 
+     	<div class="span3">
+ 			<select class="form-control" name="tipoAviso" id="tipoAviso">
+				<option value="Trabalhado" style ="width: 100px; height: 100px">Trabalhado</option>	
+     			<option value="Indenizado" style ="width: 100px; height: 100px">Indenizado(sem trabalhar)</option>
+     			<option value="Não Trabalhou" style ="width: 100px; height: 100px">Não Trabalhou</option>	
+     		</select>
+      	</div>
+    </div> 
+	
+	<div class="form-group">
+     	<label  for= "feriasVencidas" > Férias Vencidas: </label> 
+     	<div class="span3">
+ 			<select class="form-control" name="feriasVencidas" id="feriasVencidas">
+				<option value="Sim" style ="width: 100px; height: 100px">Sim</option>	
+     			<option value="Não" style ="width: 100px; height: 100px">Não</option>	
+     		</select>
+      	</div>
+    </div> 
+    	
+    <br>
 	<br>	
-</nav>
-<nav class="navbar navbar-default" role="navigation">
+	</nav>
+
+	<nav class="navbar navbar-default" role="navigation">
 	<div id="dadosFuncionario">
 	  <div class="row">
       		<div class="col-md-2">
@@ -151,14 +161,12 @@ function confirma(){
 
 	<br>
 	<br>
-</nav>
+	</nav>
      <div id="botoes">
+     	<button  type= "submit" name="acao" value="Rescisao" onclick="return confirma()" class= "btn btn-primário " > Demitir </button> 
      	<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário " onclick="history.go(-1)" > Voltar </button> 
-		<button  type= "submit" name="acao" value="Excluir" onclick="return confirma()" class= "btn btn-primário " > Demitir </button> 
-		
-	
 	</div>
-	 </form>
+	</form>
 </div>
 
 <c:import url="rodape.jsp"/>

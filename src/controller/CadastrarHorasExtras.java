@@ -125,10 +125,10 @@ public class CadastrarHorasExtras extends HttpServlet implements Servlet {
 							cadastroVoltaAlmoco, cadastroSaida);
 					String totalDeHorasExtrasNoturno = calculos.calculaHorasExtrasNoturno(horaEntrada, 
 							horaSaida);
-					int folga = 0;
+					boolean folga = false;
 					if(diaSemana == 7 || acaoSelecionada.equals("Feriado Trabalhado"))
 					{
-						folga = 1;
+						folga = true;
 					}
 					espHorasExtras.adicionar(totalDeHorasExtras, totalDeHorasExtrasNoturno, folga, codigoPonto);
 						 

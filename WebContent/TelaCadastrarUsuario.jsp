@@ -112,12 +112,14 @@ $(document).ready(function(){
 		    <input  type= "text"  class= "form-control" name="endereco" id= "endereco" size="25"> 
 		    </div>
 		 </div> 
+		 
 		 <div  class= "form-group" > 
 		    <label  for= "numero" > Numero </label> 
 		    <div class="span3">
-		    <input  type= "text"  class= "form-control"  name="numeroEndereco" id= "numeroEndereco" size="25"> 
+		    <input type="number" min="0" class= "form-control"  name="numeroEndereco" id= "numeroEndereco" size="25" required> 
 		    </div>
 		 </div>
+	
 		 <div  class= "form-group" > 
 		    <label  for= "complemento" > Complemento </label> 
 		    <div class="span3">
