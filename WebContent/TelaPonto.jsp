@@ -74,95 +74,42 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 				<img src="imagens/logo.jpg" align="left">
 			</div>
 
-			<div class="col-md-10">
-				<br> <br>
-				<nav>
-				<ul class="nav nav-pills">
-				
-					<div class="col-md-1">
-						<a href="PesquisarEmpregado?acao=PesquisarTodos">
-							<span class="fa-stack fa-2x"> <i
-								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
-								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
-						</span> <br> <span class="func-link-txt">Funcionários</span>
-						</a>
-					</div>
-					
-					<div class="col-md-1">
-						<a href="AlterarEmpregado?acao=Demitir&codEmpregado=<%=empregado.getCodigoEmpregado()%>">
-							<span class="fa-stack fa-2x"> <i
-								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
-								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
-						</span> <br> <span class="func-link-txt">Demitir</span>
-						</a>
-					</div>
-					
-					<div class="col-md-1">
-						<a href="PesquisarFolhaPagamento?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
-							<span class="fa-stack fa-2x"> <i
-								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
-								class="fa fa-bars fa-stack-1x func-link-i2"></i>
-						</span> <br> <span class="func-link-txt">Holerite</span>
-						</a>
-					</div>
-					
-					<div class="col-md-1">
-						<a href="PesquisarFerias?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
-							<span class="fa-stack fa-2x"> <i
-								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
-								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
-						</span> <br> <span class="func-link-txt">Férias</span>
-						</a>
-					</div>
-
-					<div class="col-md-1">
-						<a href="AtividadeController?acao=PesquisarTodos&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
-							<span class="fa-stack fa-2x"> <i
-								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
-								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
-						</span> <br> <span class="func-link-txt">Atividades</span>
-						</a>
-					</div>
-
-					<div class="col-md-1">
-						<a href="#">
-							<span class="fa-stack fa-2x"> <i
-								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
-								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
-						</span> <br> <span class="func-link-txt">Décimo Terceiro</span>
-						</a>
-					</div>
-					
-					<div class="col-md-1">
-						<a href="PesquisarPonto?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
-							<span class="fa-stack fa-2x"> <i
-								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
-								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
-						</span> <br> <span class="func-link-txt">Folha de Ponto</span>
-						</a>
-					</div>
-
-					<div class="col-md-4">
-	         		<nav >
-					<ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
-						<li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
-					    	<ul>
-						        <li><a href="AlterarUsuario?acao=alterar">Meu Perfil</a></li>
-						        <li><a href="AlterarUsuario?acao=excluir">Excluir</a></li>
-						        <li><a href="TelaLogin.jsp">Sair</a></li>                   
-					       	</ul>
-					    </li>            
-					</ul>
-					</nav>
-					</div>
-				</ul>
-				</nav>
-			</div>
+			
 		</div>
 	</div>
 	
     <div class="container">
-    
+    				<nav>
+				<ul class="nav nav-pills">
+
+                <div class="col-md-2">
+
+						
+							<!--<p style="font-size: 25px;">Folha de ponto</p>  -->
+
+					
+
+					</div>
+				      
+	                  
+	                    <nav >
+  <ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
+      
+            <li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
+            
+                <ul>
+                      <li><a href="AlterarUsuario?acao=alterar">Meu Perfil</a></li>
+                      <li><a href="AlterarUsuario?acao=excluir">Excluir</a></li>
+                      <li><a href="TelaLogin.jsp">Sair</a></li>                   
+                </ul>
+            </li>
+                   
+</ul>
+</nav>
+						 
+						
+				    </ul>
+				</nav>
     <h1>Folha de Ponto</h1>
 
 	<form id="dadosFolha" role="form" class="form-inline" >

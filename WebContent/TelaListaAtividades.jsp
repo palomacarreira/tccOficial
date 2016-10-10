@@ -167,7 +167,7 @@
                 <div class="col-md-2">
 
 						
-							<p style="font-size: 25px;">Atividades</p>
+							<!--<p style="font-size: 25px;">Atividades</p>  -->
 
 					
 

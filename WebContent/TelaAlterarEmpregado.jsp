@@ -74,7 +74,7 @@
 						<a href="AlterarEmpregado?acao=Demitir&codEmpregado=<%=empregado.getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
-								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+								class="fa fa-thumbs-o-down fa-stack-1x func-link-i2"></i>
 						</span> <br> <span class="func-link-txt">Demitir</span>
 						</a>
 					</div>
@@ -92,7 +92,7 @@
 						<a href="PesquisarFerias?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
-								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+								class="fa fa-suitcase fa-stack-1x func-link-i2"></i>
 						</span> <br> <span class="func-link-txt">Férias</span>
 						</a>
 					</div>
@@ -101,7 +101,7 @@
 						<a href="AtividadeController?acao=PesquisarTodos&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
-								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+								class="fa fa-file-excel-o  fa-stack-1x func-link-i2"></i>
 						</span> <br> <span class="func-link-txt">Atividades</span>
 						</a>
 					</div>
@@ -110,7 +110,7 @@
 						<a href="DecimoTerceiroController?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
-								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+								class="fa fa-caret-square-o-down fa-stack-1x func-link-i2"></i>
 						</span> <br> <span class="func-link-txt">Décimo Terceiro</span>
 						</a>
 					</div>
@@ -119,11 +119,20 @@
 						<a href="PesquisarPonto?acao=Pesquisar&codigoEmpregado=<%=empregado.getCodigoEmpregado()%>">
 							<span class="fa-stack fa-2x"> <i
 								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
-								class="fa fa-trash-o fa-stack-1x func-link-i2"></i>
+								class="fa fa-sliders  fa-stack-1x func-link-i2"></i>
 						</span> <br> <span class="func-link-txt">Folha de Ponto</span>
 						</a>
 					</div>
 
+					<div class="col-md-1">
+						<a href="#">
+							<span class="fa-stack fa-2x"> <i
+								class="fa fa-square-o fa-stack-2x func-link-i1"></i> <i
+								class="fa fa-qrcode  fa-stack-1x func-link-i2"></i>
+						</span> <br> <span class="func-link-txt">QR Code</span>
+						</a>
+					</div>
+					
 	         		<nav >
 					<ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
 						<li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
