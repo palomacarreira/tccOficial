@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportHolerite" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6a0a0704-bc89-40b3-9a2e-01f9532494ab">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="44"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nomeEmpregador" class="java.lang.String"/>
+	<field name="nomeEmpregado" class="java.lang.String"/>
+	<field name="cargoEmpregado" class="java.lang.String"/>
+	<field name="dataDoHolerite" class="java.lang.String"/>
+	<field name="salarioBase" class="java.lang.String"/>
+	<field name="valorDescontoInss" class="java.lang.String"/>
+	<field name="salarioLiquido" class="java.lang.String"/>
+	<field name="horaExtra" class="java.lang.String"/>
+	<field name="valeTransporte" class="java.lang.String"/>
+	<field name="descontoIrrf" class="java.lang.String"/>
+	<field name="fgts" class="java.lang.String"/>
+	<field name="descontoBeneficios" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="56" splitType="Stretch">
+			<image>
+				<reportElement x="2" y="1" width="75" height="54" uuid="2719a76a-38cf-40dd-b106-d67e862b4df3"/>
+				<imageExpression><![CDATA["/Users/palomacarreira/Desktop/NewWorkspace/tcc-gestao/WebContent/imagens/logo.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="0" width="1" height="56" uuid="b2097ddc-4df3-42a8-9629-ad23b371637d"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="56" uuid="20277c62-77f5-4031-8970-47e9188e26dd"/>
+			</line>
+			<staticText>
+				<reportElement x="209" y="16" width="158" height="20" uuid="b72b6a62-f749-4ef5-99f9-45e553f97316"/>
+				<text><![CDATA[Recibo de pagamento]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="437" y="1" width="118" height="20" uuid="91ffd59e-4cbc-4b14-a777-8fc510e0481b"/>
+				<textFieldExpression><![CDATA[$F{dataDoHolerite}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="405" y="1" width="30" height="20" uuid="7ca17a1a-deb4-4365-adb0-bbaf2a10c4ad"/>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="0" width="552" height="1" uuid="dc98d2c5-489b-4fe5-9af0-990961571c23"/>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="337" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="0" width="152" height="20" uuid="130af1dc-7a4f-4e12-aff1-759b00202a69"/>
+				<textFieldExpression><![CDATA[$F{nomeEmpregador}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="0" width="100" height="20" uuid="7d617e34-5cc8-43c8-8965-63656b9345c7"/>
+				<text><![CDATA[Empregador:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="353" y="1" width="200" height="20" uuid="d66177aa-342a-4eba-999a-9aee98741765"/>
+				<textFieldExpression><![CDATA[$F{nomeEmpregado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="353" y="21" width="200" height="20" uuid="14f626ce-ff3f-4656-9b29-ed6a716e8259"/>
+				<textFieldExpression><![CDATA[$F{cargoEmpregado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="253" y="20" width="100" height="20" uuid="b3ac363a-7941-475c-8d25-f35e043eebee"/>
+				<text><![CDATA[Cargo:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="-153" width="555" height="1" uuid="9be2f1e1-5141-4284-aaa3-5e705f30be96"/>
+			</line>
+			<line>
+				<reportElement x="1" y="0" width="553" height="1" uuid="e3d8395d-0928-46d7-b50d-9add33300834"/>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="1" height="335" uuid="92681e8b-f033-480d-b891-214126fc8c96"/>
+			</line>
+			<line>
+				<reportElement x="252" y="0" width="1" height="258" uuid="18479273-acb2-464d-b173-ffdc874ad752"/>
+			</line>
+			<staticText>
+				<reportElement x="253" y="1" width="100" height="20" uuid="cbf6bee4-965d-42f6-9bde-e0a68ada9c73"/>
+				<text><![CDATA[Empregado:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="39" width="553" height="1" uuid="0d0089a4-04a6-4dad-9fdf-345db95ac36d"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="336" uuid="325eca04-443b-4356-82e4-b8891fb8c012"/>
+			</line>
+			<staticText>
+				<reportElement x="77" y="47" width="100" height="20" uuid="7519b70f-091a-4b54-8450-5acf711b1183"/>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="47" width="86" height="20" uuid="25bf6bbc-f2ec-424a-b0fc-116e9d0ba02e"/>
+				<text><![CDATA[Vencimentos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="47" width="63" height="21" uuid="94d511f3-f2b2-4de2-8225-b1e624ab0152"/>
+				<text><![CDATA[Descontos]]></text>
+			</staticText>
+			<line>
+				<reportElement x="391" y="40" width="1" height="218" uuid="6b856620-9f83-458c-8ddb-ef59ec2f0a96"/>
+			</line>
+			<line>
+				<reportElement x="1" y="66" width="553" height="1" uuid="a6e86626-edb6-433f-b098-29586e55e3db"/>
+			</line>
+			<line>
+				<reportElement x="1" y="85" width="554" height="1" uuid="60859702-d6dc-4796-b79a-3cd3b11920ac"/>
+			</line>
+			<line>
+				<reportElement x="1" y="105" width="554" height="1" uuid="85f4b096-b591-4b2c-b427-f80099f83c01"/>
+			</line>
+			<line>
+				<reportElement x="1" y="124" width="553" height="1" uuid="b22fa74a-911f-4c08-96ea-d5f7f2d1c182"/>
+			</line>
+			<line>
+				<reportElement x="1" y="143" width="554" height="1" uuid="b054955d-74c8-4442-be5c-976920b528ed"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="70" width="100" height="20" uuid="f0049f49-4d6b-4c2d-9729-a398be917161"/>
+				<text><![CDATA[Salário Base]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="281" y="68" width="100" height="20" uuid="46ff982f-2de1-4c60-8586-72f60c6acc19"/>
+				<textFieldExpression><![CDATA[$F{salarioBase}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="128" width="100" height="20" uuid="e4d6ba13-53bb-4abe-ae9e-4370ba2aecba"/>
+				<text><![CDATA[INSS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="418" y="128" width="126" height="20" uuid="cab6e612-f239-41fd-b992-63e810281f90"/>
+				<textFieldExpression><![CDATA[$F{valorDescontoInss}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="281" y="240" width="100" height="20" uuid="3359ff68-bfb0-42c4-9bd8-0004b9d70c7f"/>
+				<text><![CDATA[Salário Líquido:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="418" y="240" width="100" height="20" uuid="e9ef22e0-321e-4b05-8779-2919e506f43f"/>
+				<textFieldExpression><![CDATA[$F{salarioLiquido}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="336" width="555" height="1" uuid="060dcb7f-a50d-4bcf-9ef7-d34131492da5"/>
+			</line>
+			<line>
+				<reportElement x="31" y="303" width="115" height="1" uuid="7ec4b9b5-f3c3-4379-8f7e-988e59d4bcf6"/>
+			</line>
+			<line>
+				<reportElement x="301" y="304" width="251" height="1" uuid="0b48f63d-6a75-404e-a44d-5de2fb23e05a"/>
+			</line>
+			<staticText>
+				<reportElement x="72" y="316" width="30" height="20" uuid="158cc952-f191-4e27-b66b-4570ac8c15fd"/>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="405" y="316" width="100" height="20" uuid="e9c2e6a7-9ee3-477b-8d59-82cf966fdd68"/>
+				<text><![CDATA[Assinatura]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="164" width="552" height="1" uuid="48e45012-717c-4ec8-a248-8f563dfc5b81"/>
+			</line>
+			<line>
+				<reportElement x="1" y="184" width="553" height="1" uuid="3e611984-649a-4074-b074-446e7e6712e5"/>
+			</line>
+			<line>
+				<reportElement x="1" y="202" width="553" height="1" uuid="f6cc5f71-7052-4dd0-955a-613c8650a493"/>
+			</line>
+			<line>
+				<reportElement x="1" y="220" width="552" height="1" uuid="65467b13-3957-4b5b-80a4-82baa9c03ca6"/>
+			</line>
+			<line>
+				<reportElement x="1" y="239" width="552" height="1" uuid="c74028c2-3826-42e0-bf0e-55302200d6d1"/>
+			</line>
+			<line>
+				<reportElement x="2" y="258" width="552" height="1" uuid="a6c0a96b-3b40-4377-9746-009be4d0d21f"/>
+			</line>
+			<staticText>
+				<reportElement x="2" y="109" width="100" height="15" uuid="fe5f8752-a836-4c51-8c67-4b95e2ebe729"/>
+				<text><![CDATA[Vale Transporte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="86" width="100" height="16" uuid="7c30058a-5106-42a8-82d7-12c4d4a35f89"/>
+				<text><![CDATA[Hora Extra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="147" width="100" height="16" uuid="a99cb701-a856-45ff-a59a-7ddaaad64b09"/>
+				<text><![CDATA[Benefícios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="168" width="100" height="16" uuid="d969944b-b9d5-46f8-bf1e-10b188a6b74e"/>
+				<text><![CDATA[IRRF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="187" width="100" height="16" uuid="0f9f53e4-2c90-45ba-b174-0bb02977aeb5"/>
+				<text><![CDATA[FGTS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="281" y="88" width="100" height="20" uuid="97e871a6-0730-4f8f-a30d-8ccff472fbdd"/>
+				<textFieldExpression><![CDATA[$F{horaExtra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="418" y="108" width="100" height="20" uuid="766681c0-d08a-41e9-9159-64e52e32b38d"/>
+				<textFieldExpression><![CDATA[$F{valeTransporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="418" y="168" width="100" height="20" uuid="36626994-e24e-48c6-ab3e-60b19f5be658"/>
+				<textFieldExpression><![CDATA[$F{descontoIrrf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="418" y="188" width="100" height="20" uuid="7d569516-a49c-436a-b396-31adcbc8a570"/>
+				<textFieldExpression><![CDATA[$F{fgts}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="147" width="126" height="20" uuid="48a2178b-3d09-4e8e-bd73-f6c686f98117"/>
+				<textFieldExpression><![CDATA[$F{descontoBeneficios}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
