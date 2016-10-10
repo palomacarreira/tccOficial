@@ -162,11 +162,11 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 						holerite.setIdEmpregado(empregadoTO2.getCodigoEmpregado());
 						holerite.setNomeEmpregado(empregadoTO2.getNome()+" "+ empregadoTO2.getSobrenome());
 						holerite.setCargoEmpregado(contratoTO2.getCargo());
-						holerite.setSalarioBase(salario2);//feito
+						holerite.setSalarioBase(salario2);
 						holerite.setValeTransporte(valeTransporte2);
 						holerite.setHoraExtra(valorHoraExtra2);
 						holerite.setDescontoBeneficios(3.0);
-						holerite.setValorDescontoInss(inss2);//feito
+						holerite.setValorDescontoInss(inss2);
 						holerite.setFgts(fgts2);
 						holerite.setSalarioLiquido(salarioLiquido2); 
 						holerite.setDataDoHolerite(data);
