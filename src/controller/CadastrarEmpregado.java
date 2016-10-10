@@ -168,10 +168,11 @@ public class CadastrarEmpregado extends HttpServlet {
 				 
 				 Boolean diaFolga = null;
 				 Boolean diaMeioPeriodo = null;
+				 Boolean diaNaoTrabalhado = false;
 				 String diaF = request.getParameter("diaFolga"+ i);
 				 String diaM = request.getParameter("diaMeioPeriodo"+ i);
 				 
-				 if(diaF == null){
+			     if(diaF == null){
 					 diaFolga = false;
 				 }else{diaFolga = true;}
 				 
@@ -179,8 +180,15 @@ public class CadastrarEmpregado extends HttpServlet {
 					 diaMeioPeriodo = false;
 				 }else{diaMeioPeriodo = true;}
 					
+				 if(horaEntrada.equals("") && horaSaida.equals("") && horaSaidaAlmoco.equals("") && horaVoltaAlmoco.equals(""))
+				 {
+					 if(diaFolga == false){
+						 diaNaoTrabalhado = true;
+					 }
+				 }
+				 
 				 espJornada.adicionarJornada(horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, 
-							horaSaida, diaSemana, diaFolga, diaMeioPeriodo);
+							horaSaida, diaSemana, diaFolga, diaMeioPeriodo, diaNaoTrabalhado);
 			 } 
 
 			

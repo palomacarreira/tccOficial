@@ -101,14 +101,12 @@ public class CalculosHoraExtra
 			return diaSemana;   
 		}
 
-		public int obterQuantidadeDeSemanasMesAtual(int ultimoDiaDoMes) 
-		{
-			Calendar dataBase = Calendar.getInstance();
-			dataBase.set(Calendar.DAY_OF_MONTH, ultimoDiaDoMes);
-			return dataBase.get(Calendar.WEEK_OF_MONTH);
-		}
-		
-	
+	public int obterQuantidadeDeSemanasMesAtual(int ultimoDiaDoMes) 
+	{
+		Calendar dataBase = Calendar.getInstance();
+		dataBase.set(Calendar.DAY_OF_MONTH, ultimoDiaDoMes);
+		return dataBase.get(Calendar.WEEK_OF_MONTH);
+	}
 		
 	public String somaHorasExtras(String totalDeHorasExtras, String totalDeHorasExtrasNoturno){
 
@@ -149,7 +147,7 @@ public class CalculosHoraExtra
 	
 	public double calcularValorHoras(double salario, String qtdHorasMensais, String horasExtras, String horasExtrasNoturno, int diaDaSemana, String acaoSelecionada)
 	{
-		
+		// totais de horas extras em 1 dia
 		int totalDehorasExtras = Integer.parseInt(horasExtras.substring(0, 2));
 		int TotalDehorasExtrasNoturno = Integer.parseInt(horasExtrasNoturno.substring(0, 2));
 		
@@ -159,8 +157,7 @@ public class CalculosHoraExtra
 		//As horas extras em domingos e feriados são calculadas com 100% de acréscimo.
 		//Horas extras realizadas entre segunda e sábado devem ter acréscimo de no mínimo 50% do salário. 
 		// Transforma-se a hora extra noturna: 1h / 52,5 x 60 = 1,1428 horas; já que a hora noturna equivale a 52min e 30 seg.
-		
-		
+	
 		int horas = Integer.parseInt(qtdHorasMensais.substring(0,2));
 		double valorHoraDiurna = salario / horas;
 		double valorHoraNoturna = valorHoraDiurna + (valorHoraDiurna * 0.2);
@@ -178,25 +175,16 @@ public class CalculosHoraExtra
 			}
 			else
 			{
-				hE = Integer.parseInt(horasExtras.substring(1,3));
-				int minutos = Integer.parseInt(horasExtras.substring(4,6));
 				//Se o empregado se atrasar,  o empregador está apto a deduzir além dos minutos de atraso, 
 				//um dia por semana relativo ao DSR.
 				//Se o atraso for inferior a cinco minutos diários, nenhuma implicação terá pois está
 				//dentro do período de tolerância previsto expressamente na legislação laboral.
 
-				if(minutos == 5){
-					hE = Integer.parseInt(horasExtras.substring(0,2));
-					if(diaDaSemana == 7 || acaoSelecionada.equals("Feriado Trabalhado") || acaoSelecionada.equals("Trabalhou na DSR"))		
-					{
-						totalHorasExtras = valorHoraDiurna  *  hE * 2;
-					}
-					else
-					{
-						totalHorasExtras = valorHoraDiurna *  hE * 1.5;
-					}
-				}
-				else{
+				hE = Integer.parseInt(horasExtras.substring(1,3));
+				int minutos = Integer.parseInt(horasExtras.substring(4,6));
+		
+				if(!(minutos == 5)) // calcula normal até 5 min de atraso
+				{
 					totalHorasExtras = -(valorHoraDiurna  *  hE);
 				}
 			}
@@ -219,8 +207,7 @@ public class CalculosHoraExtra
 		valorHorasExtras = totalHorasExtras + totalHorasExtrasNoturnas;
 		return valorHorasExtras;
 	}
-
-
+	
 	public String calculaHorasExtras(String horaEntrada, String horaSaidaAlmoco, String horaVoltaAlmoco, 
 	String horaSaida, String cadastroEntrada, String cadastroSaidaAlmoco, String cadastroVoltaAlmoco,
 			String cadastroSaida)
@@ -302,6 +289,77 @@ public class CalculosHoraExtra
 		return horaFinal;
 	}
 
+	// SOMA HORAS
+	public String somaHoras(String horaAnterior, String horaSomar)
+	{
+		String horaFinal = "00:00";
+		int horainicio = 0;
+		int minutoinicio = 0;
+		int horafinal = 0;
+		int minutofinal = 0;
+		if(possuiValor(horaAnterior) && possuiValor(horaSomar))
+		{
+			if(horaAnterior.substring(0, 1).equals("-"))
+			{
+				horainicio = Integer.parseInt(horaAnterior.substring(1, 3));
+				minutoinicio = Integer.parseInt(horaAnterior.substring(4, 6));
+			}
+			else
+			{
+				horainicio = Integer.parseInt(horaAnterior.substring(0, 2));
+				minutoinicio = Integer.parseInt(horaAnterior.substring(3, 5));
+			}
+			
+			if(horaSomar.substring(0, 1).equals("-"))
+			{
+				horafinal = Integer.parseInt(horaSomar.substring(1, 3));
+				minutofinal = Integer.parseInt(horaSomar.substring(4, 6));
+			}
+			else
+			{
+				horafinal = Integer.parseInt(horaSomar.substring(0, 2));
+				minutofinal = Integer.parseInt(horaSomar.substring(3, 5));
+			}
+			
+
+			if(horaAnterior.substring(0, 1).equals("-") && horaSomar.substring(0, 1).equals("-")){
+				horainicio = horainicio * 60 + minutoinicio; 
+				horafinal = horafinal * 60 + minutofinal; 
+			}
+			else if(horaAnterior.substring(0, 1).equals("-"))
+			{
+				horainicio = -(horainicio * 60 + minutoinicio); 
+				horafinal = horafinal * 60 + minutofinal; 
+			}
+			else if(horaSomar.substring(0, 1).equals("-"))
+			{
+				horainicio = horainicio * 60 + minutoinicio; 
+				horafinal = - (horafinal * 60 + minutofinal); 
+			}
+			else{
+				horainicio = horainicio * 60 + minutoinicio; 
+				horafinal = horafinal * 60 + minutofinal;
+			}
+			
+			int vlhora = (horafinal + horainicio);
+			int  hora = (int) Math.floor(vlhora / 60);
+			int  minuto = vlhora % 60;
+			horaFinal = completaZeroEsquerda(hora) + ":" + completaZeroEsquerda(minuto);
+			
+			if(horaAnterior.substring(0, 1).equals("-") && horaSomar.substring(0, 1).equals("-"))
+			{
+				 horaFinal = "-"+horaFinal;
+			}	
+			
+		}
+		else if(possuiValor(horaSomar))
+		{
+			horaFinal = horaSomar;
+		}
+		
+		return horaFinal;
+	}
+	
 	public String calculaHorasExtrasNoturno(String horaEntrada, String horaSaida)
 	{
 		String horaFinal = "00:00";

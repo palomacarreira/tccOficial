@@ -9,7 +9,7 @@ public class EspecialistaHorasExtras
 	HoraExtraTO horasExtrasTO = new HoraExtraTO();
 	HoraExtraDAO horaExtraDAO = new HoraExtraDAO();
 	
-	public void adicionar(String totalDeHorasExtras, String totalDeHorasExtrasNoturno, int folga, String codigoPonto)
+	public void adicionar(String totalDeHorasExtras, String totalDeHorasExtrasNoturno, boolean folga, String codigoPonto)
 	{		
 		horasExtrasTO.setCodigoPonto(codigoPonto);
 		horasExtrasTO.setTotalDeHorasExtras(totalDeHorasExtras);
@@ -19,7 +19,7 @@ public class EspecialistaHorasExtras
 	}
 	
 	
-	public void alterar(String totalDeHorasExtras, String totalDeHorasExtrasNoturno, int folga, String codigoPonto)
+	public void alterar(String totalDeHorasExtras, String totalDeHorasExtrasNoturno, boolean folga, String codigoPonto)
 	{		
 		horasExtrasTO.setCodigoPonto(codigoPonto);
 		horasExtrasTO.setTotalDeHorasExtras(totalDeHorasExtras);
@@ -36,6 +36,11 @@ public class EspecialistaHorasExtras
 	public HoraExtraTO pesquisar(String codigo)
 	{
 		 return horaExtraDAO.pesquisar(codigo);
+	}
+	
+	public HoraExtraTO pesquisarPorPonto(String codigo)
+	{
+		 return horaExtraDAO.pesquisarPorPonto(codigo);
 	}
 	
 }

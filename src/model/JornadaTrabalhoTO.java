@@ -4,7 +4,7 @@ public class JornadaTrabalhoTO {
 	
 	public String horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, horaSaida;
 	public int diaSemana;
-	public Boolean diaFolga, diaMeioPeriodo;
+	public Boolean diaFolga, diaMeioPeriodo, diaSemTrabalho;
 	public String codigoContrato,codigo;
 	
 	
@@ -61,6 +61,12 @@ public class JornadaTrabalhoTO {
 	}
 	public void setDiaMeioPeriodo(Boolean diaMeioPeriodo) {
 		this.diaMeioPeriodo = diaMeioPeriodo;
+	}
+	public Boolean getDiaSemTrabalho() {
+		return diaSemTrabalho;
+	}
+	public void setDiaSemTrabalho(Boolean diaSemTrabalho) {
+		this.diaSemTrabalho = diaSemTrabalho;
 	}
 	
 	

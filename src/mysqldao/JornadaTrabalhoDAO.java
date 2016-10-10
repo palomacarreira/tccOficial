@@ -47,8 +47,8 @@ public class JornadaTrabalhoDAO extends MysqlConnect{
 	    	  String sql = "INSERT INTO JORNADA_TRABALHO("
 	    		         + "HORA_ENTRADA, HORA_SAIDA, "
 	    		         + "HORA_INICIO_INTERVALO, HORA_FIM_INTERVALO,"
-	    		         + "DIA_SEMANA,DIA_FOLGA, DIA_MEIO_PERIODO, "
-	    		         + "FK_CONTRATO)VALUES (?,?,?,?,?,?,?,?)"; 
+	    		         + "DIA_SEMANA,DIA_FOLGA, DIA_MEIO_PERIODO, DIA_SEM_TRABALHO,"
+	    		         + "FK_CONTRATO)VALUES (?,?,?,?,?,?,?,?,?)"; 
 	    		         
 	         st = conn.prepareStatement(sql);
 	    	
@@ -59,7 +59,8 @@ public class JornadaTrabalhoDAO extends MysqlConnect{
 	         st.setInt(5,jornadaTrabalhoTO.getDiaSemana());
 	         st.setBoolean(6,jornadaTrabalhoTO.getDiaFolga());
 	         st.setBoolean(7,jornadaTrabalhoTO.getDiaMeioPeriodo());
-	         st.setString(8,codigoContrato);
+	         st.setBoolean(8, jornadaTrabalhoTO.getDiaSemTrabalho());
+	         st.setString(9,codigoContrato);
 	         st.executeUpdate(); 
 	         st.close();
 	      }
@@ -78,7 +79,7 @@ public class JornadaTrabalhoDAO extends MysqlConnect{
 	    	
 	    		String sql =  "UPDATE JORNADA_TRABALHO SET " 
 				+ "HORA_ENTRADA=?, HORA_SAIDA=?, HORA_INICIO_INTERVALO=?, HORA_FIM_INTERVALO=?, "
-				+ "DIA_SEMANA=?, DIA_FOLGA=?, DIA_MEIO_PERIODO=? "		
+				+ "DIA_SEMANA=?, DIA_FOLGA=?, DIA_MEIO_PERIODO=?, DIA_SEM_TRABALHO =? "		
 				+ "WHERE CD_JORNADA_TRABALHO = ?";
 	    	  
 	    	  	 st = conn.prepareStatement(sql);
@@ -89,7 +90,8 @@ public class JornadaTrabalhoDAO extends MysqlConnect{
 		         st.setInt(5,jornadaTrabalhoTO.getDiaSemana());
 		         st.setBoolean(6,jornadaTrabalhoTO.getDiaFolga());
 		         st.setBoolean(7,jornadaTrabalhoTO.getDiaMeioPeriodo());
-		         st.setString(8,jornadaTrabalhoTO.getCodigo());
+		         st.setBoolean(8,jornadaTrabalhoTO.getDiaSemTrabalho());
+		         st.setString(9,jornadaTrabalhoTO.getCodigo());
 		         st.executeUpdate(); 
 					st.close(); 
 				}
@@ -124,6 +126,7 @@ public class JornadaTrabalhoDAO extends MysqlConnect{
 	        	   jornadaTrabalhoTO.setDiaSemana(resultSet.getInt("DIA_SEMANA"));
 	        	   jornadaTrabalhoTO.setDiaFolga(resultSet.getBoolean("DIA_FOLGA"));
 	        	   jornadaTrabalhoTO.setDiaMeioPeriodo(resultSet.getBoolean("DIA_MEIO_PERIODO"));
+	        	   jornadaTrabalhoTO.setDiaSemTrabalho(resultSet.getBoolean("DIA_SEM_TRABALHO"));
 	        	   lista.add(jornadaTrabalhoTO);
 	           }
 	           st.close();

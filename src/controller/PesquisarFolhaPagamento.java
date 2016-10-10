@@ -14,14 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.CalculosFolhaDePagamento;
+import model.CalculosPagamento;
 import model.ContratoTO;
 import model.EmpregadoTO;
 import model.EspecialistaContrato;
 import model.EspecialistaEmpregado;
-import model.EspecialistaUsuario;
 import model.HoleriteRelatorio;
-import model.UsuarioTO;
 import relatorio.HoleriteRel;
 
 /**
@@ -65,7 +63,7 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 				ContratoTO contratoTO = contrato.pesquisarEmpregado(codigoEmpregado);
 				SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
 				String dataAdmissao = formatador.format(contratoTO.getDataAdmissao());
-				CalculosFolhaDePagamento calculos = new CalculosFolhaDePagamento();
+				CalculosPagamento calculos = new CalculosPagamento();
 			 	
 				int totalDias = 0;
 				int anoEscolhido = 0;
@@ -88,9 +86,9 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 				double fgts = calculos.totalFGTS(salario);
 				double irrf = calculos.totalIRRF(salario,codigoEmpregado,inss);
 				double valeTransporte = calculos.totalValeTransporte(salario, codigoEmpregado);
-				double salarioLiquido = calculos.totalSalario(codigoEmpregado, salario, valeTransporte, 
-				inss, irrf, valorHoraExtra);
-				
+				double salarioLiquido = calculos.totalSalario(codigoEmpregado, salario, valeTransporte, inss, irrf, valorHoraExtra, 0.0);
+						
+
 				request.setAttribute("anoEscolhido", anoEscolhido);
 				request.setAttribute("mesEscolhido", mesEscolhido);
 			 	request.setAttribute("totalDias", totalDias);
@@ -117,7 +115,7 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 					ContratoTO contratoTO2 = contrato.pesquisarEmpregado(codEmpregado);
 					SimpleDateFormat formatador2 = new SimpleDateFormat("yyyy-MM-dd");
 					//String dataAdmissao2 = formatador2.format(contratoTO2.getDataAdmissao());
-					CalculosFolhaDePagamento calculos2 = new CalculosFolhaDePagamento();
+					CalculosPagamento calculos2 = new CalculosPagamento();
 				 	
 					int totalDias2 = 0;
 					int anoEscolhido2 = 0;
@@ -141,7 +139,7 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 					double irrf2 = calculos2.totalIRRF(salario2,codEmpregado,inss2);
 					double valeTransporte2 = calculos2.totalValeTransporte(salario2, codEmpregado);
 					double salarioLiquido2 = calculos2.totalSalario(codEmpregado, salario2, valeTransporte2, 
-					inss2, irrf2, valorHoraExtra2);
+					inss2, irrf2, valorHoraExtra2, 0.0);
 					List<HoleriteRelatorio> holerites = new ArrayList<HoleriteRelatorio>();
 					
 					
@@ -150,7 +148,7 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 						List<HoleriteRelatorio> holerites = new ArrayList<HoleriteRelatorio>();
 						String codEmpregado = request.getParameter("codEmpregado");
 						ContratoTO contTO = contrato.pesquisarEmpregado(codEmpregado);
-						UsuarioTO usuarioTO = usuario.pesquisarUsuario(codEmpregado); 
+						UsuarioTO usuarioTO = usuario.pesquisarUsuario(codEmpregado);
 						EmpregadoTO emprTO = emp.pesquisar(codEmpregado);	*/
 						Date data = new java.sql.Date(new java.util.Date().getTime());
 						

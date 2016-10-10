@@ -8,6 +8,7 @@ import banco.MysqlConnect;
 import model.EmpregadoTO;
 import model.FeriasTO;
 import model.HoraExtraTO;
+import model.JornadaTrabalhoTO;
 import util.DataUtil;
 
 public class HoraExtraDAO  extends MysqlConnect {
@@ -28,7 +29,7 @@ public class HoraExtraDAO  extends MysqlConnect {
 		         st = conn.prepareStatement(sql);
 		         st.setString(1, horaExtraTO.getTotalDeHorasExtras());
 		         st.setString(2,horaExtraTO.getTotalDeHorasExtrasNoturno());
-		         st.setString(3, horaExtraTO.getFolgaCompensatoria());
+		         st.setBoolean(3, horaExtraTO.getFolgaCompensatoria());
 		         st.setString(4, horaExtraTO.getCodigoPonto());
 		         st.executeUpdate(); 
 		         st.close();
@@ -49,7 +50,7 @@ public class HoraExtraDAO  extends MysqlConnect {
 				         st = conn.prepareStatement(sql); 
 				         st.setString(1, horaExtraTO.getTotalDeHorasExtras());
 				         st.setString(2,horaExtraTO.getTotalDeHorasExtrasNoturno());
-				         st.setString(3, horaExtraTO.getFolgaCompensatoria());
+				         st.setBoolean(3, horaExtraTO.getFolgaCompensatoria());
 				         st.setString(4, horaExtraTO.getCodigoPonto());
 				         st.executeUpdate(); 
 				         st.close(); 
@@ -95,7 +96,7 @@ public class HoraExtraDAO  extends MysqlConnect {
 					horaExtraTO = new HoraExtraTO();
 					horaExtraTO.setCodigoPonto(resultSet.getString("FK_PONTO"));
 					horaExtraTO.setTotalDeHorasExtras(resultSet.getString("HORA_EXTRA"));
-					horaExtraTO.setFolgaCompensatoria(resultSet.getString("FOLGA_COMPENSATORIA"));
+					horaExtraTO.setFolgaCompensatoria(resultSet.getBoolean("FOLGA_COMPENSATORIA"));
 					horaExtraTO.setTotalDeHorasExtrasNoturno(resultSet.getString("HORA_EXTRA_NOTURNO"));
 				}	
 				st.close();
@@ -109,4 +110,32 @@ public class HoraExtraDAO  extends MysqlConnect {
 			return horaExtraTO;
 		}
 
+	   public HoraExtraTO pesquisarPorPonto(String codigoPonto)
+	   {
+		   HoraExtraTO horaExtraTO = null;
+		   try
+		   {
+				String sql = " SELECT * FROM HORA_EXTRA WHERE FK_PONTO = ?";
+				st= (PreparedStatement) conn.prepareStatement(sql);
+				st.setString(1,codigoPonto);
+				ResultSet resultSet = st.executeQuery();
+
+				if(resultSet.next())
+				{
+					horaExtraTO = new HoraExtraTO();
+					horaExtraTO.setCodigoPonto(resultSet.getString("CD_HORA_EXTRA"));
+					horaExtraTO.setTotalDeHorasExtras(resultSet.getString("HORA_EXTRA"));
+					horaExtraTO.setFolgaCompensatoria(resultSet.getBoolean("FOLGA_COMPENSATORIA"));
+					horaExtraTO.setTotalDeHorasExtrasNoturno(resultSet.getString("HORA_EXTRA_NOTURNO"));
+				}	
+				st.close();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				return null;
+			}
+			
+			return horaExtraTO;
+		}
 }

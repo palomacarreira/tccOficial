@@ -3,16 +3,16 @@ package model;
 public class HoraExtraTO {
 	public String totalDeHorasExtras;
 	public String totalDeHorasExtrasNoturno;
-	public String folgaCompensatoria;
+	public boolean folgaCompensatoria;
 	public String codigoPonto;
 	
 	
 	
-	public String getFolgaCompensatoria() {
+	public boolean getFolgaCompensatoria() {
 		return folgaCompensatoria;
 	}
 
-	public void setFolgaCompensatoria(String folgaCompensatoria) {
+	public void setFolgaCompensatoria(boolean folgaCompensatoria) {
 		this.folgaCompensatoria = folgaCompensatoria;
 	}
 

@@ -525,8 +525,9 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		 	<input type="text" name="horaSaida7" class="form-control" id="horaSaida7" class="form-control" size="5" disabled>
 		  </td>
 		  </tr>
+		  
 		  <tr>
-		  <td> Dia de Folga </td>
+		  <td> DSR </td>
 		  <td>
 			<input name="diaFolga1" id="diaFolga1" class="checkbox" type="checkbox" onchange="alertaDiaFolga(this)" />
 		  </td>

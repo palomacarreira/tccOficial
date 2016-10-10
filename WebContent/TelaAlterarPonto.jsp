@@ -29,7 +29,6 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 
 </head>
 <body>
-<c:import url="cabecalhoDeslogado.jsp"/>
 
 <%
 	String[] meses = {"","Janeiro", "Fevereiro","Março","Abril","Maio","Junho",
@@ -48,7 +47,37 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 %>  
     <div class="container">
     
-    <h1>Folha de Ponto</h1>
+    <div class="header clearfix">
+		<div class="row">
+			<div class="col-md-4">
+				<img src="imagens/logo.jpg" align="left">
+			</div>
+		<div class="col-md-8">
+		<br>
+		<br>
+		<nav>
+		<ul class="nav nav-pills">
+        <div class="col-md-5">	
+			<p style="font-size: 25px;">Folha de Ponto</p>
+		</div>
+	    <nav >
+  			<ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
+            <li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
+                <ul>
+                      <li><a href="AlterarUsuario?acao=alterar">Meu Perfil</a></li>
+                      <li><a href="AlterarUsuario?acao=excluir">Excluir</a></li>
+                      <li><a href="TelaLogin.jsp">Sair</a></li>                   
+                </ul>
+            </li>        
+			</ul>
+		</nav>		
+		</ul>
+		</nav>
+		</div>
+	</div>
+	</div>
+	<br>
+	
     
 	<label>
 	A hora de saída é aceita contando 24horas, ou seja, o empregado pode ser cadastrado com ponto de entrada
@@ -56,7 +85,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	Sendo que, o horário noturno é aquele que é exercido das 22:00 de um dia às 05:00 do dia seguinte, demais
 	horas são consideradas horas do mesmo dia, ultrapassando a jornada do dia é considerado hora extra. 
 	</label>
-	
+		
 	<form id="dadosPonto" role="form" class="form-inline" method="post" action ="AlterarPonto?codigoEmpregado=<%=codigoEmpregado %>&totalDeDias=<%=diasDoMes%>">
 	<div class="container" style="width: 100%;">    
 			<div class= "form-group" style="float: right;">
@@ -108,7 +137,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		      	</div>
 		    </div>  	
 		</div> 
-
+		
 	<div id="itensFolhaPonto">
 	   <table id="tableFolhaPonto" class="table table-striped table-bordered" cellspacing="0" width="100%">
 	        <thead>
@@ -139,7 +168,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	   
     <div id="botoes">
 		<button  type= "submit" name="acao" value="Salvar" onclick="return validar()" class= "btn btn-primário" > Salvar </button> 
-		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário" > Cancelar </button> 
+		<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário" onclick="history.go(-1)" > Cancelar </button> 
 	</div>
  </form>
  
@@ -201,45 +230,87 @@ window.onload = function(){
 						}
 						if(nameDia == "SEG")
 						{
-							if(<%=listaJornada.get(0).getDiaFolga()%> == true){
-							adicionaColuna(<%=diaPonto%>);}
-							else{ adicionaColunaNormal(<%=diaPonto%>);}
+							<%boolean diaNaoTrabalhado = listaJornada.get(0).getDiaSemTrabalho();%>
+							var verifica = desabilitaCampos(<%=diaPonto%>, <%=diaNaoTrabalhado%>);
+							if(verifica == true){
+								adicionaColunaEspecial(<%=diaPonto%>);
+							}else{
+								if(<%=listaJornada.get(0).getDiaFolga()%> == true){
+								adicionaColuna(<%=diaPonto%>);}
+								else{ adicionaColunaNormal(<%=diaPonto%>);}
+							}
 						}
 						else if(nameDia == "TER")
 						{
-							if(<%=listaJornada.get(1).getDiaFolga()%> == true){
-							adicionaColuna(<%=diaPonto%>);}
-							else{ adicionaColunaNormal(<%=diaPonto%>);}
+							<%diaNaoTrabalhado = listaJornada.get(1).getDiaSemTrabalho();%>
+							var verifica = desabilitaCampos(<%=diaPonto%>, <%=diaNaoTrabalhado%>);
+							if(verifica == true){
+								adicionaColunaEspecial(<%=diaPonto%>);
+							}else{
+								if(<%=listaJornada.get(1).getDiaFolga()%> == true){
+								adicionaColuna(<%=diaPonto%>);}
+								else{ adicionaColunaNormal(<%=diaPonto%>);}
+							}
 						}
 						else if(nameDia == "QUA")
 						{
-							if(<%=listaJornada.get(2).getDiaFolga()%> == true){
-							adicionaColuna(<%=diaPonto%>);}
-							else{ adicionaColunaNormal(<%=diaPonto%>);}
+							<%diaNaoTrabalhado = listaJornada.get(2).getDiaSemTrabalho();%>
+							var verifica = desabilitaCampos(<%=diaPonto%>, <%=diaNaoTrabalhado%>);
+							if(verifica == true){
+								adicionaColunaEspecial(<%=diaPonto%>);
+							}else{
+								if(<%=listaJornada.get(2).getDiaFolga()%> == true){
+								adicionaColuna(<%=diaPonto%>);}
+								else{ adicionaColunaNormal(<%=diaPonto%>);}
+							}
 						}
 						else if(nameDia == "QUI")
 						{
-							if(<%=listaJornada.get(3).getDiaFolga()%> == true){
-							adicionaColuna(<%=diaPonto%>);}
-							else{ adicionaColunaNormal(<%=diaPonto%>);}
+							<%diaNaoTrabalhado = listaJornada.get(3).getDiaSemTrabalho();%>
+							var verifica = desabilitaCampos(<%=diaPonto%>, <%=diaNaoTrabalhado%>);
+							if(verifica == true){
+								adicionaColunaEspecial(<%=diaPonto%>);
+							}else{
+								if(<%=listaJornada.get(3).getDiaFolga()%> == true){
+								adicionaColuna(<%=diaPonto%>);}
+								else{ adicionaColunaNormal(<%=diaPonto%>);}
+							}
 						}
 						else if(nameDia == "SEX")
 						{
-							if(<%=listaJornada.get(4).getDiaFolga()%> == true){
-							adicionaColuna(<%=diaPonto%>);}
-							else{ adicionaColunaNormal(<%=diaPonto%>);}
+							<%diaNaoTrabalhado = listaJornada.get(4).getDiaSemTrabalho();%>
+							var verifica = desabilitaCampos(<%=diaPonto%>, <%=diaNaoTrabalhado%>);
+							if(verifica == true){
+								adicionaColunaEspecial(<%=diaPonto%>);
+							}else{
+								if(<%=listaJornada.get(4).getDiaFolga()%> == true){
+								adicionaColuna(<%=diaPonto%>);}
+								else{ adicionaColunaNormal(<%=diaPonto%>);}
+							}
 						}
 						else if(nameDia == "SAB")
 						{
-							if(<%=listaJornada.get(5).getDiaFolga()%> == true){
-							adicionaColuna(<%=diaPonto%>);}
-							else{ adicionaColunaNormal(<%=diaPonto%>);}
+							<%diaNaoTrabalhado = listaJornada.get(5).getDiaSemTrabalho();%>
+							var verifica = desabilitaCampos(<%=diaPonto%>, <%=diaNaoTrabalhado%>);
+							if(verifica == true){
+								adicionaColunaEspecial(<%=diaPonto%>);
+							}else{
+								if(<%=listaJornada.get(5).getDiaFolga()%> == true){
+								adicionaColuna(<%=diaPonto%>);}
+								else{ adicionaColunaNormal(<%=diaPonto%>);}
+							}
 						}	
 						else if(nameDia == "DOM")
 						{
-							if(<%=listaJornada.get(6).getDiaFolga()%> == true){
-							adicionaColuna(<%=diaPonto%>);}
-							else{ adicionaColunaNormal(<%=diaPonto%>);}
+							<%diaNaoTrabalhado = listaJornada.get(6).getDiaSemTrabalho();%>
+							var verifica = desabilitaCampos(<%=diaPonto%>, <%=diaNaoTrabalhado%>);
+							if(verifica == true){
+								adicionaColunaEspecial(<%=diaPonto%>);
+							}else{
+								if(<%=listaJornada.get(6).getDiaFolga()%> == true){
+								adicionaColuna(<%=diaPonto%>);}
+								else{ adicionaColunaNormal(<%=diaPonto%>);}
+							}
 						}
 						
 						if(<%=pontoTO.getAcao().equals("Dia Comum")%>)
@@ -261,7 +332,7 @@ window.onload = function(){
 						else if(<%=pontoTO.getAcao().equals("Dia de DSR")%>){
 							document.getElementById("combo_acao_2"+<%=diaPonto%>).selectedIndex = "0";
 				  		}
-						else{
+						else if(<%=pontoTO.getAcao().equals("Trabalhou na DSR")%>){
 							document.getElementById("combo_acao_2"+<%=diaPonto%>).selectedIndex = "1";
 						}
 					<%
@@ -270,6 +341,29 @@ window.onload = function(){
 		}
 		%>
 	}(jQuery);
+	
+	function desabilitaCampos(x,diaNaoTrabalhado)
+	{
+		if(diaNaoTrabalhado){
+			document.getElementById("horaEntrada"+x).disabled = true;
+			document.getElementById("horaSaidaAlmoco"+x).disabled = true;
+			document.getElementById("horaVoltaAlmoco"+x).disabled = true;
+			document.getElementById("horaSaida"+x).disabled = true;
+			return true;
+		}	
+		return false;
+	}
+
+	function adicionaColunaEspecial(dia)
+	{
+		$('#linha'+dia).children('td:last').append($(
+				'<div class=\"form-group\">'+
+				'<select class=\"form-control\" id=\"combo_sem_trabalho'+ dia +'\" name=\"acaoSelecionada'+ dia +'\" Readonly>'+
+				'<option value=\"Sem Jornada\">Sem Jornada</option>'+
+				'</select>'  +
+				'</div>'
+		));
+	}
 	
    function adicionaColuna(dia)
    {

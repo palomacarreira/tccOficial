@@ -127,6 +127,25 @@ public class CadastrarPonto extends HttpServlet {
 						 data= new java.sql.Date(((java.util.Date)formatter.parse(dataEscolhida)).getTime());
 						 String acaoSelecionada = (String) request.getParameter("acaoSelecionada"+ i);
 
+						 if(horaEntrada.equals("") && horaSaida.equals("") && horaSaidaAlmoco.equals("") && horaVoltaAlmoco.equals(""))
+						 {
+							 if(!acaoSelecionada.equals("Dia de DSR") && !acaoSelecionada.equals("Sem Jornada")
+							&& !acaoSelecionada.equals("Falta Justificada") && !acaoSelecionada.equals("Feriado")){
+								 acaoSelecionada = "Falta";
+							 }
+						 }
+						 else if(!horaEntrada.equals("") && !horaSaida.equals("") && !horaSaidaAlmoco.equals("") && !horaVoltaAlmoco.equals(""))
+						 {
+							 if(acaoSelecionada.equals("Dia de DSR")){
+								 acaoSelecionada = "Trabalhou na DSR";
+							 }
+						 }
+						 else if(!horaEntrada.equals("")){
+							 if(acaoSelecionada.equals("Falta")){
+								 acaoSelecionada = "Dia Comum";
+							 }
+						 }
+						 
 						 // ADICIONA O PONTO
 						 espPonto.adicionar(data, horaEntrada, horaSaidaAlmoco, horaVoltaAlmoco, horaSaida,
 									acaoSelecionada, codigoEmpregado);
@@ -175,12 +194,12 @@ public class CadastrarPonto extends HttpServlet {
 						double valorTotal = 0.0;
 					
 						// SE TRABALHOU EM UM DIA DE DESCANSO ENTÃO NÃO CONTA COMO HORAS EXTRAS E SIM UM DIA DE FOLGA
-						int folga = 0;
+						boolean folga = false;
 						String totalDeHorasExtras = "00:00";
 						String totalDeHorasExtrasNoturno = "00:00";
 						if(diaSemana == 7 || acaoSelecionada.equals("Feriado Trabalhado") || acaoSelecionada.equals("Trabalhou na DSR"))
 						{
-							folga = 1;
+							folga = true;
 						} 
 						else{
 							totalDeHorasExtras = calculos.calculaHorasExtras(horaEntrada, horaSaidaAlmoco, 

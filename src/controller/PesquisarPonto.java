@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.CalculosHoraExtra;
 import model.ContratoTO;
 import model.EmpregadoTO;
 import model.EspecialistaContrato;
@@ -69,38 +70,66 @@ public class PesquisarPonto extends HttpServlet {
 				String dataAdmissao = formatador.format(contratoTO.getDataAdmissao());
 				ArrayList<PontoTO> listaDePonto = ponto.pesquisar(codigoEmpregado);
 				ArrayList<JornadaTrabalhoTO> listaJornadaTrabalho = jornadaTrabalho.pesquisarJornada(contratoTO.getCodigo());
-		
+				int anoEscolhido = 0;
+				int mesEscolhido = 0;
+				int totalDias = 0;
 				if(request.getParameter("mes") == null)
 				{
-					int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
-					int mesAtual = Calendar.getInstance().get(Calendar.MONTH) + 1;
-					int totalDias = diasNoMes(mesAtual, anoAtual);
+					anoEscolhido = Calendar.getInstance().get(Calendar.YEAR);
+					mesEscolhido = Calendar.getInstance().get(Calendar.MONTH) + 1;
+					totalDias = diasNoMes(mesEscolhido, anoEscolhido);
 
-					request.setAttribute("anoEscolhido", anoAtual);
-					request.setAttribute("mesEscolhido", mesAtual);
+					request.setAttribute("anoEscolhido", anoEscolhido);
+					request.setAttribute("mesEscolhido", mesEscolhido);
 				 	request.setAttribute("totalDias", totalDias);
 				}
 				else{
-					int anoEscolhido = Integer.parseInt(request.getParameter("ano"));
-					int mesEscolhido = Integer.parseInt(request.getParameter("mes"));
-					int totalDias = diasNoMes(mesEscolhido, anoEscolhido);
+					anoEscolhido = Integer.parseInt(request.getParameter("ano"));
+					mesEscolhido = Integer.parseInt(request.getParameter("mes"));
+					totalDias = diasNoMes(mesEscolhido, anoEscolhido);
 					
 					request.setAttribute("anoEscolhido", anoEscolhido);
 					request.setAttribute("mesEscolhido", mesEscolhido);
 				 	request.setAttribute("totalDias", totalDias);
 				}
 				
+				int totalFaltas = 0;
+				int totalFolgas = 0;
+				String totalHorasExtras = "";
+				String totalHoraExtraNoturna = "";
+				String totalHorasTrabalhadas = "";
+				HoraExtraTO horaExtraTO = new HoraExtraTO();
+				EspecialistaHorasExtras horasExtras = new EspecialistaHorasExtras();
+				ArrayList<HoraExtraTO> arrayHoras = new ArrayList<HoraExtraTO>();
+				ArrayList<PontoTO> listaPontos = ponto.pesquisar(codigoEmpregado);
 				
-				 HoraExtraTO horaExtraTO = new HoraExtraTO();
-				 EspecialistaHorasExtras horasExtras = new EspecialistaHorasExtras();
-				 ArrayList<HoraExtraTO> arrayHoras = new ArrayList<HoraExtraTO>();
-				 ArrayList<PontoTO> listaPontos = ponto.pesquisar(codigoEmpregado);
-				 for(PontoTO pontoTO : listaPontos)
-				 {	 
-					 horaExtraTO = horasExtras.pesquisar(pontoTO.getCodigo());
-					 arrayHoras.add(horaExtraTO);
-				 }
-				 
+
+				if(listaPontos != null)
+				{
+					 for(PontoTO pontoTO : listaPontos)
+					 {	 
+						String dataPonto = formatador.format(pontoTO.getDataPonto());
+						int pontoDataMes = Integer.parseInt(dataPonto.substring(5,7));
+						int pontoDataAno = Integer.parseInt(dataPonto.substring(0,4));
+						
+						if( pontoDataAno == anoEscolhido && pontoDataMes == mesEscolhido)
+						{
+							 horaExtraTO = horasExtras.pesquisarPorPonto(pontoTO.getCodigo());
+							 arrayHoras.add(horaExtraTO);
+							 totalFaltas+= somaFaltas(pontoTO.getDataPonto(), pontoTO.getAcao(), mesEscolhido, anoEscolhido);
+							 totalHorasExtras = somaHorasExtras(totalHorasExtras,horaExtraTO.getTotalDeHorasExtras());
+							 totalHoraExtraNoturna= somaHorasExtras(totalHoraExtraNoturna, horaExtraTO.getTotalDeHorasExtrasNoturno());
+							 totalHorasTrabalhadas = somaHorasTrabalhadas(totalHorasTrabalhadas, pontoTO);
+							 totalFolgas += somaFeriadosDSR(pontoTO);
+						}
+					 }
+				}
+				
+				request.setAttribute("totalFolgas", totalFolgas);
+				request.setAttribute("totalHorasTrabalhadas", totalHorasTrabalhadas);
+				request.setAttribute("totalHorasExtras", totalHorasExtras);
+				request.setAttribute("totalHoraExtraNoturna", totalHoraExtraNoturna);
+				request.setAttribute("totalFaltas", totalFaltas);
 				request.setAttribute("arrayHoras", arrayHoras);
 				request.setAttribute("listaJornadaTrabalho", listaJornadaTrabalho);
 				request.setAttribute("codigoEmpregado", codigoEmpregado);
@@ -124,7 +153,7 @@ public class PesquisarPonto extends HttpServlet {
 				{
 					int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
 					int mesAtual = Calendar.getInstance().get(Calendar.MONTH) + 1;
-					int totalDias = diasNoMes(mesAtual, anoAtual);
+					totalDias = diasNoMes(mesAtual, anoAtual);
 
 					request.setAttribute("anoEscolhido", anoAtual);
 					request.setAttribute("mesEscolhido", mesAtual);
@@ -155,9 +184,9 @@ public class PesquisarPonto extends HttpServlet {
 				}
 				else
 				{
-					int anoEscolhido = Integer.parseInt(request.getParameter("ano"));
-					int mesEscolhido = Integer.parseInt(request.getParameter("mes"));
-					int totalDias = diasNoMes(mesEscolhido, anoEscolhido);
+					anoEscolhido = Integer.parseInt(request.getParameter("ano"));
+					mesEscolhido = Integer.parseInt(request.getParameter("mes"));
+					totalDias = diasNoMes(mesEscolhido, anoEscolhido);
 					
 					request.setAttribute("anoEscolhido", anoEscolhido);
 					request.setAttribute("mesEscolhido", mesEscolhido);
@@ -206,4 +235,60 @@ public class PesquisarPonto extends HttpServlet {
 	 	return ultimoDia;
 	}
 	
+	public int somaFaltas(Date ponto, String acaoPonto, int mes, int ano)
+	{
+		int qtdFaltas = 0;
+		SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+		String dataPonto = formatador.format(ponto);
+		int pontoDataMes = Integer.parseInt(dataPonto.substring(5,7));
+		int pontoDataAno = Integer.parseInt(dataPonto.substring(0,4));
+
+		// verificando os pontos dentro do periodo selecionado		
+		if( pontoDataAno == ano && pontoDataMes == mes)
+		{
+			if(acaoPonto.equals("Falta"))
+			{
+				qtdFaltas += 1;
+			}
+		}
+		
+		return qtdFaltas;
+	}
+	
+	public String somaHorasTrabalhadas(String horaAnterior, PontoTO ponto)
+	{
+		CalculosHoraExtra calculos = new CalculosHoraExtra();
+		String horaSomar =calculos.calculaTotalHoras(ponto.getHoraEntrada(), ponto.getHoraSaidaAlmoco(), 
+				ponto.getHoraVoltaAlmoco(), ponto.getHoraSaida());
+		String horas = calculos.somaHoras(horaAnterior, horaSomar);
+		
+		return horas;
+	}
+	
+	public String somaHorasExtras(String horaAnterior, String horaSomar)
+	{
+		CalculosHoraExtra calculos = new CalculosHoraExtra();
+		String horaExtra = calculos.somaHoras(horaAnterior,horaSomar);
+		return horaExtra;
+	}
+	
+	public int somaFeriadosDSR(PontoTO pontoTO)
+	{
+		Date ponto = pontoTO.getDataPonto();
+		SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+		String dataPonto = formatador.format(ponto);
+		String dia = dataPonto.substring(8,10);
+		String mes = dataPonto.substring(5,7);
+		String ano = dataPonto.substring(0,4);
+		CalculosHoraExtra calculos = new CalculosHoraExtra();
+
+		int diaSemana = calculos.diaDaSemana(dia, mes, ano);
+		int folga = 0;
+		
+		if(diaSemana == 7 || pontoTO.getAcao().equals("Feriado Trabalhado") || pontoTO.getAcao().equals("Trabalhou na DSR"))
+		{
+			folga = 1;
+		} 
+		return folga;
+	}
 }

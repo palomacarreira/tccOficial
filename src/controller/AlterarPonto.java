@@ -86,6 +86,25 @@ public class AlterarPonto extends HttpServlet {
 					 data= new java.sql.Date(((java.util.Date)formatter.parse(dataEscolhida)).getTime());
 					 String acaoSelecionada = (String) request.getParameter("acaoSelecionada"+ i);
 	
+					 if(horaEntrada.equals("") && horaSaida.equals("") && horaSaidaAlmoco.equals("") && horaVoltaAlmoco.equals(""))
+					 {
+						 if(!acaoSelecionada.equals("Dia de DSR") && !acaoSelecionada.equals("Sem Jornada")
+						&& !acaoSelecionada.equals("Falta Justificada") && !acaoSelecionada.equals("Feriado")){
+							 acaoSelecionada = "Falta";
+						 }
+					 }
+					 else if(!horaEntrada.equals("") && !horaSaida.equals("") && !horaSaidaAlmoco.equals("") && !horaVoltaAlmoco.equals(""))
+					 {
+						 if(acaoSelecionada.equals("Dia de DSR")){
+							 acaoSelecionada = "Trabalhou na DSR";
+						 }
+					 } 
+					 else if(!horaEntrada.equals("")){
+						 if(acaoSelecionada.equals("Falta")){
+							 acaoSelecionada = "Dia Comum";
+						 }
+					 }
+					 
 					 // ADICIONA O PONTO
 					 ContratoTO contrato = espContrato.pesquisarEmpregado(codigoEmpregado);
 					 String codigoPonto = espPonto.pesquisaPorData(data).getCodigo();
@@ -127,12 +146,12 @@ public class AlterarPonto extends HttpServlet {
 	
 					
 					// ADICIONA AS HORAS EXTRAS DO PONTO 
-					int folga = 0;
+					boolean folga = false;
 					String totalDeHorasExtras = "00:00";
 					String totalDeHorasExtrasNoturno = "00:00";
 					if(diaSemana == 7 || acaoSelecionada.equals("Feriado Trabalhado") || acaoSelecionada.equals("Trabalhou na DSR"))
 					{
-						folga = 1;
+						folga = true;
 					} 
 					else{ //CÁLCULOS
 						totalDeHorasExtras = calculos.calculaHorasExtras(horaEntrada, horaSaidaAlmoco, 

@@ -31,7 +31,38 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		String codigoEmpregado = (String) request.getAttribute("codigoEmpregado");
 	%>  
 	
-	<c:import url="cabecalhoLogado.jsp"/>
+		<div class="header clearfix">
+		<div class="row">
+			<div class="col-md-4">
+				<img src="imagens/logo.jpg" align="left">
+			</div>
+			<div class="col-md-8">
+				<br>
+				<br>
+				<nav>
+				<ul class="nav nav-pills">
+                <div class="col-md-2">
+					<p style="font-size: 25px;">Pagamento Férias</p>
+				</div>
+	            <nav >
+		  		<ul class="menu perfil navbar-right" style="position: relative; left: -120px;">
+		            <li><a href="#" ><img src="imagens/ferramenta.png" width="20" height="20" align="right"></a>
+		                <ul>
+		                      <li><a href="AlterarUsuario?acao=alterar">Meu Perfil</a></li>
+		                      <li><a href="AlterarUsuario?acao=excluir">Excluir</a></li>
+		                      <li><a href="TelaLogin.jsp">Sair</a></li>                   
+		                </ul>
+		            </li>
+		                   
+				</ul>
+				</nav>	
+				</ul>
+				</nav>
+			</div>
+		</div>
+		</div>
+	<br>
+	<hr />
 	
 	
 	<div class="container">
