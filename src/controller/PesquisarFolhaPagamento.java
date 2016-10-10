@@ -150,7 +150,7 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 						List<HoleriteRelatorio> holerites = new ArrayList<HoleriteRelatorio>();
 						String codEmpregado = request.getParameter("codEmpregado");
 						ContratoTO contTO = contrato.pesquisarEmpregado(codEmpregado);
-						UsuarioTO usuarioTO = usuario.pesquisarUsuario(codEmpregado);
+						UsuarioTO usuarioTO = usuario.pesquisarUsuario(codEmpregado); 
 						EmpregadoTO emprTO = emp.pesquisar(codEmpregado);	*/
 						Date data = new java.sql.Date(new java.util.Date().getTime());
 						
