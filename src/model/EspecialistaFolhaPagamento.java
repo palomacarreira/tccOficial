@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import mysqldao.FolhaPagamentoDAO;
 
 
@@ -54,5 +56,12 @@ public class EspecialistaFolhaPagamento {
 		folhaPagamentoTO = folhaPagamentoDAO.pesquisarFolhaPagamento(codigo);
 		return folhaPagamentoTO;
 	}
+	
+	public ArrayList<FolhaPagamentoTO> pesquisarTodosPeloAnoId(String codigoContrato, String ano){
+		ArrayList<FolhaPagamentoTO> folhaPagamentoTO = new ArrayList<FolhaPagamentoTO>();
+		folhaPagamentoTO  = folhaPagamentoDAO.pesquisarTodosPeloAnoId(codigoContrato, ano);
+		return folhaPagamentoTO;
+	}
+	
 
 }

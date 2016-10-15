@@ -71,6 +71,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	String totalHorasNoturnas = (String) request.getAttribute("totalHoraExtraNoturna");
 	int totalFaltas = (int) request.getAttribute("totalFaltas");
 	int totalFolgas = (int) request.getAttribute("totalFolgas");
+
 %>  
 
 <div class="header clearfix">
@@ -196,14 +197,17 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	</script>
 	<br/>
 	
-	<form id="dadosPonto" role="form" class="form-inline" method="post">
+	<form id="dadosPonto" name="dadosPonto" class= "form-inline" method="get" action="PesquisarPonto">
 	<%out.println("<input name=\"totalFaltas\" id=\"totalFaltas\"type=\"hidden\" value=\""+request.getAttribute("totalFaltas")+"\"/>");%>
 	<%out.println("<input name=\"totalHorasTrabalhadas\" id=\"totalHorasTrabalhadas\"type=\"hidden\" value=\""+request.getAttribute("totalHorasTrabalhadas")+"\"/>");%>
 	<%out.println("<input name=\"totalHorasExtras\" id=\"totalHorasExtras\"type=\"hidden\" value=\""+request.getAttribute("totalHorasExtras")+"\"/>");%>
-	<%out.println("<input name=\"totalHorasNoturnas\" id=\"totalHorasNoturnas\"type=\"hidden\" value=\""+request.getAttribute("totalHorasNoturnas")+"\"/>");%>
+	<%out.println("<input name=\"totalHorasNoturnas\" id=\"totalHorasNoturnas\"type=\"hidden\" value=\""+request.getAttribute("totalHoraExtraNoturna")+"\"/>");%>
 	<%out.println("<input name=\"totalFolgas\" id=\"totalFolgas\"type=\"hidden\" value=\""+request.getAttribute("totalFolgas")+"\"/>");%>
-
+	<%out.println("<input name=\"codigoEmpregado\" id=\"codigoEmpregado\"type=\"hidden\" value=\""+request.getAttribute("codigoEmpregado")+"\"/>");%>
+	<%out.println("<input name=\"mes\" id=\"mes\"type=\"hidden\" value=\""+request.getAttribute("mesEscolhido")+"\"/>");%>
+	<%out.println("<input name=\"ano\" id=\"ano\"type=\"hidden\" value=\""+request.getAttribute("anoEscolhido")+"\"/>");%>
 	
+
 	<div id="itensFolhaPonto">
 	   <table id="tableFolhaPonto" class="table table-striped table-bordered" cellspacing="0" width="100%">
 	        <thead>

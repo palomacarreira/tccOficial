@@ -2,9 +2,10 @@ package mysqldao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
-import banco.MysqlConnect;
 import model.FolhaPagamentoTO;
+import banco.MysqlConnect;
 
 public class FolhaPagamentoDAO extends MysqlConnect {
 	   
@@ -105,6 +106,45 @@ public class FolhaPagamentoDAO extends MysqlConnect {
 		      return true;
 		   }
 
+	   
+	   
+	
+	   public ArrayList<FolhaPagamentoTO> pesquisarTodosPeloAnoId(String contrato, String ano){
+			ArrayList<FolhaPagamentoTO> lista= new ArrayList<FolhaPagamentoTO>();
+			
+			try{
+				String sql =" SELECT * FROM FOLHA_PAGAMENTO WHERE FK_CONTRATO = ? AND ANO_REFERENCIA = ? "; 
+						
+				st= conn.prepareStatement(sql);
+	            st.setString(1,contrato);
+	            st.setString(2,ano);
+	            ResultSet resultSet = st.executeQuery();
+				while(resultSet.next())
+				{
+					FolhaPagamentoTO folhaPagamentoTO = new FolhaPagamentoTO();
+					
+					folhaPagamentoTO.setCodigo(resultSet.getString("CD_FOLHA_PAGAMENTO"));
+	            	folhaPagamentoTO.setSalarioLiquido(resultSet.getDouble("SALARIO_LIQUIDO"));
+	            	folhaPagamentoTO.setFgts(resultSet.getDouble("FGTS"));
+	            	folhaPagamentoTO.setInss(resultSet.getDouble("INSS"));
+	            	folhaPagamentoTO.setIrRetido(resultSet.getDouble("IR_RETIDO"));
+	            	folhaPagamentoTO.setValeTransporte(resultSet.getDouble("VALE_TRANSPORTE"));
+	            	folhaPagamentoTO.setBeneficios(resultSet.getDouble("BENEFICIOS"));
+	            	folhaPagamentoTO.setMesReferencia(resultSet.getString("MES_REFERENCIA"));
+					folhaPagamentoTO.setAnoReferencia(resultSet.getString("ANO_REFERENCIA"));
+					folhaPagamentoTO.setCodigoContrato("FK_CONTRATO");
+					
+					lista.add(folhaPagamentoTO);
+				}	
+				st.close();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				return null;
+			}
+			return lista;
+		}
 	   
 	   public FolhaPagamentoTO pesquisarFolhaPagamento(String codg)
 	   {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportHolerite" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6a0a0704-bc89-40b3-9a2e-01f9532494ab">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportHolerite" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6a0a0704-bc89-40b3-9a2e-01f9532494ab">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -14,20 +14,11 @@
 	<field name="cargoEmpregado" class="java.lang.String"/>
 	<field name="mes" class="java.lang.String"/>
 	<field name="ano" class="java.lang.String"/>
-	<field name="dia" class="java.lang.String"/>
-	<field name="totais" class="java.lang.String"/>
 	<field name="diasFaltas" class="java.lang.String"/>
 	<field name="diasDeDomDsrFer" class="java.lang.String"/>
 	<field name="horasTrabalhadas" class="java.lang.String"/>
 	<field name="horasExtras" class="java.lang.String"/>
 	<field name="horasExtrasNoturnas" class="java.lang.String"/>
-	<field name="entrada" class="java.lang.String"/>
-	<field name="saidaAlmoco" class="java.lang.String"/>
-	<field name="retornoAlmoco" class="java.lang.String"/>
-	<field name="saida" class="java.lang.String"/>
-	<field name="horaExtra" class="java.lang.String"/>
-	<field name="horasNoturnas" class="java.lang.String"/>
-	<field name="acao" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -112,21 +103,14 @@
 			<line>
 				<reportElement x="554" y="0" width="1" height="247" uuid="325eca04-443b-4356-82e4-b8891fb8c012"/>
 			</line>
-			<staticText>
-				<reportElement x="15" y="46" width="56" height="20" uuid="7519b70f-091a-4b54-8450-5acf711b1183"/>
-				<text><![CDATA[Dia]]></text>
-			</staticText>
 			<line>
 				<reportElement x="1" y="66" width="553" height="1" uuid="a6e86626-edb6-433f-b098-29586e55e3db"/>
 			</line>
 			<line>
-				<reportElement x="1" y="85" width="554" height="1" uuid="60859702-d6dc-4796-b79a-3cd3b11920ac"/>
+				<reportElement x="0" y="86" width="554" height="1" uuid="85f4b096-b591-4b2c-b427-f80099f83c01"/>
 			</line>
 			<line>
-				<reportElement x="1" y="105" width="554" height="1" uuid="85f4b096-b591-4b2c-b427-f80099f83c01"/>
-			</line>
-			<line>
-				<reportElement x="1" y="124" width="553" height="1" uuid="b22fa74a-911f-4c08-96ea-d5f7f2d1c182"/>
+				<reportElement x="1" y="124" width="552" height="1" uuid="b22fa74a-911f-4c08-96ea-d5f7f2d1c182"/>
 			</line>
 			<line>
 				<reportElement x="1" y="143" width="554" height="1" uuid="b054955d-74c8-4442-be5c-976920b528ed"/>
@@ -135,163 +119,72 @@
 				<reportElement x="0" y="246" width="555" height="1" uuid="060dcb7f-a50d-4bcf-9ef7-d34131492da5"/>
 			</line>
 			<line>
-				<reportElement x="29" y="189" width="115" height="1" uuid="7ec4b9b5-f3c3-4379-8f7e-988e59d4bcf6"/>
+				<reportElement x="29" y="213" width="115" height="1" uuid="7ec4b9b5-f3c3-4379-8f7e-988e59d4bcf6"/>
 			</line>
 			<line>
-				<reportElement x="302" y="190" width="251" height="1" uuid="0b48f63d-6a75-404e-a44d-5de2fb23e05a"/>
+				<reportElement x="302" y="214" width="251" height="1" uuid="0b48f63d-6a75-404e-a44d-5de2fb23e05a"/>
 			</line>
 			<staticText>
-				<reportElement x="74" y="203" width="30" height="20" uuid="158cc952-f191-4e27-b66b-4570ac8c15fd"/>
+				<reportElement x="74" y="218" width="30" height="20" uuid="158cc952-f191-4e27-b66b-4570ac8c15fd"/>
 				<text><![CDATA[Data]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="394" y="203" width="100" height="20" uuid="e9c2e6a7-9ee3-477b-8d59-82cf966fdd68"/>
+				<reportElement x="389" y="221" width="100" height="20" uuid="e9c2e6a7-9ee3-477b-8d59-82cf966fdd68"/>
 				<text><![CDATA[Assinatura]]></text>
 			</staticText>
-			<line>
-				<reportElement x="58" y="39" width="1" height="27" uuid="35b58cdd-b0ac-4da4-ba23-dd28999b2312"/>
-			</line>
 			<staticText>
-				<reportElement x="71" y="46" width="48" height="20" uuid="08aa7e1f-0deb-42ef-9c05-05d7a63193a6"/>
-				<text><![CDATA[Entrada]]></text>
-			</staticText>
-			<line>
-				<reportElement x="118" y="40" width="1" height="26" uuid="c14cedf3-f276-48f8-a93c-eb5ec6cf0ca5"/>
-			</line>
-			<staticText>
-				<reportElement x="120" y="47" width="68" height="20" uuid="87be5568-163c-4417-b94a-b4613da81618"/>
-				<text><![CDATA[Saída Almoço]]></text>
-			</staticText>
-			<line>
-				<reportElement x="187" y="40" width="1" height="26" uuid="fe532169-7048-4000-8901-f640a5b3968a"/>
-			</line>
-			<staticText>
-				<reportElement x="190" y="47" width="84" height="20" uuid="ce6335b9-8ea4-4f5f-b6ba-48acfff2edd7"/>
-				<text><![CDATA[Retorno Almoço]]></text>
-			</staticText>
-			<line>
-				<reportElement x="271" y="40" width="1" height="26" uuid="deb332a7-4671-4c44-8fb1-049597aff47b"/>
-			</line>
-			<staticText>
-				<reportElement x="275" y="47" width="49" height="20" uuid="ddd1db9f-8446-4846-97b7-2b147048d8a2"/>
-				<text><![CDATA[Saída]]></text>
-			</staticText>
-			<line>
-				<reportElement x="324" y="40" width="1" height="26" uuid="a171c101-9eda-4278-88ee-33b71755cfc2"/>
-			</line>
-			<staticText>
-				<reportElement x="327" y="46" width="64" height="20" uuid="83dc6f18-8072-4ef4-b958-1ce9934e0242"/>
-				<text><![CDATA[Horas Extras]]></text>
-			</staticText>
-			<line>
-				<reportElement x="394" y="39" width="1" height="27" uuid="c22c0c85-6181-449a-aaea-a7869a1b0a4a"/>
-			</line>
-			<staticText>
-				<reportElement x="396" y="46" width="77" height="20" uuid="678b5d1d-bf75-49c0-8924-fded3512bd25"/>
-				<text><![CDATA[Horas Noturnas]]></text>
-			</staticText>
-			<line>
-				<reportElement x="473" y="40" width="1" height="26" uuid="96ac9f83-2daf-433e-91bb-132f054333ce"/>
-			</line>
-			<staticText>
-				<reportElement x="479" y="46" width="68" height="20" uuid="11e016cd-af4f-4c18-8978-69de359ca751"/>
-				<text><![CDATA[Ação]]></text>
+				<reportElement x="20" y="46" width="38" height="20" uuid="298dcdb3-77d6-421e-ae7d-d038b19591c3"/>
+				<text><![CDATA[Totais:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="106" width="38" height="20" uuid="298dcdb3-77d6-421e-ae7d-d038b19591c3"/>
-				<text><![CDATA[Totais]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="59" y="106" width="73" height="20" uuid="6ffd84b4-fc49-4c1a-95b0-96807a3903c2"/>
+				<reportElement x="74" y="68" width="73" height="20" uuid="6ffd84b4-fc49-4c1a-95b0-96807a3903c2"/>
 				<text><![CDATA[Dias de Faltas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="133" y="106" width="111" height="20" uuid="baaa5780-ee45-47c1-b79b-281cdc4c7e4f"/>
+				<reportElement x="74" y="88" width="111" height="20" uuid="baaa5780-ee45-47c1-b79b-281cdc4c7e4f"/>
 				<text><![CDATA[Dias de Dom/DSR/Fer.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="252" y="106" width="94" height="20" uuid="4e148bfc-3f8b-43eb-ac84-6e8550442e61"/>
+				<reportElement x="74" y="108" width="94" height="20" uuid="4e148bfc-3f8b-43eb-ac84-6e8550442e61"/>
 				<text><![CDATA[Horas Trabalhadas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="359" y="106" width="67" height="20" uuid="c4253a1f-58d9-46f5-b16e-4cde9e7b047b"/>
+				<reportElement x="74" y="128" width="67" height="20" uuid="c4253a1f-58d9-46f5-b16e-4cde9e7b047b"/>
 				<text><![CDATA[Horas Extras]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="436" y="106" width="109" height="20" uuid="249f9075-7535-4f15-9486-d69c135af760"/>
+				<reportElement x="73" y="147" width="109" height="20" uuid="249f9075-7535-4f15-9486-d69c135af760"/>
 				<text><![CDATA[Horas Extras Noturnas]]></text>
 			</staticText>
-			<line>
-				<reportElement x="58" y="106" width="1" height="37" uuid="01a2d359-436e-4519-bb46-74317348c2a4"/>
-			</line>
-			<line>
-				<reportElement x="132" y="106" width="1" height="37" uuid="d408f41c-3bcd-46d1-a7b8-36a79a6d3bac"/>
-			</line>
-			<line>
-				<reportElement x="245" y="106" width="1" height="37" uuid="3dd8969f-41aa-4763-9306-2dda002d315d"/>
-			</line>
-			<line>
-				<reportElement x="352" y="105" width="1" height="38" uuid="669e597d-215d-400b-9070-b18e85852258"/>
-			</line>
-			<line>
-				<reportElement x="430" y="105" width="1" height="39" uuid="5a1e3e4b-b5ba-4713-9d9e-d7e43bf77b86"/>
-			</line>
 			<textField>
-				<reportElement x="5" y="126" width="57" height="20" uuid="310d32de-70be-465a-8b51-0c71f9b82732"/>
-				<textFieldExpression><![CDATA[$F{totais}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="62" y="126" width="70" height="20" uuid="65ce1bcd-fe17-43a0-96b2-14d0827bc554"/>
+				<reportElement x="319" y="68" width="70" height="20" uuid="65ce1bcd-fe17-43a0-96b2-14d0827bc554"/>
 				<textFieldExpression><![CDATA[$F{diasFaltas}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="133" y="126" width="111" height="20" uuid="e9b22fac-6a81-42ff-a437-7c66e62ac2b4"/>
+				<reportElement x="319" y="89" width="111" height="20" uuid="e9b22fac-6a81-42ff-a437-7c66e62ac2b4"/>
 				<textFieldExpression><![CDATA[$F{diasDeDomDsrFer}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="246" y="126" width="107" height="20" uuid="f4efe6a4-b4df-48c6-84b9-7f79092e32a0"/>
+				<reportElement x="319" y="108" width="107" height="20" uuid="f4efe6a4-b4df-48c6-84b9-7f79092e32a0"/>
 				<textFieldExpression><![CDATA[$F{horasTrabalhadas}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="355" y="126" width="76" height="20" uuid="54f21bb2-0d92-4963-bf3b-e84710007c4a"/>
+				<reportElement x="319" y="128" width="76" height="20" uuid="54f21bb2-0d92-4963-bf3b-e84710007c4a"/>
 				<textFieldExpression><![CDATA[$F{horasExtras}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="432" y="126" width="122" height="20" uuid="37e47f1d-6ede-4f10-94cb-3e0f20668738"/>
+				<reportElement x="319" y="146" width="122" height="20" uuid="37e47f1d-6ede-4f10-94cb-3e0f20668738"/>
 				<textFieldExpression><![CDATA[$F{horasExtrasNoturnas}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="11" y="68" width="38" height="20" uuid="eecc301f-c086-4dd6-b3ac-1c59dc75072c"/>
-				<textFieldExpression><![CDATA[$F{dia}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="59" y="68" width="57" height="20" uuid="b3785b2d-615e-43d4-8132-c1211757d39b"/>
-				<textFieldExpression><![CDATA[$F{entrada}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="118" y="68" width="69" height="20" uuid="4371ba8b-8278-4e51-aa5c-5afccdf83783"/>
-				<textFieldExpression><![CDATA[$F{saidaAlmoco}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="190" y="68" width="81" height="20" uuid="d46843d6-8a94-41e8-b57e-77599b16fe16"/>
-				<textFieldExpression><![CDATA[$F{retornoAlmoco}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="274" y="68" width="50" height="20" uuid="bb18fb7a-d0a5-4102-9174-69e90167bffb"/>
-				<textFieldExpression><![CDATA[$F{saida}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="327" y="68" width="65" height="20" uuid="f5609e33-9acc-4b45-be8c-fdba0fb22fa6"/>
-				<textFieldExpression><![CDATA[$F{horaExtra}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="393" y="67" width="82" height="20" uuid="80a41106-a258-4f02-ac8f-cca257f2e884"/>
-				<textFieldExpression><![CDATA[$F{horasNoturnas}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="479" y="68" width="68" height="20" uuid="0d8c67d9-2943-4a4b-b0a1-a66bca1916eb"/>
-				<textFieldExpression><![CDATA[$F{acao}]]></textFieldExpression>
-			</textField>
+			<line>
+				<reportElement x="1" y="105" width="551" height="1" uuid="ce2d2942-ddb2-4f6c-9c74-399aadbb62b1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="163" width="554" height="1" uuid="8bc6a534-d6ea-4911-b49a-2adfcf83b4ce"/>
+			</line>
+			<line>
+				<reportElement x="253" y="66" width="1" height="97" uuid="eb75944e-52b5-4831-ad19-47c2c5f14c7f"/>
+			</line>
 		</band>
 	</detail>
 </jasperReport>

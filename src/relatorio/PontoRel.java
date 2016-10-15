@@ -55,7 +55,7 @@ public class PontoRel{
  
 		//JasperExportManager.exportReportToPdfFile(print, "/Users/palomacarreira/Desktop/Relatorio_de_Clientes.pdf");
 		try {
-			JasperExportManager.exportReportToPdfFile(print, this.getPathToReportPackage()+ pontoRelatorio.get(0).getDataDaFolhaDePonto()+pontoRelatorio.get(0).getIdEmpregado());//"pdf/Relatorio_de_Clientes2.pdf");
+			JasperExportManager.exportReportToPdfFile(print, this.getPathToReportPackage()+ pontoRelatorio.get(0).getAno()+pontoRelatorio.get(0).getIdEmpregado());//"pdf/Relatorio_de_Clientes2.pdf");
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			System.out.println("exportReportToPdfFile");
@@ -65,7 +65,7 @@ public class PontoRel{
 	
 	//Efetua Dowload
 	public void download(HttpServletResponse response, List<PontoRelatorio> pontoRelatorio){
-		File arquivo = new File(this.getPathToReportPackage()+ pontoRelatorio.get(0).getDataDaFolhaDePonto()+pontoRelatorio.get(0).getIdEmpregado());//"pdf/Relatorio_de_Clientes2.pdf");
+		File arquivo = new File(this.getPathToReportPackage()+ pontoRelatorio.get(0).getAno()+pontoRelatorio.get(0).getIdEmpregado());//"pdf/Relatorio_de_Clientes2.pdf");
 		Path path = arquivo.toPath();
 
 		OutputStream output = null;

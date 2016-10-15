@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.CalculosHoraExtra;
-import model.CalculosPagamento;
 import model.ContratoTO;
 import model.EmpregadoTO;
 import model.EspecialistaContrato;
@@ -28,6 +27,7 @@ import model.HoraExtraTO;
 import model.JornadaTrabalhoTO;
 import model.PontoRelatorio;
 import model.PontoTO;
+import model.TabelaPonto;
 import model.UsuarioTO;
 import relatorio.PontoRel;
 
@@ -144,6 +144,9 @@ public class PesquisarPonto extends HttpServlet {
 				request.setAttribute("listaEmpregado", empregadoTO);
 				request.setAttribute("listaPonto", listaDePonto);
 				request.setAttribute("dataAdmissao", dataAdmissao);
+				request.setAttribute("mes", mesEscolhido);
+				request.setAttribute("ano", anoEscolhido);
+				
 				view = request.getRequestDispatcher("TelaPonto.jsp");
 				view.forward(request, response);
 			break;
@@ -162,46 +165,27 @@ public class PesquisarPonto extends HttpServlet {
 				String totalHorasNoturnas2 = request.getParameter("totalHorasNoturnas");
 				String totalFolgas2 = request.getParameter("totalFolgas");
 				
-
 				
 				EmpregadoTO empregadoTO2 = empregado.pesquisar(codEmpregado);
 				UsuarioTO usuarioTO = usuario.pesquisarNomeEmpregador(codEmpregado);
 				ContratoTO contratoTO2 = contrato.pesquisarEmpregado(codEmpregado);
-				CalculosPagamento calculos2 = new CalculosPagamento();
 				
 				formatador = new SimpleDateFormat("yyyy-MM-dd");
 				dataAdmissao = formatador.format(contratoTO2.getDataAdmissao());
 				listaDePonto = ponto.pesquisar(codigoEmpregado);
 				
 				List<PontoRelatorio> pontoList = new ArrayList<PontoRelatorio>();
-
-				//folhaPonto.setDataDaFolhaDePonto("");
+			
 				folhaPonto.setMes(mes);
 				folhaPonto.setAno(ano);
-				//folhaPonto.setIdEmpregado("");
 				folhaPonto.setNomeEmpregador(usuarioTO.getNome() +" "+ usuarioTO.getSobrenome());
 				folhaPonto.setNomeEmpregado(empregadoTO2.getNome()+" "+ empregadoTO2.getSobrenome());
-				folhaPonto.setCargoEmpregado(empregadoTO2.getCodigoEmpregado());
-				
-				for (int j = 0; j < listaDePonto.size(); j++) {
-					
-					folhaPonto.getDia().add(listaDePonto.get(j).getDataPonto().toString());
-					folhaPonto.getEntrada().add(listaDePonto.get(j).getHoraEntrada());
-					folhaPonto.getSaidaAlmoco().add(listaDePonto.get(j).getHoraSaidaAlmoco());
-					folhaPonto.getRetornoAlmoco().add(listaDePonto.get(j).getHoraVoltaAlmoco());
-					folhaPonto.getSaida().add(listaDePonto.get(j).getHoraSaidaAlmoco());
-					folhaPonto.getHoraExtra().add(listaDePonto.get(j).getCodigo());
-					folhaPonto.getHorasNoturnas().add(listaDePonto.get(j).getCodigo());
-					folhaPonto.getAcao().add(listaDePonto.get(j).getAcao());
-				}
-
-				//folhaPonto.setTotais("");
+				folhaPonto.setCargoEmpregado(contratoTO2.getCargo());
 				folhaPonto.setDiasFaltas(totalFaltas2);
 				folhaPonto.setDiasDeDomDsrFer(totalFolgas2);
 				folhaPonto.setHorasTrabalhadas(totalHorasTrabalhadas2);
 				folhaPonto.setHorasExtras(totalHorasExtras2);
 				folhaPonto.setHorasExtrasNoturnas(totalHorasNoturnas2);
-
 
 				pontoList.add(folhaPonto);
 

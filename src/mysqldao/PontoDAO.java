@@ -5,10 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import banco.MysqlConnect;
-import model.EnderecoTO;
-import model.FeriasTO;
 import model.PontoTO;
+import banco.MysqlConnect;
 
 public class PontoDAO extends MysqlConnect {
 	   
@@ -97,7 +95,7 @@ public class PontoDAO extends MysqlConnect {
 		   PontoTO pontoTO = null;
 	         try
 	         {
-	            String sql = " SELECT * FROM PONTO WHERE FK_EMPREGADO = ?";
+	            String sql = " SELECT * FROM PONTO WHERE FK_EMPREGADO = ? " ;
 	            st= conn.prepareStatement(sql);
 	            st.setString(1,codigo);
 	            ResultSet resultSet = st.executeQuery();
