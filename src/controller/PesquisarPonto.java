@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.CalculosHoraExtra;
+import model.CalculosPagamento;
 import model.ContratoTO;
 import model.EmpregadoTO;
 import model.EspecialistaContrato;
@@ -22,10 +23,12 @@ import model.EspecialistaEmpregado;
 import model.EspecialistaHorasExtras;
 import model.EspecialistaJornadaTrabalho;
 import model.EspecialistaPonto;
+import model.EspecialistaUsuario;
 import model.HoraExtraTO;
 import model.JornadaTrabalhoTO;
 import model.PontoRelatorio;
 import model.PontoTO;
+import model.UsuarioTO;
 import relatorio.PontoRel;
 
 /**
@@ -56,6 +59,8 @@ public class PesquisarPonto extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EspecialistaContrato contrato = new EspecialistaContrato();
+		EspecialistaUsuario usuario = new EspecialistaUsuario();
+		PontoRelatorio folhaPonto = new PontoRelatorio();
 		EspecialistaPonto ponto = new EspecialistaPonto();
 		EspecialistaEmpregado empregado = new EspecialistaEmpregado();
 		EspecialistaJornadaTrabalho jornadaTrabalho = new EspecialistaJornadaTrabalho();
@@ -145,31 +150,40 @@ public class PesquisarPonto extends HttpServlet {
 			
 			case "GerarFolhaPonto":
 				
-			
 				System.out.println("GERANDO RELATORIO DA FOLHA DE PONTO");
+			
+				String codEmpregado = (String) request.getParameter("codigoEmpregado");
+				String mes = (String) request.getParameter("mes");
+				String ano = (String) request.getParameter("ano");
+				
+				String totalFaltas2 = request.getParameter("totalFaltas");
+				String totalHorasTrabalhadas2 = request.getParameter("totalHorasTrabalhadas");
+				String totalHorasExtras2 = request.getParameter("totalHorasExtras");
+				String totalHorasNoturnas2 = request.getParameter("totalHorasNoturnas");
+				String totalFolgas2 = request.getParameter("totalFolgas");
+				
 
-				List<PontoRelatorio> pontoList = new ArrayList<PontoRelatorio>();
 				
-				PontoRelatorio folhaPonto = new PontoRelatorio();
+				EmpregadoTO empregadoTO2 = empregado.pesquisar(codEmpregado);
+				UsuarioTO usuarioTO = usuario.pesquisarNomeEmpregador(codEmpregado);
+				ContratoTO contratoTO2 = contrato.pesquisarEmpregado(codEmpregado);
+				CalculosPagamento calculos2 = new CalculosPagamento();
 				
-				empregadoTO = empregado.pesquisar(codigoEmpregado);
-				contratoTO = contrato.pesquisarEmpregado(codigoEmpregado);
 				formatador = new SimpleDateFormat("yyyy-MM-dd");
-				dataAdmissao = formatador.format(contratoTO.getDataAdmissao());
+				dataAdmissao = formatador.format(contratoTO2.getDataAdmissao());
 				listaDePonto = ponto.pesquisar(codigoEmpregado);
-				//
-				folhaPonto.setDataDaFolhaDePonto("");
-				folhaPonto.setMes("");
-				folhaPonto.setAno("");
-				folhaPonto.setIdEmpregado("");
-				folhaPonto.setNomeEmpregador("");
-				folhaPonto.setNomeEmpregado("");
-				folhaPonto.setCargoEmpregado("");
 				
-				//TabelaPonto tabela = new TabelaPonto();
+				List<PontoRelatorio> pontoList = new ArrayList<PontoRelatorio>();
+
+				//folhaPonto.setDataDaFolhaDePonto("");
+				folhaPonto.setMes(mes);
+				folhaPonto.setAno(ano);
+				//folhaPonto.setIdEmpregado("");
+				folhaPonto.setNomeEmpregador(usuarioTO.getNome() +" "+ usuarioTO.getSobrenome());
+				folhaPonto.setNomeEmpregado(empregadoTO2.getNome()+" "+ empregadoTO2.getSobrenome());
+				folhaPonto.setCargoEmpregado(empregadoTO2.getCodigoEmpregado());
 				
 				for (int j = 0; j < listaDePonto.size(); j++) {
-					
 					
 					folhaPonto.getDia().add(listaDePonto.get(j).getDataPonto().toString());
 					folhaPonto.getEntrada().add(listaDePonto.get(j).getHoraEntrada());
@@ -181,14 +195,13 @@ public class PesquisarPonto extends HttpServlet {
 					folhaPonto.getAcao().add(listaDePonto.get(j).getAcao());
 				}
 
-				folhaPonto.setTotais("");
-				folhaPonto.setDiasFaltas("");
-				folhaPonto.setDiasDeDomDsrFer("");
-				folhaPonto.setHorasTrabalhadas("");
-				folhaPonto.setHorasExtras("");
-				folhaPonto.setHorasExtrasNoturnas("");
-				
-				//
+				//folhaPonto.setTotais("");
+				folhaPonto.setDiasFaltas(totalFaltas2);
+				folhaPonto.setDiasDeDomDsrFer(totalFolgas2);
+				folhaPonto.setHorasTrabalhadas(totalHorasTrabalhadas2);
+				folhaPonto.setHorasExtras(totalHorasExtras2);
+				folhaPonto.setHorasExtrasNoturnas(totalHorasNoturnas2);
+
 
 				pontoList.add(folhaPonto);
 

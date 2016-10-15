@@ -17,10 +17,7 @@ public class HoleriteRelatorio {
 	public double descontoIrrf;
 	public double fgts;
 	public double salarioLiquido;
-	public Date dataDoHolerite;//mes e ano
-	//public double porcentagemDescontoInss;
-	//public double adicionalNoturno;
-	//public double valorDescontoIr;//Imposto de renda
+	public Date dataDoHolerite;
 	
 	public String getNomeEmpregador() {
 		return nomeEmpregador;
@@ -106,5 +103,4 @@ public class HoleriteRelatorio {
 	public void setFgts(double fgts) {
 		this.fgts = fgts;
 	}
-
 }

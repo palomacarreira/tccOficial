@@ -1,7 +1,5 @@
 package model;
 
-import java.sql.ResultSet;
-
 import mysqldao.FolhaPagamentoDAO;
 
 

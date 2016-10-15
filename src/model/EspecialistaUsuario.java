@@ -65,6 +65,12 @@ import mysqldao.UsuarioDAO;
 			return usuarioTO;
 		}
 		
+		public UsuarioTO pesquisarNomeEmpregador(String codg){
+			
+			usuarioTO = usuarioDAO.pesquisarNomeEmpregador(codg);
+			return usuarioTO;
+		}
+		
 		 public boolean ativarUsuario(String codigo)
 		 {
 			 usuarioDAO.ativarUsuario(codigo);

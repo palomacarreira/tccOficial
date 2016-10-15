@@ -197,6 +197,13 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	<br/>
 	
 	<form id="dadosPonto" role="form" class="form-inline" method="post">
+	<%out.println("<input name=\"totalFaltas\" id=\"totalFaltas\"type=\"hidden\" value=\""+request.getAttribute("totalFaltas")+"\"/>");%>
+	<%out.println("<input name=\"totalHorasTrabalhadas\" id=\"totalHorasTrabalhadas\"type=\"hidden\" value=\""+request.getAttribute("totalHorasTrabalhadas")+"\"/>");%>
+	<%out.println("<input name=\"totalHorasExtras\" id=\"totalHorasExtras\"type=\"hidden\" value=\""+request.getAttribute("totalHorasExtras")+"\"/>");%>
+	<%out.println("<input name=\"totalHorasNoturnas\" id=\"totalHorasNoturnas\"type=\"hidden\" value=\""+request.getAttribute("totalHorasNoturnas")+"\"/>");%>
+	<%out.println("<input name=\"totalFolgas\" id=\"totalFolgas\"type=\"hidden\" value=\""+request.getAttribute("totalFolgas")+"\"/>");%>
+
+	
 	<div id="itensFolhaPonto">
 	   <table id="tableFolhaPonto" class="table table-striped table-bordered" cellspacing="0" width="100%">
 	        <thead>
@@ -228,6 +235,9 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	        </tbody>
 	    </table>
 	</div>
+	<button  type= "submit" name="acao" value="GerarFolhaPonto" class= "btn btn-primário "> Exportar Folha de Ponto </button> 
+	
+	<br/>
 	</form>
 	
 	
@@ -257,7 +267,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	        </tbody>
 	    </table>
 	    <%-- <a href="PesquisarPonto?acao=GerarFolhaPonto&codEmpregado=<%=empregado.getCodigoEmpregado()%>">Exportar Folha de Ponto</a>--%>
-	    <td><button onclick="funcaoRelatorio()" type="submit" class="btn btn-success">Exportar Folha de Ponto</button></td>
+	   <%-- <td><button onclick="funcaoRelatorio()" type="submit" class="btn btn-success">Exportar Folha de Ponto</button></td> --%>
 	</div>
 </div>
 

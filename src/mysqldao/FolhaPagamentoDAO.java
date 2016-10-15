@@ -111,7 +111,7 @@ public class FolhaPagamentoDAO extends MysqlConnect {
 		   	 FolhaPagamentoTO folhaPagamentoTO = null;
 	         try
 	         {
-	            String sql = " SELECT * FROM FOLHA_PAGAMENTO WHERE FK_CONTRATO = ?";
+	            String sql = " SELECT * FROM FOLHA_PAGAMENTO WHERE FK_CONTRATO = ? ";
 	            st= conn.prepareStatement(sql);
 	            st.setString(1,codg);
 	            ResultSet resultSet = st.executeQuery();
@@ -128,10 +128,6 @@ public class FolhaPagamentoDAO extends MysqlConnect {
 	            	folhaPagamentoTO.setMesReferencia(resultSet.getString("MES_REFERENCIA"));
 					folhaPagamentoTO.setAnoReferencia(resultSet.getString("ANO_REFERENCIA"));
 					folhaPagamentoTO.setCodigoContrato("FK_CONTRATO");
-	            	//folhaPagamentoTO.setDecTercPrimeiro(resultSet.getDouble("DECIMO_TERCEIRO_1PARCELA"));
-					//folhaPagamentoTO.setDecTercSegunda(resultSet.getDouble("DECIMO_TERCEIRO_2PARCELA"));
-					//folhaPagamentoTO.setHoraExtra(resultSet.getDouble("VALOR_HORA_EXTRA"));
-					//folhaPagamentoTO.setCodigo(resultSet.getString("CD_FOLHA_PAGAMENTO"));
 	            }	
 	            st.close();
 	         }

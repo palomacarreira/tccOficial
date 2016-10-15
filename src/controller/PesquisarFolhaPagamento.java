@@ -19,7 +19,9 @@ import model.ContratoTO;
 import model.EmpregadoTO;
 import model.EspecialistaContrato;
 import model.EspecialistaEmpregado;
+import model.EspecialistaUsuario;
 import model.HoleriteRelatorio;
+import model.UsuarioTO;
 import relatorio.HoleriteRel;
 
 
@@ -50,6 +52,7 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EspecialistaEmpregado empregado = new EspecialistaEmpregado();
+		EspecialistaUsuario usuario = new EspecialistaUsuario();
 		EspecialistaContrato contrato = new EspecialistaContrato();
 		RequestDispatcher view = null;
 		String codigoEmpregado = (String) request.getParameter("codigoEmpregado");
@@ -112,18 +115,15 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 			
 			case "GerarHolerite":
 				try{
+					System.out.println("GERANDO RELATORIO DO HOLERITE");
 					
 					String codEmpregado = request.getParameter("codEmpregado");
 					
 					EmpregadoTO empregadoTO2 = empregado.pesquisar(codEmpregado);
+					UsuarioTO usuarioTO = usuario.pesquisarNomeEmpregador(codEmpregado);
 					ContratoTO contratoTO2 = contrato.pesquisarEmpregado(codEmpregado);
-					SimpleDateFormat formatador2 = new SimpleDateFormat("yyyy-MM-dd");
-					//String dataAdmissao2 = formatador2.format(contratoTO2.getDataAdmissao());
 					CalculosPagamento calculos2 = new CalculosPagamento();
 				 	
-					int totalDias2 = 0;
-					int anoEscolhido2 = 0;
-					int mesEscolhido2 = 0;
 					if(request.getParameter("mes") == null)
 					{
 						anoEscolhido  = Calendar.getInstance().get(Calendar.YEAR);
@@ -144,37 +144,27 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 					double valeTransporte2 = calculos2.totalValeTransporte(salario2, codEmpregado);
 					double salarioLiquido2 = calculos2.totalSalario(codEmpregado, salario2, valeTransporte2, 
 					inss2, irrf2, valorHoraExtra2, 0.0);
+					
 					List<HoleriteRelatorio> holerites = new ArrayList<HoleriteRelatorio>();
-					
-					
-						/*EspecialistaEmpregado emp = new EspecialistaEmpregado();
-						EspecialistaUsuario usuario = new EspecialistaUsuario();
-						List<HoleriteRelatorio> holerites = new ArrayList<HoleriteRelatorio>();
-						String codEmpregado = request.getParameter("codEmpregado");
-						ContratoTO contTO = contrato.pesquisarEmpregado(codEmpregado);
-						UsuarioTO usuarioTO = usuario.pesquisarUsuario(codEmpregado);
-						EmpregadoTO emprTO = emp.pesquisar(codEmpregado);	*/
+
 						Date data = new java.sql.Date(new java.util.Date().getTime());
-						
-						System.out.println("Gerando PDF do holerite");
 						
 						HoleriteRelatorio holerite = new HoleriteRelatorio();
 						
-						holerite.setNomeEmpregador(empregadoTO2.getNome() +" "+ empregadoTO2.getSobrenome());
+						
+						holerite.setNomeEmpregador(usuarioTO.getNome() +" "+ usuarioTO.getSobrenome());
 						holerite.setIdEmpregado(empregadoTO2.getCodigoEmpregado());
 						holerite.setNomeEmpregado(empregadoTO2.getNome()+" "+ empregadoTO2.getSobrenome());
 						holerite.setCargoEmpregado(contratoTO2.getCargo());
 						holerite.setSalarioBase(salario2);
 						holerite.setValeTransporte(valeTransporte2);
 						holerite.setHoraExtra(valorHoraExtra2);
-						holerite.setDescontoBeneficios(3.0);
+						holerite.setDescontoBeneficios(contratoTO2.getDescontoBeneficios());
 						holerite.setValorDescontoInss(inss2);
 						holerite.setFgts(fgts2);
+						holerite.setDescontoIrrf(irrf2);
 						holerite.setSalarioLiquido(salarioLiquido2); 
 						holerite.setDataDoHolerite(data);
-						//holerite.setPorcentagemDescontoInss(0.6);//ISSO TEM QUE PEGAR SA TABELA PARAMETRO DO BANCO
-						//holerite.setAdicionalNoturno(9.0);//ISSO E O VALOR ADICIONAL REFERENTE TRABALHO NOTURNO
-						//holerite.setValorDescontoIr(9.0);//VALOR A SER DESCONTADO DE IR --ISSO VAI DEPENDER DO VALOR DO SALARIO DO EMPREGADO, SE O VALOR FOR BAIXO NAO ENTRA AQUI.
 						
 
 						holerites.add(holerite);
@@ -186,7 +176,6 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 						relatorio.download(response,holerites);
 						
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			break;

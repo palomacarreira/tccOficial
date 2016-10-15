@@ -84,7 +84,33 @@ public class UsuarioDAO extends MysqlConnect {
 		      return true;
 		   }
 
-	   	
+	   public UsuarioTO pesquisarNomeEmpregador(String codg)
+	   {
+		   	 UsuarioTO usuarioTO = null;
+	         try
+	         {
+	            String sql = " SELECT usuario.nome, usuario.sobrenome FROM empregado, usuario WHERE cd_usuario =  fk_empregador AND cd_empregado = ? ";
+	            st= conn.prepareStatement(sql);
+	            st.setString(1,codg);
+	            ResultSet resultSet = st.executeQuery();
+	            if(resultSet.next())
+	            {
+	            	usuarioTO = new UsuarioTO();
+	            	usuarioTO.setNome(resultSet.getString("nome"));
+	            	usuarioTO.setSobrenome(resultSet.getString("sobrenome"));
+	            }	
+	            st.close();
+	         }
+	            catch(Exception e)
+	            {
+	               e.printStackTrace();
+	               return null;
+	            }
+	      
+	         return usuarioTO;
+	      
+	      }
+	   
 	   public UsuarioTO pesquisarUsuario(String codg)
 	   {
 		   	 UsuarioTO usuarioTO = null;

@@ -69,6 +69,8 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		double folgas = (double) request.getAttribute("folgas");
 		double beneficios = (double) request.getAttribute("beneficios");
 		double total = (double) request.getAttribute("total");
+		String dataDemissao = request.getAttribute("dataDemissao").toString();
+		
 	%>  
 	
 		<div class="header clearfix">
@@ -104,7 +106,23 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	<hr />
 	
 	<div class="container">
-	<form name="form1" class= "form-inline" method="post" action="">
+	<form name="form1" class= "form-inline" method="get" action="AlterarEmpregado">
+	<%out.println("<input name=\"salarioLiquido\" id=\"salarioLiquido\"type=\"hidden\" value=\""+request.getAttribute("salarioLiquido")+"\"/>");%>
+	<%out.println("<input name=\"salarioProporcional\" id=\"salarioProporcional\"type=\"hidden\" value=\""+request.getAttribute("salarioLiquidoProporcional")+"\"/>");%>
+	<%out.println("<input name=\"inss\" id=\"inss\"type=\"hidden\" value=\""+request.getAttribute("inss")+"\"/>");%>
+	<%out.println("<input name=\"fgts\" id=\"fgts\"type=\"hidden\" value=\""+request.getAttribute("fgts")+"\"/>");%>
+	<%out.println("<input name=\"irrf\" id=\"irrf\"type=\"hidden\" value=\""+request.getAttribute("irrf")+"\"/>");%>
+	<%out.println("<input name=\"valeTransporte\" id=\"valeTransporte\"type=\"hidden\" value=\""+request.getAttribute("valeTransporte")+"\"/>");%>
+	<%out.println("<input name=\"ferias\" id=\"ferias\"type=\"hidden\" value=\""+request.getAttribute("ferias")+"\"/>");%>
+	<%out.println("<input name=\"feriasProporcionais\" id=\"feriasProporcionais\"type=\"hidden\" value=\""+request.getAttribute("feriasProporcionais")+"\"/>");%>
+	<%out.println("<input name=\"decimoTerceiro\" id=\"decimoTerceiro\"type=\"hidden\" value=\""+request.getAttribute("decimoTerceiro")+"\"/>");%>
+	<%out.println("<input name=\"multaAvisoPrevio\" id=\"multaAvisoPrevio\"type=\"hidden\" value=\""+request.getAttribute("multaAvisoPrevio")+"\"/>");%>
+	<%out.println("<input name=\"folgas\" id=\"folgas\"type=\"hidden\" value=\""+request.getAttribute("folgas")+"\"/>");%>
+	<%out.println("<input name=\"beneficios\" id=\"multaAvisoPrevio\"type=\"hidden\" value=\""+request.getAttribute("beneficios")+"\"/>");%>
+	<%out.println("<input name=\"total\" id=\"total\"type=\"hidden\" value=\""+request.getAttribute("total")+"\"/>");%>
+	<%out.println("<input name=\"dataDemissao\" id=\"dataDemissao\"type=\"hidden\" value=\""+request.getAttribute("dataDemissao")+"\"/>");%>
+	
+	
 		<nav class="navbar navbar-default" role="navigation">
 			<div id="itensFolhaPonto">
 			   <table id="tableFolhaPonto" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -209,7 +227,8 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		 <br>
 			<div id="botoes">
 				<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário "  onclick="history.go(-1)"> Cancelar </button> 
-				<a href="AlterarEmpregado?acao=GerarRescisao&codEmpregado=codEmpregado">Exportar Recisao</a>
+				<button  type= "submit" name="acao" value="GerarRescisao" class= "btn btn-primário "> Exportar Rescisão </button> 
+				<%--<a href="AlterarEmpregado?acao=GerarRescisao&codEmpregado=codEmpregado">Exportar Recisao</a> --%>
 			</div>
 	</form>
 	</div>

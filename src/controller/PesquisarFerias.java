@@ -14,16 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import relatorio.FeriasRel;
-import relatorio.HoleriteRel;
 import model.ContratoTO;
 import model.EmpregadoTO;
 import model.EspecialistaContrato;
 import model.EspecialistaEmpregado;
 import model.EspecialistaFerias;
+import model.EspecialistaUsuario;
 import model.FeriasRelatorio;
 import model.FeriasTO;
-import model.HoleriteRelatorio;
+import model.UsuarioTO;
+import relatorio.FeriasRel;
 
 /**
  * Servlet implementation class PesquisarFerias
@@ -55,6 +55,7 @@ public class PesquisarFerias extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8"); 
 		String acao = request.getParameter("acao");
+		EspecialistaUsuario usuario = new EspecialistaUsuario();
 		EspecialistaFerias espFerias = new EspecialistaFerias();
 		EspecialistaEmpregado empregado = new EspecialistaEmpregado();
 		EspecialistaContrato espContrato = new EspecialistaContrato();
@@ -94,22 +95,33 @@ public class PesquisarFerias extends HttpServlet {
 			
 			case "GerarFerias":
 			System.out.println("GERANDO RELATORIO DE FERIAS");
-			EmpregadoTO empregadoTO = empregado.pesquisar(codigoEmpregado);
-			ContratoTO contratoTO = espContrato.pesquisarEmpregado(codigoEmpregado);
+			
+
+			String codEmpregado = request.getParameter("codEmpregado");
+			String codigoFerias = request.getParameter("codigoFerias");
+			
+			UsuarioTO usuarioTO = usuario.pesquisarNomeEmpregador(codEmpregado);
+			EmpregadoTO empregadoTO = empregado.pesquisar(codEmpregado);
+			ContratoTO contratoTO = espContrato.pesquisarEmpregado(codEmpregado);
+			FeriasTO feriasTO = espFerias.pesquisarFerias(codigoFerias);
 			List<FeriasRelatorio> feriasList = new ArrayList<FeriasRelatorio>();
+			
 			FeriasRelatorio ferias = new FeriasRelatorio();
 		
-			//ferias.setNomeEmpregador(contratoTO.get);
-			//ferias.setNomeEmpregado(empregadoTO.getNome());
-			/*ferias.setCargoEmpregado(cargoEmpregado);
-			ferias.setPeriodoaquisitivo(periodoaquisitivo);
-			ferias.setSituacao(situacao);
-			ferias.setInicio(inicio);
-			ferias.setTermino(termino);
-			ferias.setQtdDias(qtdDias);
-			ferias.setValor(valor);
-			ferias.setDataPagamento(dataPagamento);*/
-			
+			ferias.setNomeEmpregador(usuarioTO.getNome() +" "+ usuarioTO.getSobrenome());
+			ferias.setNomeEmpregado(empregadoTO.getNome() +" "+ empregadoTO.getSobrenome());
+			ferias.setCargoEmpregado(contratoTO.getCargo());
+			ferias.setPeriodoaquisitivo(feriasTO.getPeriodoAquisitivoInicio()+" até "+feriasTO.getPeriodoAquisitivoFim());
+			ferias.setSituacao(feriasTO.situacao);
+			ferias.setInicio(feriasTO.getDataInicio().toString());
+			ferias.setTermino(feriasTO.getDataFinal().toString());
+			ferias.setQtdDias(feriasTO.getQtdDiasFerias()+"");
+			ferias.setValor(feriasTO.getValor().toString());
+			if(feriasTO.getDiaPagamento() != null){
+				ferias.setDataPagamento(feriasTO.getDiaPagamento().toString());
+			}else{
+				ferias.setDataPagamento("PENDENTE");
+			}
 			feriasList.add(ferias);
 
 			FeriasRel relatorio = new FeriasRel();
@@ -133,7 +145,7 @@ public class PesquisarFerias extends HttpServlet {
 		dtAdmissao.setTime(dataAdmissao);
 		dtAdmissaoMaisUmAno.setTime(dataAdmissao);
 		dtAdmissaoMaisUmAno.add(Calendar.YEAR, 1);
-		int qtdLinhas = 0;
+
 		dtHoje.setTime(dtHoje.getTime());
 		
 		if(dtAdmissaoMaisUmAno.before(dtHoje))

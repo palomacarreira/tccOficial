@@ -33,7 +33,7 @@
 			</line>
 			<staticText>
 				<reportElement x="209" y="16" width="158" height="20" uuid="b72b6a62-f749-4ef5-99f9-45e553f97316"/>
-				<text><![CDATA[Recibo de Férias]]></text>
+				<text><![CDATA[Recibo de Folha de Ponto]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="367" y="1" width="88" height="20" uuid="7ca17a1a-deb4-4365-adb0-bbaf2a10c4ad"/>
@@ -162,7 +162,7 @@
 				<text><![CDATA[TOTAL PAGAR:	]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="315" y="69" width="130" height="20" uuid="b1218b1f-1706-44aa-b3af-b8536ba47207"/>
+				<reportElement x="315" y="69" width="238" height="20" uuid="b1218b1f-1706-44aa-b3af-b8536ba47207"/>
 				<textFieldExpression><![CDATA[$F{periodoaquisitivo}]]></textFieldExpression>
 			</textField>
 			<textField>
