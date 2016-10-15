@@ -44,7 +44,7 @@ public class Login extends HttpServlet {
 		PrintWriter out = response.getWriter();  
 	    RequestDispatcher view = null;
 		EspecialistaLogin especialista = new EspecialistaLogin();
-		EspecialistaUsuario espUsuario = new EspecialistaUsuario();
+		EspecialistaUsuario espUsuario = new EspecialistaUsuario(); 
 		HttpSession session = request.getSession();
 		
 		switch (acao) 

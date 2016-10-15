@@ -22,6 +22,7 @@ import model.EspecialistaEmpregado;
 import model.HoleriteRelatorio;
 import relatorio.HoleriteRel;
 
+
 /**
  * Servlet implementation class PesquisarFolhaPagamento
  */
@@ -57,6 +58,8 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 		
 		switch (acao) 
 		{
+			
+			 			
 			case "Pesquisar":
 				
 				EmpregadoTO empregadoTO = empregado.pesquisar(codigoEmpregado);
@@ -86,9 +89,10 @@ public class PesquisarFolhaPagamento extends HttpServlet {
 				double fgts = calculos.totalFGTS(salario);
 				double irrf = calculos.totalIRRF(salario,codigoEmpregado,inss);
 				double valeTransporte = calculos.totalValeTransporte(salario, codigoEmpregado);
-				double salarioLiquido = calculos.totalSalario(codigoEmpregado, salario, valeTransporte, inss, irrf, valorHoraExtra, 0.0);
-						
-
+				double folgas = calculos.totalFolgas(codigoEmpregado);
+				double salarioLiquido = calculos.totalSalario(codigoEmpregado, salario, valeTransporte, 
+				inss, irrf, valorHoraExtra, folgas);
+				
 				request.setAttribute("anoEscolhido", anoEscolhido);
 				request.setAttribute("mesEscolhido", mesEscolhido);
 			 	request.setAttribute("totalDias", totalDias);

@@ -7,7 +7,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,6 +30,8 @@ import model.EspecialistaEmpregado;
 import model.EspecialistaEndereco;
 import model.EspecialistaJornadaTrabalho;
 import model.JornadaTrabalhoTO;
+import model.RescisaoRelatorio;
+import relatorio.RescisaoRel;
 
 
 /**
@@ -212,8 +214,8 @@ public class AlterarEmpregado extends HttpServlet {
 							 if( !dirX.isDirectory() ){
 						            dirX.mkdir();
 						     }	
-							 File dir = new File((getServletContext().getRealPath("")+ "/"+ "uploads") + "/" + codigoUsuario );// diretório de upload
-							 //se o diretório não existe ele cria
+							 File dir = new File((getServletContext().getRealPath("")+ "/"+ "uploads") + "/" + codigoUsuario );// diretï¿½rio de upload
+							 //se o diretï¿½rio nï¿½o existe ele cria
 						     if( !dir.isDirectory() ){
 						         dir.mkdir();
 						     }	
@@ -372,34 +374,34 @@ public class AlterarEmpregado extends HttpServlet {
 			{	
 				total = salarioLiquidoProporcional + ferias + feriasProporcionais ;
 			}
-			else if(tipoDemissao.equals("Pedido de Demissão") && tipoAviso.equals("Trabalhado"))
+			else if(tipoDemissao.equals("Pedido de Demissï¿½o") && tipoAviso.equals("Trabalhado"))
 			{
 				total = salarioLiquidoProporcional + ferias + feriasProporcionais + decimoTerceiro ;
 			}
-			else if(tipoDemissao.equals("Pedido de Demissão")&& tipoAviso.equals("Indenizado"))
+			else if(tipoDemissao.equals("Pedido de Demissï¿½o")&& tipoAviso.equals("Indenizado"))
 			{
 				total = salarioLiquidoProporcional + ferias + feriasProporcionais + decimoTerceiro ;
 			}
-			else if(tipoDemissao.equals("Sem Justa Causa")&& tipoAviso.equals("Não trabalhou"))
+			else if(tipoDemissao.equals("Sem Justa Causa")&& tipoAviso.equals("Nï¿½o trabalhou"))
 			{
 				double avisoPrevioIndenizado = salario;
 				multaAviso = salario;	
 				total = salario + avisoPrevioIndenizado + ferias + feriasProporcionais + decimoTerceiro
 						 - multaAviso;
 				
-				//multa no valor de um mês de salário descontado do pagamento da rescisão. 
-				//A empresa só poderia descontar até o limite, ou seja, até zerar a rescisão”, 
+				//multa no valor de um mï¿½s de salï¿½rio descontado do pagamento da rescisï¿½o. 
+				//A empresa sï¿½ poderia descontar atï¿½ o limite, ou seja, atï¿½ zerar a rescisï¿½oï¿½, 
 				if(total < 0){
 					total = 0.0;
 				}
 			}
-			else if(tipoDemissao.equals("Término de Contrato")){
+			else if(tipoDemissao.equals("Tï¿½rmino de Contrato")){
 				total = salarioLiquido + ferias + feriasProporcionais + decimoTerceiro;
 			}
 			
 			try {
 				espContrato.alterarRescisao(true, dataDemissao, total, descricao, tipoDemissao, codgEmp);
-				request.setAttribute("codigoEmpregado", codgEmp);
+				
 				request.setAttribute("salarioLiquido", salarioLiquido);
 				request.setAttribute("salarioLiquidoProporcional", salarioLiquidoProporcional);
 				request.setAttribute("inss", inss);
@@ -413,6 +415,7 @@ public class AlterarEmpregado extends HttpServlet {
 				request.setAttribute("folgas", folgas);
 				request.setAttribute("beneficios", beneficios);
 				request.setAttribute("total", total);
+				
 				view = request.getRequestDispatcher("TelaCalculosRescisao.jsp"); 
 		        view.forward(request, response);
 			} 
@@ -422,6 +425,149 @@ public class AlterarEmpregado extends HttpServlet {
 				view.forward(request, response);
 			}
 			break;
+			
+		case "GerarRescisao":
+			
+			System.out.println("GERANDO RELATORIO DA RESCISAO");
+			
+			/*codgEmp = (String) request.getParameter("codEmpregado");
+			tipoDemissao = (String) request.getParameter("motivoDemissao");
+			descricao = request.getParameter("descricao");
+			tipoAviso = request.getParameter("tipoAviso");
+			feriasVencidas = request.getParameter("feriasVencidas");
+			formatter = new SimpleDateFormat("yyyy-MM-dd");
+			dataDemissao = null;
+			dataA = request.getParameter("dataDemissao");;
+			 
+			try {
+				if(dataA != null){
+				dataDemissao = new java.sql.Date( ((java.util.Date)formatter.parse(dataA)).getTime());
+				}
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}	
+
+			SimpleDateFormat formatador2 = new SimpleDateFormat("yyyy-MM-dd");
+		
+		 	
+			calculos = new CalculosPagamento();
+			contratoTO = espContrato.pesquisarEmpregado(codgEmp);
+			// data demissao
+			ano = Integer.parseInt(dataA.substring(0,4)); 
+			mes = Integer.parseInt(dataA.substring(5,7));
+			dia = Integer.parseInt(dataA.substring(8,10));
+			
+			totalDiasProporcionais = dia;
+			totalDias = calculos.diasNoMes(mes, ano);
+			
+		 	valorHoraExtra = calculos.totalHoraExtra(codgEmp,mes, ano,totalDias);
+		 	valorHoraExtraProporcional = calculos.totalHoraExtra(codgEmp, mes, ano,totalDiasProporcionais);
+		 	
+			salario = contratoTO.getSalarioBase();
+			inss = calculos.totalINSS(salario);
+			fgts = calculos.totalFGTS(salario);
+			irrf = calculos.totalIRRF(salario,codgEmp,inss);
+			vale = calculos.totalValeTransporte(salario, codgEmp);
+			folgas = calculos.totalFolgas(codgEmp);
+			beneficios = contratoTO.getDescontoBeneficios();
+			
+			salarioLiquidoProporcional = calculos.totalSalario(codgEmp, salario, vale, 
+			inss, irrf, valorHoraExtraProporcional, folgas);
+			salarioLiquido = calculos.totalSalario(codgEmp, salario, vale, 
+			inss, irrf, valorHoraExtra, folgas);
+			
+			decimoTerceiro =  calculos.calculaDecimoTerceiro(codgEmp, mes, ano,salario,
+					valorHoraExtra, inss, irrf);
+			multaAviso = 0.0;
+			ferias = 0.0;
+			if(feriasVencidas.equals("Sim"))
+			{
+				ferias = calculos.calculaValorFerias(salario);
+			}
+			feriasProporcionais = calculos.calculaFeriasProporcionais(codgEmp, 
+					salario, mes, ano);
+				
+			total = 0.0;
+			if(tipoDemissao.equals("Sem Justa Causa") && tipoAviso.equals("Indenizado"))
+			{
+				double avisoPrevioIndenizado = salarioLiquido;
+				total = salarioLiquido + avisoPrevioIndenizado + ferias + feriasProporcionais + decimoTerceiro;
+				
+			}
+			else if(tipoDemissao.equals("Sem Justa Causa")&& tipoAviso.equals("Trabalhado"))
+			{
+				double avisoPrevioIndenizado = salarioLiquido;
+				total = salarioLiquido + avisoPrevioIndenizado + ferias + feriasProporcionais
+								+ decimoTerceiro ;
+			}
+			else if(tipoDemissao.equals("Com Justa Causa"))
+			{	
+				total = salarioLiquidoProporcional + ferias + feriasProporcionais ;
+			}
+			else if(tipoDemissao.equals("Pedido de Demissï¿½o") && tipoAviso.equals("Trabalhado"))
+			{
+				total = salarioLiquidoProporcional + ferias + feriasProporcionais + decimoTerceiro ;
+			}
+			else if(tipoDemissao.equals("Pedido de Demissï¿½o")&& tipoAviso.equals("Indenizado"))
+			{
+				total = salarioLiquidoProporcional + ferias + feriasProporcionais + decimoTerceiro ;
+			}
+			else if(tipoDemissao.equals("Sem Justa Causa")&& tipoAviso.equals("Nï¿½o trabalhou"))
+			{
+				double avisoPrevioIndenizado = salario;
+				multaAviso = salario;	
+				total = salario + avisoPrevioIndenizado + ferias + feriasProporcionais + decimoTerceiro
+						 - multaAviso;
+				
+				//multa no valor de um mï¿½s de salï¿½rio descontado do pagamento da rescisï¿½o. 
+				//A empresa sï¿½ poderia descontar atï¿½ o limite, ou seja, atï¿½ zerar a rescisï¿½oï¿½, 
+				if(total < 0){
+					total = 0.0;
+				}
+			}
+			else if(tipoDemissao.equals("Tï¿½rmino de Contrato")){
+				total = salarioLiquido + ferias + feriasProporcionais + decimoTerceiro;
+			}*/
+			List<RescisaoRelatorio> RescisaoRelatorios = new ArrayList<RescisaoRelatorio>();
+				Date data = new java.sql.Date(new java.util.Date().getTime());
+				
+				System.out.println("Gerando PDF do RESCISAO");
+				
+				
+				RescisaoRelatorio rescisao = new RescisaoRelatorio();
+				
+				
+				//rescisao.setNomeEmpregado();
+				//rescisao.setNomeEmpregador();
+				rescisao.setSalarioLiquido(0.01);//salarioLiquido);
+				rescisao.setSalarioProporcional(0.01);//salarioLiquidoProporcional);
+				rescisao.setInss(0.01);//inss);
+				rescisao.setFgts(0.01);//fgts);
+				rescisao.setIrrf(0.01);//irrf);
+				//rescisao.setValeTransporte(valeTransporte);
+				rescisao.setFerias(0.01);//ferias);
+				rescisao.setFeriasProporcionais(0.01);//feriasProporcionais);
+				rescisao.setDecimoTerceiro(0.01);//decimoTerceiro);
+				//rescisao.setMultaAvisoPrevio(multaAvisoPrevio);
+				rescisao.setFolgas(0.01);//folgas);
+				rescisao.setBeneficios(0.01);//beneficios);
+				rescisao.setTotal(0.01);//total);
+				
+				
+				//holerite.setPorcentagemDescontoInss(0.6);//ISSO TEM QUE PEGAR SA TABELA PARAMETRO DO BANCO
+				//holerite.setAdicionalNoturno(9.0);//ISSO E O VALOR ADICIONAL REFERENTE TRABALHO NOTURNO
+				//holerite.setValorDescontoIr(9.0);//VALOR A SER DESCONTADO DE IR --ISSO VAI DEPENDER DO VALOR DO SALARIO DO EMPREGADO, SE O VALOR FOR BAIXO NAO ENTRA AQUI.
+				
+
+				RescisaoRelatorios.add(rescisao);
+
+				RescisaoRel relatorio = new RescisaoRel();
+				
+				relatorio.imprimir(RescisaoRelatorios);
+				
+				relatorio.download(response,RescisaoRelatorios);
+
+		break;
 			
 		case "Alterar":
 

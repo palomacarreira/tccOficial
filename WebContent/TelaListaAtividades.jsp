@@ -203,7 +203,8 @@
 			
 			
 	<%out.println("<input name=\"codigoEmpregado\" id=\"codigoEmpregado\"type=\"hidden\" value=\""+request.getAttribute("codigoEmpregado")+"\"/>");
-	System.out.println(request.getAttribute("codigoEmpregado"));%>
+	//System.out.println(request.getAttribute("codigoEmpregado"));
+	%>
 	<nav class="navbar navbar-default" role="navigation">
 	
 	<div class="container">

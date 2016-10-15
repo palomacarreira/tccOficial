@@ -99,7 +99,7 @@ public class CadastrarFerias extends HttpServlet {
 				}
 				else
 				{
-					// NÃO HÁ PONTO REGISTRADO
+					// Nï¿½O Hï¿½ PONTO REGISTRADO
 					view = request.getRequestDispatcher("PesquisarFerias?acao=Pesquisar&codigoEmpregado=" + codigoEmpregado);
 		        	view.forward(request, response);
 				}

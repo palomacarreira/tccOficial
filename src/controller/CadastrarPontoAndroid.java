@@ -63,7 +63,7 @@ public class CadastrarPontoAndroid extends HttpServlet {
 				{
 					String hora = request.getParameter("hora");
 					if(hora == null){hora = "";}
-					String dataEscolhida = retornaDataAtual(); // pega dia que está batendo o ponto
+					String dataEscolhida = retornaDataAtual(); // pega dia que estï¿½ batendo o ponto
 					
 					DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 					Date data = null;
@@ -73,7 +73,7 @@ public class CadastrarPontoAndroid extends HttpServlet {
 						
 					String  horaEntrada , horaSaidaAlmoco,horaVoltaAlmoco,horaSaida ;
 					PontoTO pontoTO = espPonto.pesquisaPorData(data);
-					if(pontoTO != null) // altera os dados do "dia" até que este seja finalizado
+					if(pontoTO != null) // altera os dados do "dia" atï¿½ que este seja finalizado
 					{
 						horaEntrada = pontoTO.getHoraEntrada();
 						horaSaidaAlmoco = pontoTO.getHoraSaidaAlmoco();
@@ -98,7 +98,7 @@ public class CadastrarPontoAndroid extends HttpServlet {
 									horaVoltaAlmoco =  horaSaida;
 									horaSaida = hora;
 								}
-								else // caso tenha batido o ponto errado, o horário final vai se alterando
+								else // caso tenha batido o ponto errado, o horï¿½rio final vai se alterando
 								{
 									horaSaida = hora;
 								}

@@ -14,6 +14,33 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
 <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
+integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/bootstrap.css">
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script src="js/jquery-1.2.6.pack 2.js"></script>
+<script src="js/jquery.maskedinput-1.1.4.pack 2.js"></script>
+<script type="text/javascript" src="js/scriptFolhaPonto.js"></script>
+<script src="jquery.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+<script src="js/sweetalert.min.js"></script> 
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<script src="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css"></script>
+<link rel="stylesheet" type="text/css"  href="css/estilo.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.css" media="all">
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/bootstrap.css">
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script src="js/jquery-1.2.6.pack 2.js"></script>
+<script src="js/jquery.maskedinput-1.1.4.pack 2.js"></script>
+<link rel="stylesheet" type="text/css"  href="css/estilo.css" />
 <script src="js/bootstrap-datetimepicker.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
@@ -25,7 +52,10 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 
 </head>
 <body>
-	<%
+<%
+		EmpregadoTO empregado = (EmpregadoTO) request.getAttribute("listaEmpregado");
+		ContratoTO contrato = (ContratoTO) request.getAttribute("listaContrato");
+
 		double salarioLiquido = (double) request.getAttribute("salarioLiquido");
 		double salarioProporcional = (double) request.getAttribute("salarioLiquidoProporcional");
 		double inss = (double) request.getAttribute("inss");
@@ -178,8 +208,8 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		 </nav>
 		 <br>
 			<div id="botoes">
-				<button  type= "submit" name="acao" value="imprimir" class= "btn btn-primário " > Imprimir </button> 
 				<button  type= "submit" name="acao" value="Cancelar" class= "btn btn-primário "  onclick="history.go(-1)"> Cancelar </button> 
+				<a href="AlterarEmpregado?acao=GerarRescisao&codEmpregado=codEmpregado">Exportar Recisao</a>
 			</div>
 	</form>
 	</div>

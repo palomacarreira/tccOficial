@@ -44,7 +44,7 @@ public class PesquisarEmpregado extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		EmpregadoTO empregado = null;
+		EmpregadoTO empregado = null; 
 		EspecialistaEmpregado especilista = new EspecialistaEmpregado();
 		
 		RequestDispatcher view;

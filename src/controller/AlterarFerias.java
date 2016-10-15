@@ -17,18 +17,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.ContratoTO;
 import model.EspecialistaContrato;
 import model.EspecialistaFerias;
-import model.EspecialistaPonto;
 import model.FeriasTO;
-import model.PontoTO;
 
 /**
  * Servlet implementation class AlterarFerias
  */
 @WebServlet("/AlterarFerias")
-public class AlterarFerias extends HttpServlet {
+public class AlterarFerias extends HttpServlet { 
 	private static final long serialVersionUID = 1L;
        
     /**

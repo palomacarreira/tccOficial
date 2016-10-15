@@ -3,7 +3,7 @@ package model;
 import java.sql.Date;
 
 public class AtividadesTO {
-	private int id;
+	private int id; 
 	private Date data;
 	private String titulo, descricao;
 	private Boolean realizado;

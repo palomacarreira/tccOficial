@@ -153,7 +153,7 @@ public class AlterarPonto extends HttpServlet {
 					{
 						folga = true;
 					} 
-					else{ //CÁLCULOS
+					else{ //Cï¿½LCULOS
 						totalDeHorasExtras = calculos.calculaHorasExtras(horaEntrada, horaSaidaAlmoco, 
 								horaVoltaAlmoco, horaSaida, cadastroEntrada, cadastroSaidaAlmoco, 
 								cadastroVoltaAlmoco, cadastroSaida);

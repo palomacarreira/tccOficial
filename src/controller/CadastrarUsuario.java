@@ -44,7 +44,7 @@ public class CadastrarUsuario extends HttpServlet {
 		EspecialistaContato espContato = new EspecialistaContato();
 		EspecialistaEndereco espEndereco = new EspecialistaEndereco();
 		HttpSession session = request.getSession();
-		RequestDispatcher view;
+		RequestDispatcher view; 
 		request.setCharacterEncoding("UTF-8");
 		String acao = request.getParameter("acao");
 		switch (acao) 

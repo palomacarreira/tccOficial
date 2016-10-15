@@ -26,6 +26,17 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <script src="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css"></script>
 <link rel="stylesheet" type="text/css"  href="css/estilo.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.css" media="all">
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/bootstrap.css">
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script src="js/jquery-1.2.6.pack 2.js"></script>
+<script src="js/jquery.maskedinput-1.1.4.pack 2.js"></script>
+<link rel="stylesheet" type="text/css"  href="css/estilo.css" />
+
 
 
 <style type="text/css">
@@ -79,15 +90,14 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	</div>
 	
     <div class="container">
-    				<nav>
+    					<nav>
 				<ul class="nav nav-pills">
 
                 <div class="col-md-2">
 
 						
-							<!--<p style="font-size: 25px;">Folha de ponto</p>  -->
+							<!-- <p style="font-size: 25px;">Holerite</p> -->
 
-					
 
 					</div>
 				      
@@ -177,6 +187,12 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 			var valor_ano = document.getElementById("combo_ano").value;
 			location.href="PesquisarPonto?acao=Pesquisar&codigoEmpregado=<%=codigoEmpregado%>&mes="+valor_mes+"&ano="+valor_ano+""; 
 		}
+		function funcaoRelatorio() 
+		{
+			var valor_mes = document.getElementById("combo_mes").value;
+			var valor_ano = document.getElementById("combo_ano").value;
+			location.href="PesquisarPonto?acao=GerarFolhaPonto&codigoEmpregado=<%=codigoEmpregado%>&mes="+valor_mes+"&ano="+valor_ano+""; 
+		}
 	</script>
 	<br/>
 	
@@ -240,6 +256,8 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 	        <tbody>
 	        </tbody>
 	    </table>
+	    <%-- <a href="PesquisarPonto?acao=GerarFolhaPonto&codEmpregado=<%=empregado.getCodigoEmpregado()%>">Exportar Folha de Ponto</a>--%>
+	    <td><button onclick="funcaoRelatorio()" type="submit" class="btn btn-success">Exportar Folha de Ponto</button></td>
 	</div>
 </div>
 

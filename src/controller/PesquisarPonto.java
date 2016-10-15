@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,7 +24,9 @@ import model.EspecialistaJornadaTrabalho;
 import model.EspecialistaPonto;
 import model.HoraExtraTO;
 import model.JornadaTrabalhoTO;
+import model.PontoRelatorio;
 import model.PontoTO;
+import relatorio.PontoRel;
 
 /**
  * Servlet implementation class PesquisarPonto
@@ -140,6 +143,63 @@ public class PesquisarPonto extends HttpServlet {
 				view.forward(request, response);
 			break;
 			
+			case "GerarFolhaPonto":
+				
+			
+				System.out.println("GERANDO RELATORIO DA FOLHA DE PONTO");
+
+				List<PontoRelatorio> pontoList = new ArrayList<PontoRelatorio>();
+				
+				PontoRelatorio folhaPonto = new PontoRelatorio();
+				
+				empregadoTO = empregado.pesquisar(codigoEmpregado);
+				contratoTO = contrato.pesquisarEmpregado(codigoEmpregado);
+				formatador = new SimpleDateFormat("yyyy-MM-dd");
+				dataAdmissao = formatador.format(contratoTO.getDataAdmissao());
+				listaDePonto = ponto.pesquisar(codigoEmpregado);
+				//
+				folhaPonto.setDataDaFolhaDePonto("");
+				folhaPonto.setMes("");
+				folhaPonto.setAno("");
+				folhaPonto.setIdEmpregado("");
+				folhaPonto.setNomeEmpregador("");
+				folhaPonto.setNomeEmpregado("");
+				folhaPonto.setCargoEmpregado("");
+				
+				//TabelaPonto tabela = new TabelaPonto();
+				
+				for (int j = 0; j < listaDePonto.size(); j++) {
+					
+					
+					folhaPonto.getDia().add(listaDePonto.get(j).getDataPonto().toString());
+					folhaPonto.getEntrada().add(listaDePonto.get(j).getHoraEntrada());
+					folhaPonto.getSaidaAlmoco().add(listaDePonto.get(j).getHoraSaidaAlmoco());
+					folhaPonto.getRetornoAlmoco().add(listaDePonto.get(j).getHoraVoltaAlmoco());
+					folhaPonto.getSaida().add(listaDePonto.get(j).getHoraSaidaAlmoco());
+					folhaPonto.getHoraExtra().add(listaDePonto.get(j).getCodigo());
+					folhaPonto.getHorasNoturnas().add(listaDePonto.get(j).getCodigo());
+					folhaPonto.getAcao().add(listaDePonto.get(j).getAcao());
+				}
+
+				folhaPonto.setTotais("");
+				folhaPonto.setDiasFaltas("");
+				folhaPonto.setDiasDeDomDsrFer("");
+				folhaPonto.setHorasTrabalhadas("");
+				folhaPonto.setHorasExtras("");
+				folhaPonto.setHorasExtrasNoturnas("");
+				
+				//
+
+				pontoList.add(folhaPonto);
+
+				PontoRel relatorio = new PontoRel();
+				
+				relatorio.imprimir(pontoList);
+				
+				relatorio.download(response,pontoList);
+
+			break;
+			
 			case "CadastrarAlterar":
 				
 				contratoTO = contrato.pesquisarEmpregado(codigoEmpregado);
@@ -149,7 +209,7 @@ public class PesquisarPonto extends HttpServlet {
 				listaJornadaTrabalho = jornadaTrabalho.pesquisarJornada(contratoTO.getCodigo());
 				ArrayList<PontoTO> listaPonto = ponto.pesquisar(codigoEmpregado);
 	
-				if(request.getParameter("mes") == null) // CASO NÃO TENHA ESCOLHIDO O MÊS AINDA, MOSTRA PONTO DO MÊS ATUAL
+				if(request.getParameter("mes") == null) // CASO Nï¿½O TENHA ESCOLHIDO O Mï¿½S AINDA, MOSTRA PONTO DO Mï¿½S ATUAL
 				{
 					int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
 					int mesAtual = Calendar.getInstance().get(Calendar.MONTH) + 1;

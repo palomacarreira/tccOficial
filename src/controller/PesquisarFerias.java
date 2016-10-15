@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,12 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import relatorio.FeriasRel;
+import relatorio.HoleriteRel;
 import model.ContratoTO;
 import model.EmpregadoTO;
 import model.EspecialistaContrato;
 import model.EspecialistaEmpregado;
 import model.EspecialistaFerias;
+import model.FeriasRelatorio;
 import model.FeriasTO;
+import model.HoleriteRelatorio;
 
 /**
  * Servlet implementation class PesquisarFerias
@@ -48,7 +53,7 @@ public class PesquisarFerias extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8"); 
 		String acao = request.getParameter("acao");
 		EspecialistaFerias espFerias = new EspecialistaFerias();
 		EspecialistaEmpregado empregado = new EspecialistaEmpregado();
@@ -85,6 +90,33 @@ public class PesquisarFerias extends HttpServlet {
 					view = request.getRequestDispatcher("TelaPrincipal.jsp");
 					view.forward(request, response);
 				}
+			break;
+			
+			case "GerarFerias":
+			System.out.println("GERANDO RELATORIO DE FERIAS");
+			EmpregadoTO empregadoTO = empregado.pesquisar(codigoEmpregado);
+			ContratoTO contratoTO = espContrato.pesquisarEmpregado(codigoEmpregado);
+			List<FeriasRelatorio> feriasList = new ArrayList<FeriasRelatorio>();
+			FeriasRelatorio ferias = new FeriasRelatorio();
+		
+			//ferias.setNomeEmpregador(contratoTO.get);
+			//ferias.setNomeEmpregado(empregadoTO.getNome());
+			/*ferias.setCargoEmpregado(cargoEmpregado);
+			ferias.setPeriodoaquisitivo(periodoaquisitivo);
+			ferias.setSituacao(situacao);
+			ferias.setInicio(inicio);
+			ferias.setTermino(termino);
+			ferias.setQtdDias(qtdDias);
+			ferias.setValor(valor);
+			ferias.setDataPagamento(dataPagamento);*/
+			
+			feriasList.add(ferias);
+
+			FeriasRel relatorio = new FeriasRel();
+			
+			relatorio.imprimir(feriasList);
+			
+			relatorio.download(response,feriasList);
 			break;
 		}
 	}

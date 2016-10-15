@@ -396,4 +396,51 @@ public class CalculosPagamento {
 		return decimoTerceiro;
 	}
 	
+	public double calculaDecimoPrimeiraParcela(String codigoEmpregado, double salarioBase)
+	{
+
+		double decimoTerceiro = salarioBase / 2; 
+		
+		return decimoTerceiro;
+	}
+	
+	public double calculaDecimoSegundaParcela(String codigoEmpregado, int mes, int ano, double salario, double valorHoraExtra, double inss, double irrf)
+	{
+
+		ContratoTO cont = contrato.pesquisarEmpregado(codigoEmpregado);
+		ArrayList<PontoTO> listaDePonto = ponto.pesquisar(cont.getCodigo());
+		int qtdFolgas = 0;
+		int qtdDeMesesTrabalhados = mes; 
+		int contador = 0;
+		for(PontoTO pontoTO: listaDePonto)
+		{
+			SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+			String dataPonto = formatador.format(pontoTO.getDataPonto());
+			int pontoDataMes = Integer.parseInt(dataPonto.substring(5,7));
+			int pontoDataAno = Integer.parseInt(dataPonto.substring(0,4));	  
+			
+			// verificando os pontos dentro do periodo selecionado		
+			if( pontoDataAno == ano && pontoDataMes <= mes)
+			{
+				if(pontoTO.getAcao().equals("Falta"))
+				{
+					qtdFolgas += 1;
+				}
+				
+				if(qtdFolgas > 15) //+ de 15 faltas no mes deixa de ter direito ao 1/12 avos do mes;
+				{
+					if(contador != pontoDataMes){
+						contador = pontoDataMes;
+						qtdDeMesesTrabalhados -= 1;
+					}
+				}
+			}
+		}
+		double decimoTerceiro = (salario/12 * qtdDeMesesTrabalhados) +  valorHoraExtra - inss - irrf;
+		 
+		if(decimoTerceiro < 0){
+			decimoTerceiro = 0.0;
+		}
+		return decimoTerceiro;
+	}
 }

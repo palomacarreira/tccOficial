@@ -188,12 +188,12 @@ public class CadastrarPonto extends HttpServlet {
 						String cadastroSaida = lista.getHoraSaida();
 						if(cadastroSaida.equals("")){cadastroSaida = "00:00";}
 
-						//CÁLCULOS
+						//Cï¿½LCULOS
 						int ultimoDiaDoMes =  calculos.diasNoMes(mes,ano);
 						String totalHoras = ""; 
 						double valorTotal = 0.0;
 					
-						// SE TRABALHOU EM UM DIA DE DESCANSO ENTÃO NÃO CONTA COMO HORAS EXTRAS E SIM UM DIA DE FOLGA
+						// SE TRABALHOU EM UM DIA DE DESCANSO ENTï¿½O Nï¿½O CONTA COMO HORAS EXTRAS E SIM UM DIA DE FOLGA
 						boolean folga = false;
 						String totalDeHorasExtras = "00:00";
 						String totalDeHorasExtrasNoturno = "00:00";

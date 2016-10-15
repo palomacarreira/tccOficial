@@ -31,6 +31,11 @@
 	{
 		 location.href = "AlterarFerias?acao=TelaPagamento&codigoEmpregado="+idEmpregado+"&codigoFerias="+idFerias;
 	}
+	function relatorio(idFerias, idEmpregado)
+	{
+		 location.href = "PesquisarFerias?acao=GerarFerias&codEmpregado="+idEmpregado+"&codigoFerias="+idFerias;
+	
+	}
 
 		function confirma(idFerias, idEmpregado) 
 		{
@@ -199,6 +204,7 @@
 					 	}
 					%>
 					 <td><button onclick="confirma(<%=listaFerias.get(i).getCodigo()%>, <%= codigoEmpregado %>)" type="submit" class="btn btn-danger">Excluir</button></td>
+					<td><button onclick="relatorio(<%=listaFerias.get(i).getCodigo()%>, <%= codigoEmpregado %>)" type="submit" class="btn btn-success">Exportar Férias</button></td>
 			    	</tr>
 			 	<% 
 			 	}
@@ -214,12 +220,10 @@
 			%>
 		</tbody>
 	  </table>
-  
+  	   
 <c:import url="rodape.jsp"/>
 </body>
 </html>
-
-
 
 
 

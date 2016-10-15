@@ -11,7 +11,7 @@ package banco;
 		    String url      = "jdbc:mysql://localhost/";      
 	        String dbName   = "projetoTCC";                      
 	        String driver   = "com.mysql.jdbc.Driver";       
-	        String userName = "root";                         
+	        String userName = "root";                          
 	        String password = "";                  
 	        try {
 	            Class.forName(driver); 

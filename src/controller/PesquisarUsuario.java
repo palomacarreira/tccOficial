@@ -47,7 +47,7 @@ public class PesquisarUsuario extends HttpServlet {
 		EspecialistaEndereco espEndereco = new EspecialistaEndereco();
 		EspecialistaContato espContato = new EspecialistaContato();
 		
-		UsuarioTO usuario = null;
+		UsuarioTO usuario = null; 
 		EnderecoTO endereco = null;
 		ContatoTO contato = null;
 		RequestDispatcher view= null;

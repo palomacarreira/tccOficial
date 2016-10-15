@@ -24,6 +24,17 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <script src="js/sweetalert.min.js"></script> 
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <script type="text/javascript" src="js/scriptFolhaPonto.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="dist/css/bootstrap-submenu.min.css">
+<link rel="stylesheet" type="text/css"  href="css/estilo.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" defer></script>
+<script src="dist/js/bootstrap-submenu.min.js" defer></script>
+<script src="js/sweetalert.min.js"></script> 
 
 <title>Ponto</title>
 
